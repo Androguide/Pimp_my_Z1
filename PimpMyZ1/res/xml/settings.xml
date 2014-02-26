@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:key="setOnBoot"
+        android:title="Set On Boot"
+        android:summaryOff="Your changes will be lost after a reboot"
+        android:summaryOn="Your changes will be applied after each reboot"/>
+</PreferenceScreen>

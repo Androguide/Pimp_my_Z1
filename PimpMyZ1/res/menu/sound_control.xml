@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:honami="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/refresh"
+        honami:showAsAction="never"
+        android:title="@string/refresh"/>
+
+    <item android:id="@+id/link_seekbars"
+        android:checkable="true"
+        honami:showAsAction="ifRoom|withText"
+        android:title="@string/menu_link_seekbars"/>
+</menu>
