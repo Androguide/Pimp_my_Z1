@@ -58,7 +58,6 @@ public class KernelFragment extends Fragment {
         assert ll != null;
         mCardUI = (CardUI) (ll.findViewById(R.id.cardsui));
         mCardUI.addStack(new CardStack(""), true);
-        mCardUI.addStack(new CardStack(""), true);
 
         String sectionColor = fa.getString(R.string.kernel_color);
 

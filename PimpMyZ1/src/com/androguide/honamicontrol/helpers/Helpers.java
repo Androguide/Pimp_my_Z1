@@ -517,5 +517,9 @@ public class Helpers {
     public static int getSoundCountrolBitRepresentation(int leftGain, int rightGain) {
         return 0xFF & (0xFFFFFFFF ^ (leftGain & 0xFF) + (rightGain & 0xFF));
     }
+
+    public static Boolean doesFileExist(String path) {
+        return new File(path).exists();
+    }
 }
 

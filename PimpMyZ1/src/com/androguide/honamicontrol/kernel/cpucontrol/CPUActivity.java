@@ -108,55 +108,87 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         graph.setLineToFill(0);
 
         availableFrequencies = new String[0];
-        String availableFrequenciesLine = CPUHelper.readOneLineNotRoot(STEPS);
-        if (availableFrequenciesLine != null) {
-            availableFrequencies = availableFrequenciesLine.split(" ");
-            Arrays.sort(availableFrequencies, new Comparator<String>() {
-                @Override
-                public int compare(String object1, String object2) {
-                    return Integer.valueOf(object1).compareTo(
-                            Integer.valueOf(object2));
-                }
-            });
+        String availableFrequenciesLine;
+
+        if (Helpers.doesFileExist(STEPS)) {
+            availableFrequenciesLine = CPUHelper.readOneLineNotRoot(STEPS);
+
+            if (availableFrequenciesLine != null) {
+                availableFrequencies = availableFrequenciesLine.split(" ");
+                Arrays.sort(availableFrequencies, new Comparator<String>() {
+                    @Override
+                    public int compare(String object1, String object2) {
+                        return Integer.valueOf(object1).compareTo(
+                                Integer.valueOf(object2));
+                    }
+                });
+            }
         }
 
         int frequenciesNum = availableFrequencies.length - 1;
 
-        String currentGovernor = CPUHelper.readOneLineNotRoot(GOVERNOR);
-        String currentGovernor2 = CPUHelper.readOneLineNotRoot(GOVERNOR2);
-        String currentGovernor3 = CPUHelper.readOneLineNotRoot(GOVERNOR3);
-        String currentGovernor4 = CPUHelper.readOneLineNotRoot(GOVERNOR4);
+        String currentGovernor = "";
+        if (Helpers.doesFileExist(GOVERNOR))
+            currentGovernor = CPUHelper.readOneLineNotRoot(GOVERNOR);
 
-        String currentIo = CPUHelper.readOneLineNotRoot(CPUInterface.IO_SCHEDULER);
-        String curMaxSpeed = CPUHelper.readOneLineNotRoot(MAX_FREQ);
-        String curMinSpeed = CPUHelper.readOneLineNotRoot(MIN_FREQ);
+        String currentGovernor2 = "";
+        if (Helpers.doesFileExist(GOVERNOR2))
+            currentGovernor2 = CPUHelper.readOneLineNotRoot(GOVERNOR2);
+
+        String currentGovernor3 = "";
+        if (Helpers.doesFileExist(GOVERNOR3))
+            currentGovernor3 = CPUHelper.readOneLineNotRoot(GOVERNOR3);
+
+        String currentGovernor4 = "";
+        if (Helpers.doesFileExist(GOVERNOR4))
+            currentGovernor4 = CPUHelper.readOneLineNotRoot(GOVERNOR4);
+
+        String currentIo = "";
+        if (Helpers.doesFileExist(IO_SCHEDULER))
+            currentIo = CPUHelper.getIOScheduler();
+
+        String curMaxSpeed = "";
+        if (Helpers.doesFileExist(MAX_FREQ))
+            curMaxSpeed = CPUHelper.readOneLineNotRoot(MAX_FREQ);
+
+        String curMinSpeed = "";
+        if (Helpers.doesFileExist(MIN_FREQ))
+            curMinSpeed = CPUHelper.readOneLineNotRoot(MIN_FREQ);
 
         if (mIsTegra3) {
-            String curTegraMaxSpeed = CPUHelper.readOneLineNotRoot(TEGRA_MAX_FREQ);
-            int curTegraMax = 0;
-            try {
-                curTegraMax = Integer.parseInt(curTegraMaxSpeed);
-                if (curTegraMax > 0) {
-                    curMaxSpeed = Integer.toString(curTegraMax);
+            String curTegraMaxSpeed;
+            if (Helpers.doesFileExist(TEGRA_MAX_FREQ)) {
+                curTegraMaxSpeed = CPUHelper.readOneLineNotRoot(TEGRA_MAX_FREQ);
+                int curTegraMax = 0;
+                try {
+                    curTegraMax = Integer.parseInt(curTegraMaxSpeed);
+                    if (curTegraMax > 0) {
+                        curMaxSpeed = Integer.toString(curTegraMax);
+                    }
+                } catch (NumberFormatException ex) {
+                    curTegraMax = 0;
                 }
-            } catch (NumberFormatException ex) {
-                curTegraMax = 0;
             }
         }
 
-        String numOfCpus = CPUHelper.readOneLineNotRoot(NUM_OF_CPUS);
-        String[] cpuCount = numOfCpus.split("-");
-        if (cpuCount.length > 1) {
-            try {
-                int cpuStart = Integer.parseInt(cpuCount[0]);
-                int cpuEnd = Integer.parseInt(cpuCount[1]);
+        String numOfCpus = "";
+        if (Helpers.doesFileExist(NUM_OF_CPUS))
+            numOfCpus = CPUHelper.readOneLineNotRoot(NUM_OF_CPUS);
 
-                mNumOfCpu = cpuEnd - cpuStart + 1;
+        if (!numOfCpus.isEmpty()) {
+            String[] cpuCount = numOfCpus.split("-");
+            if (cpuCount.length > 1) {
+                try {
+                    int cpuStart = Integer.parseInt(cpuCount[0]);
+                    int cpuEnd = Integer.parseInt(cpuCount[1]);
 
-                if (mNumOfCpu < 0)
+                    mNumOfCpu = cpuEnd - cpuStart + 1;
+
+                    if (mNumOfCpu < 0)
+                        mNumOfCpu = 1;
+                } catch (NumberFormatException ex) {
                     mNumOfCpu = 1;
-            } catch (NumberFormatException ex) {
-                mNumOfCpu = 1;
+                }
             }
         }
 
@@ -245,79 +277,112 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         /** CPU Governor for core 1 */
         mGovernor2 = (Spinner) findViewById(R.id.governor2);
         String[] availableGovernors2;
-        try {
-            availableGovernors2 = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST2)
-                    .split(" ");
-        } catch (NullPointerException e) {
-            availableGovernors2 = new String[]{"Core Offline"};
+        if (Helpers.doesFileExist(GOVERNORS_LIST2)) {
+            try {
+                availableGovernors2 = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST2)
+                        .split(" ");
+            } catch (NullPointerException e) {
+                availableGovernors2 = new String[]{"Core Offline"};
+            }
+
+            ArrayAdapter<CharSequence> governorAdapter2 = new ArrayAdapter<CharSequence>(
+                    this, R.layout.spinner_row);
+            governorAdapter2
+                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            for (String anAvailableGovernors2 : availableGovernors2) {
+                governorAdapter2.add(anAvailableGovernors2);
+            }
+            mGovernor2.setAdapter(governorAdapter2);
+            mGovernor2.setSelection(Arrays.asList(availableGovernors2).indexOf(
+                    currentGovernor2));
+            mGovernor2.setOnItemSelectedListener(new GovListener2());
+        } else {
+            ArrayAdapter<CharSequence> governorAdapter2 = new ArrayAdapter<CharSequence>(
+                    this, R.layout.spinner_row);
+            governorAdapter2
+                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            governorAdapter2.add("Core Offline");
+            mGovernor2.setEnabled(false);
+            mGovernor2.setAdapter(governorAdapter2);
         }
-        ArrayAdapter<CharSequence> governorAdapter2 = new ArrayAdapter<CharSequence>(
-                this, R.layout.spinner_row);
-        governorAdapter2
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        for (String anAvailableGovernors2 : availableGovernors2) {
-            governorAdapter2.add(anAvailableGovernors2);
-        }
-        mGovernor2.setAdapter(governorAdapter2);
-        mGovernor2.setSelection(Arrays.asList(availableGovernors2).indexOf(
-                currentGovernor2));
-        mGovernor2.setOnItemSelectedListener(new GovListener2());
 
         /** CPU Governor for core 2 */
         mGovernor3 = (Spinner) findViewById(R.id.governor3);
-        String[] availableGovernors3 = {};
-        try {
-            availableGovernors3 = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST3)
-                    .split(" ");
-        } catch (NullPointerException e) {
-            availableGovernors3 = new String[]{"Core Offline"};
+        if (Helpers.doesFileExist(GOVERNORS_LIST3)) {
+            String[] availableGovernors3 = {};
+            try {
+                availableGovernors3 = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST3)
+                        .split(" ");
+            } catch (NullPointerException e) {
+                availableGovernors3 = new String[]{"Core Offline"};
+            }
+            ArrayAdapter<CharSequence> governorAdapter3 = new ArrayAdapter<CharSequence>(
+                    this, R.layout.spinner_row);
+            governorAdapter3
+                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            for (String anAvailableGovernors3 : availableGovernors3) {
+                governorAdapter3.add(anAvailableGovernors3);
+            }
+            mGovernor3.setAdapter(governorAdapter3);
+            mGovernor3.setSelection(Arrays.asList(availableGovernors3).indexOf(
+                    currentGovernor3));
+            mGovernor3.setOnItemSelectedListener(new GovListener3());
+        } else {
+            ArrayAdapter<CharSequence> governorAdapter3 = new ArrayAdapter<CharSequence>(
+                    this, R.layout.spinner_row);
+            governorAdapter3
+                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            governorAdapter3.add("Core Offline");
+            mGovernor3.setEnabled(false);
+            mGovernor3.setAdapter(governorAdapter3);
         }
-        ArrayAdapter<CharSequence> governorAdapter3 = new ArrayAdapter<CharSequence>(
-                this, R.layout.spinner_row);
-        governorAdapter3
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        for (String anAvailableGovernors3 : availableGovernors3) {
-            governorAdapter3.add(anAvailableGovernors3);
-        }
-        mGovernor3.setAdapter(governorAdapter3);
-        mGovernor3.setSelection(Arrays.asList(availableGovernors3).indexOf(
-                currentGovernor3));
-        mGovernor3.setOnItemSelectedListener(new GovListener3());
 
         /** CPU Governor for core 3 */
         mGovernor4 = (Spinner) findViewById(R.id.governor4);
-        String[] availableGovernors4;
-        try {
-            availableGovernors4 = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST4)
-                    .split(" ");
-        } catch (NullPointerException e) {
-            availableGovernors4 = new String[]{"Core Offline"};
+        if (Helpers.doesFileExist(GOVERNORS_LIST4)) {
+            String[] availableGovernors4;
+            try {
+                availableGovernors4 = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST4)
+                        .split(" ");
+            } catch (NullPointerException e) {
+                availableGovernors4 = new String[]{"Core Offline"};
+            }
+            ArrayAdapter<CharSequence> governorAdapter4 = new ArrayAdapter<CharSequence>(
+                    this, R.layout.spinner_row);
+            governorAdapter4
+                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            for (String anAvailableGovernors4 : availableGovernors4) {
+                governorAdapter4.add(anAvailableGovernors4);
+            }
+            mGovernor4.setAdapter(governorAdapter4);
+            mGovernor4.setSelection(Arrays.asList(availableGovernors4).indexOf(
+                    currentGovernor4));
+            mGovernor4.setOnItemSelectedListener(new GovListener4());
+        } else {
+            ArrayAdapter<CharSequence> governorAdapter4 = new ArrayAdapter<CharSequence>(
+                    this, R.layout.spinner_row);
+            governorAdapter4
+                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            governorAdapter4.add("Core Offline");
+            mGovernor4.setEnabled(false);
+            mGovernor4.setAdapter(governorAdapter4);
         }
-        ArrayAdapter<CharSequence> governorAdapter4 = new ArrayAdapter<CharSequence>(
-                this, R.layout.spinner_row);
-        governorAdapter4
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        for (String anAvailableGovernors4 : availableGovernors4) {
-            governorAdapter4.add(anAvailableGovernors4);
-        }
-        mGovernor4.setAdapter(governorAdapter4);
-        mGovernor4.setSelection(Arrays.asList(availableGovernors4).indexOf(
-                currentGovernor4));
-        mGovernor4.setOnItemSelectedListener(new GovListener4());
 
         /** I/O Scheduler Spinner */
         mIo = (Spinner) findViewById(R.id.io);
-        String[] availableIo = CPUHelper.getAvailableIOSchedulers();
-        ArrayAdapter<CharSequence> ioAdapter = new ArrayAdapter<CharSequence>(
-                this, R.layout.spinner_row);
-        ioAdapter
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        for (int i = 0; i < availableIo.length; i++) {
-            ioAdapter.add(availableIo[i]);
+        if (Helpers.doesFileExist(IO_SCHEDULER)) {
+            String[] availableIo = CPUHelper.getAvailableIOSchedulers();
+            ArrayAdapter<CharSequence> ioAdapter = new ArrayAdapter<CharSequence>(
+                    this, R.layout.spinner_row);
+            ioAdapter
+                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            for (int i = 0; i < availableIo.length; i++) {
+                ioAdapter.add(availableIo[i]);
+            }
+            mIo.setAdapter(ioAdapter);
+            mIo.setSelection(Arrays.asList(availableIo).indexOf(currentIo));
+            mIo.setOnItemSelectedListener(new IOListener());
         }
-        mIo.setAdapter(ioAdapter);
-        mIo.setSelection(Arrays.asList(availableIo).indexOf(currentIo));
-        mIo.setOnItemSelectedListener(new IOListener());
     }
 
     public class GovListener implements OnItemSelectedListener {
@@ -425,7 +490,7 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         public void onItemSelected(AdapterView<?> parent, View view, int pos,
                                    long id) {
             if (schedCounter > 0) {
-                String selected = parent.getItemAtPosition(pos).toString();
+                String selected = CPUHelper.getAvailableIOSchedulers()[pos];
                 Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + IO_SCHEDULER);
                 bootPrefs.edit().putString("IO_SCHEDULER", selected).commit();
                 final SharedPreferences.Editor editor = preferences.edit();
@@ -456,7 +521,7 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
             mCurCPUThread.interrupt();
             try {
                 mCurCPUThread.join();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
     }

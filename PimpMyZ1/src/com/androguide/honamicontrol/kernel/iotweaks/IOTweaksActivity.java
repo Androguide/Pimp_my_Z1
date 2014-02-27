@@ -28,11 +28,13 @@ import android.view.MenuItem;
 import android.widget.CompoundButton;
 
 import com.androguide.honamicontrol.R;
+import com.androguide.honamicontrol.cards.CardSwitchDisabled;
 import com.androguide.honamicontrol.cards.CardSwitchPlugin;
 import com.androguide.honamicontrol.helpers.CMDProcessor.CMDProcessor;
 import com.androguide.honamicontrol.helpers.CPUHelper;
 import com.androguide.honamicontrol.helpers.Helpers;
 import com.fima.cardsui.objects.CardStack;
+import com.fima.cardsui.views.CardTextStripe;
 import com.fima.cardsui.views.CardUI;
 
 public class IOTweaksActivity extends ActionBarActivity implements IOTweaksInterface {
@@ -50,24 +52,35 @@ public class IOTweaksActivity extends ActionBarActivity implements IOTweaksInter
         cardsUI.addStack(new CardStack(""));
         cardsUI.addStack(new CardStack(""));
 
-        cardsUI.addCard(new CardSwitchPlugin(
-                getString(R.string.dynamic_fsync),
-                getString(R.string.dynamic_fsync_desc) +
-                getString(R.string.dynamic_fsync_version) + CPUHelper.readOneLine(DYNAMIC_FSYNC_VERSION) + "\'",
-                "#1abc9c",
-                DYNAMIC_FSYNC_TOGGLE,
-                this,
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
-                        bootPrefs.edit().putBoolean("DYNAMIC_FSYNC", isOn).commit();
-                        if (isOn)
-                            Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + DYNAMIC_FSYNC_TOGGLE);
-                        else
-                            Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + DYNAMIC_FSYNC_TOGGLE);
+        if (Helpers.doesFileExist(DYNAMIC_FSYNC_TOGGLE)) {
+            cardsUI.addCard(new CardSwitchPlugin(
+                    getString(R.string.dynamic_fsync),
+                    getString(R.string.dynamic_fsync_desc) +
+                            getString(R.string.dynamic_fsync_version) + CPUHelper.readOneLine(DYNAMIC_FSYNC_VERSION) + "\'",
+                    "#1abc9c",
+                    DYNAMIC_FSYNC_TOGGLE,
+                    this,
+                    new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
+                            bootPrefs.edit().putBoolean("DYNAMIC_FSYNC", isOn).commit();
+                            if (isOn)
+                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + DYNAMIC_FSYNC_TOGGLE);
+                            else
+                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + DYNAMIC_FSYNC_TOGGLE);
+                        }
                     }
-                }
-        ));
+            ));
+        } else {
+            cardsUI.addCard(new CardSwitchDisabled(
+                    getString(R.string.dynamic_fsync),
+                    "Sorry, your kernel does not seem to support Dynamic Fsync.",
+                    "#c74b46",
+                    "",
+                    this,
+                    null)
+            );
+        }
 
         cardsUI.refresh();
     }

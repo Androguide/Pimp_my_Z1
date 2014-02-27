@@ -53,7 +53,6 @@ public class HelpFragment extends Fragment {
         assert ll != null;
         CardUI mCardUI = (CardUI) (ll.findViewById(R.id.cardsui));
         mCardUI.addStack(new CardStack(""));
-        mCardUI.addStack(new CardStack(""));
 
         mCardUI.addCard(new CardCategory(
                 fa.getString(R.string.coming_soon),

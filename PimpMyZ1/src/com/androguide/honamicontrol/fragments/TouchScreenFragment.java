@@ -36,6 +36,7 @@ import android.widget.LinearLayout;
 
 import com.androguide.honamicontrol.R;
 import com.androguide.honamicontrol.cards.CardSeekBar;
+import com.androguide.honamicontrol.cards.CardSwitchDisabled;
 import com.androguide.honamicontrol.cards.CardSwitchPlugin;
 import com.androguide.honamicontrol.helpers.CMDProcessor.CMDProcessor;
 import com.androguide.honamicontrol.helpers.CPUHelper;
@@ -62,46 +63,67 @@ public class TouchScreenFragment extends Fragment implements TouchScreenInterfac
         assert ll != null;
         CardUI mCardUI = (CardUI) (ll.findViewById(R.id.cardsui));
         mCardUI.addStack(new CardStack(""));
-        mCardUI.addStack(new CardStack(""));
 
         final SharedPreferences bootPrefs = fa.getSharedPreferences("BOOT_PREFS", 0);
         String sectionColor = fa.getString(R.string.touch_screen_color);
 
-        mCardUI.addCard(new CardSwitchPlugin(
-                fa.getString(R.string.pen_mode),
-                fa.getString(R.string.pen_mode_desc),
-                sectionColor,
-                PEN_MODE,
-                fa,
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
-                        bootPrefs.edit().putBoolean("PEN_MODE", isOn).commit();
-                        if (isOn)
-                            Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + PEN_MODE);
-                        else
-                            Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + PEN_MODE);
+        if (Helpers.doesFileExist(PEN_MODE)) {
+            mCardUI.addCard(new CardSwitchPlugin(
+                    fa.getString(R.string.pen_mode),
+                    fa.getString(R.string.pen_mode_desc),
+                    sectionColor,
+                    PEN_MODE,
+                    fa,
+                    new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
+                            bootPrefs.edit().putBoolean("PEN_MODE", isOn).commit();
+                            if (isOn)
+                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + PEN_MODE);
+                            else
+                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + PEN_MODE);
+                        }
                     }
-                }
-        ));
+            ));
+        } else {
+            mCardUI.addCard(new CardSwitchDisabled(
+                    fa.getString(R.string.pen_mode),
+                    "Sorry, your kernel does not seem to support Pen Mode",
+                    "#c74b46",
+                    "",
+                    fa,
+                    null)
+            );
+        }
 
-        mCardUI.addCard(new CardSwitchPlugin(
-                fa.getString(R.string.glove_mode),
-                fa.getString(R.string.glove_mode_desc),
-                sectionColor,
-                PEN_MODE,
-                fa,
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
-                        bootPrefs.edit().putBoolean("GLOVE_MODE", isOn).commit();
-                        if (isOn)
-                            Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + PEN_MODE);
-                        else
-                            Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + PEN_MODE);
+        if (Helpers.doesFileExist(GLOVE_MODE)) {
+            mCardUI.addCard(new CardSwitchPlugin(
+                    fa.getString(R.string.glove_mode),
+                    fa.getString(R.string.glove_mode_desc),
+                    sectionColor,
+                    PEN_MODE,
+                    fa,
+                    new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
+                            bootPrefs.edit().putBoolean("GLOVE_MODE", isOn).commit();
+                            if (isOn)
+                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + PEN_MODE);
+                            else
+                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + PEN_MODE);
+                        }
                     }
-                }
-        ));
+            ));
+        } else {
+            mCardUI.addCard(new CardSwitchDisabled(
+                    fa.getString(R.string.glove_mode),
+                    "Sorry, your kernel does not seem to support Glove Mode",
+                    "#c74b46",
+                    "",
+                    fa,
+                    null)
+            );
+        }
 
         // bash command to grab the nth line (where NUM is the line number):
         // sed 'NUMq;d' path/to/file

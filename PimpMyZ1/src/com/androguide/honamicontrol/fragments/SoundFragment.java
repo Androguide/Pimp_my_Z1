@@ -68,8 +68,6 @@ public class SoundFragment extends Fragment implements SoundControlInterface {
 
         assert ll != null;
         mCardUI = (CardUI) (ll.findViewById(R.id.cardsui));
-        mCardUI.addStack(new CardStack(""));
-        mCardUI.addStack(new CardStack(""));
         createCards();
         return ll;
     }
@@ -120,10 +118,10 @@ public class SoundFragment extends Fragment implements SoundControlInterface {
     }
 
     private static void createCards() {
-        String SC_VERSION = CPUHelper.readOneLineNotRoot(FAUX_SC_VERSION);
         String sectionColor = fa.getString(R.string.sound_control_color);
+        mCardUI.addStack(new CardStack(""));
 
-        if (SC_VERSION.isEmpty() || SC_VERSION == null) {
+        if (!Helpers.doesFileExist(FAUX_SC_VERSION)) {
             mCardUI.addCard(new CardTextStripe(
                     fa.getString(R.string.unsupported),
                     fa.getString(R.string.sound_control_unsupported),

@@ -104,24 +104,34 @@ public class GPUActivity extends ActionBarActivity {
         graph.setLineToFill(0);
 
         availableFrequencies = new String[0];
-        String availableFrequenciesLine = CPUHelper.readOneLineNotRoot(GPUInterface.availableFreqs);
-        if (availableFrequenciesLine != null) {
-            availableFrequencies = availableFrequenciesLine.split(" ");
-            Arrays.sort(availableFrequencies, new Comparator<String>() {
-                @Override
-                public int compare(String object1, String object2) {
-                    return Integer.valueOf(object1).compareTo(
-                            Integer.valueOf(object2));
-                }
-            });
+        String availableFrequenciesLine = "";
+        if (Helpers.doesFileExist(GPUInterface.availableFreqs)) {
+            availableFrequenciesLine = CPUHelper.readOneLineNotRoot(GPUInterface.availableFreqs);
+            if (availableFrequenciesLine != null) {
+                availableFrequencies = availableFrequenciesLine.split(" ");
+                Arrays.sort(availableFrequencies, new Comparator<String>() {
+                    @Override
+                    public int compare(String object1, String object2) {
+                        return Integer.valueOf(object1).compareTo(
+                                Integer.valueOf(object2));
+                    }
+                });
+            }
         }
 
         int frequenciesNum = availableFrequencies.length - 1;
 
-        String currentGovernor = CPUHelper.readOneLineNotRoot(GPUInterface.currGovernor);
-        String currentIo = CPUHelper.getIOScheduler();
-        String curMaxSpeed = CPUHelper.readOneLineNotRoot(GPUInterface.maxFreq);
-        String curMinSpeed = CPUHelper.readOneLineNotRoot(GPUInterface.minFreq);
+        String currentGovernor = "";
+        if (Helpers.doesFileExist(GPUInterface.currGovernor))
+            currentGovernor = CPUHelper.readOneLineNotRoot(GPUInterface.currGovernor);
+
+        String curMaxSpeed = "";
+        if (Helpers.doesFileExist(GPUInterface.maxFreq))
+            curMaxSpeed = CPUHelper.readOneLineNotRoot(GPUInterface.maxFreq);
+
+        String curMinSpeed = "";
+        if (Helpers.doesFileExist(GPUInterface.minFreq))
+            curMinSpeed = CPUHelper.readOneLineNotRoot(GPUInterface.minFreq);
 
         mCurFreq = (TextView) findViewById(R.id.currspeed);
 
@@ -182,8 +192,10 @@ public class GPUActivity extends ActionBarActivity {
         });
 
         Spinner mGovernor = (Spinner) findViewById(R.id.governor);
-        String[] availableGovernors = CPUHelper.readOneLineNotRoot(GPUInterface.availableGovernors)
-                .split(" ");
+        String[] availableGovernors = new String[]{"No GPU Governors Found!"};
+        if (Helpers.doesFileExist(GPUInterface.availableGovernors))
+            availableGovernors = CPUHelper.readOneLineNotRoot(GPUInterface.availableGovernors)
+                    .split(" ");
         ArrayAdapter<CharSequence> governorAdapter = new ArrayAdapter<CharSequence>(
                 this, R.layout.spinner_row);
         governorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
