@@ -11,6 +11,7 @@
 # generated files
 bin/
 gen/
+build/
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -27,3 +28,25 @@ proguard/
 *.ipr
 *.iws
 .idea/
+.gradle/
+
+# Project-specific
+PimpMyZ1/build/
+PimpMyZ1/.idea/
+PimpMyZ1/*.iml
+PimpMyZ1/*.idea
+
+libs/CardsUILib/build/
+libs/CardsUILib/.idea/
+libs/CardsUILib/*.iml
+libs/CardsUILib/*.idea
+
+libs/HoloGraphLibrary/build/
+libs/HoloGraphLibrary/.idea/
+libs/HoloGraphLibrary/*.iml
+libs/HoloGraphLibrary/*.idea
+
+libs/PagerSlidingStrip/build/
+libs/PagerSlidingStrip/.idea/
+libs/PagerSlidingStrip/*.iml
+libs/PagerSlidingStrip/*.idea
