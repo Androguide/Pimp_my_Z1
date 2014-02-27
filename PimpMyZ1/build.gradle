@@ -26,7 +26,8 @@ dependencies {
     compile project(':libs:CardsUILib')
     compile project(':libs:PagerSlidingStrip')
     compile project(':libs:HoloGraphLibrary')
-    'com.android.support:support-v4:19.0.0'
+    compile 'com.android.support:support-v4:19.0.+'
+    compile 'com.android.support:appcompat-v7:19.0.+'
 }
 
 android {
