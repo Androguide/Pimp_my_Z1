@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+
+   Copyright (C) 2013  Louis Teboul (a.k.a Androguide)
+
+   admin@pimpmyrom.org  || louisteboul@gmail.com
+   http://pimpmyrom.org || http://androguide.fr
+   71 quai Clemenceau, 69300 Caluire-et-Cuire, FRANCE.
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License along
+   with this program; if not, write to the Free Software Foundation, Inc.,
+   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+-->
+
+<resources>
+
+    <!-- ================= General Stuff ================= -->
+    <string name="app_name">Pimp My Z1</string>
+    <string name="presentation">紹介</string>
+    <string name="action_settings">設定</string>
+    <string name="open_drawer">ドロワーを開く</string>
+    <string name="close_drawer">ドロワーを閉じる</string>
+
+    <!-- ================= Colours in String form ================= -->
+    <string name="background_window">#FFE5E5E5</string>
+    <string name="holoblue">#33b6ea</string>
+    <string name="play_blue">#FF3F9FE0</string>
+    <string name="play_green">#FF96AA39</string>
+    <string name="play_orange">#FFF4842D</string>
+    <string name="play_red">#FFC74B46</string>
+    <string name="play_gray">#FF666666</string>
+
+    <!-- ================= Drawer Entries ================= -->
+    <string name="drawer_website">ウェブサイト</string>
+    <string name="drawer_xda">XDA Thread</string>
+    <string name="drawer_twitter">フォローする</string>
+    <string name="drawer_gplus">サークルに追加する</string>
+    <string name="drawer_facebook">ファンになる</string>
+    <string name="drawer_donate">PayPalで寄付する</string>
+
+    <!-- ================= Cards ================= -->
+    <string name="card_title">Card Title</string>
+    <string name="lorem_ipsum">umque ibi diu moratur commeatus opperiens, quorum translationem ex Aquitania verni imbres solito crebriores prohibebant auctique torrentes, Herculanus advenit protector domesticus</string>
+    <string name="card_icon_accessibility">Card Icon</string>
+
+    <!-- ================= Welcome Fragment ================= -->
+    <string name="welcome">ようこそ!</string>
+    <string name="welcome_desc">Pimp My Z1にようこそ、このアプリはXperia Z1のあらゆるものを変えられるアプリです。</string>
+    <string name="help_center">ヘルプ</string>
+    <string name="help_center_introduction">Pimp My Z1で変えられる機能について学んでAndroidマニアになりましょう!</string>
+    <string name="menu_link_seekbars">左右のリンク</string>
+    <string name="kernel_cpu_control">CPU制御</string>
+    <string name="kernel_cpu_control_desc">CPUの最小/最大周波数やガバナ、I/Oスケジューラなどを変更できます。</string>
+    <string name="kernel_color">#1abc9c</string>
+    <string name="coming_soon">開発中</string>
+    <string name="kernel_gpu_control">GPU制御</string>
+    <string name="kernel_gpu_control_desc"><![CDATA[GPUの最小/最大周波数を変更できます。カーネルが対応している場合はオーバークロックもできます。]]></string>
+    <string name="kernel_power_management">電源管理</string>
+    <string name="kernel_power_management_desc">電源管理に関係した機能を設定できます。(カーネルに搭載されている場合のみ)</string>
+    <string name="kernel_io_tweaks">I/O調整</string>
+    <string name="kernel_io_tweaks_desc">カーネルレベルで、I/OスケジューラやDynamic File SyncなどのI/O調整をします。</string>
+    <string name="unsupported">非対応</string>
+    <string name="sound_control_unsupported">お使いのカーネルにFaux123 Sound Controlドライバが搭載されていないか、バージョンが古いため対応していません。</string>
+    <string name="sound_control_color">#e67e22</string>
+    <string name="sc_headphone_digital_gain">ヘッドホンデジタルゲイン</string>
+    <string name="sc_headphone_digital_gain_desc">ヘッドホンのデジタル出力のゲインを調整します。</string>
+    <string name="sc_headphone_analog_gain">ヘッドホンアナログゲイン</string>
+    <string name="sc_headphone_analog_gain_desc">ヘッドホンのアナログ出力のゲインを調整します。\n(PowerAmpゲイン)</string>
+    <string name="sc_speaker_gain">スピーカーゲイン</string>
+    <string name="sc_speaker_gain_desc">スピーカーのアナログ出力のゲインを調整します。</string>
+    <string name="sc_mic_gain">マイクゲイン</string>
+    <string name="sc_mic_gain_desc">マイク入力のゲインを調整します。</string>
+    <string name="sc_cam_mic_gain">カメラマイクゲイン</string>
+    <string name="sc_cam_mic_gain_desc">カメラマイク入力のゲインを調整します。</string>
+    <string name="coming_soon_desc">現在は使用できません。</string>
+    <string name="pen_mode">ペンモード</string>
+    <string name="pen_mode_desc">ペンモードを有効にすると、プラスチック以外の金属や木製などの物でXperia Z1の画面を操作できるようになります。</string>
+    <string name="touch_screen_color">#2980b9</string>
+    <string name="glove_mode">手ぶくろモード</string>
+    <string name="glove_mode_desc">手ぶくろモードを有効にすると、手ぶくろをしたままでもXperia Z1を操作できるようになります。(ハードウェアが非対応である場合ペンモードと同じ動作になります)</string>
+    <string name="kernel_control">カーネル制御</string>
+    <string name="kernel_control_desc">CPUやGPUオーバークロック、ガバナやI/Oスケジューラ、TCPの輻輳制御アルゴリズムの変更など、様々なカーネルの機能を変更できます。</string>
+    <string name="sound_control">音量調整</string>
+    <string name="sound_control_desc">カーネルにFaux123 Sound Controlが搭載されている場合、ヘッドホン出力やスピーカー、カメラマイクや録音用マイクの音量を調整できます。</string>
+    <string name="touch_screen">タッチスクリーン</string>
+    <string name="touch_screen_desc">Xperia Z1のタッチスクリーンをプラスチック製以外のペンに対応させたり、タッチ圧力、ターゲットサイズやドラッグ範囲などの細かな値などを調整したりします。</string>
+    <string name="help_center_color">#34495e</string>
+    <string name="dynamic_fsync">Dynamic File Sync</string>
+    <string name="dynamic_fsync_desc">When Dynamic Fsyncが有効になっている場合、画面が消灯するまでファイル同期を遅延させ、使用中のパフォーマンスを改善します。</string>
+    <string name="dynamic_fsync_version">カーネルのDynamic Fsyncバージョン: \'</string>
+    <string name="sched_mc">マルチコアプロセッサ制御</string>
+    <string name="sched_mc_desc">マルチコアプロセッサ制御を有効にすると、CPUは使用率が最大になるまで一つのコアを使い、コア数を最小限にしようとするようになります。この機能でバッテリー消費が改善されます。\n二段階で調整できます。</string>
+    <string name="intelli_plug">Intelli Plug</string>
+    <string name="intelli_plug_desc">Intelli_plugはFaux123さんが作ったHotplugドライバで、Qualcommのクローズドソースのmsm_mpdecisionドライバの代わりになるオープンソースのドライバです。よりカスタマイズがしやすくなっており、最適化されています。</string>
+    <string name="intelli_plug_eco">Intelli Plugエコモード</string>
+    <string name="intelli_plug_eco_desc">Intelli_plugのエコモードは、2コアをできる限りオフラインにしてバッテリー消費を減らすよう調整するモードです。</string>
+    <string name="power_suspend">Power Suspend</string>
+    <string name="power_suspend_desc">Power SuspendはFaux123さんが作ったオープンソースのカーネルの電源管理ドライバで、early_suspendドライバの代わりになります。\nPower Suspendを有効にすると画面消灯中の消費電力を減らせます。</string>
+    <string name="disabled">無効</string>
+    <string name="moderate">緩やか</string>
+    <string name="aggressive">積極的</string>
+    <string name="refresh">再読み込み</string>
+</resources>
