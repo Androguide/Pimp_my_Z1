@@ -119,11 +119,10 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
                         public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
                             isIntelliPlugOn = isOn;
                             bootPrefs.edit().putBoolean("INTELLI_PLUG", isOn).commit();
-                            if (isOn)
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + INTELLI_PLUG_TOGGLE);
-                            else {
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + INTELLI_PLUG_TOGGLE);
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + INTELLI_PLUG_ECO_MODE);
+                            if (isOn) {
+                                Helpers.CMDProcessorWrapper.runSuCommand("stop mpdecision && busybox echo 1 > " + INTELLI_PLUG_TOGGLE);
+                            } else {
+                                Helpers.CMDProcessorWrapper.runSuCommand("start mpdecision && busybox echo 0 > " + INTELLI_PLUG_TOGGLE);
                                 if (ecoModeSwitch != null)
                                     ecoModeSwitch.setChecked(false);
                             }

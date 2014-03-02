@@ -76,7 +76,7 @@ public class CardDoubleSeekBarPA extends Card implements SoundControlInterface {
         valueLeft.setText(getSeekbarLabel(seekBarProgress) + unit);
         valueRight.setText(getSeekbarLabel(seekBarProgress2) + unit);
 
-        prefs = fa.getSharedPreferences(prop.replaceAll("/", ""), 0);
+        prefs = fa.getSharedPreferences(prop.replaceAll("/", "_"), 0);
         soundPrefs = fa.getSharedPreferences("SOUND_CONTROL", 0);
         isLinked = soundPrefs.getBoolean("LINKED", true);
 
@@ -127,6 +127,10 @@ public class CardDoubleSeekBarPA extends Card implements SoundControlInterface {
                                                 + Helpers.getSoundCountrolBitRepresentation(toApplyLeft, toApplyRight) + " > " + location + " && "
                                                 + "busybox echo 1 > " + FAUX_SC_LOCKED
                                 );
+                                SharedPreferences bootPrefs = fa.getSharedPreferences("BOOT_PREFS", 0);
+                                bootPrefs.edit().putString(
+                                        prop.replaceAll("/", "_"), toApplyLeft + " " + toApplyRight + " " + Helpers.getSoundCountrolBitRepresentation(toApplyLeft, toApplyRight)
+                                ).commit();
                                 actionMode.finish();
                                 break;
                         }
@@ -189,7 +193,7 @@ public class CardDoubleSeekBarPA extends Card implements SoundControlInterface {
                                 );
                                 SharedPreferences bootPrefs = fa.getSharedPreferences("BOOT_PREFS", 0);
                                 bootPrefs.edit().putString(
-                                        "SC_HEADPHONE_PA", toApplyLeft + " " + toApplyRight + Helpers.getSoundCountrolBitRepresentation(toApplyLeft, toApplyRight)
+                                        prop.replaceAll("/", "_"), toApplyLeft + " " + toApplyRight + " " + Helpers.getSoundCountrolBitRepresentation(toApplyLeft, toApplyRight)
                                 ).commit();
                                 actionMode.finish();
                                 break;

@@ -90,8 +90,6 @@ public class SoundFragment extends Fragment implements SoundControlInterface {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                fa.startActivity(new Intent(fa, SettingsActivity.class));
             case R.id.link_seekbars:
                 SharedPreferences soundPrefs = fa.getSharedPreferences("SOUND_CONTROL", 0);
                 if (item.isChecked()) {

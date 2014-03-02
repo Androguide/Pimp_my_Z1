@@ -21,6 +21,7 @@
 
 package com.androguide.honamicontrol;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -38,13 +39,17 @@ public class SettingsActivity extends PreferenceActivity {
 
         final SwitchPreference setOnBoot = (SwitchPreference) findPreference("setOnBoot");
         assert setOnBoot != null;
+        final SharedPreferences prefs = getSharedPreferences("BOOT_PREFS", 0);
         setOnBoot.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
-                if (setOnBoot.isChecked())
+                if (setOnBoot.isChecked()) {
                     setOnBoot.setChecked(false);
-                else
+                    prefs.edit().putBoolean("SET_ON_BOOT", false).commit();
+                } else {
                     setOnBoot.setChecked(true);
+                    prefs.edit().putBoolean("SET_ON_BOOT", true).commit();
+                }
                 return true;
             }
         });

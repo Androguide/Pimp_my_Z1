@@ -42,7 +42,7 @@ import com.fima.cardsui.objects.Card;
 
 public class CardDoubleSeekBar extends Card implements SoundControlInterface {
 
-    private SharedPreferences prefs, soundPrefs;
+    private SharedPreferences prefs, soundPrefs, bootPrefs;
     private Boolean isLinked = true;
     private String location;
 
@@ -74,8 +74,9 @@ public class CardDoubleSeekBar extends Card implements SoundControlInterface {
         valueLeft.setText(seekBarProgress - 30 + unit);
         valueRight.setText(seekBarProgress2 - 30 + unit);
 
-        prefs = fa.getSharedPreferences(prop.replaceAll("/", ""), 0);
+        prefs = fa.getSharedPreferences(prop.replaceAll("/", "_"), 0);
         soundPrefs = fa.getSharedPreferences("SOUND_CONTROL", 0);
+        bootPrefs = fa.getSharedPreferences("BOOT_PREFS", 0);
         isLinked = soundPrefs.getBoolean("LINKED", true);
 
         seekBarLeft.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -187,7 +188,7 @@ public class CardDoubleSeekBar extends Card implements SoundControlInterface {
                                 );
                                 SharedPreferences bootPrefs = fa.getSharedPreferences("BOOT_PREFS", 0);
                                 bootPrefs.edit().putString(
-                                        prop.replaceAll("/", "_"), toApplyLeft + " " + toApplyRight + Helpers.getSoundCountrolBitRepresentation(toApplyLeft, toApplyRight)
+                                        prop.replaceAll("/", "_"), toApplyLeft + " " + toApplyRight + " " + Helpers.getSoundCountrolBitRepresentation(toApplyLeft, toApplyRight)
                                 ).commit();
                                 actionMode.finish();
                                 break;

@@ -24,11 +24,14 @@ package com.androguide.honamicontrol.bootservice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 
 public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        BootHelper.generateScriptFromPrefs(context.getSharedPreferences("BOOT_PREFS", 0));
+        SharedPreferences prefs = context.getSharedPreferences("BOOT_PREFS", 0);
+        if (prefs.getBoolean("SET_ON_BOOT", false))
+            BootHelper.generateScriptFromPrefs(prefs);
     }
 }

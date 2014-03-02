@@ -51,9 +51,10 @@ public class BootHelper {
         String core2Governor = prefs.getString("CORE2_GOVERNOR", "intellidemand");
         String core3Governor = prefs.getString("CORE3_GOVERNOR", "intellidemand");
         String gpuGovernor = prefs.getString("GPU_GOVERNOR", "msm-adreno-tz");
-        String SC_HEADPHONE_PA = prefs.getString("SC_HEADPHONE", "38 38 179");
+        String ioScheduler = prefs.getString("IO_SCHEDULER", "row");
         String SC_MIC = prefs.getString("SC_MIC", "0 0 255");
         String SC_CAM_MIC = prefs.getString("SC_CAM_MIC", "0 0 255");
+        String SC_HEADPHONE_PA = prefs.getString(SoundControlInterface.FAUX_SC_HEADPHONE_POWERAMP.replaceAll("/", "_"), "38 38 179");
         String SC_HEADPHONE = prefs.getString(SoundControlInterface.FAUX_SC_HEADPHONE.replaceAll("/", "_"), "0 0 255");
         String SC_SPEAKER = prefs.getString(SoundControlInterface.FAUX_SC_SPEAKER.replaceAll("/", "_"), "0 0 255");
 
@@ -66,40 +67,44 @@ public class BootHelper {
         String applyCore2Governor = "busybox echo " + core2Governor + " > " + CPUInterface.GOVERNOR3;
         String applyCore3Governor = "busybox echo " + core3Governor + " > " + CPUInterface.GOVERNOR4;
         String applyGpuGovernor = "busybox echo " + gpuGovernor + " > " + GPUInterface.currGovernor;
+        String applyIOScheduler = "busybox echo " + ioScheduler + " > " + CPUInterface.IO_SCHEDULER;
         String applySchedMcLevel = "busybox echo " + SCHED_MC_LEVEL + " > " + PowerManagementInterface.SCHED_MC_POWER_SAVINGS;
         String applyDynamicFsync = "busybox echo " + getIntFromBoolean(DYNAMIC_FSYNC) + " > " + IOTweaksInterface.DYNAMIC_FSYNC_TOGGLE;
         String applyIntelliPlug = "busybox echo " + getIntFromBoolean(INTELLI_PLUG) + " > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE;
         String applyIntelliPlugEco = "busybox echo " + getIntFromBoolean(INTELLI_PLUG_ECO) + " > " + PowerManagementInterface.INTELLI_PLUG_ECO_MODE;
         String applyPowerSuspend = "busybox echo " + getIntFromBoolean(POWER_SUSPEND) + " > " + PowerManagementInterface.POWER_SUSPEND_TOGGLE;
-        String applyPenMode = "busybox echo " + getIntFromBoolean(PEN_MODE) + " > " + TouchScreenInterface.PEN_MODE;
-        String applyGloveMode = "busybox echo " + getIntFromBoolean(GLOVE_MODE) + " > " + TouchScreenInterface.GLOVE_MODE;
+        String applyPenMode = "chown system:system "  + TouchScreenInterface.PEN_MODE + " && busybox echo " + getIntFromBoolean(PEN_MODE) + " > " + TouchScreenInterface.PEN_MODE;
+        String applyGloveMode = "chown system:system "  + TouchScreenInterface.PEN_MODE + " && busybox echo " + getIntFromBoolean(GLOVE_MODE) + " > " + TouchScreenInterface.GLOVE_MODE;
         String applyScHeadphone = "busybox echo " + SC_HEADPHONE + " > " + SoundControlInterface.FAUX_SC_HEADPHONE;
         String applyScHeadphonePa = "busybox echo " + SC_HEADPHONE_PA + " > " + SoundControlInterface.FAUX_SC_HEADPHONE_POWERAMP;
         String applyScSpeaker = "busybox echo " + SC_SPEAKER + " > " + SoundControlInterface.FAUX_SC_SPEAKER;
         String applyScMic = "busybox echo " + SC_MIC + " > " + SoundControlInterface.FAUX_SC_MIC;
         String applyScCamMic = "busybox echo " + SC_CAM_MIC + " > " + SoundControlInterface.FAUX_SC_CAM_MIC;
 
-        Helpers.CMDProcessorWrapper.runSuCommand("" +
-                applyMaxCpuFreq + " && " +
-                applyMinCpuFreq + " && " +
-                applyMaxGpuFreq + " && " +
-                applyMinGpuFreq + " && " +
-                applyCore0Governor + " && " +
-                applyCore1Governor + " && " +
-                applyCore2Governor + " && " +
-                applyCore3Governor + " && " +
-                applyGpuGovernor + " && " +
-                applyScHeadphone + " && " +
-                applyScHeadphonePa + " && " +
-                applyScSpeaker + " && " +
-                applyScMic + " && " +
-                applyScCamMic + " && " +
-                applySchedMcLevel + " && " +
-                applyDynamicFsync + " && " +
-                applyIntelliPlug + " && " +
-                applyIntelliPlugEco + " && " +
-                applyPowerSuspend + " && " +
-                applyPenMode + " && " +
+        Helpers.CMDProcessorWrapper.runSuCommand(
+                applyMaxCpuFreq + "\n" +
+                applyMinCpuFreq + "\n" +
+                applyMaxGpuFreq + "\n" +
+                applyMinGpuFreq + "\n" +
+                applyCore0Governor + "\n" +
+//                applyCore1Governor + "\n" +
+//                applyCore2Governor + "\n" +
+//                applyCore3Governor + "\n" +
+                applyIOScheduler + "\n" +
+                applyGpuGovernor + "\n" +
+                "echo 0 > " + SoundControlInterface.FAUX_SC_LOCKED + "\n" +
+                applyScHeadphone + "\n" +
+                applyScHeadphonePa + "\n" +
+                applyScSpeaker + "\n" +
+                applyScMic + "\n" +
+                applyScCamMic + "\n" +
+                applySchedMcLevel + "\n" +
+                "echo 0 > " + SoundControlInterface.FAUX_SC_LOCKED + "\n" +
+                applyDynamicFsync + "\n" +
+                applyIntelliPlug + "\n" +
+                applyIntelliPlugEco + "\n" +
+                applyPowerSuspend + "\n" +
+                applyPenMode + "\n" +
                 applyGloveMode
         );
     }
