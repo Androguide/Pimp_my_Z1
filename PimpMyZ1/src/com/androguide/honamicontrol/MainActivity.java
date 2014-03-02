@@ -301,7 +301,7 @@ public class MainActivity extends ActionBarActivity implements
         SharedPreferences prefs = getSharedPreferences("CONFIG", 0);
         switch (position) {
             case 0:
-                goToUrl(prefs.getString("WEBSITE", "http://pimpmyrom.org"));
+                goToUrl(prefs.getString("WEBSITE", "http://androguide.github.io/Pimp_my_Z1/"));
                 break;
             case 1:
                 goToUrl(prefs.getString("XDA",
