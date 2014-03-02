@@ -79,9 +79,9 @@ public class TouchScreenFragment extends Fragment implements TouchScreenInterfac
                         public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
                             bootPrefs.edit().putBoolean("PEN_MODE", isOn).commit();
                             if (isOn)
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + PEN_MODE);
+                                Helpers.CMDProcessorWrapper.runSuCommand("chown system:system " + PEN_MODE + " && busybox echo 1 > " + PEN_MODE);
                             else
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + PEN_MODE);
+                                Helpers.CMDProcessorWrapper.runSuCommand("chown system:system " + PEN_MODE + " && busybox echo 0 > " + PEN_MODE);
                         }
                     }
             ));
@@ -101,16 +101,16 @@ public class TouchScreenFragment extends Fragment implements TouchScreenInterfac
                     fa.getString(R.string.glove_mode),
                     fa.getString(R.string.glove_mode_desc),
                     sectionColor,
-                    PEN_MODE,
+                    GLOVE_MODE,
                     fa,
                     new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
                             bootPrefs.edit().putBoolean("GLOVE_MODE", isOn).commit();
                             if (isOn)
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + PEN_MODE);
+                                Helpers.CMDProcessorWrapper.runSuCommand("chown system:system " + GLOVE_MODE + " && busybox echo 1 > " + GLOVE_MODE);
                             else
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + PEN_MODE);
+                                Helpers.CMDProcessorWrapper.runSuCommand("chown system:system " + GLOVE_MODE + " && busybox echo 0 > " + GLOVE_MODE);
                         }
                     }
             ));

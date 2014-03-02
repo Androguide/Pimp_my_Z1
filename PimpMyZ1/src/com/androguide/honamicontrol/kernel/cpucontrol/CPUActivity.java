@@ -147,16 +147,16 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         if (Helpers.doesFileExist(IO_SCHEDULER))
             currentIo = CPUHelper.getIOScheduler();
 
-        String curMaxSpeed = "";
+        String curMaxSpeed = "0";
         if (Helpers.doesFileExist(MAX_FREQ))
             curMaxSpeed = CPUHelper.readOneLineNotRoot(MAX_FREQ);
 
-        String curMinSpeed = "";
+        String curMinSpeed = "0";
         if (Helpers.doesFileExist(MIN_FREQ))
             curMinSpeed = CPUHelper.readOneLineNotRoot(MIN_FREQ);
 
         if (mIsTegra3) {
-            String curTegraMaxSpeed;
+            String curTegraMaxSpeed = "0";
             if (Helpers.doesFileExist(TEGRA_MAX_FREQ)) {
                 curTegraMaxSpeed = CPUHelper.readOneLineNotRoot(TEGRA_MAX_FREQ);
                 int curTegraMax = 0;
@@ -560,10 +560,21 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
 
     // Convert raw collected values to formatted MhZ
     private static String toMHz(String mhzString) {
-        if (Integer.valueOf(mhzString) != null)
-            return String.valueOf(Integer.valueOf(mhzString) / 1000) + " MHz";
-        else
+        try {
+            if (Integer.valueOf(mhzString) != null) {
+                int val = 0;
+                try {
+                    val = Integer.valueOf(mhzString);
+                } catch (NumberFormatException e) {
+                    Log.e("ToMHZ", e.getMessage());
+                }
+                return String.valueOf(val / 1000) + " MHz";
+            } else
+                return "NaN";
+        } catch (NumberFormatException e) {
+            Log.e("CPU-toMHz", e.getMessage());
             return "NaN";
+        }
     }
 
     // Read current frequency from /sys in a separate thread
@@ -593,29 +604,33 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
     // Update real-time current frequency & stats in a separate thread
     protected static Handler mCurCPUHandler = new Handler() {
         public void handleMessage(Message msg) {
-            mCurFreq.setText(toMHz((String) msg.obj));
-            currX += 1;
-            final int p = Integer.parseInt((String) msg.obj);
-            counter++;
-            addStatPoint(currX, p, line, graph);
-            ArrayList<LinePoint> array = line.getPoints();
-            if (line.getSize() > 10)
-                array.remove(0);
-            line.setPoints(array);
+            try {
+                mCurFreq.setText(toMHz((String) msg.obj));
+                currX += 1;
+                final int p = Integer.parseInt((String) msg.obj);
+                counter++;
+                addStatPoint(currX, p, line, graph);
+                ArrayList<LinePoint> array = line.getPoints();
+                if (line.getSize() > 10)
+                    array.remove(0);
+                line.setPoints(array);
 
-            // Reset the line every 50 updates of the current frequency
-            // to make-up for the lack of garbage collection in the
-            // HoloGraph pluggable
-            if (counter == 50) {
-                graph.removeAllLines();
-                line = new Line();
-                LinePoint point = new LinePoint();
-                point.setX(currX);
-                point.setY(1);
-                line.addPoint(point);
-                line.setColor(Color.parseColor("#FFBB33"));
-                graph.addLine(line);
-                counter = 0;
+                // Reset the line every 50 updates of the current frequency
+                // to make-up for the lack of garbage collection in the
+                // HoloGraph pluggable
+                if (counter == 50) {
+                    graph.removeAllLines();
+                    line = new Line();
+                    LinePoint point = new LinePoint();
+                    point.setX(currX);
+                    point.setY(1);
+                    line.addPoint(point);
+                    line.setColor(Color.parseColor("#FFBB33"));
+                    graph.addLine(line);
+                    counter = 0;
+                }
+            } catch (NumberFormatException e) {
+                Log.e("CPUHandler", e.getMessage());
             }
         }
     };

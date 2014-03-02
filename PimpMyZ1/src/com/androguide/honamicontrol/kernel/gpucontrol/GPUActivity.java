@@ -286,10 +286,21 @@ public class GPUActivity extends ActionBarActivity {
 
     // Convert raw collected values to formatted MhZ
     private static String toMHz(String mhzString) {
-        if (Integer.valueOf(mhzString) != null)
-            return String.valueOf(Integer.valueOf(mhzString) / 1000000) + " MHz";
-        else
+        try {
+            if (Integer.valueOf(mhzString) != null) {
+                int val = 0;
+                try {
+                    val = Integer.valueOf(mhzString);
+                } catch (NumberFormatException e) {
+                    Log.e("ToMHZ", e.getMessage());
+                }
+                return String.valueOf(val / 1000000) + " MHz";
+            } else
+                return "NaN";
+        } catch (NumberFormatException e) {
+            Log.e("CPU-toMHz", e.getMessage());
             return "NaN";
+        }
     }
 
     // Read current frequency from /sys in a separate thread
@@ -319,35 +330,39 @@ public class GPUActivity extends ActionBarActivity {
     // Update real-time current frequency & stats in a separate thread
     protected static Handler mCurCPUHandler = new Handler() {
         public void handleMessage(Message msg) {
-            mCurFreq.setText(toMHz((String) msg.obj));
-            currX += 1;
-            final int p = Integer.parseInt((String) msg.obj);
+            try {
+                mCurFreq.setText(toMHz((String) msg.obj));
+                currX += 1;
+                final int p = Integer.parseInt((String) msg.obj);
 
-            new Thread(new Runnable() {
-                public void run() {
-                    counter++;
-                    addStatPoint(currX, p, line, graph);
-                    ArrayList<LinePoint> array = line.getPoints();
-                    if (line.getSize() > 10)
-                        array.remove(0);
-                    line.setPoints(array);
+                new Thread(new Runnable() {
+                    public void run() {
+                        counter++;
+                        addStatPoint(currX, p, line, graph);
+                        ArrayList<LinePoint> array = line.getPoints();
+                        if (line.getSize() > 10)
+                            array.remove(0);
+                        line.setPoints(array);
 
-                    // Reset the line every 50 updates of the current frequency
-                    // to make-up for the lack of garbage collection in the
-                    // HoloGraph pluggable
-                    if (counter == 50) {
-                        graph.removeAllLines();
-                        line = new Line();
-                        LinePoint point = new LinePoint();
-                        point.setX(currX);
-                        point.setY(1);
-                        line.addPoint(point);
-                        line.setColor(Color.parseColor("#FFBB33"));
-                        graph.addLine(line);
-                        counter = 0;
+                        // Reset the line every 50 updates of the current frequency
+                        // to make-up for the lack of garbage collection in the
+                        // HoloGraph pluggable
+                        if (counter == 50) {
+                            graph.removeAllLines();
+                            line = new Line();
+                            LinePoint point = new LinePoint();
+                            point.setX(currX);
+                            point.setY(1);
+                            line.addPoint(point);
+                            line.setColor(Color.parseColor("#FFBB33"));
+                            graph.addLine(line);
+                            counter = 0;
+                        }
                     }
-                }
-            }).start();
+                }).start();
+            } catch (NumberFormatException e) {
+                Log.e("GPUHandler", e.getMessage());
+            }
         }
     };
 

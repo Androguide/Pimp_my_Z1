@@ -383,8 +383,13 @@ public class Helpers {
     }
 
     public static String toMHz(String mhzString) {
-        return new StringBuilder().append(Integer.valueOf(mhzString) / 1000)
-                .append(" MHz").toString();
+        int val = 0;
+        try {
+            val = Integer.valueOf(mhzString);
+        } catch (NumberFormatException e) {
+            Log.e("ToMHZ", e.getMessage());
+        }
+        return val / 1000 + " MHz";
     }
 
     public static int getNumOfCpus() {
