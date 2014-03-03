@@ -305,11 +305,40 @@
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center_horizontal"
                 android:paddingTop="8dp"
-                android:text="I/O Scheduler"
+                android:text="@string/io_scheduler"
                 android:textSize="18sp" />
 
             <Spinner
                 android:id="@+id/io"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tcp_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="center_horizontal"
+                android:paddingTop="8dp"
+                android:text="@string/tcp_congestion"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/tcp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

@@ -105,4 +105,6 @@
     <string name="moderate">Moderate</string>
     <string name="aggressive">Aggressive</string>
     <string name="refresh">Refresh</string>
+    <string name="io_scheduler">I/O Scheduler</string>
+    <string name="tcp_congestion">TCP Congestion Algorithm</string>
 </resources>

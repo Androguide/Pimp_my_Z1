@@ -51,7 +51,7 @@ import java.util.Comparator;
 
 public class CPUActivity extends ActionBarActivity implements CPUInterface {
 
-    private static SharedPreferences preferences, bootPrefs;
+    private static SharedPreferences bootPrefs;
 
     public static final String TAG = "CPUSettings";
 
@@ -65,7 +65,7 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
     private SeekBar mMaxSlider;
     private SeekBar mMinSlider;
     private Spinner mGovernor, mGovernor2, mGovernor3, mGovernor4;
-    private Spinner mIo;
+    private Spinner mIo, mTcp;
     private TextView mMaxSpeedText;
     private TextView mMinSpeedText;
     private String[] availableFrequencies;
@@ -74,7 +74,7 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
     private CurCPUThread mCurCPUThread;
     private boolean mIsTegra3 = false;
     private int mNumOfCpu = 1;
-    private int spinnerCounter = 0, spinnerCounter2 = 0, spinnerCounter3 = 0, spinnerCounter4 = 0, schedCounter = 0;
+    private int spinnerCounter = 0, spinnerCounter2 = 0, spinnerCounter3 = 0, spinnerCounter4 = 0, schedCounter = 0, tcpCounter = 0;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -94,7 +94,6 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.ic_tools_cpu_control));
         setContentView(R.layout.card_cpu_control);
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
         bootPrefs = getSharedPreferences("BOOT_PREFS", 0);
 
         graph = (LineGraph) findViewById(R.id.graph);
@@ -376,13 +375,25 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                     this, R.layout.spinner_row);
             ioAdapter
                     .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            for (int i = 0; i < availableIo.length; i++) {
-                ioAdapter.add(availableIo[i]);
+            for (String anAvailableIo : availableIo) {
+                ioAdapter.add(anAvailableIo);
             }
             mIo.setAdapter(ioAdapter);
             mIo.setSelection(Arrays.asList(availableIo).indexOf(currentIo));
             mIo.setOnItemSelectedListener(new IOListener());
         }
+
+        /** TCP Congestion Spinner */
+        mTcp = (Spinner) findViewById(R.id.tcp);
+        ArrayAdapter<CharSequence> tcpAdapter = new ArrayAdapter<CharSequence>(
+                this, R.layout.spinner_row);
+        tcpAdapter
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayList<String> algorithms = Helpers.getTcpAlgorithms();
+        for (String algorithm : algorithms) tcpAdapter.add(algorithm);
+        mTcp.setAdapter(tcpAdapter);
+        mTcp.setSelection(algorithms.indexOf(currentIo));
+        mTcp.setOnItemSelectedListener(new TCPListener());
     }
 
     public class GovListener implements OnItemSelectedListener {
@@ -397,10 +408,6 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                     // and it doesn't hurt other devices to do it
                     Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + GOVERNOR);
                     bootPrefs.edit().putString("CORE0_GOVERNOR", selected).commit();
-
-                    final SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString(GOV_PREF, selected);
-                    editor.commit();
                 }
             } else {
                 spinnerCounter++;
@@ -423,10 +430,6 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                 // and it doesn't hurt other devices to do it
                 Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + GOVERNOR2);
                 bootPrefs.edit().putString("CORE1_GOVERNOR", selected).commit();
-
-                final SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("GOVERNOR_2", selected);
-                editor.commit();
             } else {
                 spinnerCounter2++;
             }
@@ -448,10 +451,6 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                 // and it doesn't hurt other devices to do it
                 Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + GOVERNOR3);
                 bootPrefs.edit().putString("CORE2_GOVERNOR", selected).commit();
-
-                final SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("GOVERNOR_3", selected);
-                editor.commit();
             } else {
                 spinnerCounter3++;
             }
@@ -473,10 +472,6 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                 // and it doesn't hurt other devices to do it
                 Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + GOVERNOR4);
                 bootPrefs.edit().putString("CORE3_GOVERNOR", selected).commit();
-
-                final SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("GOVERNOR_4", selected);
-                editor.commit();
             } else {
                 spinnerCounter4++;
             }
@@ -493,11 +488,25 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                 String selected = CPUHelper.getAvailableIOSchedulers()[pos];
                 Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + IO_SCHEDULER);
                 bootPrefs.edit().putString("IO_SCHEDULER", selected).commit();
-                final SharedPreferences.Editor editor = preferences.edit();
-                editor.putString(IO_PREF, selected);
-                editor.commit();
             } else {
                 schedCounter++;
+            }
+        }
+
+        public void onNothingSelected(AdapterView<?> parent) {
+        }
+    }
+
+    public class TCPListener implements OnItemSelectedListener {
+        public void onItemSelected(AdapterView<?> parent, View view, int pos,
+                                   long id) {
+            if (tcpCounter > 0) {
+                String selected = Helpers.getTcpAlgorithms().get(pos);
+                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + CURR_TCP_ALGORITHM + " && "
+                        + SYSCTL_TCP_ALGORITHM + selected);
+                bootPrefs.edit().putString("TCP_ALGORITHM", selected).commit();
+            } else {
+                tcpCounter++;
             }
         }
 
@@ -537,9 +546,6 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         }
         mMaxSpeedText.setText(toMHz(current));
         mMaxFreqSetting = current;
-        final SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(MAX_CPU, current);
-        editor.commit();
     }
 
     public void setMinSpeed(SeekBar seekBar, int progress) {
@@ -553,9 +559,6 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         }
         mMinSpeedText.setText(toMHz(current));
         mMinFreqSetting = current;
-        final SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(MIN_CPU, current);
-        editor.commit();
     }
 
     // Convert raw collected values to formatted MhZ
@@ -598,6 +601,7 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                 Log.e("CPU Thread", e.getMessage());
             }
         }
+
     }
 
 

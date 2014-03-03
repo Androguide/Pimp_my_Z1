@@ -37,6 +37,9 @@ public interface CPUInterface {
     public static final String GOVERNOR4 = "/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor";
     public static final String IO_SCHEDULER = "/sys/block/mmcblk0/queue/scheduler";
     public static final String NUM_OF_CPUS = "/sys/devices/system/cpu/present";
+    public static final String AVAILABLE_TCP_ALGORITHMS = "/proc/sys/net/ipv4/tcp_available_congestion_control";
+    public static final String CURR_TCP_ALGORITHM = "/proc/sys/net/ipv4/tcp_congestion_control";
+    public static final String SYSCTL_TCP_ALGORITHM = "sysctl -w net.ipv4.tcp_congestion_control=";
 
     public static final String MAX_CPU = "max_cpu";
     public static final String MIN_CPU = "min_cpu";

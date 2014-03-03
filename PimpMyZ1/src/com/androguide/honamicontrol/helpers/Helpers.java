@@ -413,12 +413,22 @@ public class Helpers {
     }
 
     public static ArrayList<String> getTcpAlgorithms() {
-        String result = String.valueOf(runShellCommand("cat /proc/sys/net/ipv4/tcp_available_congestion_control").getStdout());
-        Log.e("TCP", result);
-        String[] algorithms = result.split("\\s");
-        ArrayList<String> holder = new ArrayList<String>();
-        Collections.addAll(holder, algorithms);
-        return holder;
+        if (new File("/proc/sys/net/ipv4/tcp_available_congestion_control").exists()) {
+            try {
+                String result = String.valueOf(runShellCommand("cat /proc/sys/net/ipv4/tcp_available_congestion_control").getStdout());
+                Log.e("TCP", result);
+                String[] algorithms = result.split("\\s");
+                ArrayList<String> holder = new ArrayList<String>();
+                Collections.addAll(holder, algorithms);
+                return holder;
+            } catch (Exception e) {
+                Log.e("getTcpAlgorithms", e.getMessage());
+                return new ArrayList<String>();
+            }
+
+        } else {
+            return new ArrayList<String>();
+        }
     }
 
     public static void setPmrProp(String prop, Boolean isOn) {
