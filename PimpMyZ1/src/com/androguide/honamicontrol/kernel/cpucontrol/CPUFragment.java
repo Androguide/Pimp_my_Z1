@@ -135,7 +135,7 @@ public class CPUFragment extends Fragment implements
         int frequenciesNum = availableFrequencies.length - 1;
 
         String currentGovernor = CPUHelper.readOneLine(GOVERNOR);
-        String currentIo = CPUHelper.getIOScheduler();
+//        String currentIo = CPUHelper.getIOScheduler();
         String curMaxSpeed = CPUHelper.readOneLine(MAX_FREQ);
         String curMinSpeed = CPUHelper.readOneLine(MIN_FREQ);
 
@@ -201,7 +201,7 @@ public class CPUFragment extends Fragment implements
                 currentGovernor));
         mGovernor.setOnItemSelectedListener(new GovListener());
 
-        mIo = (Spinner) view.findViewById(R.id.io);
+//        mIo = (Spinner) view.findViewById(R.id.io);
 //        String[] availableIo = CPUHelper.getAvailableIOSchedulers();
 //        ArrayAdapter<CharSequence> ioAdapter = new ArrayAdapter<CharSequence>(
 //                mActivity, android.R.layout.simple_spinner_item);
