@@ -431,6 +431,17 @@ public class Helpers {
         }
     }
 
+    public static String getCurrentTcpAlgorithm() {
+        if (new File("/proc/sys/net/ipv4/tcp_congestion_control").exists()) {
+            try {
+                return String.valueOf(runShellCommand("cat /proc/sys/net/ipv4/tcp_congestion_control").getStdout());
+            } catch (Exception e) {
+                Log.e("getCurrentTcpAlgorithm", e.getMessage());
+                return "NaN";
+            }
+        } else return "NaN";
+    }
+
     public static void setPmrProp(String prop, Boolean isOn) {
         if (isOn)
             runSuCommand(Shell.ECHO + "\"" + prop + "=true" + "\" >> " + Shell.BUILD_PROP);

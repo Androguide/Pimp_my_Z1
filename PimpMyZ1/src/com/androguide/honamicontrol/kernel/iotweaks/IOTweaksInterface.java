@@ -24,4 +24,6 @@ package com.androguide.honamicontrol.kernel.iotweaks;
 public interface IOTweaksInterface {
     public static final String DYNAMIC_FSYNC_VERSION = "/sys/kernel/dyn_fsync/Dyn_fsync_version";
     public static final String DYNAMIC_FSYNC_TOGGLE = "/sys/kernel/dyn_fsync/Dyn_fsync_active";
+    public static final String IO_SCHEDULER = "/sys/block/mmcblk0/queue/scheduler";
+    public static final String IO_SCHEDULER_SD = "/sys/block/mmcblk1/queue/scheduler";
 }

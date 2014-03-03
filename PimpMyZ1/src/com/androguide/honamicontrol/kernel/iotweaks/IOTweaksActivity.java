@@ -25,17 +25,21 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 
 import com.androguide.honamicontrol.R;
+import com.androguide.honamicontrol.cards.CardSpinner;
 import com.androguide.honamicontrol.cards.CardSwitchDisabled;
 import com.androguide.honamicontrol.cards.CardSwitchPlugin;
-import com.androguide.honamicontrol.helpers.CMDProcessor.CMDProcessor;
 import com.androguide.honamicontrol.helpers.CPUHelper;
 import com.androguide.honamicontrol.helpers.Helpers;
 import com.fima.cardsui.objects.CardStack;
-import com.fima.cardsui.views.CardTextStripe;
 import com.fima.cardsui.views.CardUI;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class IOTweaksActivity extends ActionBarActivity implements IOTweaksInterface {
 
@@ -80,6 +84,50 @@ public class IOTweaksActivity extends ActionBarActivity implements IOTweaksInter
                     this,
                     null)
             );
+        }
+
+        if (Helpers.doesFileExist(IO_SCHEDULER)) {
+            final ArrayList<String> ioScheds = CPUHelper.getAvailableIOSchedulers();
+            cardsUI.addCard(new CardSpinner("I/O Scheduler (eMMC)",
+                    "Defines the I/O Scheduler to use for the internal storage",
+                    "#1abc9c",
+                    IO_SCHEDULER,
+                    ioScheds.indexOf(CPUHelper.getIOScheduler()),
+                    ioScheds,
+                    this,
+                    new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + ioScheds.get(position) + " > " + IO_SCHEDULER);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    }));
+        }
+
+        if (Helpers.doesFileExist(IO_SCHEDULER_SD)) {
+            final ArrayList<String> ioScheds = CPUHelper.getAvailableIOSchedulersSD();
+            cardsUI.addCard(new CardSpinner("I/O Scheduler (SD-Card)",
+                    "Defines the I/O Scheduler to use for the external storage/SD-Card",
+                    "#1abc9c",
+                    IO_SCHEDULER_SD,
+                    ioScheds.indexOf(CPUHelper.getIOSchedulerSD()),
+                    ioScheds,
+                    this,
+                    new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + ioScheds.get(position) + " > " + IO_SCHEDULER_SD);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    }));
         }
 
         cardsUI.refresh();

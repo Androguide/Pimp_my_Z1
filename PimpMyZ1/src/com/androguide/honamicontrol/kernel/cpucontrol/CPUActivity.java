@@ -146,6 +146,10 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         if (Helpers.doesFileExist(IO_SCHEDULER))
             currentIo = CPUHelper.getIOScheduler();
 
+        String currentTcp = "";
+        if (Helpers.doesFileExist(CURR_TCP_ALGORITHM))
+            currentTcp = Helpers.getCurrentTcpAlgorithm();
+
         String curMaxSpeed = "0";
         if (Helpers.doesFileExist(MAX_FREQ))
             curMaxSpeed = CPUHelper.readOneLineNotRoot(MAX_FREQ);
@@ -367,21 +371,21 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
             mGovernor4.setAdapter(governorAdapter4);
         }
 
-        /** I/O Scheduler Spinner */
-        mIo = (Spinner) findViewById(R.id.io);
-        if (Helpers.doesFileExist(IO_SCHEDULER)) {
-            String[] availableIo = CPUHelper.getAvailableIOSchedulers();
-            ArrayAdapter<CharSequence> ioAdapter = new ArrayAdapter<CharSequence>(
-                    this, R.layout.spinner_row);
-            ioAdapter
-                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            for (String anAvailableIo : availableIo) {
-                ioAdapter.add(anAvailableIo);
-            }
-            mIo.setAdapter(ioAdapter);
-            mIo.setSelection(Arrays.asList(availableIo).indexOf(currentIo));
-            mIo.setOnItemSelectedListener(new IOListener());
-        }
+//        /** I/O Scheduler Spinner */
+//        mIo = (Spinner) findViewById(R.id.io);
+//        if (Helpers.doesFileExist(IO_SCHEDULER)) {
+//            String[] availableIo = CPUHelper.getAvailableIOSchedulers();
+//            ArrayAdapter<CharSequence> ioAdapter = new ArrayAdapter<CharSequence>(
+//                    this, R.layout.spinner_row);
+//            ioAdapter
+//                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//            for (String anAvailableIo : availableIo) {
+//                ioAdapter.add(anAvailableIo);
+//            }
+//            mIo.setAdapter(ioAdapter);
+//            mIo.setSelection(Arrays.asList(availableIo).indexOf(currentIo));
+//            mIo.setOnItemSelectedListener(new IOListener());
+//        }
 
         /** TCP Congestion Spinner */
         mTcp = (Spinner) findViewById(R.id.tcp);
@@ -392,7 +396,7 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         ArrayList<String> algorithms = Helpers.getTcpAlgorithms();
         for (String algorithm : algorithms) tcpAdapter.add(algorithm);
         mTcp.setAdapter(tcpAdapter);
-        mTcp.setSelection(algorithms.indexOf(currentIo));
+        mTcp.setSelection(algorithms.indexOf(currentTcp));
         mTcp.setOnItemSelectedListener(new TCPListener());
     }
 
@@ -481,21 +485,21 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         }
     }
 
-    public class IOListener implements OnItemSelectedListener {
-        public void onItemSelected(AdapterView<?> parent, View view, int pos,
-                                   long id) {
-            if (schedCounter > 0) {
-                String selected = CPUHelper.getAvailableIOSchedulers()[pos];
-                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + IO_SCHEDULER);
-                bootPrefs.edit().putString("IO_SCHEDULER", selected).commit();
-            } else {
-                schedCounter++;
-            }
-        }
-
-        public void onNothingSelected(AdapterView<?> parent) {
-        }
-    }
+//    public class IOListener implements OnItemSelectedListener {
+//        public void onItemSelected(AdapterView<?> parent, View view, int pos,
+//                                   long id) {
+//            if (schedCounter > 0) {
+//                String selected = CPUHelper.getAvailableIOSchedulers()[pos];
+//                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + IO_SCHEDULER);
+//                bootPrefs.edit().putString("IO_SCHEDULER", selected).commit();
+//            } else {
+//                schedCounter++;
+//            }
+//        }
+//
+//        public void onNothingSelected(AdapterView<?> parent) {
+//        }
+//    }
 
     public class TCPListener implements OnItemSelectedListener {
         public void onItemSelected(AdapterView<?> parent, View view, int pos,

@@ -202,17 +202,17 @@ public class CPUFragment extends Fragment implements
         mGovernor.setOnItemSelectedListener(new GovListener());
 
         mIo = (Spinner) view.findViewById(R.id.io);
-        String[] availableIo = CPUHelper.getAvailableIOSchedulers();
-        ArrayAdapter<CharSequence> ioAdapter = new ArrayAdapter<CharSequence>(
-                mActivity, android.R.layout.simple_spinner_item);
-        ioAdapter
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        for (int i = 0; i < availableIo.length; i++) {
-            ioAdapter.add(availableIo[i]);
-        }
-        mIo.setAdapter(ioAdapter);
-        mIo.setSelection(Arrays.asList(availableIo).indexOf(currentIo));
-        mIo.setOnItemSelectedListener(new IOListener());
+//        String[] availableIo = CPUHelper.getAvailableIOSchedulers();
+//        ArrayAdapter<CharSequence> ioAdapter = new ArrayAdapter<CharSequence>(
+//                mActivity, android.R.layout.simple_spinner_item);
+//        ioAdapter
+//                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        for (int i = 0; i < availableIo.length; i++) {
+//            ioAdapter.add(availableIo[i]);
+//        }
+//        mIo.setAdapter(ioAdapter);
+//        mIo.setSelection(Arrays.asList(availableIo).indexOf(currentIo));
+//        mIo.setOnItemSelectedListener(new IOListener());
 
         return view;
     }

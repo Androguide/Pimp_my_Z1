@@ -39,6 +39,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class CPUHelper {
@@ -227,28 +228,34 @@ public class CPUHelper {
         return true;
     }
 
-    public static String[] getAvailableIOSchedulers() {
-        String[] schedulers = null;
+    public static ArrayList<String> getAvailableIOSchedulers() {
+        ArrayList<String> schedulers = new ArrayList<String>();
         String[] aux = readStringArray("/sys/block/mmcblk0/queue/scheduler");
         if (aux != null) {
-            schedulers = new String[aux.length];
             for (int i = 0; i < aux.length; i++) {
                 if (aux[i].charAt(0) == '[') {
-                    schedulers[i] = aux[i].substring(1, aux[i].length() - 1);
+                    schedulers.add(i, aux[i].substring(1, aux[i].length() - 1));
                 } else {
-                    schedulers[i] = aux[i];
+                    schedulers.add(i, aux[i]);
                 }
             }
         }
         return schedulers;
     }
 
-    private static String[] readStringArray(String fname) {
-        String line = readOneLine(fname);
-        if (line != null) {
-            return line.split(" ");
+    public static ArrayList<String> getAvailableIOSchedulersSD() {
+        ArrayList<String> schedulers = new ArrayList<String>();
+        String[] aux = readStringArray("/sys/block/mmcblk1/queue/scheduler");
+        if (aux != null) {
+            for (int i = 0; i < aux.length; i++) {
+                if (aux[i].charAt(0) == '[') {
+                    schedulers.add(i, aux[i].substring(1, aux[i].length() - 1));
+                } else {
+                    schedulers.add(i, aux[i]);
+                }
+            }
         }
-        return null;
+        return schedulers;
     }
 
     public static String getIOScheduler() {
@@ -263,6 +270,28 @@ public class CPUHelper {
             }
         }
         return scheduler;
+    }
+
+    public static String getIOSchedulerSD() {
+        String scheduler = null;
+        String[] schedulers = readStringArray("/sys/block/mmcblk1/queue/scheduler");
+        if (schedulers != null) {
+            for (String s : schedulers) {
+                if (s.charAt(0) == '[') {
+                    scheduler = s.substring(1, s.length() - 1);
+                    break;
+                }
+            }
+        }
+        return scheduler;
+    }
+
+    private static String[] readStringArray(String fname) {
+        String line = readOneLine(fname);
+        if (line != null) {
+            return line.split(" ");
+        }
+        return null;
     }
 
     /**
