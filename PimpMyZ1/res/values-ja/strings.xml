@@ -63,7 +63,7 @@
     <string name="kernel_color">#1abc9c</string>
     <string name="coming_soon">開発中</string>
     <string name="kernel_gpu_control">GPU制御</string>
-    <string name="kernel_gpu_control_desc"><![CDATA[GPUの最小/最大周波数を変更できます。カーネルが対応している場合はオーバークロックもできます。]]></string>
+    <string name="kernel_gpu_control_desc">GPUの最小/最大周波数を変更できます。カーネルが対応している場合はオーバークロックもできます</string>
     <string name="kernel_power_management">電源管理</string>
     <string name="kernel_power_management_desc">電源管理に関係した機能を設定できます。(カーネルに搭載されている場合のみ)</string>
     <string name="kernel_io_tweaks">I/O調整</string>

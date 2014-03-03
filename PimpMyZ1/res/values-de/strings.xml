@@ -64,7 +64,7 @@
     <string name="kernel_color">#1abc9c</string>
     <string name="coming_soon">Coming Soon</string>
     <string name="kernel_gpu_control">GPU Control</string>
-    <string name="kernel_gpu_control_desc"><![CDATA[This tool allows you to control your GPU\'s minimum & maximum frequencies, and overlock it if supported by your kernel.]]></string>
+    <string name="kernel_gpu_control_desc">This tool allows you to control your GPU\'s minimum &amp; maximum frequencies, and overlock it if supported by your kernel.</string>
     <string name="kernel_power_management">Power Management</string>
     <string name="kernel_power_management_desc">This section allows you to control various power management features of your kernel (if implemented)</string>
     <string name="kernel_io_tweaks">I/O Tweaks</string>
@@ -88,8 +88,8 @@
     <string name="glove_mode">Glove Mode</string>
     <string name="glove_mode_desc">With Glove Mode enabled, you will be able to use the touchscreen on your Xperia Z1 even while wearing gloves.</string>
     <string name="kernel_control">Kernel Control</string>
-    <string name="kernel_control_desc">This section allows you to tweak your kernel features to your liking, from CPU &amp; GPU overclocking to governors, I/O schedulers, TCP congestion algorithms and much more&#8230;></string>
-    <string name="sound_control">Sound Control</string><string name="sound_control_desc">Tweak the volume of your headphones output, speaker, camera mic &amp; sound recording mic if you are using a kernel which implements Faux123\'s Sound Control.></string>
+    <string name="kernel_control_desc">This section allows you to tweak your kernel features to your liking, from CPU &amp; GPU overclocking to governors, I/O schedulers, TCP congestion algorithms and much more&#8230;</string>
+    <string name="sound_control">Sound Control</string><string name="sound_control_desc">Tweak the volume of your headphones output, speaker, camera mic &amp; sound recording mic if you are using a kernel which implements Faux123\'s Sound Control.</string>
     <string name="touch_screen">Touch Screen</string>
     <string name="touch_screen_desc">Control your Xperia Z1 touch-screen, from adding support for any pen or non-plastic object to tweaking the smallest parameters like touch pressure, target size, max speed, drag range, etc…</string>
     <string name="help_center_color">#34495e</string>
