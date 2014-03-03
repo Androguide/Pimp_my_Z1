@@ -38,7 +38,7 @@
         android:layout_marginRight="4dp"
         android:layout_weight="5"
         android:fontFamily="sans-serif-condensed"
-        android:text="SET ON BOOT"
+        android:text="Beim Starten ausfuehren"
         android:textColor="#FFFFFF" />
 
     <Switch xmlns:android="http://schemas.android.com/apk/res/android"

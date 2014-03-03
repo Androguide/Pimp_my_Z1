@@ -4,7 +4,7 @@
 
     <SwitchPreference
         android:key="setOnBoot"
-        android:title="Set On Boot"
-        android:summaryOff="Your changes will be lost after a reboot"
-        android:summaryOn="Your changes will be applied after each reboot"/>
+        android:title="Beim Starten ausfuehren"
+        android:summaryOff="Ihre Einstellungen werden nach dem Neustart nicht ausgefuehrt"
+        android:summaryOn="Ihre Einstellungen werden nach dem Neustart ausgefuehrt"/>
 </PreferenceScreen>
