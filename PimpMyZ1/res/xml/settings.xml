@@ -5,6 +5,6 @@
     <SwitchPreference
         android:key="setOnBoot"
         android:title="Beim Starten ausfuehren"
-        android:summaryOff="Ihre Einstellungen werden nach Neustart nicht ausgefuehrt"
-        android:summaryOn="Ihre Einstellungen werden nach Neustart ausgefuehrt"/>
+        android:summaryOff="Ihre Einstellungen werden nach dem Neustart nicht ausgefuehrt"
+        android:summaryOn="Ihre Einstellungen werden nach dem Neustart ausgefuehrt"/>
 </PreferenceScreen>
