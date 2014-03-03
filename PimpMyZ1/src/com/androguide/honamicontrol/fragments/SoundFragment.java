@@ -233,12 +233,12 @@ public class SoundFragment extends Fragment implements SoundControlInterface {
                                     break;
                                 case R.id.apply:
                                     isApplied = true;
-                                    SharedPreferences prefs = fa.getSharedPreferences(FAUX_SC_MIC.replaceAll("/", ""), 0);
+                                    SharedPreferences prefs = fa.getSharedPreferences(FAUX_SC_MIC.replaceAll("/", "_"), 0);
                                     int toApply = prefs.getInt("VALUE", 0);
-                                    Helpers.writeOneLine(FAUX_SC_LOCKED, 0 + "");
-                                    Helpers.writeOneLine(FAUX_SC_MIC, toApply + " " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, toApply));
-                                    Helpers.writeOneLine(FAUX_SC_LOCKED, 1 + "");
-                                    bootPrefs.edit().putString("SC_MIC", toApply + " " + toApply + Helpers.getSoundCountrolBitRepresentation(toApply, toApply)).commit();
+                                    Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + FAUX_SC_LOCKED);
+                                    Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + toApply + " " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, toApply) + " > " + FAUX_SC_MIC);
+                                    Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + FAUX_SC_LOCKED);
+                                    bootPrefs.edit().putString("SC_MIC", toApply + " " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, toApply)).commit();
                                     actionMode.finish();
                             }
                             return false;
@@ -292,12 +292,12 @@ public class SoundFragment extends Fragment implements SoundControlInterface {
                                     break;
                                 case R.id.apply:
                                     isApplied = true;
-                                    SharedPreferences prefs = fa.getSharedPreferences(FAUX_SC_CAM_MIC.replaceAll("/", ""), 0);
+                                    SharedPreferences prefs = fa.getSharedPreferences(FAUX_SC_CAM_MIC.replaceAll("/", "_"), 0);
                                     int toApply = prefs.getInt("VALUE", 0);
-                                    Helpers.writeOneLine(FAUX_SC_LOCKED, 0 + "");
-                                    Helpers.writeOneLine(FAUX_SC_CAM_MIC, toApply + " " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, toApply));
-                                    Helpers.writeOneLine(FAUX_SC_LOCKED, 1 + "");
-                                    bootPrefs.edit().putString("SC_CAM_MIC", toApply + " " + toApply + Helpers.getSoundCountrolBitRepresentation(toApply, toApply)).commit();
+                                    Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + FAUX_SC_LOCKED);
+                                    Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + toApply + " " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, toApply) + " > " + FAUX_SC_CAM_MIC);
+                                    Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + FAUX_SC_LOCKED);
+                                    bootPrefs.edit().putString("SC_CAM_MIC", toApply + " " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, toApply)).commit();
                                     actionMode.finish();
                                     break;
                             }
