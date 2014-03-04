@@ -80,7 +80,7 @@ public class CardSeekBar extends Card {
             public void onStopTrackingTouch(final SeekBar seekBar) {
                 fa.startSupportActionMode(callback);
                 SharedPreferences p = fa.getSharedPreferences(prop.replaceAll("/", "_"), 0);
-                p.edit().putInt("VALUE", seekBar.getProgress()).commit();
+                p.edit().putInt("VALUE", seekBarProgress).commit();
 
             }
         });

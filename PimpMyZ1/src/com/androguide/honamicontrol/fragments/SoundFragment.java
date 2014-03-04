@@ -233,7 +233,7 @@ public class SoundFragment extends Fragment implements SoundControlInterface {
                                     break;
                                 case R.id.apply:
                                     isApplied = true;
-                                    SharedPreferences prefs = fa.getSharedPreferences(FAUX_SC_MIC.replaceAll("/", "_"), 0);
+                                    SharedPreferences prefs = fa.getSharedPreferences("syskernelsound_control_3gpl_mic_gain", 0);
                                     int toApply = prefs.getInt("VALUE", 0);
                                     Helpers.CMDProcessorWrapper.runSuCommand(
                                             "busybox echo 0 > " + FAUX_SC_LOCKED + "\n" +
@@ -293,7 +293,7 @@ public class SoundFragment extends Fragment implements SoundControlInterface {
                                     break;
                                 case R.id.apply:
                                     isApplied = true;
-                                    SharedPreferences prefs = fa.getSharedPreferences(FAUX_SC_CAM_MIC.replaceAll("/", "_"), 0);
+                                    SharedPreferences prefs = fa.getSharedPreferences("syskernelsound_control_3gpl_cam_mic_gain", 0);
                                     int toApply = prefs.getInt("VALUE", 0);
                                     Helpers.CMDProcessorWrapper.runSuCommand(
                                     "busybox echo 0 > " + FAUX_SC_LOCKED + "\n" +
