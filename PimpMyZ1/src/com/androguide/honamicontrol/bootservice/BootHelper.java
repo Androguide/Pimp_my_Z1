@@ -52,6 +52,7 @@ public class BootHelper {
         String core3Governor = prefs.getString("CORE3_GOVERNOR", "intellidemand");
         String gpuGovernor = prefs.getString("GPU_GOVERNOR", "msm-adreno-tz");
         String ioScheduler = prefs.getString("IO_SCHEDULER", "row");
+        String ioSchedulerSD = prefs.getString("IO_SCHEDULER", "row");
         String tcpAlgorithm = prefs.getString("TCP_ALGORITHM", "cubic");
         String SC_MIC = prefs.getString("SC_MIC", "0 0 255");
         String SC_CAM_MIC = prefs.getString("SC_CAM_MIC", "0 0 255");
@@ -68,7 +69,8 @@ public class BootHelper {
         String applyCore2Governor = "busybox echo " + core2Governor + " > " + CPUInterface.GOVERNOR3;
         String applyCore3Governor = "busybox echo " + core3Governor + " > " + CPUInterface.GOVERNOR4;
         String applyGpuGovernor = "busybox echo " + gpuGovernor + " > " + GPUInterface.currGovernor;
-        String applyIOScheduler = "busybox echo " + ioScheduler + " > " + CPUInterface.IO_SCHEDULER;
+        String applyIOScheduler = "busybox echo " + ioScheduler + " > " + IOTweaksInterface.IO_SCHEDULER;
+        String applyIOSchedulerSD = "busybox echo " + ioSchedulerSD + " > " + IOTweaksInterface.IO_SCHEDULER_SD;
         String applyTcpAlgorithm = "busybox echo " + tcpAlgorithm + " > " + CPUInterface.CURR_TCP_ALGORITHM + " && " + CPUInterface.SYSCTL_TCP_ALGORITHM + tcpAlgorithm;
         String applySchedMcLevel = "busybox echo " + SCHED_MC_LEVEL + " > " + PowerManagementInterface.SCHED_MC_POWER_SAVINGS;
         String applyDynamicFsync = "busybox echo " + getIntFromBoolean(DYNAMIC_FSYNC) + " > " + IOTweaksInterface.DYNAMIC_FSYNC_TOGGLE;
@@ -90,6 +92,7 @@ public class BootHelper {
                         applyMinGpuFreq + "\n" +
                         applyCore0Governor + "\n" +
                         applyIOScheduler + "\n" +
+                        applyIOSchedulerSD + "\n" +
                         applyTcpAlgorithm + "\n" +
                         applyGpuGovernor + "\n" +
                         "echo 0 > " + SoundControlInterface.FAUX_SC_LOCKED + " && " +

@@ -99,6 +99,7 @@ public class IOTweaksActivity extends ActionBarActivity implements IOTweaksInter
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + ioScheds.get(position) + " > " + IO_SCHEDULER);
+                            bootPrefs.edit().putString("IO_SCHEDULER", ioScheds.get(position)).commit();
                         }
 
                         @Override
@@ -121,6 +122,7 @@ public class IOTweaksActivity extends ActionBarActivity implements IOTweaksInter
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + ioScheds.get(position) + " > " + IO_SCHEDULER_SD);
+                            bootPrefs.edit().putString("IO_SCHEDULER_SD", ioScheds.get(position)).commit();
                         }
 
                         @Override

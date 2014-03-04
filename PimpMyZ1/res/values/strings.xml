@@ -114,11 +114,11 @@
     <string name="governor_core3">Governor (Core 3)</string>
     <string name="governor_core2">Governor (Core 2)</string>
     <string name="governor_core1">Governor (Core 1)</string>
-    <string name="minimum">Minimum: </string>
-    <string name="maximum">Maximum: </string>
+    <string name="minimum">Minimum:\u0020</string>
+    <string name="maximum">Maximum:\u0020</string>
     <string name="current_freq">Current Frequency</string>
-    <string name="left">Left: </string>
+    <string name="left">Left:\u0020</string>
     <string name="sec">sec.</string>
-    <string name="right">Right: </string>
+    <string name="right">Right:\u0020</string>
     <string name="gpu_governor">GPU Governor</string>
 </resources>
