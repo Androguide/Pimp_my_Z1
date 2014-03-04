@@ -59,7 +59,7 @@
         android:id="@+id/unit"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="sec."
+        android:text="@string/sec"
         android:fontFamily="sans-serif-light"
         android:textSize="18sp"
         android:textColor="@color/play_gray"

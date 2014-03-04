@@ -107,4 +107,18 @@
     <string name="refresh">Refresh</string>
     <string name="io_scheduler">I/O Scheduler</string>
     <string name="tcp_congestion">TCP Congestion Algorithm</string>
+    <string name="set_on_boot">Set On Boot</string>
+    <string name="set_on_boot_summary_off">Your changes will be lost after a reboot</string>
+    <string name="set_on_boot_summary_on">Your changes will be applied after each reboot</string>
+    <string name="governor_core4">Governor (Core 4)</string>
+    <string name="governor_core3">Governor (Core 3)</string>
+    <string name="governor_core2">Governor (Core 2)</string>
+    <string name="governor_core1">Governor (Core 1)</string>
+    <string name="minimum">Minimum: </string>
+    <string name="maximum">Maximum: </string>
+    <string name="current_freq">Current Frequency</string>
+    <string name="left">Left: </string>
+    <string name="sec">sec.</string>
+    <string name="right">Right: </string>
+    <string name="gpu_governor">GPU Governor</string>
 </resources>

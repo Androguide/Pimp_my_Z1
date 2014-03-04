@@ -60,7 +60,7 @@
     <string name="help_center_introduction">Hier erfahren Sie jede Einzelheit von Pimp My Z1 und werden Sie ein Level 99 Android Experte.</string>
     <string name="menu_link_seekbars">Link Links und Rechts</string>
     <string name="kernel_cpu_control">CPU Control</string>
-    <string name="kernel_cpu_control_desc">Dieses Tool ermöglicht es Ihnen, Ihre CPU zu steuern, min/max Frequenz, governors, I/O schedulers und vieles mehr...</string>
+    <string name="kernel_cpu_control_desc">Dieses Tool ermöglicht es Ihnen, Ihre CPU zu steuern, min/max Frequenz, governors, I/O schedulers und vieles mehr…</string>
     <string name="kernel_color">#1abc9c</string>
     <string name="coming_soon">Was wird noch kommen?</string>
     <string name="kernel_gpu_control">GPU Control</string>
@@ -68,7 +68,7 @@
     <string name="kernel_power_management">Enerigieoptionen</string>
     <string name="kernel_power_management_desc">In diesem Abschnitt können Sie verschiedene Power-Management-Funktionen des Kernels kontrollieren (falls diese implementiert sind)</string>
     <string name="kernel_io_tweaks">I/O Tweaks</string>
-    <string name="kernel_io_tweaks_desc">Dieser Abschnitt enthält verschiedene Kernel Ebenen, I/O tweaks, I/O Schedulers settings, dynamic file sync, I/O readahead, etc...</string>
+    <string name="kernel_io_tweaks_desc">Dieser Abschnitt enthält verschiedene Kernel Ebenen, I/O tweaks, I/O Schedulers settings, dynamic file sync, I/O readahead, etc…</string>
     <string name="unsupported">Keine Unterstütztung</string>
     <string name="sound_control_unsupported">Ihr Kernel hat keine Faux123 Sound Control-Treiber integriert, oder es wird von dieser Version nicht unterstützt, sorry.</string>
     <string name="sound_control_color">#e67e22</string>
@@ -89,19 +89,23 @@
     <string name="glove_mode">Handschuh Modus</string>
     <string name="glove_mode_desc">Mit aktiviertem Handschuh Modus lässt sich Ihr Xperia Z1 Touchscreen mit Handschuhen bedienen.</string>
     <string name="kernel_control">Kernel Steuerung</string>
-    <string name="kernel_control_desc">Hier können Sie Ihre Kernel-Funktion nach Ihren wünschen optimieren, CPU und GPU Übertaktung durch governors, I/O schedulers, TCP congestion algorithms und vieles mehr...</string>
-    <string name="sound_control">Musik Steuerung</string><string name="sound_control_desc">Tweak the volume of your headphones output, speaker, camera mic &amp; sound recording mic if you are using a kernel which implements Faux123\'s Sound Control.></string>
+    <string name="kernel_control_desc">Hier können Sie Ihre Kernel-Funktion nach Ihren wünschen optimieren, CPU und GPU Übertaktung durch governors, I/O schedulers, TCP congestion algorithms und vieles mehr…</string>
+    <string name="sound_control">Musik Steuerung</string>
+    <string name="sound_control_desc">Tweak the volume of your headphones output, speaker, camera mic &amp; sound recording mic if you are using a kernel which implements Faux123\'s Sound Control.</string>
     <string name="touch_screen">Touch Screen</string>
     <string name="touch_screen_desc">Control your Xperia Z1 touch-screen, from adding support for any pen or non-plastic object to tweaking the smallest parameters like touch pressure, target size, max speed, drag range, etc…</string>
     <string name="help_center_color">#34495e</string>
-    <string name="dynamic_fsync">Dynamic File Sync</string><string name="dynamic_fsync_desc">When Dynamic Fsync is enabled, file sync will be delayed until the screen is turned off, at which point all pending write operations are synced, allowing for better performance while using the device.</string>
+    <string name="dynamic_fsync">Dynamic File Sync</string>
+    <string name="dynamic_fsync_desc">When Dynamic Fsync is enabled, file sync will be delayed until the screen is turned off, at which point all pending write operations are synced, allowing for better performance while using the device.</string>
     <string name="dynamic_fsync_version">Your kernel\'s Dynamic Fsync version is: \'</string>
-    <string name="sched_mc">Multi-Core Power Savings</string><string name="sched_mc_desc">With Multi-Core Power Savings enabled, the CPU will try to use as few cores as possible by using one core until it is maxed-out. This allows to save quite a lot of battery.\nTwo levels of aggressiveness are available.</string>
+    <string name="sched_mc">Multi-Core Power Savings</string>
+    <string name="sched_mc_desc">With Multi-Core Power Savings enabled, the CPU will try to use as few cores as possible by using one core until it is maxed-out. This allows to save quite a lot of battery.\nTwo levels of aggressiveness are available.</string>
     <string name="intelli_plug">Intelli Plug</string>
     <string name="intelli_plug_desc">Intelli_plug is a hotplug driver created by Faux123 as an open-source replacement for Qualcomm\'s closed-source msm_mpdecision driver. As such, it is more customizable and has a different and possibly more optimized strategy.</string>
     <string name="intelli_plug_eco">Intelli Plug Eco Mode</string>
     <string name="intelli_plug_eco_desc">Intelli_plug\'s eco mode is a hotplug strategy optimized to keep 2 cores offline as often as possible, thus saving a great deal of battery.</string>
-    <string name="power_suspend">Power Suspend</string><string name="power_suspend_desc">Power Suspend is an open-source kernel power management driver created by Faux123, it replaces the now aging early_suspend driver.\nPower Suspend allows for better battery savings while the screen is off.</string>
+    <string name="power_suspend">Power Suspend</string>
+    <string name="power_suspend_desc">Power Suspend is an open-source kernel power management driver created by Faux123, it replaces the now aging early_suspend driver.\nPower Suspend allows for better battery savings while the screen is off.</string>
     <string name="disabled">Deaktiviert</string>
     <string name="moderate">Moderate</string>
     <string name="aggressive">Aggressiv</string>
