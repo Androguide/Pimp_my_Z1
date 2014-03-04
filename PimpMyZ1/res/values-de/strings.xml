@@ -62,7 +62,7 @@
     <string name="kernel_cpu_control">CPU Control</string>
     <string name="kernel_cpu_control_desc">Dieses Tool ermöglicht es Ihnen, Ihre CPU zu steuern, min/max Frequenz, governors, I/O schedulers und vieles mehr…</string>
     <string name="kernel_color">#1abc9c</string>
-    <string name="coming_soon">Was wird noch kommen?</string>
+    <string name="coming_soon">Demnaechst verfuegbar</string>
     <string name="kernel_gpu_control">GPU Control</string>
     <string name="kernel_gpu_control_desc">Dieses Tool ermöglicht es Ihnen, Ihre GPU zu steuern, min/max Frequenz und Übertacktung wenn der Kernel das unterstützt.</string>
     <string name="kernel_power_management">Enerigieoptionen</string>
@@ -122,8 +122,8 @@
     <string name="minimum">Minimum: </string>
     <string name="maximum">Maximum: </string>
     <string name="current_freq">Current Frequency</string>
-    <string name="left">Left: </string>
+    <string name="left">Links: </string>
     <string name="sec">sec.</string>
-    <string name="right">Right: </string>
+    <string name="right">Rechts: </string>
     <string name="gpu_governor">GPU Governor</string>
 </resources>
