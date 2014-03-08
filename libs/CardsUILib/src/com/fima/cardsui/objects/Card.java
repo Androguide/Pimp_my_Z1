@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 
 import com.fima.cardsui.R;
 import com.fima.cardsui.Utils;
@@ -143,6 +144,18 @@ public abstract class Card extends AbstractCard {
         this.callback = callback;
     }
 
+    // Card with Seekbar
+    public Card(String title, String desc, String color, String unit, String prop, int seekBarMax, int seekBarProgress, ActionBarActivity fa, SeekBar.OnSeekBarChangeListener seekBarChangeListener) {
+        this.title = title;
+        this.desc = desc;
+        this.color = color;
+        this.unit = unit;
+        this.prop = prop;
+        this.seekBarMax = seekBarMax;
+        this.seekBarProgress = seekBarProgress;
+        this.fa = fa;
+        this.listener = seekBarChangeListener;
+    }
 
     // Card with Seekbar & EditText for PmR build.prop Plugins
     public Card(String title, String desc, String unit, String prop, int seekBarMax, int seekBarProgress, ActionBarActivity fa) {
