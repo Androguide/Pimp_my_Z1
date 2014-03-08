@@ -237,9 +237,9 @@ public class SoundFragment extends Fragment implements SoundControlInterface {
                                     int toApply = prefs.getInt("VALUE", 0);
                                     Helpers.CMDProcessorWrapper.runSuCommand(
                                             "busybox echo 0 > " + FAUX_SC_LOCKED + "\n" +
-                                            "busybox echo " + toApply + " " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, toApply) + " > " + FAUX_SC_MIC + "\n" +
+                                            "busybox echo " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, 0) + " > " + FAUX_SC_MIC + "\n" +
                                             "busybox echo 1 > " + FAUX_SC_LOCKED);
-                                    bootPrefs.edit().putString("SC_MIC", toApply + " " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, toApply)).commit();
+                                    bootPrefs.edit().putString("SC_MIC", toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, 0)).commit();
                                     actionMode.finish();
                             }
                             return false;
@@ -297,9 +297,9 @@ public class SoundFragment extends Fragment implements SoundControlInterface {
                                     int toApply = prefs.getInt("VALUE", 0);
                                     Helpers.CMDProcessorWrapper.runSuCommand(
                                     "busybox echo 0 > " + FAUX_SC_LOCKED + "\n" +
-                                    "busybox echo " + toApply + " " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, toApply) + " > " + FAUX_SC_CAM_MIC + "\n" +
+                                    "busybox echo " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, 0) + " > " + FAUX_SC_CAM_MIC + "\n" +
                                     "busybox echo 1 > " + FAUX_SC_LOCKED);
-                                    bootPrefs.edit().putString("SC_CAM_MIC", toApply + " " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, toApply)).commit();
+                                    bootPrefs.edit().putString("SC_CAM_MIC", toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, 0)).commit();
                                     actionMode.finish();
                                     break;
                             }
