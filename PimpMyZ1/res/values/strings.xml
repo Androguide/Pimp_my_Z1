@@ -127,4 +127,8 @@
     <string name="ksm">KSM</string>
     <string name="ksm_desc">Enabling Kernel Same-page Merging reduces memory usage and increases performance by allowing the system to scan for duplicate memory pages, merge them and allow those pages to be shared amongst different processes</string>
     <string name="ksm_unsupported">Sorry, your kernel does not seem to support KSM.</string>
+    <string name="ksm_pages_to_scan">Pages To Scan</string>
+    <string name="ksm_pages_to_scan_desc">Amount of pages KSM should scan at each run</string>
+    <string name="ksm_timer">KSM Timer</string>
+    <string name="ksm_timer_desc">Defines the interval of time (in milliseconds) at which KSM will scan for mergeable memory pages</string>
 </resources>

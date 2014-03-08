@@ -24,15 +24,21 @@ package com.androguide.honamicontrol.kernel.misc;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
+import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.androguide.honamicontrol.R;
+import com.androguide.honamicontrol.cards.CardSeekBar;
+import com.androguide.honamicontrol.cards.CardSeekBarGeneric;
 import com.androguide.honamicontrol.cards.CardSpinner;
 import com.androguide.honamicontrol.cards.CardSwitchDisabled;
 import com.androguide.honamicontrol.cards.CardSwitchPlugin;
+import com.androguide.honamicontrol.helpers.CMDProcessor.CMDProcessor;
 import com.androguide.honamicontrol.helpers.CPUHelper;
 import com.androguide.honamicontrol.helpers.Helpers;
 import com.fima.cardsui.objects.CardStack;
@@ -77,13 +83,97 @@ public class MiscActivity extends ActionBarActivity implements MiscInterface {
 
         } else {
             cardsUI.addCard(new CardSwitchDisabled(
-                    getString(R.string.ksm),
-                    getString(R.string.ksm_unsupported),
-                    "#c74b46",
-                    "",
-                    this,
-                    null)
+                            getString(R.string.ksm),
+                            getString(R.string.ksm_unsupported),
+                            "#c74b46",
+                            "",
+                            this,
+                            null)
             );
+        }
+
+        if (Helpers.doesFileExist(KSM_PAGES_TO_SCAN)) {
+            int currPagesToScan = 100;
+            try {
+                currPagesToScan = Integer.valueOf(CPUHelper.readOneLineNotRoot(KSM_PAGES_TO_SCAN));
+            } catch (Exception e) {
+                Log.e("KSM_PAGES_TO_SCAN", e.getMessage());
+            }
+
+            cardsUI.addCard(new CardSeekBarGeneric(
+                    getString(R.string.ksm_pages_to_scan),
+                    getString(R.string.ksm_pages_to_scan_desc),
+                    "#1abc9c", "",
+                    KSM_PAGES_TO_SCAN,
+                    200,
+                    currPagesToScan,
+                    this,
+                    new SeekBar.OnSeekBarChangeListener() {
+
+                        @Override
+                        public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+                        }
+
+                        @Override
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+
+                        }
+
+                        @Override
+                        public void onStopTrackingTouch(final SeekBar seekBar) {
+                            int progress = seekBar.getProgress();
+                            bootPrefs.edit().putInt("KSM_PAGES_TO_SCAN", progress).commit();
+                            try {
+                                CMDProcessor.runSuCommand("echo " + progress + " > " + KSM_PAGES_TO_SCAN);
+                            } catch (Exception e) {
+                                Log.e("KSM_PAGES_TO_SCAN", e.getMessage());
+                            }
+                        }
+                    }
+            ));
+        }
+
+        if (Helpers.doesFileExist(KSM_SLEEP_TIMER)) {
+            int currTimer = 500;
+            try {
+                currTimer = Integer.valueOf(CPUHelper.readOneLineNotRoot(KSM_SLEEP_TIMER));
+            } catch (Exception e) {
+                Log.e("KSM_SLEEP_TIMER", e.getMessage());
+            }
+
+            cardsUI.addCard(new CardSeekBarGeneric(
+                    getString(R.string.ksm_timer),
+                    getString(R.string.ksm_timer_desc),
+                    "#1abc9c", "ms",
+                    KSM_SLEEP_TIMER,
+                    2000,
+                    currTimer,
+                    this,
+                    new SeekBar.OnSeekBarChangeListener() {
+
+                        @Override
+                        public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+                        }
+
+                        @Override
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+
+                        }
+
+                        @Override
+                        public void onStopTrackingTouch(final SeekBar seekBar) {
+                            int progress = seekBar.getProgress();
+                            bootPrefs.edit().putInt("KSM_SLEEP_TIMER", progress).commit();
+                            try {
+                                CMDProcessor.runSuCommand("echo " + progress + " > " + KSM_SLEEP_TIMER);
+                            } catch (Exception e) {
+                                Log.e("KSM_SLEEP_TIMER", e.getMessage());
+                            }
+                        }
+                    }
+            ));
         }
 
         cardsUI.refresh();

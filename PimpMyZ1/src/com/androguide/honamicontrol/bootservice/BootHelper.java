@@ -27,6 +27,7 @@ import com.androguide.honamicontrol.helpers.Helpers;
 import com.androguide.honamicontrol.kernel.cpucontrol.CPUInterface;
 import com.androguide.honamicontrol.kernel.gpucontrol.GPUInterface;
 import com.androguide.honamicontrol.kernel.iotweaks.IOTweaksInterface;
+import com.androguide.honamicontrol.kernel.misc.MiscInterface;
 import com.androguide.honamicontrol.kernel.powermanagement.PowerManagementInterface;
 import com.androguide.honamicontrol.soundcontrol.SoundControlInterface;
 import com.androguide.honamicontrol.touchscreen.TouchScreenInterface;
@@ -38,6 +39,8 @@ public class BootHelper {
         int GPU_MAX_FREQ = Integer.valueOf(prefs.getString("GPU_MAX_FREQ", "450000000"));
         int GPU_MIN_FREQ = Integer.valueOf(prefs.getString("GPU_MIN_FREQ", "200000000"));
         int SCHED_MC_LEVEL = prefs.getInt("SCHED_MC_LEVEL", 0);
+        int KSM_PAGES_TO_SCAN = prefs.getInt("KSM_PAGES_TO_SCAN", 100);
+        int KSM_SLEEP_TIMER = prefs.getInt("KSM_SLEEP_TIMER", 500);
 
         Boolean DYNAMIC_FSYNC = prefs.getBoolean("DYNAMIC_FSYNC", false);
         Boolean INTELLI_PLUG = prefs.getBoolean("INTELLI_PLUG", false);
@@ -45,6 +48,7 @@ public class BootHelper {
         Boolean POWER_SUSPEND = prefs.getBoolean("POWER_SUSPEND", false);
         Boolean PEN_MODE = prefs.getBoolean("PEN_MODE", false);
         Boolean GLOVE_MODE = prefs.getBoolean("GLOVE_MODE", false);
+        Boolean KSM_ENABLED = prefs.getBoolean("KSM_ENABLED", false);
 
         String core0Governor = prefs.getString("CORE0_GOVERNOR", "intellidemand");
         String core1Governor = prefs.getString("CORE1_GOVERNOR", "intellidemand");
@@ -54,6 +58,8 @@ public class BootHelper {
         String ioScheduler = prefs.getString("IO_SCHEDULER", "row");
         String ioSchedulerSD = prefs.getString("IO_SCHEDULER", "row");
         String tcpAlgorithm = prefs.getString("TCP_ALGORITHM", "cubic");
+
+
         String SC_MIC = prefs.getString("SC_MIC", "0 0 255");
         String SC_CAM_MIC = prefs.getString("SC_CAM_MIC", "0 0 255");
         String SC_HEADPHONE_PA = prefs.getString(SoundControlInterface.FAUX_SC_HEADPHONE_POWERAMP.replaceAll("/", "_"), "38 38 179");
@@ -84,6 +90,9 @@ public class BootHelper {
         String applyScSpeaker = "busybox echo " + SC_SPEAKER + " > " + SoundControlInterface.FAUX_SC_SPEAKER;
         String applyScMic = "busybox echo " + SC_MIC + " > " + SoundControlInterface.FAUX_SC_MIC;
         String applyScCamMic = "busybox echo " + SC_CAM_MIC + " > " + SoundControlInterface.FAUX_SC_CAM_MIC;
+        String applyKSM = "busybox echo " + getIntFromBoolean(KSM_ENABLED) + " > " + MiscInterface.KSM_TOGGLE;
+        String applyKSMPages = "busybox echo " + KSM_PAGES_TO_SCAN + " > " + MiscInterface.KSM_PAGES_TO_SCAN;
+        String applyKSMTimer = "busybox echo " + KSM_SLEEP_TIMER + " > " + MiscInterface.KSM_SLEEP_TIMER;
 
         Helpers.CMDProcessorWrapper.runSuCommand(
                 applyMaxCpuFreq + "\n" +
@@ -91,6 +100,9 @@ public class BootHelper {
                         applyMaxGpuFreq + "\n" +
                         applyMinGpuFreq + "\n" +
                         applyCore0Governor + "\n" +
+                        applyCore1Governor + "\n" +
+                        applyCore2Governor + "\n" +
+                        applyCore3Governor + "\n" +
                         applyIOScheduler + "\n" +
                         applyIOSchedulerSD + "\n" +
                         applyTcpAlgorithm + "\n" +
@@ -107,6 +119,9 @@ public class BootHelper {
                         applyIntelliPlug + "\n" +
                         applyIntelliPlugEco + "\n" +
                         applyPowerSuspend + "\n" +
+                        applyKSM + "\n" +
+                        applyKSMPages + "\n" +
+                        applyKSMTimer + "\n" +
                         applyPenMode + "\n" +
                         applyGloveMode
         );
