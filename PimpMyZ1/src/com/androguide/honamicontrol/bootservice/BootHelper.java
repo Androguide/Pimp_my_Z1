@@ -107,12 +107,12 @@ public class BootHelper {
                         applyIOSchedulerSD + "\n" +
                         applyTcpAlgorithm + "\n" +
                         applyGpuGovernor + "\n" +
-                        "echo 0 > " + SoundControlInterface.FAUX_SC_LOCKED + " && " +
-                        applyScHeadphone + " && " +
-                        applyScHeadphonePa + " && " +
-                        applyScSpeaker + " && " +
-                        applyScMic + " && " +
-                        applyScCamMic + " && " +
+                        "echo 0 > " + SoundControlInterface.FAUX_SC_LOCKED + "\n" +
+                        applyScHeadphone + "\n" +
+                        applyScHeadphonePa + "\n" +
+                        applyScSpeaker + "\n" +
+                        applyScMic + "\n" +
+                        applyScCamMic + "\n" +
                         "echo 1 > " + SoundControlInterface.FAUX_SC_LOCKED + "\n" +
                         applySchedMcLevel + "\n" +
                         applyDynamicFsync + "\n" +

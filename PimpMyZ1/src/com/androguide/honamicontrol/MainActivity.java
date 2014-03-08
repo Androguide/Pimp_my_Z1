@@ -305,7 +305,7 @@ public class MainActivity extends ActionBarActivity implements
                 break;
             case 1:
                 goToUrl(prefs.getString("XDA",
-                        "http://forum.xda-developers.com/showthread.php?t=2660679"));
+                        "http://forum.xda-developers.com/showthread.php?p=50930265"));
                 break;
             case 2:
                 goToUrl(prefs.getString("TWITTER",

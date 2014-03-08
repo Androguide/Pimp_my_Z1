@@ -35,6 +35,7 @@ PimpMyZ1/build/
 PimpMyZ1/.idea/
 PimpMyZ1/*.iml
 PimpMyZ1/*.idea
+PimpMyZ1/*.apk
 
 libs/CardsUILib/build/
 libs/CardsUILib/.idea/
