@@ -71,6 +71,10 @@
             android:label="@string/kernel_io_tweaks">
         </activity>
         <activity
+            android:name="com.androguide.honamicontrol.kernel.misc.MiscActivity"
+            android:label="@string/kernel_misc">
+        </activity>
+        <activity
             android:name="com.androguide.honamicontrol.SettingsActivity"
             android:label="@string/action_settings">
         </activity>

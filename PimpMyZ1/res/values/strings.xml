@@ -121,4 +121,10 @@
     <string name="sec">sec.</string>
     <string name="right">Right:\u0020</string>
     <string name="gpu_governor">GPU Governor</string>
+    <string name="kernel_misc">Miscellaneous</string>
+    <string name="kernel_misc_desc">Control some miscellaneous kernel features, such as VM parameters, Kernel Same-page Merging and more</string>
+    <string name="ksm_header">KERNEL SAME-PAGE MERGING</string>
+    <string name="ksm">KSM</string>
+    <string name="ksm_desc">Enabling Kernel Same-page Merging reduces memory usage and increases performance by allowing the system to scan for duplicate memory pages, merge them and allow those pages to be shared amongst different processes</string>
+    <string name="ksm_unsupported">Sorry, your kernel does not seem to support KSM.</string>
 </resources>

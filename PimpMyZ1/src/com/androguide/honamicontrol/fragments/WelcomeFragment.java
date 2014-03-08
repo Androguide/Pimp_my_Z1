@@ -40,11 +40,8 @@ import java.util.ArrayList;
 
 public class WelcomeFragment extends Fragment {
 
-    private static ArrayList<Card> mCards = new ArrayList<Card>();
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.cardsui, container, false);
         final ActionBarActivity fa = (ActionBarActivity) super.getActivity();
         fa.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -52,38 +49,40 @@ public class WelcomeFragment extends Fragment {
 
         assert ll != null;
         CardUI mCardUI = (CardUI) (ll.findViewById(R.id.cardsui));
+        ArrayList<Card> mCards = new ArrayList<Card>();
+
         mCardUI.addStack(new CardStack(""));
 
         mCards.add(new CardCategory(
-                fa.getString(R.string.kernel_control),
-                fa.getString(R.string.kernel_control_desc),
-                "#16a085",
-                "",
-                false)
+                        fa.getString(R.string.kernel_control),
+                        fa.getString(R.string.kernel_control_desc),
+                        "#16a085",
+                        "",
+                        false)
         );
 
         mCards.add(new CardCategory(
-                fa.getString(R.string.sound_control),
-                fa.getString(R.string.sound_control_desc),
-                fa.getString(R.string.sound_control_color),
-                "",
-                false)
+                        fa.getString(R.string.sound_control),
+                        fa.getString(R.string.sound_control_desc),
+                        fa.getString(R.string.sound_control_color),
+                        "",
+                        false)
         );
 
         mCards.add(new CardCategory(
-                fa.getString(R.string.touch_screen),
-                fa.getString(R.string.touch_screen_desc),
-                fa.getString(R.string.touch_screen_color),
-                "",
-                false)
+                        fa.getString(R.string.touch_screen),
+                        fa.getString(R.string.touch_screen_desc),
+                        fa.getString(R.string.touch_screen_color),
+                        "",
+                        false)
         );
 
         mCards.add(new CardCategory(
-                fa.getString(R.string.help_center),
-                fa.getString(R.string.help_center_introduction),
-                fa.getString(R.string.help_center_color),
-                "",
-                false)
+                        fa.getString(R.string.help_center),
+                        fa.getString(R.string.help_center_introduction),
+                        fa.getString(R.string.help_center_color),
+                        "",
+                        false)
         );
 
         for (int i = 0; i < mCards.size(); i++) {
@@ -101,15 +100,5 @@ public class WelcomeFragment extends Fragment {
         mCardUI.addStack(new CardStack());
         mCardUI.refresh();
         return ll;
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 }

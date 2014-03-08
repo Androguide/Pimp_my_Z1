@@ -35,6 +35,7 @@ import com.androguide.honamicontrol.cards.CardImageLocal;
 import com.androguide.honamicontrol.kernel.cpucontrol.CPUActivity;
 import com.androguide.honamicontrol.kernel.gpucontrol.GPUActivity;
 import com.androguide.honamicontrol.kernel.iotweaks.IOTweaksActivity;
+import com.androguide.honamicontrol.kernel.misc.MiscActivity;
 import com.androguide.honamicontrol.kernel.powermanagement.PowerManagementActivity;
 import com.fima.cardsui.objects.Card;
 import com.fima.cardsui.objects.CardStack;
@@ -121,10 +122,26 @@ public class KernelFragment extends Fragment {
             }
         });
 
+        CardImageLocal misc = new CardImageLocal(
+                fa.getString(R.string.kernel_misc),
+                fa.getString(R.string.kernel_misc_desc),
+                sectionColor,
+                R.drawable.ic_tools_misc,
+                fa
+        );
+
+        misc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fa.startActivity(new Intent(fa, MiscActivity.class));
+            }
+        });
+
         mCardUI.addCard(cpuControl);
         mCardUI.addCard(gpuControl);
         mCardUI.addCard(powerManagement);
         mCardUI.addCard(ioTweaks);
+        mCardUI.addCard(misc);
         mCardUI.refresh();
 
         return ll;
