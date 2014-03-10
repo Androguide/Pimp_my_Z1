@@ -28,7 +28,7 @@
     <string name="app_name">Pimp My Z1</string>
     <string name="presentation">Presentation</string>
     <string name="action_settings">Einstellungen</string>
-    <string name="open_drawer">Oeffne Drawer</string>
+    <string name="open_drawer">öffne Drawer</string>
     <string name="close_drawer">Schließe Drawer</string>
 
     <!-- ================= Colours in String form ================= -->
@@ -55,41 +55,41 @@
 
     <!-- ================= Welcome Fragment ================= -->
     <string name="welcome">Willkommen</string>
-    <string name="welcome_desc">Willkommen bei Pimp My Z1, die lang ersehnte All-in-One App fuer das Xperia Z1.</string>
+    <string name="welcome_desc">Willkommen bei Pimp My Z1, die lang ersehnte All-in-One App für das Xperia Z1.</string>
     <string name="help_center">Hilfe Center</string>
     <string name="help_center_introduction">Hier erfahren Sie jede Einzelheit von Pimp My Z1 und werden Sie ein Level 99 Android Experte.</string>
     <string name="menu_link_seekbars">Link Links und Rechts</string>
     <string name="kernel_cpu_control">CPU Control</string>
-    <string name="kernel_cpu_control_desc">Dieses Tool ermoeglicht es Ihnen, Ihre CPU zu steuern, min/max Frequenz, governors, I/O schedulers und vieles mehr...</string>
+    <string name="kernel_cpu_control_desc">Dieses Tool ermöglicht es Ihnen, Ihre CPU zu steuern, min/max Frequenz, governors, I/O schedulers und vieles mehr...</string>
     <string name="kernel_color">#1abc9c</string>
-    <string name="coming_soon">Demnaechst verfuegbar</string>
+    <string name="coming_soon">Demnächst verfügbar</string>
     <string name="kernel_gpu_control">GPU Control</string>
-    <string name="kernel_gpu_control_desc">Dieses Tool ermoeglicht es Ihnen, Ihre GPU zu steuern, min/max Frequenz und Uebertacktung wenn der Kernel das unterstuetzt.</string>
+    <string name="kernel_gpu_control_desc">Dieses Tool ermöglicht es Ihnen, Ihre GPU zu steuern, min/max Frequenz und übertacktung wenn der Kernel das unterstützt.</string>
     <string name="kernel_power_management">Energieoptionen</string>
-    <string name="kernel_power_management_desc">In diesem Abschnitt koennen Sie verschiedene Power-Management-Funktionen des Kernels kontrollieren (falls diese implementiert sind)</string>
+    <string name="kernel_power_management_desc">In diesem Abschnitt können Sie verschiedene Power-Management-Funktionen des Kernels kontrollieren (falls diese implementiert sind)</string>
     <string name="kernel_io_tweaks">I/O Tweaks</string>
-    <string name="kernel_io_tweaks_desc">Dieser Abschnitt enthaelt verschiedene Kernel Ebenen, I/O tweaks, I/O Schedulers settings, dynamic file sync, I/O readahead, etc...</string>
-    <string name="unsupported">Keine Unterstuetztung</string>
-    <string name="sound_control_unsupported">Ihr Kernel hat keine Faux123 Sound Control-Treiber integriert, oder es wird von dieser Version nicht unterstuetzt, sorry.</string>
+    <string name="kernel_io_tweaks_desc">Dieser Abschnitt enthält verschiedene Kernel Ebenen, I/O tweaks, I/O Schedulers settings, dynamic file sync, I/O readahead, etc...</string>
+    <string name="unsupported">Keine Unterstütztung</string>
+    <string name="sound_control_unsupported">Ihr Kernel hat keine Faux123 Sound Control-Treiber integriert, oder es wird von dieser Version nicht unterstützt, sorry.</string>
     <string name="sound_control_color">#e67e22</string>
-    <string name="sc_headphone_digital_gain">Koepfhoerer Digitale Vertaerkung</string>
-    <string name="sc_headphone_digital_gain_desc">Steuert die Lautstaerke fuer die Kopfhoererverstaerkung am Digitalausgang</string>
-    <string name="sc_headphone_analog_gain">Kopfhoerer Analoge Verstaerkung</string>
-    <string name="sc_headphone_analog_gain_desc">Steuert die Lautstaerke fuer die Kopfhoererverstaerkung Analogausgang Power Amp Verstaerkung</string>
+    <string name="sc_headphone_digital_gain">Köpfhörer Digitale Vertärkung</string>
+    <string name="sc_headphone_digital_gain_desc">Steuert die Lautstärke für die Kopfhörerverstärkung am Digitalausgang</string>
+    <string name="sc_headphone_analog_gain">Kopfhörer Analoge Verstärkung</string>
+    <string name="sc_headphone_analog_gain_desc">Steuert die Lautstärke für die Kopfhörerverstärkung Analogausgang Power Amp Verstärkung</string>
     <string name="sc_speaker_gain">Laustsprecher Pegel</string>
-    <string name="sc_speaker_gain_desc">Steuert die Lautstaerkeverstaerkung fuer Analogausgang</string>
+    <string name="sc_speaker_gain_desc">Steuert die Lautstärkeverstärkung für Analogausgang</string>
     <string name="sc_mic_gain">Mikrofon Pegel</string>
-    <string name="sc_mic_gain_desc">Steuert die Lautstaerke Verstaerkung fuer den Mikrofoneingang</string>
+    <string name="sc_mic_gain_desc">Steuert die Lautstärke Verstärkung für den Mikrofoneingang</string>
     <string name="sc_cam_mic_gain">Kamera Mikrofon Pegel</string>
-    <string name="sc_cam_mic_gain_desc">Steuert die Lautstaerke Verstaerkung fuer den Kamera Mikrofon-Eingang</string>
-    <string name="coming_soon_desc">Leider ist dieser Abschnitt im Moment nicht verfuegbar</string>
+    <string name="sc_cam_mic_gain_desc">Steuert die Lautstärke Verstärkung für den Kamera Mikrofon-Eingang</string>
+    <string name="coming_soon_desc">Leider ist dieser Abschnitt im Moment nicht verfügbar</string>
     <string name="pen_mode">Stift Modus</string>
-    <string name="pen_mode_desc">Wenn der Stift Modus aktiviert ist koennen Sie mit jedem auch nicht aus Plastik bestehendem Stift Ihr Xperia Z1 Touchscreen bedienen.</string>
+    <string name="pen_mode_desc">Wenn der Stift Modus aktiviert ist können Sie mit jedem auch nicht aus Plastik bestehendem Stift Ihr Xperia Z1 Touchscreen bedienen.</string>
     <string name="touch_screen_color">#2980b9</string>
     <string name="glove_mode">Handschuh Modus</string>
-    <string name="glove_mode_desc">Mit aktiviertem Handschuh Modus laesst sich Ihr Xperia Z1 Touchscreen mit Handschuhen bedienen.</string>
+    <string name="glove_mode_desc">Mit aktiviertem Handschuh Modus lässt sich Ihr Xperia Z1 Touchscreen mit Handschuhen bedienen.</string>
     <string name="kernel_control">Kernel Steuerung</string>
-    <string name="kernel_control_desc">Hier koennen Sie Ihre Kernel-Funktion nach Ihren wuenschen optimieren, CPU und GPU Uebertaktung durch governors, I/O schedulers, TCP congestion algorithms und vieles mehr...</string>
+    <string name="kernel_control_desc">Hier können Sie Ihre Kernel-Funktion nach Ihren wünschen optimieren, CPU und GPU übertaktung durch governors, I/O schedulers, TCP congestion algorithms und vieles mehr...</string>
     <string name="sound_control">Musik Steuerung</string><string name="sound_control_desc">Tweak the volume of your headphones output, speaker, camera mic &amp; sound recording mic if you are using a kernel which implements Faux123\'s Sound Control.></string>
     <string name="touch_screen">Touch Screen</string>
     <string name="touch_screen_desc">Control your Xperia Z1 touch-screen, from adding support for any pen or non-plastic object to tweaking the smallest parameters like touch pressure, target size, max speed, drag range, etc…</string>
@@ -108,9 +108,9 @@
     <string name="refresh">Aktualisieren</string>
     <string name="io_scheduler">I/O Scheduler</string>
     <string name="tcp_congestion">TCP Congestion Algorithm</string>
-    <string name="set_on_boot">Set On Boot</string>
-    <string name="set_on_boot_summary_off">Your changes will be lost after a reboot</string>
-    <string name="set_on_boot_summary_on">Your changes will be applied after each reboot</string>
+    <string name="set_on_boot">Beim Starten ausführen</string>
+    <string name="set_on_boot_summary_off">Ihre Einstellungen werden nach dem Neustart nicht ausgeführt</string>
+    <string name="set_on_boot_summary_on">Ihre Einstellungen werden nach dem Neustart ausgeführt</string>
     <string name="governor_core4">Governor (Core 4)</string>
     <string name="governor_core3">Governor (Core 3)</string>
     <string name="governor_core2">Governor (Core 2)</string>
