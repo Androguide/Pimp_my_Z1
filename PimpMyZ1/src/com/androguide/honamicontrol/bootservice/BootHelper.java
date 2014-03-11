@@ -66,6 +66,12 @@ public class BootHelper {
         String SC_HEADPHONE = prefs.getString(SoundControlInterface.FAUX_SC_HEADPHONE.replaceAll("/", "_"), "0 0 255");
         String SC_SPEAKER = prefs.getString(SoundControlInterface.FAUX_SC_SPEAKER.replaceAll("/", "_"), "0 0 255");
 
+        String applyIntelliPlug;
+        if (INTELLI_PLUG)
+            applyIntelliPlug = "stop mpdecision\nbusybox echo 1 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE;
+        else
+            applyIntelliPlug = "start mpdecision\nbusybox echo 0 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE;
+
         String applyMaxCpuFreq = "busybox echo " + CPU_MAX_FREQ + " > " + CPUInterface.MAX_FREQ;
         String applyMinCpuFreq = "busybox echo " + CPU_MIN_FREQ + " > " + CPUInterface.MIN_FREQ;
         String applyMaxGpuFreq = "busybox echo " + GPU_MAX_FREQ + " > " + GPUInterface.maxFreq;
@@ -80,7 +86,6 @@ public class BootHelper {
         String applyTcpAlgorithm = "busybox echo " + tcpAlgorithm + " > " + CPUInterface.CURR_TCP_ALGORITHM + " && " + CPUInterface.SYSCTL_TCP_ALGORITHM + tcpAlgorithm;
         String applySchedMcLevel = "busybox echo " + SCHED_MC_LEVEL + " > " + PowerManagementInterface.SCHED_MC_POWER_SAVINGS;
         String applyDynamicFsync = "busybox echo " + getIntFromBoolean(DYNAMIC_FSYNC) + " > " + IOTweaksInterface.DYNAMIC_FSYNC_TOGGLE;
-        String applyIntelliPlug = "busybox echo " + getIntFromBoolean(INTELLI_PLUG) + " > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE;
         String applyIntelliPlugEco = "busybox echo " + getIntFromBoolean(INTELLI_PLUG_ECO) + " > " + PowerManagementInterface.INTELLI_PLUG_ECO_MODE;
         String applyPowerSuspend = "busybox echo " + getIntFromBoolean(POWER_SUSPEND) + " > " + PowerManagementInterface.POWER_SUSPEND_TOGGLE;
         String applyPenMode = "chown system:system " + TouchScreenInterface.PEN_MODE + " && busybox echo " + getIntFromBoolean(PEN_MODE) + " > " + TouchScreenInterface.PEN_MODE;
