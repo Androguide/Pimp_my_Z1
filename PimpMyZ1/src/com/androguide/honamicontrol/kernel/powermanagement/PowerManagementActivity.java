@@ -129,6 +129,7 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
                         }
                     }
             ));
+
         } else {
             cardsUI.addCard(new CardSwitchDisabled(
                     getString(R.string.intelli_plug),

@@ -26,25 +26,16 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.CompoundButton;
-import android.widget.SeekBar;
-import android.widget.Toast;
 
 import com.androguide.honamicontrol.R;
-import com.androguide.honamicontrol.cards.CardSeekBar;
 import com.androguide.honamicontrol.cards.CardSeekBarGeneric;
-import com.androguide.honamicontrol.cards.CardSpinner;
 import com.androguide.honamicontrol.cards.CardSwitchDisabled;
 import com.androguide.honamicontrol.cards.CardSwitchPlugin;
-import com.androguide.honamicontrol.helpers.CMDProcessor.CMDProcessor;
 import com.androguide.honamicontrol.helpers.CPUHelper;
 import com.androguide.honamicontrol.helpers.Helpers;
 import com.fima.cardsui.objects.CardStack;
 import com.fima.cardsui.views.CardUI;
-
-import java.util.ArrayList;
 
 public class MiscActivity extends ActionBarActivity implements MiscInterface {
 
@@ -100,7 +91,7 @@ public class MiscActivity extends ActionBarActivity implements MiscInterface {
                 Log.e("KSM_PAGES_TO_SCAN", e.getMessage());
             }
 
-            cardsUI.addCard(new CardSeekBarGeneric(
+            final CardSeekBarGeneric cardKSMPages = new CardSeekBarGeneric(
                     getString(R.string.ksm_pages_to_scan),
                     getString(R.string.ksm_pages_to_scan_desc),
                     "#1abc9c", "",
@@ -108,30 +99,9 @@ public class MiscActivity extends ActionBarActivity implements MiscInterface {
                     200,
                     currPagesToScan,
                     this,
-                    new SeekBar.OnSeekBarChangeListener() {
-
-                        @Override
-                        public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-                        }
-
-                        @Override
-                        public void onStartTrackingTouch(SeekBar seekBar) {
-
-                        }
-
-                        @Override
-                        public void onStopTrackingTouch(final SeekBar seekBar) {
-                            int progress = seekBar.getProgress();
-                            bootPrefs.edit().putInt("KSM_PAGES_TO_SCAN", progress).commit();
-                            try {
-                                CMDProcessor.runSuCommand("echo " + progress + " > " + KSM_PAGES_TO_SCAN);
-                            } catch (Exception e) {
-                                Log.e("KSM_PAGES_TO_SCAN", e.getMessage());
-                            }
-                        }
-                    }
-            ));
+                    null
+            );
+            cardsUI.addCard(cardKSMPages);
         }
 
         if (Helpers.doesFileExist(KSM_SLEEP_TIMER)) {
@@ -150,29 +120,7 @@ public class MiscActivity extends ActionBarActivity implements MiscInterface {
                     2000,
                     currTimer,
                     this,
-                    new SeekBar.OnSeekBarChangeListener() {
-
-                        @Override
-                        public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-                        }
-
-                        @Override
-                        public void onStartTrackingTouch(SeekBar seekBar) {
-
-                        }
-
-                        @Override
-                        public void onStopTrackingTouch(final SeekBar seekBar) {
-                            int progress = seekBar.getProgress();
-                            bootPrefs.edit().putInt("KSM_SLEEP_TIMER", progress).commit();
-                            try {
-                                CMDProcessor.runSuCommand("echo " + progress + " > " + KSM_SLEEP_TIMER);
-                            } catch (Exception e) {
-                                Log.e("KSM_SLEEP_TIMER", e.getMessage());
-                            }
-                        }
-                    }
+                    null
             ));
         }
 

@@ -22,22 +22,20 @@
 package com.androguide.honamicontrol.cards;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.view.ActionMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.androguide.honamicontrol.helpers.CMDProcessor.CMDProcessor;
 import com.androguide.honamicontrol.helpers.NegativeSeekBar;
 import com.fima.cardsui.R;
 import com.fima.cardsui.objects.Card;
 
-public class CardSeekBarGeneric extends Card {
-
-    private SharedPreferences prefs;
+public class CardSeekBarGeneric extends Card  {
 
     public CardSeekBarGeneric(String title, String desc, String color, String unit, String prop, int seekBarMax, int seekBarProgress, ActionBarActivity fa, SeekBar.OnSeekBarChangeListener listener) {
         super(title, desc, color, unit, prop, seekBarMax, seekBarProgress, fa, listener);
@@ -46,17 +44,40 @@ public class CardSeekBarGeneric extends Card {
     @Override
     public View getCardContent(Context context) {
         final View v = LayoutInflater.from(context).inflate(R.layout.card_seekbar, null);
-
         assert v != null;
-        final TextView value = (TextView) v.findViewById(R.id.unit);
+        final TextView mValue = (TextView) v.findViewById(R.id.unit);
         final NegativeSeekBar seekBar = (NegativeSeekBar) v.findViewById(R.id.seek);
-        ((TextView) v.findViewById(R.id.title)).setText(title);
-        ((TextView) v.findViewById(R.id.title)).setTextColor(Color.parseColor(color));
+        TextView titleTextView = (TextView) v.findViewById(R.id.title);
+        titleTextView.setText(title);
+        titleTextView.setTextColor(Color.parseColor(color));
         ((TextView) v.findViewById(R.id.desc)).setText(desc);
-        value.setText(seekBarProgress + unit);
+        mValue.setText(seekBarProgress + unit);
         seekBar.setMax(seekBarMax);
         seekBar.setProgress(seekBarProgress);
-        seekBar.setOnSeekBarChangeListener(listener);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mValue.setText(progress + "");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                int progress = seekBar.getProgress();
+                fa.getSharedPreferences("BOOT_PREFS", 0).edit().putInt(prop.replaceAll("/", "_"), progress).commit();
+                try {
+                    CMDProcessor.runSuCommand("echo " + progress + " > " + prop);
+                } catch (Exception e) {
+                    Log.e("CardSeekBarGeneric", e.getMessage());
+                }
+            }
+        });
+
         return v;
     }
 
@@ -68,4 +89,5 @@ public class CardSeekBarGeneric extends Card {
     public boolean convert(View convertCardView) {
         return true;
     }
+
 }
