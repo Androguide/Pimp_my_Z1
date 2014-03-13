@@ -59,7 +59,6 @@ public class BootHelper {
         String ioSchedulerSD = prefs.getString("IO_SCHEDULER", "row");
         String tcpAlgorithm = prefs.getString("TCP_ALGORITHM", "cubic");
 
-
         String SC_MIC = prefs.getString("SC_MIC", "0 0 255");
         String SC_CAM_MIC = prefs.getString("SC_CAM_MIC", "0 0 255");
         String SC_HEADPHONE_PA = prefs.getString(SoundControlInterface.FAUX_SC_HEADPHONE_POWERAMP.replaceAll("/", "_"), "38 38 179");

@@ -21,7 +21,6 @@
 
 package com.androguide.honamicontrol.fragments;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -36,7 +35,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.androguide.honamicontrol.R;
-import com.androguide.honamicontrol.SettingsActivity;
 import com.androguide.honamicontrol.cards.CardDoubleSeekBar;
 import com.androguide.honamicontrol.cards.CardDoubleSeekBarPA;
 import com.androguide.honamicontrol.cards.CardSeekBarSC;

@@ -27,15 +27,11 @@ import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.androguide.honamicontrol.R;
-import com.androguide.honamicontrol.fragments.SoundFragment;
 import com.androguide.honamicontrol.helpers.Helpers;
 import com.androguide.honamicontrol.soundcontrol.SoundControlInterface;
 import com.fima.cardsui.objects.Card;
@@ -85,7 +81,7 @@ public class CardDoubleSeekBar extends Card implements SoundControlInterface {
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 seekBarProgress = i;
                 valueLeft.setText(i - 30 + unit);
-                if (soundPrefs.getBoolean("LINKED", true)) {
+                if (isLinked) {
                     seekBarProgress2 = i;
                     seekBarRight.setProgress(i);
                 }
@@ -98,41 +94,14 @@ public class CardDoubleSeekBar extends Card implements SoundControlInterface {
 
             @Override
             public void onStopTrackingTouch(final SeekBar seekBar) {
-                fa.startSupportActionMode(new ActionMode.Callback() {
-                    @Override
-                    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-                        MenuInflater inflater = actionMode.getMenuInflater();
-                        inflater.inflate(R.menu.contextual_menu, menu);
-                        return true;
-                    }
+                int toApplyLeft = getSCInt(seekBarProgress);
+                int toApplyRight = getSCInt(seekBarProgress2);
+                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + FAUX_SC_LOCKED + " && "
+                                + "busybox echo " + toApplyLeft + " " + toApplyRight + " "
+                                + Helpers.getSoundCountrolBitRepresentation(toApplyLeft, toApplyRight) + " > " + location + " && "
+                                + "busybox echo 1 > " + FAUX_SC_LOCKED
+                );
 
-                    @Override
-                    public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            case R.id.apply:
-                                int toApplyLeft = getSCInt(seekBarProgress);
-                                int toApplyRight = getSCInt(seekBarProgress2);
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + FAUX_SC_LOCKED + " && "
-                                        + "busybox echo " + toApplyLeft + " " + toApplyRight + " "
-                                        + Helpers.getSoundCountrolBitRepresentation(toApplyLeft, toApplyRight) + " > " + location + " && "
-                                        + "busybox echo 1 > " + FAUX_SC_LOCKED
-                                );
-                                actionMode.finish();
-                                break;
-                        }
-                        return false;
-                    }
-
-                    @Override
-                    public void onDestroyActionMode(ActionMode actionMode) {
-
-                    }
-                });
                 int scProgress = seekBar.getProgress() - 30;
                 if (scProgress < 0)
                     scProgress += 256;
@@ -146,7 +115,7 @@ public class CardDoubleSeekBar extends Card implements SoundControlInterface {
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 seekBarProgress2 = i;
                 valueRight.setText(i - 30 + unit);
-                if (soundPrefs.getBoolean("LINKED", true)) {
+                if (isLinked) {
                     seekBarProgress = i;
                     seekBarLeft.setProgress(i);
                 }
@@ -159,49 +128,17 @@ public class CardDoubleSeekBar extends Card implements SoundControlInterface {
 
             @Override
             public void onStopTrackingTouch(final SeekBar seekBar) {
-                fa.startSupportActionMode(new ActionMode.Callback() {
-                    private Boolean isApplied = false;
+                int toApplyLeft = getSCInt(seekBarProgress);
+                int toApplyRight = getSCInt(seekBarProgress2);
+                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + FAUX_SC_LOCKED + " && "
+                                + "busybox echo " + toApplyLeft + " " + toApplyRight + " "
+                                + Helpers.getSoundCountrolBitRepresentation(toApplyLeft, toApplyRight) + " > " + location + " && "
+                                + "busybox echo 1 > " + FAUX_SC_LOCKED
+                );
+                bootPrefs.edit().putString(
+                        prop.replaceAll("/", "_"), toApplyLeft + " " + toApplyRight + " " + Helpers.getSoundCountrolBitRepresentation(toApplyLeft, toApplyRight)
+                ).commit();
 
-                    @Override
-                    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-                        MenuInflater inflater = actionMode.getMenuInflater();
-                        inflater.inflate(R.menu.contextual_menu, menu);
-                        return true;
-                    }
-
-                    @Override
-                    public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            case R.id.apply:
-                                isApplied = true;
-                                int toApplyLeft = getSCInt(seekBarProgress);
-                                int toApplyRight = getSCInt(seekBarProgress2);
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + FAUX_SC_LOCKED + " && "
-                                        + "busybox echo " + toApplyLeft + " " + toApplyRight + " "
-                                        + Helpers.getSoundCountrolBitRepresentation(toApplyLeft, toApplyRight) + " > " + location + " && "
-                                        + "busybox echo 1 > " + FAUX_SC_LOCKED
-                                );
-                                SharedPreferences bootPrefs = fa.getSharedPreferences("BOOT_PREFS", 0);
-                                bootPrefs.edit().putString(
-                                        prop.replaceAll("/", "_"), toApplyLeft + " " + toApplyRight + " " + Helpers.getSoundCountrolBitRepresentation(toApplyLeft, toApplyRight)
-                                ).commit();
-                                actionMode.finish();
-                                break;
-                        }
-                        return false;
-                    }
-
-                    @Override
-                    public void onDestroyActionMode(ActionMode actionMode) {
-                        if (!isApplied)
-                            SoundFragment.recreateCards();
-                    }
-                });
                 int scProgress = seekBar.getProgress() - 30;
                 if (scProgress < 0)
                     scProgress += 256;

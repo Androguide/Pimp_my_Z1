@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:paddingLeft="12dip"
+            android:paddingRight="12dip"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/headphone_gain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/sc_headphone_digital_gain"
+                android:textColor="@color/play_blue"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/headphone_gain_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sc_headphone_digital_gain_desc"
+                android:fontFamily="sans-serif-light"
+                android:autoLink="all"
+                android:textSize="15sp" />
+
+            <SeekBar
+                android:id="@+id/headphone_seekbar_left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_3quarter_margin" />
+
+            <TextView
+                android:id="@+id/headphone_unit_left"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/sec"
+                android:fontFamily="sans-serif-light"
+                android:textSize="18sp"
+                android:textColor="@color/play_gray"
+                android:layout_marginBottom="@dimen/activity_half_margin"
+                android:layout_gravity="center_horizontal" />
+
+            <SeekBar
+                android:id="@+id/headphone_seekbar_right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_3quarter_margin" />
+
+            <TextView
+                android:id="@+id/headphone_unit_right"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/sec"
+                android:fontFamily="sans-serif-light"
+                android:textSize="18sp"
+                android:textColor="@color/play_gray"
+                android:layout_marginBottom="@dimen/activity_half_margin"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:paddingLeft="12dip"
+            android:paddingRight="12dip"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/headphone_pa_gain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/sc_headphone_analog_gain"
+                android:textColor="@color/play_blue"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/headphone_pa_gain_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sc_headphone_analog_gain_desc"
+                android:fontFamily="sans-serif-light"
+                android:autoLink="all"
+                android:textSize="15sp" />
+
+            <SeekBar
+                android:id="@+id/headphone_pa_seekbar_left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_3quarter_margin" />
+
+            <TextView
+                android:id="@+id/headphone_pa_unit_left"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/sec"
+                android:fontFamily="sans-serif-light"
+                android:textSize="18sp"
+                android:textColor="@color/play_gray"
+                android:layout_marginBottom="@dimen/activity_half_margin"
+                android:layout_gravity="center_horizontal" />
+
+            <SeekBar
+                android:id="@+id/headphone_pa_seekbar_right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_3quarter_margin" />
+
+            <TextView
+                android:id="@+id/headphone_pa_unit_right"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/sec"
+                android:fontFamily="sans-serif-light"
+                android:textSize="18sp"
+                android:textColor="@color/play_gray"
+                android:layout_marginBottom="@dimen/activity_half_margin"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:paddingLeft="12dip"
+            android:paddingRight="12dip"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/speaker_gain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/sc_speaker_gain"
+                android:textColor="@color/play_blue"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/speaker_gain_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sc_speaker_gain_desc"
+                android:fontFamily="sans-serif-light"
+                android:autoLink="all"
+                android:textSize="15sp" />
+
+            <SeekBar
+                android:id="@+id/speaker_seekbar_left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_3quarter_margin" />
+
+            <TextView
+                android:id="@+id/speaker_unit_left"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/sec"
+                android:fontFamily="sans-serif-light"
+                android:textSize="18sp"
+                android:textColor="@color/play_gray"
+                android:layout_marginBottom="@dimen/activity_half_margin"
+                android:layout_gravity="center_horizontal" />
+
+            <SeekBar
+                android:id="@+id/speaker_seekbar_right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_3quarter_margin" />
+
+            <TextView
+                android:id="@+id/speaker_unit_right"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/sec"
+                android:fontFamily="sans-serif-light"
+                android:textSize="18sp"
+                android:textColor="@color/play_gray"
+                android:layout_marginBottom="@dimen/activity_half_margin"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:paddingLeft="12dip"
+            android:paddingRight="12dip"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mic_gain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/sc_mic_gain"
+                android:textColor="@color/play_blue"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/mic_gain_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sc_mic_gain_desc"
+                android:fontFamily="sans-serif-light"
+                android:autoLink="all"
+                android:textSize="15sp" />
+
+            <SeekBar
+                android:id="@+id/mic_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_3quarter_margin" />
+
+            <TextView
+                android:id="@+id/mic_unit"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/sec"
+                android:fontFamily="sans-serif-light"
+                android:textSize="18sp"
+                android:textColor="@color/play_gray"
+                android:layout_marginBottom="@dimen/activity_half_margin"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:paddingLeft="12dip"
+            android:paddingRight="12dip"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/cam_mic_gain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/sc_cam_mic_gain"
+                android:textColor="@color/play_blue"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/cam_mic_gain_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sc_cam_mic_gain_desc"
+                android:fontFamily="sans-serif-light"
+                android:autoLink="all"
+                android:textSize="15sp" />
+
+            <SeekBar
+                android:id="@+id/cam_mic_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_3quarter_margin" />
+
+            <TextView
+                android:id="@+id/cam_mic_unit"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/sec"
+                android:fontFamily="sans-serif-light"
+                android:textSize="18sp"
+                android:textColor="@color/play_gray"
+                android:layout_marginBottom="@dimen/activity_half_margin"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
