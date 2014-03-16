@@ -92,23 +92,23 @@
     <string name="kernel_control_desc">Hier können Sie Ihre Kernel-Funktion nach Ihren wünschen optimieren, CPU und GPU übertaktung durch governors, I/O schedulers, TCP congestion algorithms und vieles mehr...</string>
     <string name="sound_control">Musik Steuerung</string><string name="sound_control_desc">Tweak the volume of your headphones output, speaker, camera mic &amp; sound recording mic if you are using a kernel which implements Faux123\'s Sound Control.></string>
     <string name="touch_screen">Touch Screen</string>
-    <string name="touch_screen_desc">Control your Xperia Z1 touch-screen, from adding support for any pen or non-plastic object to tweaking the smallest parameters like touch pressure, target size, max speed, drag range, etc…</string>
+    <string name="touch_screen_desc">Bedienen Sie Ihren Xperia Z1 Touch-Screen durch Erhöhung der Sensitivität zusätzlich mit jeder Art von Stiften (Bleistift) und im Winter z.B. mit Handschuhen.</string>
     <string name="help_center_color">#34495e</string>
-    <string name="dynamic_fsync">Dynamic File Sync</string><string name="dynamic_fsync_desc">When Dynamic Fsync is enabled, file sync will be delayed until the screen is turned off, at which point all pending write operations are synced, allowing for better performance while using the device.</string>
+    <string name="dynamic_fsync">Dynamic File Sync</string><string name="dynamic_fsync_desc">Wenn Dynamische Fsync aktiviert ist, wird Fsync deaktiviert wenn der Bildschirm an ist  und aktiviert wenn er aus ist. Dadurch kommt eine bessere Leistung des Grätes zustande.</string>
     <string name="dynamic_fsync_version">Your kernel\'s Dynamic Fsync version is: \'</string>
-    <string name="sched_mc">Multi-Core Power Savings</string><string name="sched_mc_desc">With Multi-Core Power Savings enabled, the CPU will try to use as few cores as possible by using one core until it is maxed-out. This allows to save quite a lot of battery.\nTwo levels of aggressiveness are available.</string>
+    <string name="sched_mc">Multi-Core Power Savings</string><string name="sched_mc_desc">Wenn Multi Core Power Saving aktiviert ist, werden Prozesse so gruppiert, dass ein Kern maximal ausgelastet wird, bevor der zweite belastet wird. Dies erlaubt es, eine ganze Reihe von Batterie zu sparen. Zwei Ebenen der Aggressivität sind vorhanden.</string>
     <string name="intelli_plug">Intelli Plug</string>
-    <string name="intelli_plug_desc">Intelli_plug is a hotplug driver created by Faux123 as an open-source replacement for Qualcomm\'s closed-source msm_mpdecision driver. As such, it is more customizable and has a different and possibly more optimized strategy.</string>
-    <string name="intelli_plug_eco">Intelli Plug Eco Mode</string>
-    <string name="intelli_plug_eco_desc">Intelli_plug\'s eco mode is a hotplug strategy optimized to keep 2 cores offline as often as possible, thus saving a great deal of battery.</string>
-    <string name="power_suspend">Power Suspend</string><string name="power_suspend_desc">Power Suspend is an open-source kernel power management driver created by Faux123, it replaces the now aging early_suspend driver.\nPower Suspend allows for better battery savings while the screen is off.</string>
+    <string name="intelli_plug_desc">Intelli_plug ist ein Hotplug-Treiber als Open-Source-Ersatz für Qualcomm's Closed-Source-Treiber erstellt von msm_mpdecision Faux123. Als solches ist er besser angepasst und hat eine andere und möglicherweise optimierte Strategie.</string>
+    <string name="intelli_plug_eco">Intelli Plug Eco Modus</string>
+    <string name="intelli_plug_eco_desc">Intelli_plug Eco-Modus ist eine optimierte Hotplug-Strategie, spezieller Stromsparmodus optimiert 2 Kerne und das spart viel Akku.</string>
+    <string name="power_suspend">Power Suspend</string><string name="power_suspend_desc">Power-Suspend ist ein Open-Source-Kernel-Power-Management-Treiber erstellt von Faux123, der jetzt alternde early_suspend Treiber ersetzt. NPower Suspend ermöglicht eine bessere Batterieeinsparung während der Bildschirm ausgeschaltet ist.</string>
     <string name="disabled">Deaktiviert</string>
     <string name="moderate">Moderate</string>
     <string name="aggressive">Aggressiv</string>
     <string name="refresh">Aktualisieren</string>
     <string name="io_scheduler">I/O Scheduler</string>
     <string name="tcp_congestion">TCP Congestion Algorithm</string>
-    <string name="set_on_boot">Beim Starten ausführen</string>
+    <string name="set_on_boot">Beim Start setzen</string>
     <string name="set_on_boot_summary_off">Ihre Einstellungen werden nach dem Neustart nicht ausgeführt</string>
     <string name="set_on_boot_summary_on">Ihre Einstellungen werden nach dem Neustart ausgeführt</string>
     <string name="governor_core4">Governor (Core 4)</string>
@@ -118,8 +118,8 @@
     <string name="minimum">Minimum:\u0020</string>
     <string name="maximum">Maximum:\u0020</string>
     <string name="current_freq">Current Frequency</string>
-    <string name="left">Links:\u0020</string>
+    <string name="left">Li:\u0020</string>
     <string name="sec">sec.</string>
-    <string name="right">Rechts:\u0020</string>
+    <string name="right">Re:\u0020</string>
     <string name="gpu_governor">GPU Governor</string>
 </resources>
