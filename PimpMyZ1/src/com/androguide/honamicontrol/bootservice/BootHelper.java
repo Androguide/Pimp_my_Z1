@@ -67,9 +67,11 @@ public class BootHelper {
 
         String applyIntelliPlug;
         if (INTELLI_PLUG)
-            applyIntelliPlug = "stop mpdecision\nbusybox echo 1 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE;
+            applyIntelliPlug = "stop mpdecision\nbusybox echo 0 > " + PowerManagementInterface.MSM_MPDECISION_TOGGLE
+                    + "\nbusybox echo 1 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE;
         else
-            applyIntelliPlug = "start mpdecision\nbusybox echo 0 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE;
+            applyIntelliPlug = "start mpdecision\nbusybox echo 1 > " + PowerManagementInterface.MSM_MPDECISION_TOGGLE
+                    + "\nbusybox echo 0 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE;
 
         String applyMaxCpuFreq = "busybox echo " + CPU_MAX_FREQ + " > " + CPUInterface.MAX_FREQ;
         String applyMinCpuFreq = "busybox echo " + CPU_MIN_FREQ + " > " + CPUInterface.MIN_FREQ;

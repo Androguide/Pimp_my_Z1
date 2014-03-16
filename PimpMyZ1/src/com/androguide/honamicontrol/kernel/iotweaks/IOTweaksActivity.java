@@ -39,7 +39,6 @@ import com.fima.cardsui.objects.CardStack;
 import com.fima.cardsui.views.CardUI;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class IOTweaksActivity extends ActionBarActivity implements IOTweaksInterface {
 
