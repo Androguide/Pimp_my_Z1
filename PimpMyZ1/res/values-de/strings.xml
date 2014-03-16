@@ -90,12 +90,12 @@
     <string name="glove_mode_desc">Mit aktiviertem Handschuh Modus lässt sich Ihr Xperia Z1 Touchscreen mit Handschuhen bedienen.</string>
     <string name="kernel_control">Kernel Steuerung</string>
     <string name="kernel_control_desc">Hier können Sie Ihre Kernel-Funktion nach Ihren wünschen optimieren, CPU und GPU übertaktung durch governors, I/O schedulers, TCP congestion algorithms und vieles mehr...</string>
-    <string name="sound_control">Musik Steuerung</string><string name="sound_control_desc">Tweak the volume of your headphones output, speaker, camera mic &amp; sound recording mic if you are using a kernel which implements Faux123\'s Sound Control.></string>
+    <string name="sound_control">Musik Steuerung</string><string name="sound_control_desc">Optimiert die Lautstärke Kopfhörerausgang, Lautsprecher, Mikrofon und Kamera,  Tonaufnahme Mikrofon, wenn Sie einen Kernel mit Faux123 Sound Control implementiert haben.></string>
     <string name="touch_screen">Touch Screen</string>
     <string name="touch_screen_desc">Bedienen Sie Ihren Xperia Z1 Touch-Screen durch Erhöhung der Sensitivität zusätzlich mit jeder Art von Stiften (Bleistift) und im Winter z.B. mit Handschuhen.</string>
     <string name="help_center_color">#34495e</string>
     <string name="dynamic_fsync">Dynamic File Sync</string><string name="dynamic_fsync_desc">Wenn Dynamische Fsync aktiviert ist, wird Fsync deaktiviert wenn der Bildschirm an ist  und aktiviert wenn er aus ist. Dadurch kommt eine bessere Leistung des Grätes zustande.</string>
-    <string name="dynamic_fsync_version">Your kernel\'s Dynamic Fsync version is: \'</string>
+    <string name="dynamic_fsync_version">Ihre Kernel Dynamische Fsync Version ist: </string>
     <string name="sched_mc">Multi-Core Power Savings</string><string name="sched_mc_desc">Wenn Multi Core Power Saving aktiviert ist, werden Prozesse so gruppiert, dass ein Kern maximal ausgelastet wird, bevor der zweite belastet wird. Dies erlaubt es, eine ganze Reihe von Batterie zu sparen. Zwei Ebenen der Aggressivität sind vorhanden.</string>
     <string name="intelli_plug">Intelli Plug</string>
     <string name="intelli_plug_desc">Intelli_plug ist ein Hotplug-Treiber als Open-Source-Ersatz für Qualcomm's Closed-Source-Treiber erstellt von msm_mpdecision Faux123. Als solches ist er besser angepasst und hat eine andere und möglicherweise optimierte Strategie.</string>
@@ -111,10 +111,10 @@
     <string name="set_on_boot">Beim Start setzen</string>
     <string name="set_on_boot_summary_off">Ihre Einstellungen werden nach dem Neustart nicht ausgeführt</string>
     <string name="set_on_boot_summary_on">Ihre Einstellungen werden nach dem Neustart ausgeführt</string>
-    <string name="governor_core4">Governor (Core 4)</string>
-    <string name="governor_core3">Governor (Core 3)</string>
-    <string name="governor_core2">Governor (Core 2)</string>
-    <string name="governor_core1">Governor (Core 1)</string>
+    <string name="governor_core4">Governor (Kern 4)</string>
+    <string name="governor_core3">Governor (Kern 3)</string>
+    <string name="governor_core2">Governor (Kern 2)</string>
+    <string name="governor_core1">Governor (Kern 1)</string>
     <string name="minimum">Minimum:\u0020</string>
     <string name="maximum">Maximum:\u0020</string>
     <string name="current_freq">Current Frequency</string>
