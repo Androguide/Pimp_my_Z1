@@ -120,9 +120,11 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
                             isIntelliPlugOn = isOn;
                             bootPrefs.edit().putBoolean("INTELLI_PLUG", isOn).commit();
                             if (isOn) {
-                                Helpers.CMDProcessorWrapper.runSuCommand("stop mpdecision\nbusybox echo 1 > " + INTELLI_PLUG_TOGGLE);
+                                Helpers.CMDProcessorWrapper.runSuCommand("stop mpdecision\nbusybox echo 0 > " + MSM_MPDECISION_TOGGLE
+                                        + "\nbusybox echo 1 > " + INTELLI_PLUG_TOGGLE);
                             } else {
-                                Helpers.CMDProcessorWrapper.runSuCommand("start mpdecision\nbusybox echo 0 > " + INTELLI_PLUG_TOGGLE);
+                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + INTELLI_PLUG_TOGGLE
+                                        + "\nbusybox echo 1 > " + MSM_MPDECISION_TOGGLE + "\nstart mpdecision");
                                 if (ecoModeSwitch != null)
                                     ecoModeSwitch.setChecked(false);
                             }
@@ -221,5 +223,4 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
     private Boolean getIsIntelliPlugOn() {
         return !CPUHelper.readOneLineNotRoot(INTELLI_PLUG_TOGGLE).equals("0");
     }
-
 }

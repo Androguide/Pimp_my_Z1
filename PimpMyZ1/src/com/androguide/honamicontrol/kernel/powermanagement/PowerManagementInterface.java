@@ -25,6 +25,7 @@ public interface PowerManagementInterface {
     public static final String SCHED_MC_POWER_SAVINGS = "/sys/devices/system/cpu/sched_mc_power_savings";
     public static final String INTELLI_PLUG_TOGGLE = "/sys/module/intelli_plug/parameters/intelli_plug_active";
     public static final String INTELLI_PLUG_ECO_MODE = "/sys/module/intelli_plug/parameters/eco_mode_active";
+    public static final String MSM_MPDECISION_TOGGLE = "/sys/kernel/msm_mpdecision/conf/enabled";
     public static final String POWER_SUSPEND_TOGGLE = "/sys/kernel/power_suspend/power_suspend_mode";
 }
 
