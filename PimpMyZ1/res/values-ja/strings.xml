@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright (C) 2013  Louis Teboul (a.k.a Androguide)
 
    admin@pimpmyrom.org  || louisteboul@gmail.com
    http://pimpmyrom.org || http://androguide.fr
-   71 quai Clemenceau, 69300 Caluire-et-Cuire, FRANCE.
+   71 quai Clémenceau, 69300 Caluire-et-Cuire, FRANCE.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -19,8 +19,8 @@
    You should have received a copy of the GNU General Public License along
    with this program; if not, write to the Free Software Foundation, Inc.,
    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
--->
 
+-->
 <resources>
 
     <!-- ================= General Stuff ================= -->
@@ -88,7 +88,7 @@
     <string name="glove_mode">手ぶくろモード</string>
     <string name="glove_mode_desc">手ぶくろモードを有効にすると、手ぶくろをしたままでもXperia Z1を操作できるようになります。(ハードウェアが非対応である場合ペンモードと同じ動作になります)</string>
     <string name="kernel_control">カーネル制御</string>
-    <string name="kernel_control_desc">CPUやGPUオーバークロック、ガバナやI/Oスケジューラ、TCPの輻輳制御アルゴリズムの変更など、様々なカーネルの機能を変更できます。</string>
+    <string name="kernel_control_desc">CPUやGPUオーバークロック、ガバナやI/Oスケジューラ、TCP輻輳制御アルゴリズムの変更など、様々なカーネルの機能を変更できます。</string>
     <string name="sound_control">音量調整</string>
     <string name="sound_control_desc">カーネルにFaux123 Sound Controlが搭載されている場合、ヘッドホン出力やスピーカー、カメラマイクや録音用マイクの音量を調整できます。</string>
     <string name="touch_screen">タッチスクリーン</string>
@@ -109,4 +109,30 @@
     <string name="moderate">緩やか</string>
     <string name="aggressive">積極的</string>
     <string name="refresh">再読み込み</string>
+    <string name="io_scheduler">I/Oスケジューラ</string>
+    <string name="tcp_congestion">TCP輻輳制御アルゴリズム</string>
+    <string name="set_on_boot">起動時に適用</string>
+    <string name="set_on_boot_summary_off">現在の設定は再起動後に元に戻ります。</string>
+    <string name="set_on_boot_summary_on">現在の設定は再起動後に再適用されます。</string>
+    <string name="governor_core4">ガバナ(コア 4)</string>
+    <string name="governor_core3">ガバナ(コア 3)</string>
+    <string name="governor_core2">ガバナ(コア 2)</string>
+    <string name="governor_core1">ガバナ(コア 1)</string>
+    <string name="minimum">最大:\u0020</string>
+    <string name="maximum">最小:\u0020</string>
+    <string name="current_freq">現在の周波数</string>
+    <string name="left">左:\u0020</string>
+    <string name="sec">秒</string>
+    <string name="right">右:\u0020</string>
+    <string name="gpu_governor">GPUガバナ</string>
+    <string name="kernel_misc">その他</string>
+    <string name="kernel_misc_desc">VMパラメータやKernel Same-page Mergingなどのその他のカーネルの機能を設定します。</string>
+    <string name="ksm_header">KERNEL SAME-PAGE MERGING</string>
+    <string name="ksm">KSM</string>
+    <string name="ksm_desc">Kernel Same-page Mergingを有効にすると、システムが重複したメモリページをスキャンして統合することによりメモリ使用率が減りパフォーマンスが向上します。</string>
+    <string name="ksm_unsupported">お使いのカーネルはKSMに対応していません。</string>
+    <string name="ksm_pages_to_scan">スキャンするページ</string>
+    <string name="ksm_pages_to_scan_desc">実行ごとにKSMがスキャンするページ数を指定してください。</string>
+    <string name="ksm_timer">KSMタイマー</string>
+    <string name="ksm_timer_desc">KSMがメモリページをスキャンする間隔をミリ秒で指定してください。</string>
 </resources>
