@@ -36,4 +36,5 @@
     <color name="kernel_color">#ff16a085</color>
     <color name="play_red_alpha">#88C74B46</color>
     <color name="light_gray">#FFABABAB</color>
+    <color name="flat_orange">#e67e22</color>
 </resources>
