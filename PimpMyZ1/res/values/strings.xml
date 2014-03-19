@@ -133,4 +133,16 @@
     <string name="ksm_timer_desc">Defines the interval of time (in milliseconds) at which KSM will scan for mergeable memory pages</string>
     <string name="snake_charmer">Snake Charmer</string>
     <string name="snake_charmer_desc">Snake Charmer by faux123 allows to limit the maximum CPU frequency for all cores</string>
+    <string name="dyn_fsync_unsupported">Sorry, your kernel does not seem to support Dynamic Fsync.</string>
+    <string name="io_sched_emmc">I/O Scheduler (eMMC)</string>
+    <string name="io_sched_emmc_desc">Defines the I/O Scheduler to use for the internal storage</string>
+    <string name="io_sched_sd">I/O Scheduler (SD-Card)</string>
+    <string name="io_sched_sd_desc">Defines the I/O Scheduler to use for the external storage/SD-Card</string>
+    <string name="emmc_readahead">Readahead (eMMC)</string>
+    <string name="emmc_readahead_desc">Specifies the amount of data in kilobytes that are read and cached ahead of time by the I/O Scheduler for the internal storage</string>
+    <string name="sdcard_readahead">Readahead (SD-Card)</string>
+    <string name="sdcard_readahead_desc">Specifies the amount of data in kilobytes that are read and cached ahead of time by the I/O Scheduler for the external SD-Card</string>
+    <string name="emmc_entropy_contrib">Entropy Contribution (eMMC)</string>
+    <string name="entropy_contrib_desc">Flash devices have few randomness and as such they are a very poor source of entropy, disable for better performance.</string>
+    <string name="sdcard_entropy_contrib">Entropy Contribution (SD-Card)</string>
 </resources>

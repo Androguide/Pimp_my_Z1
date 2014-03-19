@@ -47,9 +47,6 @@ android {
         release {
             signingConfig signingConfigs.release
         }
-        debug {
-            packageNameSuffix ".debug"
-        }
     }
 
     lintOptions {
