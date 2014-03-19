@@ -60,6 +60,11 @@ public class BootHelper {
         String ioSchedulerSD = prefs.getString("IO_SCHEDULER", "row");
         String tcpAlgorithm = prefs.getString("TCP_ALGORITHM", "cubic");
 
+        String EMMC_READAHEAD = prefs.getString("EMMC_READAHEAD", "1024");
+        String SD_READAHEAD = prefs.getString("SD_READAHEAD", "1024");
+        Boolean EMMC_ENTROPY = prefs.getBoolean("EMMC_ENTROPY_CONTRIB", true);
+        Boolean SD_ENTROPY = prefs.getBoolean("SD_ENTROPY_CONTRIB", true);
+
         String SC_MIC = prefs.getString("SC_MIC", "0 0 255");
         String SC_CAM_MIC = prefs.getString("SC_CAM_MIC", "0 0 255");
         String SC_HEADPHONE_PA = prefs.getString("HEADPHONE_PA", "38 38 179");
@@ -101,6 +106,10 @@ public class BootHelper {
         String applyKSM = "busybox echo " + getIntFromBoolean(KSM_ENABLED) + " > " + MiscInterface.KSM_TOGGLE;
         String applyKSMPages = "busybox echo " + KSM_PAGES_TO_SCAN + " > " + MiscInterface.KSM_PAGES_TO_SCAN;
         String applyKSMTimer = "busybox echo " + KSM_SLEEP_TIMER + " > " + MiscInterface.KSM_SLEEP_TIMER;
+        String applyEmmcReadahead = "busybox echo " + EMMC_READAHEAD + " > " + IOTweaksInterface.EMMC_READAHEAD;
+        String applySDReadahead = "busybox echo " + SD_READAHEAD + " > " + IOTweaksInterface.SD_READAHEAD;
+        String applyEmmcEntropy = "busybox echo " + EMMC_ENTROPY + " > " + IOTweaksInterface.EMMC_ENTROPY_CONTRIB;
+        String applySDEntropy = "busybox echo " + SD_ENTROPY + " > " + IOTweaksInterface.SD_ENTROPY_CONTRIB;
 
         Helpers.CMDProcessorWrapper.runSuCommand(
                 applyMaxCpuFreq + "\n" +
@@ -113,6 +122,10 @@ public class BootHelper {
                         applyCore3Governor + "\n" +
                         applyIOScheduler + "\n" +
                         applyIOSchedulerSD + "\n" +
+                        applyEmmcReadahead + "\n" +
+                        applySDReadahead + "\n" +
+                        applyEmmcEntropy + "\n" +
+                        applySDEntropy + "\n" +
                         applyTcpAlgorithm + "\n" +
                         applyGpuGovernor + "\n" +
                         "echo 0 > " + SoundControlInterface.FAUX_SC_LOCKED + "\n" +

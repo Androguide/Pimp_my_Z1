@@ -26,4 +26,8 @@ public interface IOTweaksInterface {
     public static final String DYNAMIC_FSYNC_TOGGLE = "/sys/kernel/dyn_fsync/Dyn_fsync_active";
     public static final String IO_SCHEDULER = "/sys/block/mmcblk0/queue/scheduler";
     public static final String IO_SCHEDULER_SD = "/sys/block/mmcblk1/queue/scheduler";
+    public static final String EMMC_ENTROPY_CONTRIB = "/sys/block/mmcblk0/queue/add_random";
+    public static final String SD_ENTROPY_CONTRIB = "/sys/block/mmcblk1/queue/add_random";
+    public static final String EMMC_READAHEAD = "/sys/block/mmcblk0/queue/read_ahead_kb";
+    public static final String SD_READAHEAD = "/sys/block/mmcblk1/queue/read_ahead_kb";
 }
