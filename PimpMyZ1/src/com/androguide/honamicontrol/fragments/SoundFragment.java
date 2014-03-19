@@ -119,11 +119,11 @@ public class SoundFragment extends Fragment implements SoundControlInterface {
 
         if (!Helpers.doesFileExist(FAUX_SC_VERSION)) {
             mCardUI.addCard(new CardTextStripe(
-                    fa.getString(R.string.unsupported),
-                    fa.getString(R.string.sound_control_unsupported),
-                    "#C74B46",
-                    "#C74B46",
-                    false)
+                            fa.getString(R.string.unsupported),
+                            fa.getString(R.string.sound_control_unsupported),
+                            "#C74B46",
+                            "#C74B46",
+                            false)
             );
 
         } else {
@@ -235,8 +235,8 @@ public class SoundFragment extends Fragment implements SoundControlInterface {
                                     int toApply = prefs.getInt("VALUE", 0);
                                     Helpers.CMDProcessorWrapper.runSuCommand(
                                             "busybox echo 0 > " + FAUX_SC_LOCKED + "\n" +
-                                            "busybox echo " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, 0) + " > " + FAUX_SC_MIC + "\n" +
-                                            "busybox echo 1 > " + FAUX_SC_LOCKED);
+                                                    "busybox echo " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, 0) + " > " + FAUX_SC_MIC + "\n" +
+                                                    "busybox echo 1 > " + FAUX_SC_LOCKED);
                                     bootPrefs.edit().putString("SC_MIC", toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, 0)).commit();
                                     actionMode.finish();
                             }
@@ -294,9 +294,9 @@ public class SoundFragment extends Fragment implements SoundControlInterface {
                                     SharedPreferences prefs = fa.getSharedPreferences("syskernelsound_control_3gpl_cam_mic_gain", 0);
                                     int toApply = prefs.getInt("VALUE", 0);
                                     Helpers.CMDProcessorWrapper.runSuCommand(
-                                    "busybox echo 0 > " + FAUX_SC_LOCKED + "\n" +
-                                    "busybox echo " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, 0) + " > " + FAUX_SC_CAM_MIC + "\n" +
-                                    "busybox echo 1 > " + FAUX_SC_LOCKED);
+                                            "busybox echo 0 > " + FAUX_SC_LOCKED + "\n" +
+                                                    "busybox echo " + toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, 0) + " > " + FAUX_SC_CAM_MIC + "\n" +
+                                                    "busybox echo 1 > " + FAUX_SC_LOCKED);
                                     bootPrefs.edit().putString("SC_CAM_MIC", toApply + " " + Helpers.getSoundCountrolBitRepresentation(toApply, 0)).commit();
                                     actionMode.finish();
                                     break;

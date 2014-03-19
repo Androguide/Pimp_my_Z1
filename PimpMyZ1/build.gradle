@@ -36,10 +36,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile = file(System.getenv("KEYSTORE_PATH"))
-            storePassword = System.getenv("KEYSTORE_PWD")
-            keyAlias = System.getenv("KEYSTORE_ALIAS")
-            keyPassword = System.getenv("KEYSTORE_ALIAS_PWD")
+            storeFile = file("/home/louis/Dropbox/Development/Android/Keystores/general-keystore.jks")
+            storePassword = "@ndr0gu1d3c4nn4815"
+            keyAlias = "Androguide"
+            keyPassword = "@ndr0gu1d3c4nn4815"
         }
     }
 
