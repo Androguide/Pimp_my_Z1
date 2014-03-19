@@ -138,6 +138,11 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                 String snakeVersion = CPUHelper.readOneLineNotRoot(SNAKE_CHARMER_VERSION);
                 snakeVersion = snakeVersion.replaceAll("version: ", "v");
                 snakeTitle.setText(snakeTitle.getText() + " " + snakeVersion);
+                if (snakeVersion.equals("v1.2")) {
+                    TextView snakeDesc = (TextView) findViewById(R.id.snake_charmer);
+                    snakeDesc.setText(snakeDesc.getText() + "\n" + "Snake Charmer v1.2 is used as a built-in kernel feature and cannot be disabled");
+                    snakeCharmer.setEnabled(false);
+                }
             }
 
             if (bootPrefs.getBoolean("SNAKE_CHARMER", true)) {
