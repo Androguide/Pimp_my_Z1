@@ -34,8 +34,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.androguide.honamicontrol.R;
@@ -66,13 +69,14 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
     private SeekBar mMinSlider;
     private Spinner mGovernor, mGovernor2, mGovernor3, mGovernor4;
     private Spinner mIo, mTcp;
+    private Switch snakeCharmer;
     private TextView mMaxSpeedText;
     private TextView mMinSpeedText;
     private String[] availableFrequencies;
     private String mMaxFreqSetting;
     private String mMinFreqSetting;
     private CurCPUThread mCurCPUThread;
-    private boolean mIsTegra3 = false;
+    private Boolean mIsTegra3 = false, snakeCharmerEnabled = true;
     private int mNumOfCpu = 1;
     private int spinnerCounter = 0, spinnerCounter2 = 0, spinnerCounter3 = 0, spinnerCounter4 = 0, schedCounter = 0, tcpCounter = 0;
 
@@ -122,6 +126,31 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                     }
                 });
             }
+        }
+
+        snakeCharmer = (Switch) findViewById(R.id.snake_charmer_seekbar);
+        if (!Helpers.doesFileExist(SNAKE_CHARMER_MAX_FREQ)) {
+            LinearLayout cardSnakeCharmer = (LinearLayout) findViewById(R.id.card_snake_charmer);
+            cardSnakeCharmer.setVisibility(View.GONE);
+        } else {
+            if (Helpers.doesFileExist(SNAKE_CHARMER_VERSION)) {
+                TextView snakeTitle = (TextView) findViewById(R.id.snake_charmer);
+                String snakeVersion = CPUHelper.readOneLineNotRoot(SNAKE_CHARMER_VERSION);
+                snakeVersion = snakeVersion.replaceAll("version: ", "v");
+                snakeTitle.setText(snakeTitle.getText() + " " + snakeVersion);
+            }
+
+            if (bootPrefs.getBoolean("SNAKE_CHARMER", true)) {
+                snakeCharmer.setChecked(true);
+                snakeCharmerEnabled = true;
+            }
+
+            snakeCharmer.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
+                    snakeCharmerEnabled = isOn;
+                }
+            });
         }
 
         int frequenciesNum = availableFrequencies.length - 1;
@@ -222,6 +251,9 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                     for (int i = 0; i < mNumOfCpu; i++)
                         Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + mMaxFreqSetting + " > "
                                 + MAX_FREQ.replace("cpu0", "cpu" + i));
+
+                    if (snakeCharmerEnabled)
+                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + mMaxFreqSetting + " > " + SNAKE_CHARMER_MAX_FREQ);
                 }
 
 
@@ -229,6 +261,9 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                     if (mMaxFreqSetting != null && !mMaxFreqSetting.isEmpty())
                         Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + mMaxFreqSetting + " > "
                                 + TEGRA_MAX_FREQ);
+
+                    if (snakeCharmerEnabled)
+                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + mMaxFreqSetting + " > " + SNAKE_CHARMER_MAX_FREQ);
                 }
             }
         });

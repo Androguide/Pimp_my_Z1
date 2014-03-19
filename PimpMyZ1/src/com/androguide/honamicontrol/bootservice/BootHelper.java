@@ -49,6 +49,7 @@ public class BootHelper {
         Boolean PEN_MODE = prefs.getBoolean("PEN_MODE", false);
         Boolean GLOVE_MODE = prefs.getBoolean("GLOVE_MODE", false);
         Boolean KSM_ENABLED = prefs.getBoolean("KSM_ENABLED", false);
+        Boolean SNAKE_CHARMER = prefs.getBoolean("SNAKE_CHARMER", true);
 
         String core0Governor = prefs.getString("CORE0_GOVERNOR", "intellidemand");
         String core1Governor = prefs.getString("CORE1_GOVERNOR", "intellidemand");
@@ -61,9 +62,9 @@ public class BootHelper {
 
         String SC_MIC = prefs.getString("SC_MIC", "0 0 255");
         String SC_CAM_MIC = prefs.getString("SC_CAM_MIC", "0 0 255");
-        String SC_HEADPHONE_PA = prefs.getString(SoundControlInterface.FAUX_SC_HEADPHONE_POWERAMP.replaceAll("/", "_"), "38 38 179");
-        String SC_HEADPHONE = prefs.getString(SoundControlInterface.FAUX_SC_HEADPHONE.replaceAll("/", "_"), "0 0 255");
-        String SC_SPEAKER = prefs.getString(SoundControlInterface.FAUX_SC_SPEAKER.replaceAll("/", "_"), "0 0 255");
+        String SC_HEADPHONE_PA = prefs.getString("HEADPHONE_PA", "38 38 179");
+        String SC_HEADPHONE = prefs.getString("HEADPHONE", "0 0 255");
+        String SC_SPEAKER = prefs.getString("SPEAKER", "0 0 255");
 
         String applyIntelliPlug;
         if (INTELLI_PLUG)
@@ -74,6 +75,7 @@ public class BootHelper {
                     + "\nbusybox echo 0 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE;
 
         String applyMaxCpuFreq = "busybox echo " + CPU_MAX_FREQ + " > " + CPUInterface.MAX_FREQ;
+        if (SNAKE_CHARMER) applyMaxCpuFreq += "\nbusybox echo " + CPU_MAX_FREQ + " > " + CPUInterface.SNAKE_CHARMER_MAX_FREQ;
         String applyMinCpuFreq = "busybox echo " + CPU_MIN_FREQ + " > " + CPUInterface.MIN_FREQ;
         String applyMaxGpuFreq = "busybox echo " + GPU_MAX_FREQ + " > " + GPUInterface.maxFreq;
         String applyMinGpuFreq = "busybox echo " + GPU_MIN_FREQ + " > " + GPUInterface.minFreq;
@@ -84,13 +86,13 @@ public class BootHelper {
         String applyGpuGovernor = "busybox echo " + gpuGovernor + " > " + GPUInterface.currGovernor;
         String applyIOScheduler = "busybox echo " + ioScheduler + " > " + IOTweaksInterface.IO_SCHEDULER;
         String applyIOSchedulerSD = "busybox echo " + ioSchedulerSD + " > " + IOTweaksInterface.IO_SCHEDULER_SD;
-        String applyTcpAlgorithm = "busybox echo " + tcpAlgorithm + " > " + CPUInterface.CURR_TCP_ALGORITHM + " && " + CPUInterface.SYSCTL_TCP_ALGORITHM + tcpAlgorithm;
+        String applyTcpAlgorithm = "busybox echo " + tcpAlgorithm + " > " + CPUInterface.CURR_TCP_ALGORITHM + "\n" + CPUInterface.SYSCTL_TCP_ALGORITHM + tcpAlgorithm;
         String applySchedMcLevel = "busybox echo " + SCHED_MC_LEVEL + " > " + PowerManagementInterface.SCHED_MC_POWER_SAVINGS;
         String applyDynamicFsync = "busybox echo " + getIntFromBoolean(DYNAMIC_FSYNC) + " > " + IOTweaksInterface.DYNAMIC_FSYNC_TOGGLE;
         String applyIntelliPlugEco = "busybox echo " + getIntFromBoolean(INTELLI_PLUG_ECO) + " > " + PowerManagementInterface.INTELLI_PLUG_ECO_MODE;
         String applyPowerSuspend = "busybox echo " + getIntFromBoolean(POWER_SUSPEND) + " > " + PowerManagementInterface.POWER_SUSPEND_TOGGLE;
-        String applyPenMode = "chown system:system " + TouchScreenInterface.PEN_MODE + " && busybox echo " + getIntFromBoolean(PEN_MODE) + " > " + TouchScreenInterface.PEN_MODE;
-        String applyGloveMode = "chown system:system " + TouchScreenInterface.PEN_MODE + " && busybox echo " + getIntFromBoolean(GLOVE_MODE) + " > " + TouchScreenInterface.GLOVE_MODE;
+        String applyPenMode = "chown system:system " + TouchScreenInterface.PEN_MODE + "\nbusybox echo " + getIntFromBoolean(PEN_MODE) + " > " + TouchScreenInterface.PEN_MODE;
+        String applyGloveMode = "chown system:system " + TouchScreenInterface.PEN_MODE + "\nbusybox echo " + getIntFromBoolean(GLOVE_MODE) + " > " + TouchScreenInterface.GLOVE_MODE;
         String applyScHeadphone = "busybox echo " + SC_HEADPHONE + " > " + SoundControlInterface.FAUX_SC_HEADPHONE;
         String applyScHeadphonePa = "busybox echo " + SC_HEADPHONE_PA + " > " + SoundControlInterface.FAUX_SC_HEADPHONE_POWERAMP;
         String applyScSpeaker = "busybox echo " + SC_SPEAKER + " > " + SoundControlInterface.FAUX_SC_SPEAKER;
