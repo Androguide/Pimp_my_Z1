@@ -131,4 +131,6 @@
     <string name="ksm_pages_to_scan_desc">Amount of pages KSM should scan at each run</string>
     <string name="ksm_timer">KSM Timer</string>
     <string name="ksm_timer_desc">Defines the interval of time (in milliseconds) at which KSM will scan for mergeable memory pages</string>
+    <string name="snake_charmer">Snake Charmer</string>
+    <string name="snake_charmer_desc">Snake Charmer by faux123 allows to limit the maximum CPU frequency for all cores</string>
 </resources>
