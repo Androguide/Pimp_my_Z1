@@ -96,7 +96,7 @@ public class MiscActivity extends ActionBarActivity implements MiscInterface {
                     getString(R.string.ksm_pages_to_scan_desc),
                     "#1abc9c", "",
                     KSM_PAGES_TO_SCAN,
-                    200,
+                    512,
                     currPagesToScan,
                     this,
                     null
