@@ -145,4 +145,5 @@
     <string name="emmc_entropy_contrib">Entropy Contribution (eMMC)</string>
     <string name="entropy_contrib_desc">Flash devices have few randomness and as such they are a very poor source of entropy, disable for better performance.</string>
     <string name="sdcard_entropy_contrib">Entropy Contribution (SD-Card)</string>
+    <string name="profiles">Profiles</string>
 </resources>

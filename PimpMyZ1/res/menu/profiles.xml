@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:honami="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/profile_spinner"
+        android:title="@string/profiles"
+        honami:showAsAction="always"
+        honami:actionLayout="@layout/spinner_action"/>
+</menu>

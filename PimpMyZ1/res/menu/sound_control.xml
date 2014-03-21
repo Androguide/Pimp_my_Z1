@@ -9,6 +9,7 @@
 
     <item android:id="@+id/link_seekbars"
         android:checkable="true"
-        honami:showAsAction="ifRoom|withText"
+        android:checked="true"
+        honami:showAsAction="never"
         android:title="@string/menu_link_seekbars"/>
 </menu>

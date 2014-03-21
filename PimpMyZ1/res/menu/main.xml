@@ -5,6 +5,7 @@
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_action_settings"
         honami:showAsAction="always|withText"
+        android:orderInCategory="99"
         android:title="@string/action_settings"/>
 
 </menu>

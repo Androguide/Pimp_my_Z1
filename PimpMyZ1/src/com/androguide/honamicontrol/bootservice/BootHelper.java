@@ -41,7 +41,6 @@ public class BootHelper {
         int SCHED_MC_LEVEL = prefs.getInt("SCHED_MC_LEVEL", 0);
         int KSM_PAGES_TO_SCAN = prefs.getInt("KSM_PAGES_TO_SCAN", 100);
         int KSM_SLEEP_TIMER = prefs.getInt("KSM_SLEEP_TIMER", 500);
-
         Boolean DYNAMIC_FSYNC = prefs.getBoolean("DYNAMIC_FSYNC", false);
         Boolean INTELLI_PLUG = prefs.getBoolean("INTELLI_PLUG", false);
         Boolean INTELLI_PLUG_ECO = prefs.getBoolean("INTELLI_PLUG_ECO", false);
@@ -50,21 +49,18 @@ public class BootHelper {
         Boolean GLOVE_MODE = prefs.getBoolean("GLOVE_MODE", false);
         Boolean KSM_ENABLED = prefs.getBoolean("KSM_ENABLED", false);
         Boolean SNAKE_CHARMER = prefs.getBoolean("SNAKE_CHARMER", true);
-
-        String core0Governor = prefs.getString("CORE0_GOVERNOR", "intellidemand");
-        String core1Governor = prefs.getString("CORE1_GOVERNOR", "intellidemand");
-        String core2Governor = prefs.getString("CORE2_GOVERNOR", "intellidemand");
-        String core3Governor = prefs.getString("CORE3_GOVERNOR", "intellidemand");
-        String gpuGovernor = prefs.getString("GPU_GOVERNOR", "msm-adreno-tz");
-        String ioScheduler = prefs.getString("IO_SCHEDULER", "row");
-        String ioSchedulerSD = prefs.getString("IO_SCHEDULER", "row");
-        String tcpAlgorithm = prefs.getString("TCP_ALGORITHM", "cubic");
-
-        String EMMC_READAHEAD = prefs.getString("EMMC_READAHEAD", "1024");
-        String SD_READAHEAD = prefs.getString("SD_READAHEAD", "1024");
         Boolean EMMC_ENTROPY = prefs.getBoolean("EMMC_ENTROPY_CONTRIB", true);
         Boolean SD_ENTROPY = prefs.getBoolean("SD_ENTROPY_CONTRIB", true);
-
+        String CORE0_GOV = prefs.getString("CORE0_GOVERNOR", "intellidemand");
+        String CORE1_GOV = prefs.getString("CORE1_GOVERNOR", "intellidemand");
+        String CORE2_GOV = prefs.getString("CORE2_GOVERNOR", "intellidemand");
+        String CORE3_GOV = prefs.getString("CORE3_GOVERNOR", "intellidemand");
+        String GPU_GOV = prefs.getString("GPU_GOVERNOR", "msm-adreno-tz");
+        String IO_SCHED_EMMC = prefs.getString("IO_SCHEDULER", "row");
+        String IO_SCHED_SD = prefs.getString("IO_SCHEDULER", "row");
+        String TCP_ALGORITHM = prefs.getString("TCP_ALGORITHM", "cubic");
+        String EMMC_READAHEAD = prefs.getString("EMMC_READAHEAD", "1024");
+        String SD_READAHEAD = prefs.getString("SD_READAHEAD", "1024");
         String SC_MIC = prefs.getString("SC_MIC", "0 0 255");
         String SC_CAM_MIC = prefs.getString("SC_CAM_MIC", "0 0 255");
         String SC_HEADPHONE_PA = prefs.getString("HEADPHONE_PA", "38 38 179");
@@ -84,14 +80,14 @@ public class BootHelper {
         String applyMinCpuFreq = "busybox echo " + CPU_MIN_FREQ + " > " + CPUInterface.MIN_FREQ;
         String applyMaxGpuFreq = "busybox echo " + GPU_MAX_FREQ + " > " + GPUInterface.maxFreq;
         String applyMinGpuFreq = "busybox echo " + GPU_MIN_FREQ + " > " + GPUInterface.minFreq;
-        String applyCore0Governor = "busybox echo " + core0Governor + " > " + CPUInterface.GOVERNOR;
-        String applyCore1Governor = "busybox echo " + core1Governor + " > " + CPUInterface.GOVERNOR2;
-        String applyCore2Governor = "busybox echo " + core2Governor + " > " + CPUInterface.GOVERNOR3;
-        String applyCore3Governor = "busybox echo " + core3Governor + " > " + CPUInterface.GOVERNOR4;
-        String applyGpuGovernor = "busybox echo " + gpuGovernor + " > " + GPUInterface.currGovernor;
-        String applyIOScheduler = "busybox echo " + ioScheduler + " > " + IOTweaksInterface.IO_SCHEDULER;
-        String applyIOSchedulerSD = "busybox echo " + ioSchedulerSD + " > " + IOTweaksInterface.IO_SCHEDULER_SD;
-        String applyTcpAlgorithm = "busybox echo " + tcpAlgorithm + " > " + CPUInterface.CURR_TCP_ALGORITHM + "\n" + CPUInterface.SYSCTL_TCP_ALGORITHM + tcpAlgorithm;
+        String applyCore0Governor = "busybox echo " + CORE0_GOV + " > " + CPUInterface.GOVERNOR;
+        String applyCore1Governor = "busybox echo " + CORE1_GOV + " > " + CPUInterface.GOVERNOR2;
+        String applyCore2Governor = "busybox echo " + CORE2_GOV + " > " + CPUInterface.GOVERNOR3;
+        String applyCore3Governor = "busybox echo " + CORE3_GOV + " > " + CPUInterface.GOVERNOR4;
+        String applyGpuGovernor = "busybox echo " + GPU_GOV + " > " + GPUInterface.currGovernor;
+        String applyIOScheduler = "busybox echo " + IO_SCHED_EMMC + " > " + IOTweaksInterface.IO_SCHEDULER;
+        String applyIOSchedulerSD = "busybox echo " + IO_SCHED_SD + " > " + IOTweaksInterface.IO_SCHEDULER_SD;
+        String applyTcpAlgorithm = "busybox echo " + TCP_ALGORITHM + " > " + CPUInterface.CURR_TCP_ALGORITHM + "\n" + CPUInterface.SYSCTL_TCP_ALGORITHM + TCP_ALGORITHM;
         String applySchedMcLevel = "busybox echo " + SCHED_MC_LEVEL + " > " + PowerManagementInterface.SCHED_MC_POWER_SAVINGS;
         String applyDynamicFsync = "busybox echo " + getIntFromBoolean(DYNAMIC_FSYNC) + " > " + IOTweaksInterface.DYNAMIC_FSYNC_TOGGLE;
         String applyIntelliPlugEco = "busybox echo " + getIntFromBoolean(INTELLI_PLUG_ECO) + " > " + PowerManagementInterface.INTELLI_PLUG_ECO_MODE;

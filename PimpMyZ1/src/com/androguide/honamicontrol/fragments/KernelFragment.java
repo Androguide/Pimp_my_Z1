@@ -22,13 +22,20 @@
 package com.androguide.honamicontrol.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import com.androguide.honamicontrol.R;
 import com.androguide.honamicontrol.cards.CardImageLocal;
@@ -37,6 +44,12 @@ import com.androguide.honamicontrol.kernel.gpucontrol.GPUActivity;
 import com.androguide.honamicontrol.kernel.iotweaks.IOTweaksActivity;
 import com.androguide.honamicontrol.kernel.misc.MiscActivity;
 import com.androguide.honamicontrol.kernel.powermanagement.PowerManagementActivity;
+import com.androguide.honamicontrol.profiles.BalancedProfile;
+import com.androguide.honamicontrol.profiles.BatteryMaxProfile;
+import com.androguide.honamicontrol.profiles.BatteryProfile;
+import com.androguide.honamicontrol.profiles.BenchmarkProfile;
+import com.androguide.honamicontrol.profiles.PerformanceProfile;
+import com.androguide.honamicontrol.profiles.ProfileEnabler;
 import com.fima.cardsui.objects.Card;
 import com.fima.cardsui.objects.CardStack;
 import com.fima.cardsui.views.CardUI;
@@ -47,10 +60,11 @@ public class KernelFragment extends Fragment {
 
     private static ArrayList<Card> mCards;
     private static CardUI mCardUI;
+    private static int profileCounter = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        setHasOptionsMenu(true);
         LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.cardsui, container, false);
         final ActionBarActivity fa = (ActionBarActivity) super.getActivity();
         fa.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -148,13 +162,44 @@ public class KernelFragment extends Fragment {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-    }
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.profiles, menu);
+        MenuItem item = menu.findItem(R.id.profile_spinner);
+        View spinner = item != null ? item.getActionView() : null;
+        if (spinner instanceof android.widget.Spinner) {
+            final SharedPreferences profilePrefs = super.getActivity().getSharedPreferences("PROFILES", 0);
+            Spinner profiles = (Spinner) spinner;
+            profiles.setAdapter(ArrayAdapter.createFromResource(super.getActivity(), R.array.profiles_array, R.layout.spinner_action_row));
+            profiles.setSelection(profilePrefs.getInt("CURR_PROFILE", 5));
+            profiles.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    switch (i) {
+                        case 0:
+                            ProfileEnabler.enableProfile(new BatteryMaxProfile());
+                            break;
+                        case 1:
+                            ProfileEnabler.enableProfile(new BatteryProfile());
+                            break;
+                        case 2:
+                            ProfileEnabler.enableProfile(new BalancedProfile());
+                            break;
+                        case 3:
+                            ProfileEnabler.enableProfile(new PerformanceProfile());
+                            break;
+                        case 4:
+                            ProfileEnabler.enableProfile(new BenchmarkProfile());
+                            break;
+                    }
+                    profilePrefs.edit().putInt("CURR_PROFILE", i).commit();
+                }
 
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        }
+    }
 }

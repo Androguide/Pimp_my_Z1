@@ -73,7 +73,7 @@ public class MainActivity extends ActionBarActivity implements
     private ArrayList<String> headers = new ArrayList<String>();
     private PagerSlidingTabStrip tabs;
     private Drawable oldBackground = null;
-    private int currentColor = 0xFF3F9FE0;
+    private int currentColor = 0xFF3F9FE0, profileCounter = 0;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -177,7 +177,8 @@ public class MainActivity extends ActionBarActivity implements
 
         final int pageMargin = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, 4, getResources()
-                .getDisplayMetrics());
+                        .getDisplayMetrics()
+        );
         pager.setPageMargin(pageMargin);
 
         tabs.setViewPager(pager);
@@ -404,7 +405,7 @@ public class MainActivity extends ActionBarActivity implements
                 case 1:
                     return new KernelFragment();
                 case 2:
-                    return new SoundFragment();
+                    return new SoundControlFragment();
                 case 3:
                     return new TouchScreenFragment();
                 case 4:

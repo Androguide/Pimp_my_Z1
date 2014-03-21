@@ -11,6 +11,11 @@
     <style name="ActionBarStyle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:icon">@drawable/ic_launcher</item>
         <item name="android:background">#FF666666</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="myCustomSpinner" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+        <item name="android:background">@drawable/selectable_background_cardbank</item>
     </style>
 
     <!-- ActionBarCompat workaround-->
@@ -116,6 +121,7 @@
     </style>
     <style name="Widget.AppCompat.Light.Spinner.DropDown.ActionBar"
            parent="Widget.AppCompat.Light.Base.Spinner">
+        <item name="android:dropDownSpinnerStyle">@style/myCustomSpinner</item>
     </style>
     <style name="Widget.AppCompat.DropDownItem.Spinner"
            parent="Widget.AppCompat.Base.DropDownItem.Spinner">

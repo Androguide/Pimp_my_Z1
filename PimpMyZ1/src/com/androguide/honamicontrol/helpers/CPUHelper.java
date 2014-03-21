@@ -32,6 +32,8 @@ import android.widget.Toast;
 
 import com.androguide.honamicontrol.helpers.CMDProcessor.CMDProcessor;
 import com.androguide.honamicontrol.helpers.CMDProcessor.CommandResult;
+import com.androguide.honamicontrol.kernel.cpucontrol.CPUInterface;
+import com.androguide.honamicontrol.kernel.gpucontrol.GPUInterface;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -40,6 +42,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 
 public class CPUHelper {
@@ -413,5 +417,47 @@ public class CPUHelper {
             super.onPostExecute(result);
         }
 
+    }
+
+    public static String[] getAvailableCPUFreqs() {
+        String[] availableFrequencies = new String[0];
+        String availableFrequenciesLine;
+
+        if (Helpers.doesFileExist(CPUInterface.STEPS)) {
+            availableFrequenciesLine = CPUHelper.readOneLineNotRoot(CPUInterface.STEPS);
+
+            if (availableFrequenciesLine != null) {
+                availableFrequencies = availableFrequenciesLine.split(" ");
+                Arrays.sort(availableFrequencies, new Comparator<String>() {
+                    @Override
+                    public int compare(String object1, String object2) {
+                        return Integer.valueOf(object1).compareTo(
+                                Integer.valueOf(object2));
+                    }
+                });
+            }
+        }
+        return availableFrequencies;
+    }
+
+    public static String[] getAvailableGPUFreqs() {
+        String[] availableFrequencies = new String[0];
+        String availableFrequenciesLine;
+
+        if (Helpers.doesFileExist(GPUInterface.availableFreqs)) {
+            availableFrequenciesLine = CPUHelper.readOneLineNotRoot(GPUInterface.availableFreqs);
+
+            if (availableFrequenciesLine != null) {
+                availableFrequencies = availableFrequenciesLine.split(" ");
+                Arrays.sort(availableFrequencies, new Comparator<String>() {
+                    @Override
+                    public int compare(String object1, String object2) {
+                        return Integer.valueOf(object1).compareTo(
+                                Integer.valueOf(object2));
+                    }
+                });
+            }
+        }
+        return availableFrequencies;
     }
 }
