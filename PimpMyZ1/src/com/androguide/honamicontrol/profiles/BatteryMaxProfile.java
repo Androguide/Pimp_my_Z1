@@ -97,7 +97,8 @@ public class BatteryMaxProfile extends Profile {
 
     @Override
     public String isIntelliplugEnabled() {
-        return toShell("1", PowerManagementInterface.INTELLI_PLUG_TOGGLE);
+        return "stop mpdecision\n" + "busybox echo 0 > " + PowerManagementInterface.MSM_MPDECISION_TOGGLE + "\n"
+                + toShell("1", PowerManagementInterface.INTELLI_PLUG_TOGGLE);
     }
 
     @Override

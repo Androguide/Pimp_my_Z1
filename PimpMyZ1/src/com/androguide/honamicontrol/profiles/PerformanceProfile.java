@@ -87,7 +87,8 @@ public class PerformanceProfile extends Profile {
 
     @Override
     public String isIntelliplugEnabled() {
-        return toShell("0", PowerManagementInterface.INTELLI_PLUG_TOGGLE);
+        return "start mpdecision\n" + "busybox echo 1 > " + PowerManagementInterface.MSM_MPDECISION_TOGGLE + "\n"
+                + toShell("0", PowerManagementInterface.INTELLI_PLUG_TOGGLE);
     }
 
     @Override
