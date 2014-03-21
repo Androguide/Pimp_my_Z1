@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/card_headphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -30,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/sc_headphone_digital_gain"
-                android:textColor="@color/play_blue"
+                android:textColor="@color/flat_orange"
                 android:textSize="20sp" />
 
             <TextView
@@ -78,6 +79,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/card_headphone_pa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -96,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/sc_headphone_analog_gain"
-                android:textColor="@color/play_blue"
+                android:textColor="@color/flat_orange"
                 android:textSize="20sp" />
 
             <TextView
@@ -144,6 +146,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/card_speaker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -162,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/sc_speaker_gain"
-                android:textColor="@color/play_blue"
+                android:textColor="@color/play_orange"
                 android:textSize="20sp" />
 
             <TextView
@@ -210,6 +213,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/card_mic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -228,7 +232,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/sc_mic_gain"
-                android:textColor="@color/play_blue"
+                android:textColor="@color/play_orange"
                 android:textSize="20sp" />
 
             <TextView
@@ -259,6 +263,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/card_cam_mic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -277,7 +282,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/sc_cam_mic_gain"
-                android:textColor="@color/play_blue"
+                android:textColor="@color/play_orange"
                 android:textSize="20sp" />
 
             <TextView

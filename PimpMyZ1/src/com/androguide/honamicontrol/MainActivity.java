@@ -59,6 +59,7 @@ import android.widget.ListView;
 import com.androguide.honamicontrol.fragments.CardsFragment;
 import com.androguide.honamicontrol.fragments.HelpFragment;
 import com.androguide.honamicontrol.fragments.KernelFragment;
+import com.androguide.honamicontrol.fragments.SoundControlFragment;
 import com.androguide.honamicontrol.fragments.SoundFragment;
 import com.androguide.honamicontrol.fragments.TouchScreenFragment;
 import com.androguide.honamicontrol.fragments.WelcomeFragment;
