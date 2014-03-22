@@ -30,6 +30,7 @@ import android.widget.CompoundButton;
 
 import com.androguide.honamicontrol.R;
 import com.androguide.honamicontrol.cards.CardSeekBarGeneric;
+import com.androguide.honamicontrol.cards.CardSeekBarVibrator;
 import com.androguide.honamicontrol.cards.CardSwitchDisabled;
 import com.androguide.honamicontrol.cards.CardSwitchPlugin;
 import com.androguide.honamicontrol.helpers.CPUHelper;
@@ -52,6 +53,7 @@ public class MiscActivity extends ActionBarActivity implements MiscInterface {
         cardsUI.addStack(new CardStack(""));
         cardsUI.addStack(new CardStack(""));
 
+        cardsUI.addCard(new CardSeekBarVibrator(getString(R.string.vibrator_intensity), getString(R.string.vibrator_intensity_text), "#1abc9c", this));
 
         cardsUI.refresh();
     }

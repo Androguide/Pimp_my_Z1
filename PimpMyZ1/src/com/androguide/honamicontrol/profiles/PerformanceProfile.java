@@ -25,6 +25,7 @@ import com.androguide.honamicontrol.helpers.CPUHelper;
 import com.androguide.honamicontrol.kernel.cpucontrol.CPUInterface;
 import com.androguide.honamicontrol.kernel.gpucontrol.GPUInterface;
 import com.androguide.honamicontrol.kernel.iotweaks.IOTweaksInterface;
+import com.androguide.honamicontrol.kernel.memory.MemoryManagementInterface;
 import com.androguide.honamicontrol.kernel.misc.MiscInterface;
 import com.androguide.honamicontrol.kernel.powermanagement.PowerManagementInterface;
 
@@ -125,7 +126,7 @@ public class PerformanceProfile extends Profile {
     @Override
     public String isKSMEnabled() {
         prefs.edit().putBoolean("KSM_ENABLED", true).commit();
-        return toShell("1", MiscInterface.KSM_TOGGLE);
+        return toShell("1", MemoryManagementInterface.KSM_TOGGLE);
     }
 
     @Override
@@ -157,12 +158,12 @@ public class PerformanceProfile extends Profile {
     @Override
     public String KSMpagesToScan() {
         prefs.edit().putString("KSM_PAGES_TO_SCAN", "0").commit();
-        return toShell("0", MiscInterface.KSM_PAGES_TO_SCAN);
+        return toShell("0", MemoryManagementInterface.KSM_PAGES_TO_SCAN);
     }
 
     @Override
     public String KSMTimer() {
         prefs.edit().putString("KSM_SLEEP_TIMER", "0").commit();
-        return toShell("0", MiscInterface.KSM_SLEEP_TIMER);
+        return toShell("0", MemoryManagementInterface.KSM_SLEEP_TIMER);
     }
 }

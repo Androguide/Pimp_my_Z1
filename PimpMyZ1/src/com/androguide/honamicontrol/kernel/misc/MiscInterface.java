@@ -22,7 +22,5 @@
 package com.androguide.honamicontrol.kernel.misc;
 
 public interface MiscInterface {
-    public static final String KSM_TOGGLE = "/sys/kernel/mm/ksm/run";
-    public static final String KSM_PAGES_TO_SCAN = "/sys/kernel/mm/ksm/pages_to_scan";
-    public static final String KSM_SLEEP_TIMER = "/sys/kernel/mm/ksm/sleep_millisecs";
+    public static final String VIBRATOR_SYSFS = "/sys/devices/virtual/timed_output/vibrator/vtg_level";
 }

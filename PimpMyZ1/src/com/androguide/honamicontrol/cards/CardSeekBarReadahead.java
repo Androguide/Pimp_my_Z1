@@ -49,7 +49,7 @@ public class CardSeekBarReadahead extends Card {
 
         assert v != null;
         final TextView value = (TextView) v.findViewById(R.id.unit);
-        final NegativeSeekBar seekBar = (NegativeSeekBar) v.findViewById(R.id.seek);
+        final SeekBar seekBar = (SeekBar) v.findViewById(R.id.seek);
         ((TextView) v.findViewById(R.id.title)).setText(title);
         ((TextView) v.findViewById(R.id.title)).setTextColor(Color.parseColor(color));
         ((TextView) v.findViewById(R.id.desc)).setText(desc);

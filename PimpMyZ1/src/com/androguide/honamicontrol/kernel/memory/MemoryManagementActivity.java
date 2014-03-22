@@ -50,7 +50,6 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
         final SharedPreferences bootPrefs = getSharedPreferences("BOOT_PREFS", 0);
         CardUI cardsUI = (CardUI) findViewById(R.id.cardsui);
         cardsUI.addStack(new CardStack(""));
-        cardsUI.addStack(new CardStack(""));
         cardsUI.addStack(new CardStack(getString(R.string.ksm_header)));
 
         if (Helpers.doesFileExist(KSM_TOGGLE)) {

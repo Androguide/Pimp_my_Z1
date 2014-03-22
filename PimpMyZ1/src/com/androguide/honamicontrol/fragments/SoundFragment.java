@@ -99,11 +99,6 @@ public class SoundFragment extends Fragment implements SoundControlInterface {
                 }
                 break;
 
-            case R.id.refresh:
-                mCardUI.clearCards();
-                createCards();
-                break;
-
         }
         return super.onOptionsItemSelected(item);
     }

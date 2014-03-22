@@ -46,7 +46,7 @@ public class CardSeekBarGeneric extends Card  {
         final View v = LayoutInflater.from(context).inflate(R.layout.card_seekbar, null);
         assert v != null;
         final TextView mValue = (TextView) v.findViewById(R.id.unit);
-        final NegativeSeekBar seekBar = (NegativeSeekBar) v.findViewById(R.id.seek);
+        final SeekBar seekBar = (SeekBar) v.findViewById(R.id.seek);
         TextView titleTextView = (TextView) v.findViewById(R.id.title);
         titleTextView.setText(title);
         titleTextView.setTextColor(Color.parseColor(color));

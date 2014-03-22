@@ -149,6 +149,9 @@
     <string name="per_core_governors">Per-Core Governor Control</string>
     <string name="per_core_governors_text">Enable to control each core\'s governor independently, disable to use the same governor for all cores.</string>
     <string name="general_governor">Governor (All Cores)</string>
-    <string name="memory_management_text"><![CDATA[Control the memory management features of your kernel, such as Kernel Same-page Merging, zRam, Swap, VM parameters and more&#8230;]]></string>
+    <string name="memory_management_text">Control the memory management features of your kernel, such as Kernel Same-page Merging, zRam, Swap, VM parameters and more&#8230;</string>
     <string name="memory_management">Memory Management</string>
+    <string name="warning_vibrator">Values higher than %1$d are not recommended</string>
+    <string name="vibrator_intensity">Vibrator Intensity</string>
+    <string name="vibrator_intensity_text">Allows to set the device\'s vibrator intensity at kernel level by modifying its voltage</string>
 </resources>

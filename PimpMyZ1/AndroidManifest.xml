@@ -28,10 +28,9 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
 
     <application
@@ -69,6 +68,10 @@
         <activity
             android:name="com.androguide.honamicontrol.kernel.iotweaks.IOTweaksActivity"
             android:label="@string/kernel_io_tweaks">
+        </activity>
+        <activity
+            android:name="com.androguide.honamicontrol.kernel.memory.MemoryManagementActivity"
+            android:label="@string/memory_management">
         </activity>
         <activity
             android:name="com.androguide.honamicontrol.kernel.misc.MiscActivity"

@@ -25,6 +25,7 @@ import com.androguide.honamicontrol.helpers.CPUHelper;
 import com.androguide.honamicontrol.kernel.cpucontrol.CPUInterface;
 import com.androguide.honamicontrol.kernel.gpucontrol.GPUInterface;
 import com.androguide.honamicontrol.kernel.iotweaks.IOTweaksInterface;
+import com.androguide.honamicontrol.kernel.memory.MemoryManagementInterface;
 import com.androguide.honamicontrol.kernel.misc.MiscInterface;
 import com.androguide.honamicontrol.kernel.powermanagement.PowerManagementInterface;
 
@@ -112,7 +113,7 @@ public class BenchmarkProfile extends Profile {
 
     @Override
     public String isKSMEnabled() {
-        return toShell("1", MiscInterface.KSM_TOGGLE);
+        return toShell("1", MemoryManagementInterface.KSM_TOGGLE);
     }
 
     @Override
@@ -137,11 +138,11 @@ public class BenchmarkProfile extends Profile {
 
     @Override
     public String KSMpagesToScan() {
-        return toShell("512", MiscInterface.KSM_PAGES_TO_SCAN);
+        return toShell("512", MemoryManagementInterface.KSM_PAGES_TO_SCAN);
     }
 
     @Override
     public String KSMTimer() {
-        return toShell("500", MiscInterface.KSM_SLEEP_TIMER);
+        return toShell("500", MemoryManagementInterface.KSM_SLEEP_TIMER);
     }
 }
