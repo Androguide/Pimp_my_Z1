@@ -21,11 +21,15 @@
 
 package com.androguide.honamicontrol.profiles;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.androguide.honamicontrol.helpers.Helpers;
 
 
 public class ProfileEnabler {
-    public static void enableProfile(Profile profile) {
+    public static void enableProfile(Profile profile, Context context) {
+        profile.setSharedPrefs(context.getSharedPreferences("BOOT_PREFS", 0));
         Helpers.CMDProcessorWrapper.runSuCommand(
                 profile.getCpuMaxFreq() + "\n"
                         + profile.getCPUGovernor() + "\n"
@@ -43,5 +47,6 @@ public class ProfileEnabler {
                         + profile.readahead() + "\n"
                         + profile.schedMCLevel()
         );
+        SharedPreferences bootPrefs  = context.getSharedPreferences("BOOT_PREFS", 0);
     }
 }

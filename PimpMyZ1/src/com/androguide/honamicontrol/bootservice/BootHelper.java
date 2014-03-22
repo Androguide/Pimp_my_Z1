@@ -57,7 +57,7 @@ public class BootHelper {
         String CORE3_GOV = prefs.getString("CORE3_GOVERNOR", "intellidemand");
         String GPU_GOV = prefs.getString("GPU_GOVERNOR", "msm-adreno-tz");
         String IO_SCHED_EMMC = prefs.getString("IO_SCHEDULER", "row");
-        String IO_SCHED_SD = prefs.getString("IO_SCHEDULER", "row");
+        String IO_SCHED_SD = prefs.getString("IO_SCHEDULER_SD", "row");
         String TCP_ALGORITHM = prefs.getString("TCP_ALGORITHM", "cubic");
         String EMMC_READAHEAD = prefs.getString("EMMC_READAHEAD", "1024");
         String SD_READAHEAD = prefs.getString("SD_READAHEAD", "1024");

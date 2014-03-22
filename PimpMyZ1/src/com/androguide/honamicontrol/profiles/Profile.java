@@ -21,12 +21,17 @@
 
 package com.androguide.honamicontrol.profiles;
 
+import android.content.SharedPreferences;
+
 abstract class Profile {
     public static final String echo = "busybox echo ";
+    public static SharedPreferences prefs;
     public static String toShell(String value, String path) {
         return echo + value + " > " + path;
     }
-
+    public void setSharedPrefs(SharedPreferences prefs) {
+        Profile.prefs = prefs;
+    }
     abstract String getCpuMaxFreq();
     abstract String getGpuMaxFreq();
     abstract String getCPUGovernor();

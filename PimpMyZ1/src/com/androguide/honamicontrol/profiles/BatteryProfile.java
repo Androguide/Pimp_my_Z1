@@ -37,6 +37,7 @@ public class BatteryProfile extends Profile {
     @Override
     public String getCpuMaxFreq() {
         String[] freqs = CPUHelper.getAvailableCPUFreqs();
+        prefs.edit().putString("CPU_MAX_FREQ", freqs[freqs.length - 3]).commit();
         return toShell(freqs[freqs.length - 3], CPUInterface.MAX_FREQ) + "\n" + toShell(freqs[freqs.length - 3], CPUInterface.SNAKE_CHARMER_MAX_FREQ);
     }
 
@@ -44,28 +45,38 @@ public class BatteryProfile extends Profile {
     public String getGpuMaxFreq() {
         String[] freqs = CPUHelper.getAvailableGPUFreqs();
         List<String> frequencies = Arrays.asList(freqs);
-        if (frequencies.contains("389000000"))
+        if (frequencies.contains("389000000")) {
+            prefs.edit().putString("GPU_MAX_FREQ", "389000000").commit();
             return toShell("389000000", GPUInterface.maxFreq);
-        else if (frequencies.contains("320000000"))
+        } else if (frequencies.contains("320000000")) {
+            prefs.edit().putString("GPU_MAX_FREQ", "320000000").commit();
             return toShell("320000000", GPUInterface.maxFreq);
-        else return toShell("450000000", GPUInterface.maxFreq);
+        } else {
+            prefs.edit().putString("GPU_MAX_FREQ", "450000000").commit();
+            return toShell("450000000", GPUInterface.maxFreq);
+        }
     }
 
     @Override
     public String getCPUGovernor() {
         String[] govs = CPUHelper.readOneLineNotRoot(CPUInterface.GOVERNORS_LIST).split(" ");
         List<String> governors = Arrays.asList(govs);
-        if (governors.contains("intellidemand"))
-            return toShell("intellidemand", CPUInterface.GOVERNOR) + "\n" + toShell("100", "/sys/devices/system/cpu/cpufreq/intellidemand/powersave_bias");
-        else if (governors.contains("lionheart"))
+        if (governors.contains("intellidemand")) {
+            prefs.edit().putString("CORE0_GOVERNOR", "intellidemand").commit();
+            return toShell("intellidemand", CPUInterface.GOVERNOR) + "\necho 50 > /sys/devices/system/cpu/cpufreq/intellidemand/powersave_bias";
+        } else if (governors.contains("lionheart")) {
+            prefs.edit().putString("CORE0_GOVERNOR", "lionheart").commit();
             return toShell("lionheart", CPUInterface.GOVERNOR);
-        else if (governors.contains("Lionheart"))
+        } else if (governors.contains("Lionheart")) {
+            prefs.edit().putString("CORE0_GOVERNOR", "Lionheart").commit();
             return toShell("Lionheart", CPUInterface.GOVERNOR);
-        else if (governors.contains("lagfree"))
+        } else if (governors.contains("lagfree")) {
+            prefs.edit().putString("CORE0_GOVERNOR", "lagfree").commit();
             return toShell("lagfree", CPUInterface.GOVERNOR);
-        else if (governors.contains("conservative"))
+        } else if (governors.contains("conservative")) {
+            prefs.edit().putString("CORE0_GOVERNOR", "conservative").commit();
             return toShell("conservative", CPUInterface.GOVERNOR);
-        else
+        } else
             return "";
     }
 
@@ -73,80 +84,104 @@ public class BatteryProfile extends Profile {
     public String getGPUGovernor() {
         String[] govs = CPUHelper.readOneLineNotRoot(GPUInterface.availableGovernors).split(" ");
         List<String> governors = Arrays.asList(govs);
-        if (governors.contains("powersave"))
+        if (governors.contains("powersave")) {
+            prefs.edit().putString("GPU_GOVERNOR", "powersave").commit();
             return toShell("powersave", GPUInterface.currGovernor);
-        else if (governors.contains("simple_ondemand"))
+        } else if (governors.contains("simple_ondemand")) {
+            prefs.edit().putString("GPU_GOVERNOR", "simple_ondemand").commit();
             return toShell("simple_ondemand", GPUInterface.currGovernor);
-        else if (governors.contains("msm_cpufreq"))
+        } else if (governors.contains("msm_cpufreq")) {
+            prefs.edit().putString("GPU_GOVERNOR", "msm_cpufreq").commit();
             return toShell("msm_cpufreq", GPUInterface.currGovernor);
-        else
+        } else {
+            prefs.edit().putString("GPU_GOVERNOR", "msm-adreno-tz").commit();
             return toShell("msm-adreno-tz", GPUInterface.currGovernor);
+        }
     }
 
     @Override
     public String getIOScheduler() {
         ArrayList<String> scheds = CPUHelper.getAvailableIOSchedulers();
-        if (scheds.contains("sio"))
+        if (scheds.contains("sio")) {
+            prefs.edit().putString("IO_SCHEDULER", "sio").commit();
+            prefs.edit().putString("IO_SCHEDULER_SD", "sio").commit();
             return toShell("sio", IOTweaksInterface.IO_SCHEDULER) + "\n" + toShell("sio", IOTweaksInterface.IO_SCHEDULER_SD);
-        else if (scheds.contains("bfq"))
+        } else if (scheds.contains("bfq")) {
+            prefs.edit().putString("IO_SCHEDULER", "bfq").commit();
+            prefs.edit().putString("IO_SCHEDULER_SD", "bfq").commit();
             return toShell("bfq", IOTweaksInterface.IO_SCHEDULER) + "\n" + toShell("bfq", IOTweaksInterface.IO_SCHEDULER_SD);
-        else if (scheds.contains("deadline"))
+        } else if (scheds.contains("deadline")) {
+            prefs.edit().putString("IO_SCHEDULER", "deadline").commit();
+            prefs.edit().putString("IO_SCHEDULER_SD", "deadline").commit();
             return toShell("deadline", IOTweaksInterface.IO_SCHEDULER) + "\n" + toShell("deadline", IOTweaksInterface.IO_SCHEDULER_SD);
-        else if (scheds.contains("row"))
+        } else if (scheds.contains("row")) {
+            prefs.edit().putString("IO_SCHEDULER", "row").commit();
+            prefs.edit().putString("IO_SCHEDULER_SD", "row").commit();
             return toShell("row", IOTweaksInterface.IO_SCHEDULER) + "\n" + toShell("row", IOTweaksInterface.IO_SCHEDULER_SD);
-        else
+        } else
             return "";
     }
 
     @Override
     public String isIntelliplugEnabled() {
+        prefs.edit().putBoolean("INTELLI_PLUG", true).commit();
         return "stop mpdecision\n" + "busybox echo 0 > " + PowerManagementInterface.MSM_MPDECISION_TOGGLE + "\n"
                 + toShell("1", PowerManagementInterface.INTELLI_PLUG_TOGGLE);
     }
 
     @Override
     public String isEcoModeEnabled() {
+        prefs.edit().putBoolean("INTELLI_PLUG_ECO", true).commit();
         return toShell("1", PowerManagementInterface.INTELLI_PLUG_ECO_MODE);
     }
 
     @Override
     public String isPowerSuspendEnabled() {
+        prefs.edit().putBoolean("POWER_SUSPEND", true).commit();
         return toShell("1", PowerManagementInterface.POWER_SUSPEND_TOGGLE);
     }
 
     @Override
     public String isKSMEnabled() {
+        prefs.edit().putBoolean("KSM_ENABLED", false).commit();
         return toShell("0", MiscInterface.KSM_TOGGLE);
     }
 
     @Override
     public String isDynFsyncEnabled() {
+        prefs.edit().putBoolean("DYNAMIC_FSYNC", false).commit();
         return toShell("0", IOTweaksInterface.DYNAMIC_FSYNC_TOGGLE);
     }
 
     @Override
     public String isEntropyContributionEnabled() {
+        prefs.edit().putBoolean("EMMC_ENTROPY_CONTRIB", false).commit();
+        prefs.edit().putBoolean("SD_ENTROPY_CONTRIB", false).commit();
         return toShell("0", IOTweaksInterface.EMMC_ENTROPY_CONTRIB) + "\n" + toShell("0", IOTweaksInterface.SD_ENTROPY_CONTRIB);
     }
 
     @Override
     public String schedMCLevel() {
+        prefs.edit().putInt("SCHED_MC_LEVEL", 2).commit();
         return toShell("2", PowerManagementInterface.SCHED_MC_POWER_SAVINGS);
     }
 
     @Override
     public String readahead() {
+        prefs.edit().putString("EMMC_READAHEAD", "512").commit();
+        prefs.edit().putString("SD_READAHEAD", "512").commit();
         return toShell("512", IOTweaksInterface.EMMC_READAHEAD) + "\n" + toShell("512", IOTweaksInterface.SD_READAHEAD);
     }
 
     @Override
     public String KSMpagesToScan() {
-        return "";
+        prefs.edit().putString("KSM_PAGES_TO_SCAN", "0").commit();
+        return toShell("0", MiscInterface.KSM_PAGES_TO_SCAN);
     }
 
     @Override
     public String KSMTimer() {
-        return "";
+        prefs.edit().putString("KSM_SLEEP_TIMER", "0").commit();
+        return toShell("0", MiscInterface.KSM_SLEEP_TIMER);
     }
 }
-
