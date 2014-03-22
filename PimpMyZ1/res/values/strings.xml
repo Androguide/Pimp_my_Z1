@@ -116,10 +116,10 @@
     <string name="governor_core1">Governor (Core 1)</string>
     <string name="minimum">Minimum:\u0020</string>
     <string name="maximum">Maximum:\u0020</string>
-    <string name="current_freq">Current Frequency</string>
-    <string name="left">Left:\u0020</string>
+    <string name="current_freq">Aktuelle Frequenz</string>
+    <string name="left">Links:\u0020</string>
     <string name="sec">sec.</string>
-    <string name="right">Right:\u0020</string>
+    <string name="right">Rechts:\u0020</string>
     <string name="gpu_governor">GPU Governor</string>
     <string name="kernel_misc">Miscellaneous</string>
     <string name="kernel_misc_desc">Control some miscellaneous kernel features, such as VM parameters, Kernel Same-page Merging and more</string>
