@@ -168,13 +168,13 @@ public class KernelFragment extends Fragment {
         View spinner = item != null ? item.getActionView() : null;
         if (spinner instanceof android.widget.Spinner) {
             final SharedPreferences profilePrefs = super.getActivity().getSharedPreferences("PROFILES", 0);
-            final int currProfile = profilePrefs.getInt("CURR_PROFILE", 5);
             Spinner profiles = (Spinner) spinner;
             profiles.setAdapter(ArrayAdapter.createFromResource(super.getActivity(), R.array.profiles_array, R.layout.spinner_action_row));
             profiles.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    final int currProfile = profilePrefs.getInt("CURR_PROFILE", 5);
                     switch (i) {
                         case 0:
                             if (profileCounter > 0 && i != currProfile)

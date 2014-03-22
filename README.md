@@ -32,6 +32,15 @@ Most features require either [Pimped Kernel](http://forum.xda-developers.com/sho
 - __I/O Tweaks__:
 
   - Toggle Dynamic File Sync on and off
+  - Select your I/O Scheduler independently for the internal & external storage
+  - Toggle eMMC & SD-Card entropy contribution independently
+
+
+- __Miscellaneous__:
+
+  - Toggle Kernel Same-page Merging (KSM) on and off
+  - Set KSM's amount of pages to scan
+  - Set KSM's timer in milliseconds
 
 
 - __Sound Control__:
