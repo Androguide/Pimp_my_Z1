@@ -60,7 +60,7 @@
     <string name="help_center_introduction">Hier erfahren Sie jede Einzelheit von Pimp My Z1 und werden Sie ein Level 99 Android Experte.</string>
     <string name="menu_link_seekbars">Link Links und Rechts</string>
     <string name="kernel_cpu_control">CPU Control</string>
-    <string name="kernel_cpu_control_desc">Dieses Tool ermöglicht es Ihnen, Ihre CPU zu steuern, min/max Frequenz, governors, I/O schedulers und vieles mehr...</string>
+    <string name="kernel_cpu_control_desc">Dieses Tool ermöglicht es Ihnen, Ihre CPU zu steuern, min/max Frequenz, governors, I/O schedulers und vieles mehr…</string>
     <string name="kernel_color">#1abc9c</string>
     <string name="coming_soon">Demnächst verfügbar</string>
     <string name="kernel_gpu_control">GPU Control</string>
@@ -68,7 +68,7 @@
     <string name="kernel_power_management">Energieoptionen</string>
     <string name="kernel_power_management_desc">In diesem Abschnitt können Sie verschiedene Power-Management-Funktionen des Kernels kontrollieren (falls diese implementiert sind)</string>
     <string name="kernel_io_tweaks">I/O Tweaks</string>
-    <string name="kernel_io_tweaks_desc">Dieser Abschnitt enthält verschiedene Kernel Ebenen, I/O tweaks, I/O Schedulers settings, dynamic file sync, I/O readahead, etc...</string>
+    <string name="kernel_io_tweaks_desc">Dieser Abschnitt enthält verschiedene Kernel Ebenen, I/O tweaks, I/O Schedulers settings, dynamic file sync, I/O readahead, etc…</string>
     <string name="unsupported">Keine Unterstütztung</string>
     <string name="sound_control_unsupported">Ihr Kernel hat keine Faux123 Sound Control-Treiber integriert, oder es wird von dieser Version nicht unterstützt, sorry.</string>
     <string name="sound_control_color">#e67e22</string>
@@ -89,7 +89,7 @@
     <string name="glove_mode">Handschuh Modus</string>
     <string name="glove_mode_desc">Mit aktiviertem Handschuh Modus lässt sich Ihr Xperia Z1 Touchscreen mit Handschuhen bedienen.</string>
     <string name="kernel_control">Kernel Steuerung</string>
-    <string name="kernel_control_desc">Hier können Sie Ihre Kernel-Funktion nach Ihren wünschen optimieren, CPU und GPU übertaktung durch governors, I/O schedulers, TCP congestion algorithms und vieles mehr...</string>
+    <string name="kernel_control_desc">Hier können Sie Ihre Kernel-Funktion nach Ihren wünschen optimieren, CPU und GPU übertaktung durch governors, I/O schedulers, TCP congestion algorithms und vieles mehr…</string>
     <string name="sound_control">Musik Steuerung</string><string name="sound_control_desc">Optimiert die Lautstärke Kopfhörerausgang, Lautsprecher, Mikrofon und Kamera,  Tonaufnahme Mikrofon, wenn Sie einen Kernel mit Faux123 Sound Control implementiert haben.></string>
     <string name="touch_screen">Touch Screen</string>
     <string name="touch_screen_desc">Bedienen Sie Ihren Xperia Z1 Touch-Screen durch Erhöhung der Sensitivität zusätzlich mit jeder Art von Stiften (Bleistift) und im Winter z.B. mit Handschuhen.</string>
@@ -98,7 +98,7 @@
     <string name="dynamic_fsync_version">Ihre Kernel Dynamische Fsync Version ist: </string>
     <string name="sched_mc">Multi-Core Power Savings</string><string name="sched_mc_desc">Wenn Multi Core Power Saving aktiviert ist, werden Prozesse so gruppiert, dass ein Kern maximal ausgelastet wird, bevor der zweite belastet wird. Dies erlaubt es, eine ganze Reihe von Batterie zu sparen. Zwei Ebenen der Aggressivität sind vorhanden.</string>
     <string name="intelli_plug">Intelli Plug</string>
-    <string name="intelli_plug_desc">Intelli_plug ist ein Hotplug-Treiber als Open-Source-Ersatz für Qualcomm's Closed-Source-Treiber erstellt von msm_mpdecision Faux123. Als solches ist er besser angepasst und hat eine andere und möglicherweise optimierte Strategie.</string>
+    <string name="intelli_plug_desc">Intelli_plug ist ein Hotplug-Treiber als Open-Source-Ersatz für Qualcomm\'s Closed-Source-Treiber erstellt von msm_mpdecision Faux123. Als solches ist er besser angepasst und hat eine andere und möglicherweise optimierte Strategie.</string>
     <string name="intelli_plug_eco">Intelli Plug Eco Modus</string>
     <string name="intelli_plug_eco_desc">Intelli_plug Eco-Modus ist eine optimierte Hotplug-Strategie, spezieller Stromsparmodus optimiert 2 Kerne und das spart viel Akku.</string>
     <string name="power_suspend">Power Suspend</string><string name="power_suspend_desc">Power-Suspend ist ein Open-Source-Kernel-Power-Management-Treiber erstellt von Faux123, der jetzt alternde early_suspend Treiber ersetzt. NPower Suspend ermöglicht eine bessere Batterieeinsparung während der Bildschirm ausgeschaltet ist.</string>
