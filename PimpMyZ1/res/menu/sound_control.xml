@@ -3,10 +3,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:honami="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/refresh"
-        honami:showAsAction="never"
-        android:title="@string/refresh"/>
-
     <item android:id="@+id/link_seekbars"
         android:checkable="true"
         android:checked="true"

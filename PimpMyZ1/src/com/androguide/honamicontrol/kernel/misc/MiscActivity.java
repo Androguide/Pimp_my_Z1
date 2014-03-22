@@ -51,78 +51,7 @@ public class MiscActivity extends ActionBarActivity implements MiscInterface {
         CardUI cardsUI = (CardUI) findViewById(R.id.cardsui);
         cardsUI.addStack(new CardStack(""));
         cardsUI.addStack(new CardStack(""));
-        cardsUI.addStack(new CardStack(getString(R.string.ksm_header)));
 
-        if (Helpers.doesFileExist(KSM_TOGGLE)) {
-            cardsUI.addCard(new CardSwitchPlugin(
-                    getString(R.string.ksm),
-                    getString(R.string.ksm_desc),
-                    "#1abc9c",
-                    KSM_TOGGLE,
-                    this,
-                    new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
-                            bootPrefs.edit().putBoolean("KSM_ENABLED", isOn).commit();
-                            if (isOn)
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + KSM_TOGGLE);
-                            else
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + KSM_TOGGLE);
-                        }
-                    }
-            ));
-
-        } else {
-            cardsUI.addCard(new CardSwitchDisabled(
-                            getString(R.string.ksm),
-                            getString(R.string.ksm_unsupported),
-                            "#c74b46",
-                            "",
-                            this,
-                            null)
-            );
-        }
-
-        if (Helpers.doesFileExist(KSM_PAGES_TO_SCAN)) {
-            int currPagesToScan = 100;
-            try {
-                currPagesToScan = Integer.valueOf(CPUHelper.readOneLineNotRoot(KSM_PAGES_TO_SCAN));
-            } catch (Exception e) {
-                Log.e("KSM_PAGES_TO_SCAN", e.getMessage());
-            }
-
-            final CardSeekBarGeneric cardKSMPages = new CardSeekBarGeneric(
-                    getString(R.string.ksm_pages_to_scan),
-                    getString(R.string.ksm_pages_to_scan_desc),
-                    "#1abc9c", "",
-                    KSM_PAGES_TO_SCAN,
-                    512,
-                    currPagesToScan,
-                    this,
-                    null
-            );
-            cardsUI.addCard(cardKSMPages);
-        }
-
-        if (Helpers.doesFileExist(KSM_SLEEP_TIMER)) {
-            int currTimer = 500;
-            try {
-                currTimer = Integer.valueOf(CPUHelper.readOneLineNotRoot(KSM_SLEEP_TIMER));
-            } catch (Exception e) {
-                Log.e("KSM_SLEEP_TIMER", e.getMessage());
-            }
-
-            cardsUI.addCard(new CardSeekBarGeneric(
-                    getString(R.string.ksm_timer),
-                    getString(R.string.ksm_timer_desc),
-                    "#1abc9c", "ms",
-                    KSM_SLEEP_TIMER,
-                    2000,
-                    currTimer,
-                    this,
-                    null
-            ));
-        }
 
         cardsUI.refresh();
     }

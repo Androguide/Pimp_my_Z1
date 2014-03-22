@@ -465,10 +465,6 @@ public class SoundControlFragment extends Fragment implements SoundControlInterf
                     soundPrefs.edit().putBoolean("LINKED", true).commit();
                 }
                 break;
-
-            case R.id.refresh:
-                break;
-
         }
         return super.onOptionsItemSelected(item);
     }
