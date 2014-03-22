@@ -175,30 +175,31 @@ public class KernelFragment extends Fragment {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     final int currProfile = profilePrefs.getInt("CURR_PROFILE", 5);
+                    ActionBarActivity context = (ActionBarActivity) getActivity();
                     switch (i) {
                         case 0:
                             if (profileCounter > 0 && i != currProfile)
-                                ProfileEnabler.enableProfile(new BatteryMaxProfile());
+                                ProfileEnabler.enableProfile(new BatteryMaxProfile(), context);
                             profileCounter++;
                             break;
                         case 1:
                             if (profileCounter > 0 && i != currProfile)
-                                ProfileEnabler.enableProfile(new BatteryProfile());
+                                ProfileEnabler.enableProfile(new BatteryProfile(), context);
                             profileCounter++;
                             break;
                         case 2:
                             if (profileCounter > 0 && i != currProfile)
-                                ProfileEnabler.enableProfile(new BalancedProfile());
+                                ProfileEnabler.enableProfile(new BalancedProfile(), context);
                             profileCounter++;
                             break;
                         case 3:
                             if (profileCounter > 0 && i != currProfile)
-                                ProfileEnabler.enableProfile(new PerformanceProfile());
+                                ProfileEnabler.enableProfile(new PerformanceProfile(), context);
                             profileCounter++;
                             break;
                         case 4:
                             if (profileCounter > 0 && i != currProfile)
-                                ProfileEnabler.enableProfile(new BenchmarkProfile());
+                                ProfileEnabler.enableProfile(new BenchmarkProfile(), context);
                             profileCounter++;
                             break;
                     }
