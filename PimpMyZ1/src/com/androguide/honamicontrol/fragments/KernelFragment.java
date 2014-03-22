@@ -168,28 +168,38 @@ public class KernelFragment extends Fragment {
         View spinner = item != null ? item.getActionView() : null;
         if (spinner instanceof android.widget.Spinner) {
             final SharedPreferences profilePrefs = super.getActivity().getSharedPreferences("PROFILES", 0);
+            final int currProfile = profilePrefs.getInt("CURR_PROFILE", 5);
             Spinner profiles = (Spinner) spinner;
             profiles.setAdapter(ArrayAdapter.createFromResource(super.getActivity(), R.array.profiles_array, R.layout.spinner_action_row));
-            profiles.setSelection(profilePrefs.getInt("CURR_PROFILE", 5));
             profiles.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     switch (i) {
                         case 0:
-                            ProfileEnabler.enableProfile(new BatteryMaxProfile());
+                            if (profileCounter > 0 && i != currProfile)
+                                ProfileEnabler.enableProfile(new BatteryMaxProfile());
+                            profileCounter++;
                             break;
                         case 1:
-                            ProfileEnabler.enableProfile(new BatteryProfile());
+                            if (profileCounter > 0 && i != currProfile)
+                                ProfileEnabler.enableProfile(new BatteryProfile());
+                            profileCounter++;
                             break;
                         case 2:
-                            ProfileEnabler.enableProfile(new BalancedProfile());
+                            if (profileCounter > 0 && i != currProfile)
+                                ProfileEnabler.enableProfile(new BalancedProfile());
+                            profileCounter++;
                             break;
                         case 3:
-                            ProfileEnabler.enableProfile(new PerformanceProfile());
+                            if (profileCounter > 0 && i != currProfile)
+                                ProfileEnabler.enableProfile(new PerformanceProfile());
+                            profileCounter++;
                             break;
                         case 4:
-                            ProfileEnabler.enableProfile(new BenchmarkProfile());
+                            if (profileCounter > 0 && i != currProfile)
+                                ProfileEnabler.enableProfile(new BenchmarkProfile());
+                            profileCounter++;
                             break;
                     }
                     profilePrefs.edit().putInt("CURR_PROFILE", i).commit();
@@ -200,6 +210,8 @@ public class KernelFragment extends Fragment {
 
                 }
             });
+
+            profiles.setSelection(profilePrefs.getInt("CURR_PROFILE", 5));
         }
     }
 }
