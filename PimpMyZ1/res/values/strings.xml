@@ -146,4 +146,7 @@
     <string name="entropy_contrib_desc">Flash devices have few randomness and as such they are a very poor source of entropy, disable for better performance.</string>
     <string name="sdcard_entropy_contrib">Entropy Contribution (SD-Card)</string>
     <string name="profiles">Profiles</string>
+    <string name="per_core_governors">Per-Core Governor Control</string>
+    <string name="per_core_governors_text">Enable to control each core\'s governor independently, disable to use the same governor for all cores.</string>
+    <string name="general_governor">Governor (All Cores)</string>
 </resources>

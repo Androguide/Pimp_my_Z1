@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="16dp">
+        android:paddingBottom="16dp"
+        android:animateLayoutChanges="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -160,12 +161,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:paddingBottom="16dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/card_background"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
 
             <TextView
                 android:id="@+id/snake_charmer"
@@ -179,11 +180,11 @@
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/snake_charmer_seekbar"
+                android:id="@+id/snake_charmer_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp" />
 
             <TextView
                 android:id="@+id/snake_charmer_text"
@@ -200,137 +201,217 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:weightSum="100">
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
+
+            <TextView
+                android:id="@+id/per_core_governors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="center_horizontal"
+                android:paddingTop="8dp"
+                android:text="@string/per_core_governors"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/per_core_governors_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/per_core_governors_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center_horizontal"
+                android:paddingTop="8dp"
+                android:text="@string/per_core_governors_text"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/card_per_core_governors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="50"
-                android:background="@drawable/card_background"
-                android:orientation="vertical">
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-                <TextView
-                    android:id="@+id/governor_label"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-thin"
-                    android:gravity="center_horizontal"
-                    android:paddingTop="8dp"
-                    android:text="@string/governor_core1"
-                    android:textSize="18sp" />
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="50"
+                    android:background="@drawable/card_background"
+                    android:orientation="vertical">
 
-                <Spinner
-                    android:id="@+id/governor"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/governor_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-thin"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="8dp"
+                        android:text="@string/governor_core1"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/governor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:paddingTop="8dp" />
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="50"
+                    android:background="@drawable/card_background"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/governor2_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-thin"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="8dp"
+                        android:text="@string/governor_core2"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/governor2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="8dp" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="50"
-                android:background="@drawable/card_background"
-                android:orientation="vertical">
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-                <TextView
-                    android:id="@+id/governor2_label"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-thin"
-                    android:gravity="center_horizontal"
-                    android:paddingTop="8dp"
-                    android:text="@string/governor_core2"
-                    android:textSize="18sp" />
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="50"
+                    android:background="@drawable/card_background"
+                    android:orientation="vertical">
 
-                <Spinner
-                    android:id="@+id/governor2"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/governor3_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-thin"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="8dp"
+                        android:text="@string/governor_core3"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/governor3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:paddingTop="8dp" />
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="50"
+                    android:background="@drawable/card_background"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/governor4_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-thin"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="8dp"
+                        android:text="@string/governor_core4"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/governor4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="8dp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/card_general_governor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:weightSum="100">
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/general_governor_label"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="50"
-                android:background="@drawable/card_background"
-                android:orientation="vertical">
+                android:fontFamily="sans-serif-thin"
+                android:gravity="center_horizontal"
+                android:paddingTop="8dp"
+                android:text="@string/general_governor"
+                android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/governor3_label"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-thin"
-                    android:gravity="center_horizontal"
-                    android:paddingTop="8dp"
-                    android:text="@string/governor_core3"
-                    android:textSize="18sp" />
-
-                <Spinner
-                    android:id="@+id/governor3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:paddingTop="8dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
+            <Spinner
+                android:id="@+id/general_governor"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="50"
-                android:background="@drawable/card_background"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/governor4_label"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-thin"
-                    android:gravity="center_horizontal"
-                    android:paddingTop="8dp"
-                    android:text="@string/governor_core4"
-                    android:textSize="18sp" />
-
-                <Spinner
-                    android:id="@+id/governor4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:paddingTop="8dp" />
-            </LinearLayout>
+                android:gravity="center_horizontal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="8dp" />
         </LinearLayout>
 
         <LinearLayout

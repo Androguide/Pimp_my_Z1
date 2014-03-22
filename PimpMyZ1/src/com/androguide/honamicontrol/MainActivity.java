@@ -65,6 +65,8 @@ import com.androguide.honamicontrol.fragments.TouchScreenFragment;
 import com.androguide.honamicontrol.fragments.WelcomeFragment;
 import com.astuetz.viewpager.extensions.PagerSlidingTabStrip;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity implements
@@ -215,10 +217,9 @@ public class MainActivity extends ActionBarActivity implements
     }
 
     /**
-     * Method to set the color scheme according to the color defined in
-     * config.xml
+     * Method to set the color scheme according to the color passed in the parameters
      *
-     * @param newColor : the color retrieved from config.xml
+     * @param newColor : the color resource to use
      */
     public void changeColor(int newColor) {
         tabs.setIndicatorColor(newColor);
@@ -270,7 +271,7 @@ public class MainActivity extends ActionBarActivity implements
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NotNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
     }
 

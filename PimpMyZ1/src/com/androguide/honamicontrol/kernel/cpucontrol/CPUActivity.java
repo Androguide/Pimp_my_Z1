@@ -26,7 +26,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -67,9 +66,13 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
 
     private SeekBar mMaxSlider;
     private SeekBar mMinSlider;
-    private Spinner mGovernor, mGovernor2, mGovernor3, mGovernor4;
+    private Spinner mGeneralGovernor;
+    private static Spinner mGovernor;
+    private static Spinner mGovernor2;
+    private static Spinner mGovernor3;
+    private static Spinner mGovernor4;
     private Spinner mIo, mTcp;
-    private Switch snakeCharmer;
+    private Switch snakeCharmer, perCoreGovernor;
     private TextView mMaxSpeedText;
     private TextView mMinSpeedText;
     private String[] availableFrequencies;
@@ -77,8 +80,8 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
     private String mMinFreqSetting;
     private CurCPUThread mCurCPUThread;
     private Boolean mIsTegra3 = false, snakeCharmerEnabled = true;
-    private int mNumOfCpu = 1;
-    private int spinnerCounter = 0, spinnerCounter2 = 0, spinnerCounter3 = 0, spinnerCounter4 = 0, schedCounter = 0, tcpCounter = 0;
+    private int mNumOfCpu = 0;
+    private int govCounterGeneral = 0, govCounter = 0, govCounter2 = 0, govCounter3 = 0, govCounter4 = 0, schedCounter = 0, tcpCounter = 0;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -113,6 +116,11 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         availableFrequencies = new String[0];
         String availableFrequenciesLine;
 
+        mGovernor = (Spinner) findViewById(R.id.governor);
+        mGovernor2 = (Spinner) findViewById(R.id.governor2);
+        mGovernor3 = (Spinner) findViewById(R.id.governor3);
+        mGovernor4 = (Spinner) findViewById(R.id.governor4);
+
         if (Helpers.doesFileExist(STEPS)) {
             availableFrequenciesLine = CPUHelper.readOneLineNotRoot(STEPS);
 
@@ -128,7 +136,8 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
             }
         }
 
-        snakeCharmer = (Switch) findViewById(R.id.snake_charmer_seekbar);
+
+        snakeCharmer = (Switch) findViewById(R.id.snake_charmer_switch);
         if (!Helpers.doesFileExist(SNAKE_CHARMER_MAX_FREQ)) {
             LinearLayout cardSnakeCharmer = (LinearLayout) findViewById(R.id.card_snake_charmer);
             cardSnakeCharmer.setVisibility(View.GONE);
@@ -139,8 +148,8 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                 snakeVersion = snakeVersion.replaceAll("version: ", "v");
                 snakeTitle.setText(snakeTitle.getText() + " " + snakeVersion);
                 if (snakeVersion.equals("v1.2")) {
-                    TextView snakeDesc = (TextView) findViewById(R.id.snake_charmer);
-                    snakeDesc.setText(snakeDesc.getText() + "\n" + "Snake Charmer v1.2 is used as a built-in kernel feature and cannot be disabled");
+                    TextView snakeDesc = (TextView) findViewById(R.id.snake_charmer_text);
+                    snakeDesc.setText(snakeDesc.getText() + "\n" + "Your version (v1.2) is used as a built-in kernel feature and cannot be disabled");
                     snakeCharmer.setEnabled(false);
                 }
             }
@@ -159,6 +168,29 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         }
 
         int frequenciesNum = availableFrequencies.length - 1;
+
+        perCoreGovernor = (Switch) findViewById(R.id.per_core_governors_switch);
+        perCoreGovernor.setChecked(bootPrefs.getBoolean("PER_CORE_CONTROL", true));
+        if (perCoreGovernor.isChecked()) {
+            findViewById(R.id.card_general_governor).setVisibility(View.GONE);
+            findViewById(R.id.card_per_core_governors).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.card_per_core_governors).setVisibility(View.GONE);
+            findViewById(R.id.card_general_governor).setVisibility(View.VISIBLE);
+        }
+
+        perCoreGovernor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    findViewById(R.id.card_general_governor).setVisibility(View.GONE);
+                    findViewById(R.id.card_per_core_governors).setVisibility(View.VISIBLE);
+                } else {
+                    findViewById(R.id.card_per_core_governors).setVisibility(View.GONE);
+                    findViewById(R.id.card_general_governor).setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         String currentGovernor = "";
         if (Helpers.doesFileExist(GOVERNOR))
@@ -302,114 +334,21 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
             }
         });
 
-        /** CPU Governor for core 0 */
-        mGovernor = (Spinner) findViewById(R.id.governor);
-        String[] availableGovernors = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST).split(" ");
-        ArrayAdapter<CharSequence> governorAdapter = new ArrayAdapter<CharSequence>(
+        /** CPU Governor for all cores */
+        mGeneralGovernor = (Spinner) findViewById(R.id.general_governor);
+        String[] availableGovernorsGeneral = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST).split(" ");
+        ArrayAdapter<CharSequence> governorAdapterGeneral = new ArrayAdapter<CharSequence>(
                 this, R.layout.spinner_row);
-        governorAdapter
+        governorAdapterGeneral
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        for (String availableGovernor : availableGovernors) {
-            governorAdapter.add(availableGovernor);
+        for (String availableGovernor : availableGovernorsGeneral) {
+            governorAdapterGeneral.add(availableGovernor);
         }
-        mGovernor.setAdapter(governorAdapter);
-        mGovernor.setSelection(Arrays.asList(availableGovernors).indexOf(
+        mGeneralGovernor.setAdapter(governorAdapterGeneral);
+        mGeneralGovernor.setSelection(Arrays.asList(availableGovernorsGeneral).indexOf(
                 currentGovernor));
-        mGovernor.setOnItemSelectedListener(new GovListener());
+        mGeneralGovernor.setOnItemSelectedListener(new GeneralGovListener());
 
-        /** CPU Governor for core 1 */
-        mGovernor2 = (Spinner) findViewById(R.id.governor2);
-        String[] availableGovernors2;
-        if (Helpers.doesFileExist(GOVERNORS_LIST2)) {
-            try {
-                availableGovernors2 = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST2)
-                        .split(" ");
-            } catch (NullPointerException e) {
-                availableGovernors2 = new String[]{"Core Offline"};
-            }
-
-            ArrayAdapter<CharSequence> governorAdapter2 = new ArrayAdapter<CharSequence>(
-                    this, R.layout.spinner_row);
-            governorAdapter2
-                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            for (String anAvailableGovernors2 : availableGovernors2) {
-                governorAdapter2.add(anAvailableGovernors2);
-            }
-            mGovernor2.setAdapter(governorAdapter2);
-            mGovernor2.setSelection(Arrays.asList(availableGovernors2).indexOf(
-                    currentGovernor2));
-            mGovernor2.setOnItemSelectedListener(new GovListener2());
-        } else {
-            ArrayAdapter<CharSequence> governorAdapter2 = new ArrayAdapter<CharSequence>(
-                    this, R.layout.spinner_row);
-            governorAdapter2
-                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            governorAdapter2.add("Core Offline");
-            mGovernor2.setEnabled(false);
-            mGovernor2.setAdapter(governorAdapter2);
-        }
-
-        /** CPU Governor for core 2 */
-        mGovernor3 = (Spinner) findViewById(R.id.governor3);
-        if (Helpers.doesFileExist(GOVERNORS_LIST3)) {
-            String[] availableGovernors3 = {};
-            try {
-                availableGovernors3 = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST3)
-                        .split(" ");
-            } catch (NullPointerException e) {
-                availableGovernors3 = new String[]{"Core Offline"};
-            }
-            ArrayAdapter<CharSequence> governorAdapter3 = new ArrayAdapter<CharSequence>(
-                    this, R.layout.spinner_row);
-            governorAdapter3
-                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            for (String anAvailableGovernors3 : availableGovernors3) {
-                governorAdapter3.add(anAvailableGovernors3);
-            }
-            mGovernor3.setAdapter(governorAdapter3);
-            mGovernor3.setSelection(Arrays.asList(availableGovernors3).indexOf(
-                    currentGovernor3));
-            mGovernor3.setOnItemSelectedListener(new GovListener3());
-        } else {
-            ArrayAdapter<CharSequence> governorAdapter3 = new ArrayAdapter<CharSequence>(
-                    this, R.layout.spinner_row);
-            governorAdapter3
-                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            governorAdapter3.add("Core Offline");
-            mGovernor3.setEnabled(false);
-            mGovernor3.setAdapter(governorAdapter3);
-        }
-
-        /** CPU Governor for core 3 */
-        mGovernor4 = (Spinner) findViewById(R.id.governor4);
-        if (Helpers.doesFileExist(GOVERNORS_LIST4)) {
-            String[] availableGovernors4;
-            try {
-                availableGovernors4 = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST4)
-                        .split(" ");
-            } catch (NullPointerException e) {
-                availableGovernors4 = new String[]{"Core Offline"};
-            }
-            ArrayAdapter<CharSequence> governorAdapter4 = new ArrayAdapter<CharSequence>(
-                    this, R.layout.spinner_row);
-            governorAdapter4
-                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            for (String anAvailableGovernors4 : availableGovernors4) {
-                governorAdapter4.add(anAvailableGovernors4);
-            }
-            mGovernor4.setAdapter(governorAdapter4);
-            mGovernor4.setSelection(Arrays.asList(availableGovernors4).indexOf(
-                    currentGovernor4));
-            mGovernor4.setOnItemSelectedListener(new GovListener4());
-        } else {
-            ArrayAdapter<CharSequence> governorAdapter4 = new ArrayAdapter<CharSequence>(
-                    this, R.layout.spinner_row);
-            governorAdapter4
-                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            governorAdapter4.add("Core Offline");
-            mGovernor4.setEnabled(false);
-            mGovernor4.setAdapter(governorAdapter4);
-        }
 
 //        /** I/O Scheduler Spinner */
 //        mIo = (Spinner) findViewById(R.id.io);
@@ -438,12 +377,169 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         mTcp.setAdapter(tcpAdapter);
         mTcp.setSelection(algorithms.indexOf(currentTcp));
         mTcp.setOnItemSelectedListener(new TCPListener());
+
+        onlineCoresPolling();
+    }
+
+    public class GeneralGovListener implements OnItemSelectedListener {
+        public void onItemSelected(AdapterView<?> parent, View view, int pos,
+                                   long id) {
+            if (govCounterGeneral > 0 && !perCoreGovernor.isChecked()) {
+                @SuppressWarnings("ConstantConditions")
+                String selected = parent.getItemAtPosition(pos).toString();
+                if (!selected.equals("Core Offline")) {
+                    // do this on all cpu's since MSM can have different governors on
+                    // each cpu
+                    // and it doesn't hurt other devices to do it
+                    for (int i = 0; i < mNumOfCpu; i++) {
+                        Helpers.CMDProcessorWrapper.runSuCommand(
+                                "busybox echo 1 > " + FIRST_PART_CPU + i + SECOND_PART_ONLINE +
+                                        "\n" +
+                                        "busybox echo " + selected + " > " + FIRST_PART_CPU + i + SECOND_PART_GOV
+                        );
+                        bootPrefs.edit().putString("CORE" + i + "_GOVERNOR", selected).commit();
+                    }
+                }
+            } else {
+                govCounterGeneral++;
+            }
+        }
+
+        public void onNothingSelected(AdapterView<?> parent) {
+        }
+    }
+
+    public void handleGovernors() {
+        String currentGovernor = "";
+        if (Helpers.doesFileExist(GOVERNOR))
+            currentGovernor = CPUHelper.readOneLineNotRoot(GOVERNOR);
+
+        String currentGovernor2 = "";
+        if (Helpers.doesFileExist(GOVERNOR2))
+            currentGovernor2 = CPUHelper.readOneLineNotRoot(GOVERNOR2);
+
+        String currentGovernor3 = "";
+        if (Helpers.doesFileExist(GOVERNOR3))
+            currentGovernor3 = CPUHelper.readOneLineNotRoot(GOVERNOR3);
+
+        String currentGovernor4 = "";
+        if (Helpers.doesFileExist(GOVERNOR4))
+            currentGovernor4 = CPUHelper.readOneLineNotRoot(GOVERNOR4);
+
+
+        /** CPU Governor for core 0 */
+        String[] availableGovernors = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST).split(" ");
+        ArrayAdapter<CharSequence> governorAdapter = new ArrayAdapter<CharSequence>(
+                this, R.layout.spinner_row);
+        governorAdapter
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        for (String availableGovernor : availableGovernors) {
+            governorAdapter.add(availableGovernor);
+        }
+        mGovernor.setAdapter(governorAdapter);
+        mGovernor.setSelection(Arrays.asList(availableGovernors).indexOf(
+                currentGovernor));
+        mGovernor.setOnItemSelectedListener(new GovListener());
+
+        /** CPU Governor for core 1 */
+        String[] availableGovernors2;
+        if (Helpers.doesFileExist(GOVERNORS_LIST2)) {
+            try {
+                availableGovernors2 = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST2)
+                        .split(" ");
+            } catch (NullPointerException e) {
+                availableGovernors2 = new String[]{"Core Offline"};
+            }
+
+            ArrayAdapter<CharSequence> governorAdapter2 = new ArrayAdapter<CharSequence>(
+                    this, R.layout.spinner_row);
+            governorAdapter2
+                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            for (String anAvailableGovernors2 : availableGovernors2) {
+                governorAdapter2.add(anAvailableGovernors2);
+            }
+            mGovernor2.setAdapter(governorAdapter2);
+            mGovernor2.setSelection(Arrays.asList(availableGovernors2).indexOf(
+                    currentGovernor2));
+            mGovernor2.setEnabled(true);
+            mGovernor2.setOnItemSelectedListener(new GovListener2());
+        } else {
+            ArrayAdapter<CharSequence> governorAdapter2 = new ArrayAdapter<CharSequence>(
+                    this, R.layout.spinner_row);
+            governorAdapter2
+                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            governorAdapter2.add("Core Offline");
+            mGovernor2.setEnabled(false);
+            mGovernor2.setAdapter(governorAdapter2);
+        }
+
+        /** CPU Governor for core 2 */
+        if (Helpers.doesFileExist(GOVERNORS_LIST3)) {
+            String[] availableGovernors3 = {};
+            try {
+                availableGovernors3 = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST3)
+                        .split(" ");
+            } catch (NullPointerException e) {
+                availableGovernors3 = new String[]{"Core Offline"};
+            }
+            ArrayAdapter<CharSequence> governorAdapter3 = new ArrayAdapter<CharSequence>(
+                    this, R.layout.spinner_row);
+            governorAdapter3
+                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            for (String anAvailableGovernors3 : availableGovernors3) {
+                governorAdapter3.add(anAvailableGovernors3);
+            }
+            mGovernor3.setAdapter(governorAdapter3);
+            mGovernor3.setSelection(Arrays.asList(availableGovernors3).indexOf(
+                    currentGovernor3));
+            mGovernor3.setEnabled(true);
+            mGovernor3.setOnItemSelectedListener(new GovListener3());
+        } else {
+            ArrayAdapter<CharSequence> governorAdapter3 = new ArrayAdapter<CharSequence>(
+                    this, R.layout.spinner_row);
+            governorAdapter3
+                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            governorAdapter3.add("Core Offline");
+            mGovernor3.setEnabled(false);
+            mGovernor3.setAdapter(governorAdapter3);
+        }
+
+        /** CPU Governor for core 3 */
+        if (Helpers.doesFileExist(GOVERNORS_LIST4)) {
+            String[] availableGovernors4;
+            try {
+                availableGovernors4 = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST4)
+                        .split(" ");
+            } catch (NullPointerException e) {
+                availableGovernors4 = new String[]{"Core Offline"};
+            }
+            ArrayAdapter<CharSequence> governorAdapter4 = new ArrayAdapter<CharSequence>(
+                    this, R.layout.spinner_row);
+            governorAdapter4
+                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            for (String anAvailableGovernors4 : availableGovernors4) {
+                governorAdapter4.add(anAvailableGovernors4);
+            }
+            mGovernor4.setAdapter(governorAdapter4);
+            mGovernor4.setSelection(Arrays.asList(availableGovernors4).indexOf(
+                    currentGovernor4));
+            mGovernor4.setEnabled(true);
+            mGovernor4.setOnItemSelectedListener(new GovListener4());
+        } else {
+            ArrayAdapter<CharSequence> governorAdapter4 = new ArrayAdapter<CharSequence>(
+                    this, R.layout.spinner_row);
+            governorAdapter4
+                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            governorAdapter4.add("Core Offline");
+            mGovernor4.setEnabled(false);
+            mGovernor4.setAdapter(governorAdapter4);
+        }
     }
 
     public class GovListener implements OnItemSelectedListener {
         public void onItemSelected(AdapterView<?> parent, View view, int pos,
                                    long id) {
-            if (spinnerCounter > 0) {
+            if (govCounter > 0) {
                 @SuppressWarnings("ConstantConditions")
                 String selected = parent.getItemAtPosition(pos).toString();
                 if (!selected.equals("Core Offline")) {
@@ -454,7 +550,7 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                     bootPrefs.edit().putString("CORE0_GOVERNOR", selected).commit();
                 }
             } else {
-                spinnerCounter++;
+                govCounter++;
             }
         }
 
@@ -465,17 +561,19 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
     public class GovListener2 implements OnItemSelectedListener {
         public void onItemSelected(AdapterView<?> parent, View view, int pos,
                                    long id) {
-            if (spinnerCounter2 > 0) {
+            if (govCounter2 > 0 && perCoreGovernor.isChecked()) {
                 @SuppressWarnings("ConstantConditions")
                 String selected = parent.getItemAtPosition(pos).toString();
 
                 // do this on all cpu's since MSM can have different governors on
                 // each cpu
                 // and it doesn't hurt other devices to do it
-                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + GOVERNOR2);
-                bootPrefs.edit().putString("CORE1_GOVERNOR", selected).commit();
+                if (!selected.equals("Core Offline")) {
+                    Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + GOVERNOR2);
+                    bootPrefs.edit().putString("CORE1_GOVERNOR", selected).commit();
+                }
             } else {
-                spinnerCounter2++;
+                govCounter2++;
             }
         }
 
@@ -486,17 +584,19 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
     public class GovListener3 implements OnItemSelectedListener {
         public void onItemSelected(AdapterView<?> parent, View view, int pos,
                                    long id) {
-            if (spinnerCounter3 > 0) {
+            if (govCounter3 > 0 && perCoreGovernor.isChecked()) {
                 @SuppressWarnings("ConstantConditions")
                 String selected = parent.getItemAtPosition(pos).toString();
 
                 // do this on all cpu's since MSM can have different governors on
                 // each cpu
                 // and it doesn't hurt other devices to do it
-                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + GOVERNOR3);
-                bootPrefs.edit().putString("CORE2_GOVERNOR", selected).commit();
+                if (!selected.equals("Core Offline")) {
+                    Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + GOVERNOR3);
+                    bootPrefs.edit().putString("CORE2_GOVERNOR", selected).commit();
+                }
             } else {
-                spinnerCounter3++;
+                govCounter3++;
             }
         }
 
@@ -507,17 +607,19 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
     public class GovListener4 implements OnItemSelectedListener {
         public void onItemSelected(AdapterView<?> parent, View view, int pos,
                                    long id) {
-            if (spinnerCounter4 > 0) {
+            if (govCounter4 > 0 && perCoreGovernor.isChecked()) {
                 @SuppressWarnings("ConstantConditions")
                 String selected = parent.getItemAtPosition(pos).toString();
 
                 // do this on all cpu's since MSM can have different governors on
                 // each cpu
                 // and it doesn't hurt other devices to do it
-                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + GOVERNOR4);
-                bootPrefs.edit().putString("CORE3_GOVERNOR", selected).commit();
+                if (!selected.equals("Core Offline")) {
+                    Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + GOVERNOR4);
+                    bootPrefs.edit().putString("CORE3_GOVERNOR", selected).commit();
+                }
             } else {
-                spinnerCounter4++;
+                govCounter4++;
             }
         }
 
@@ -690,5 +792,21 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         point.setY(Y);
         line.addPoint(point);
         graph.addLine(line);
+    }
+
+    public void onlineCoresPolling() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                govCounter = 0;
+                govCounter2 = 0;
+                govCounter3 = 0;
+                govCounter4 = 0;
+                handleGovernors();
+                onlineCoresPolling();
+            }
+
+        }, 500);
     }
 }
