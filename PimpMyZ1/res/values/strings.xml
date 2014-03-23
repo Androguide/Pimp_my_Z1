@@ -154,4 +154,7 @@
     <string name="warning_vibrator">Values higher than %1$d are not recommended</string>
     <string name="vibrator_intensity">Vibrator Intensity</string>
     <string name="vibrator_intensity_text">Allows to set the device\'s vibrator intensity at kernel level by modifying its voltage</string>
+    <string name="msm_thermal_text">This option allows you to enable or disable your kernel\'s thermal control module (msm_thermal). Be careful if you disable this option, as nothing will prevent your device from overheating and potentially frying.</string>
+    <string name="msm_thermal">Thermal Throttling</string>
+    <string name="cores_online">Cores Online: </string>
 </resources>

@@ -30,6 +30,7 @@ public interface CPUInterface {
     public static final String MIN_FREQ = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq";
     public static final String STEPS = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies";
     public static final String ONLINE_CPUS = "/sys/devices/system/cpu/online";
+    public static final String OFFLINE_CPUS = "/sys/devices/system/cpu/offline";
     public static final String CPU0_ONLINE = "/sys/devices/system/cpu/cpu0/online";
     public static final String CPU1_ONLINE = "/sys/devices/system/cpu/cpu1/online";
     public static final String CPU2_ONLINE = "/sys/devices/system/cpu/cpu2/online";
@@ -50,4 +51,5 @@ public interface CPUInterface {
     public static final String AVAILABLE_TCP_ALGORITHMS = "/proc/sys/net/ipv4/tcp_available_congestion_control";
     public static final String CURR_TCP_ALGORITHM = "/proc/sys/net/ipv4/tcp_congestion_control";
     public static final String SYSCTL_TCP_ALGORITHM = "sysctl -w net.ipv4.tcp_congestion_control=";
+    public static final String MSM_THERMAL = "/sys/module/msm_thermal/parameters/enabled";
 }

@@ -52,6 +52,7 @@ public class BootHelper {
         Boolean SNAKE_CHARMER = prefs.getBoolean("SNAKE_CHARMER", true);
         Boolean EMMC_ENTROPY = prefs.getBoolean("EMMC_ENTROPY_CONTRIB", true);
         Boolean SD_ENTROPY = prefs.getBoolean("SD_ENTROPY_CONTRIB", true);
+        Boolean MSM_THERMAL = prefs.getBoolean("MSM_THERMAL", false);
         String CORE0_GOV = prefs.getString("CORE0_GOVERNOR", "intellidemand");
         String CORE1_GOV = prefs.getString("CORE1_GOVERNOR", "intellidemand");
         String CORE2_GOV = prefs.getString("CORE2_GOVERNOR", "intellidemand");
@@ -77,7 +78,13 @@ public class BootHelper {
                     + "\nbusybox echo 0 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE;
 
         String applyMaxCpuFreq = "busybox echo " + CPU_MAX_FREQ + " > " + CPUInterface.MAX_FREQ;
+        String applyMsmThermal = "";
         if (SNAKE_CHARMER) applyMaxCpuFreq += "\nbusybox echo " + CPU_MAX_FREQ + " > " + CPUInterface.SNAKE_CHARMER_MAX_FREQ;
+        if (MSM_THERMAL)
+            applyMsmThermal = "busybox echo Y > " + CPUInterface.MSM_THERMAL;
+        else
+           applyMsmThermal = "busybox echo N > " + CPUInterface.MSM_THERMAL;
+
         String applyMinCpuFreq = "busybox echo " + CPU_MIN_FREQ + " > " + CPUInterface.MIN_FREQ;
         String applyMaxGpuFreq = "busybox echo " + GPU_MAX_FREQ + " > " + GPUInterface.maxFreq;
         String applyMinGpuFreq = "busybox echo " + GPU_MIN_FREQ + " > " + GPUInterface.minFreq;
@@ -137,6 +144,7 @@ public class BootHelper {
                         applyIntelliPlug + "\n" +
                         applyIntelliPlugEco + "\n" +
                         applyPowerSuspend + "\n" +
+                        applyMsmThermal + "\n" +
                         applyKSM + "\n" +
                         applyKSMPages + "\n" +
                         applyKSMTimer + "\n" +
