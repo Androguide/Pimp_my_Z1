@@ -40,8 +40,8 @@ public class BootHelper {
         int GPU_MAX_FREQ = Integer.valueOf(prefs.getString("GPU_MAX_FREQ", "450000000"));
         int GPU_MIN_FREQ = Integer.valueOf(prefs.getString("GPU_MIN_FREQ", "200000000"));
         int SCHED_MC_LEVEL = prefs.getInt("SCHED_MC_LEVEL", 0);
-        int KSM_PAGES_TO_SCAN = prefs.getInt("KSM_PAGES_TO_SCAN", 100);
-        int KSM_SLEEP_TIMER = prefs.getInt("KSM_SLEEP_TIMER", 500);
+        int KSM_PAGES_TO_SCAN = prefs.getInt(MemoryManagementInterface.KSM_PAGES_TO_SCAN.replaceAll("/", "_"), 100);
+        int KSM_SLEEP_TIMER = prefs.getInt(MemoryManagementInterface.KSM_SLEEP_TIMER.replaceAll("/", "_"), 500);
         Boolean DYNAMIC_FSYNC = prefs.getBoolean("DYNAMIC_FSYNC", false);
         Boolean INTELLI_PLUG = prefs.getBoolean("INTELLI_PLUG", false);
         Boolean INTELLI_PLUG_ECO = prefs.getBoolean("INTELLI_PLUG_ECO", false);
