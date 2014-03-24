@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+                            <?xml version="1.0" encoding="utf-8"?><!--
 
    Copyright (C) 2013  Louis Teboul (a.k.a Androguide)
 
@@ -122,4 +122,40 @@
     <string name="sec">sec.</string>
     <string name="right">Re:\u0020</string>
     <string name="gpu_governor">GPU Governor</string>
+    <string name="kernel_misc">Miscellaneous</string>
+    <string name="kernel_misc_desc">Control some miscellaneous kernel features, such as VM parameters, Kernel Same-page Merging and more</string>
+    <string name="ksm_header">KERNEL SAME-PAGE MERGING</string>
+    <string name="ksm">KSM</string>
+    <string name="ksm_desc">Enabling Kernel Same-page Merging reduces memory usage and increases performance by allowing the system to scan for duplicate memory pages, merge them and allow those pages to be shared amongst different processes</string>
+    <string name="ksm_unsupported">Sorry, your kernel does not seem to support KSM.</string>
+    <string name="ksm_pages_to_scan">Pages To Scan</string>
+    <string name="ksm_pages_to_scan_desc">Amount of pages KSM should scan at each run</string>
+    <string name="ksm_timer">KSM Timer</string>
+    <string name="ksm_timer_desc">Defines the interval of time (in milliseconds) at which KSM will scan for mergeable memory pages</string>
+    <string name="snake_charmer">Snake Charmer</string>
+    <string name="snake_charmer_desc">Snake Charmer by faux123 allows to limit the maximum CPU frequency for all cores</string>
+    <string name="dyn_fsync_unsupported">Sorry, your kernel does not seem to support Dynamic Fsync.</string>
+    <string name="io_sched_emmc">I/O Scheduler (eMMC)</string>
+    <string name="io_sched_emmc_desc">Defines the I/O Scheduler to use for the internal storage</string>
+    <string name="io_sched_sd">I/O Scheduler (SD-Card)</string>
+    <string name="io_sched_sd_desc">Defines the I/O Scheduler to use for the external storage/SD-Card</string>
+    <string name="emmc_readahead">Readahead (eMMC)</string>
+    <string name="emmc_readahead_desc">Specifies the amount of data in kilobytes that are read and cached ahead of time by the I/O Scheduler for the internal storage</string>
+    <string name="sdcard_readahead">Readahead (SD-Card)</string>
+    <string name="sdcard_readahead_desc">Specifies the amount of data in kilobytes that are read and cached ahead of time by the I/O Scheduler for the external SD-Card</string>
+    <string name="emmc_entropy_contrib">Entropy Contribution (eMMC)</string>
+    <string name="entropy_contrib_desc">Flash devices have few randomness and as such they are a very poor source of entropy, disable for better performance.</string>
+    <string name="sdcard_entropy_contrib">Entropy Contribution (SD-Card)</string>
+    <string name="profiles">Profiles</string>
+    <string name="per_core_governors">Per-Core Governor Control</string>
+    <string name="per_core_governors_text">Enable to control each core\'s governor independently, disable to use the same governor for all cores.</string>
+    <string name="general_governor">Governor (All Cores)</string>
+    <string name="memory_management_text">Control the memory management features of your kernel, such as Kernel Same-page Merging, zRam, Swap, VM parameters and more&#8230;</string>
+    <string name="memory_management">Memory Management</string>
+    <string name="warning_vibrator">Values higher than %1$d are not recommended</string>
+    <string name="vibrator_intensity">Vibrator Intensity</string>
+    <string name="vibrator_intensity_text">Allows to set the device\'s vibrator intensity at kernel level by modifying its voltage</string>
+    <string name="msm_thermal_text">This option allows you to enable or disable your kernel\'s thermal control module (msm_thermal). Be careful if you disable this option, as nothing will prevent your device from overheating and potentially frying.</string>
+    <string name="msm_thermal">Thermal Throttling</string>
+    <string name="cores_online">Cores Online: </string>
 </resources>
