@@ -26,8 +26,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.internal.view.SupportMenuInflater;
+import android.support.v7.view.ActionMode;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -281,25 +286,54 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if (mMaxFreqSetting != null && !mMaxFreqSetting.isEmpty()) {
-                    bootPrefs.edit().putString("CPU_MAX_FREQ", mMaxFreqSetting).commit();
-                    for (int i = 0; i < mNumOfCpus; i++)
-                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + mMaxFreqSetting + " > "
-                                + MAX_FREQ.replace("cpu0", "cpu" + i));
+                startSupportActionMode(new ActionMode.Callback() {
+                    @Override
+                    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+                        MenuInflater inflater = actionMode.getMenuInflater();
+                        inflater.inflate(R.menu.contextual_menu, menu);
+                        return true;
+                    }
 
-                    if (snakeCharmerEnabled)
-                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + mMaxFreqSetting + " > " + SNAKE_CHARMER_MAX_FREQ);
-                }
+                    @Override
+                    public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.apply:
+                                if (mMaxFreqSetting != null && !mMaxFreqSetting.isEmpty()) {
+                                    bootPrefs.edit().putString("CPU_MAX_FREQ", mMaxFreqSetting).commit();
+                                    for (int i = 0; i < mNumOfCpus; i++)
+                                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + mMaxFreqSetting + " > "
+                                                + MAX_FREQ.replace("cpu0", "cpu" + i));
+
+                                    if (snakeCharmerEnabled)
+                                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + mMaxFreqSetting + " > " + SNAKE_CHARMER_MAX_FREQ);
+                                }
 
 
-                if (mIsTegra3) {
-                    if (mMaxFreqSetting != null && !mMaxFreqSetting.isEmpty())
-                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + mMaxFreqSetting + " > "
-                                + TEGRA_MAX_FREQ);
+                                if (mIsTegra3) {
+                                    if (mMaxFreqSetting != null && !mMaxFreqSetting.isEmpty())
+                                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + mMaxFreqSetting + " > "
+                                                + TEGRA_MAX_FREQ);
 
-                    if (snakeCharmerEnabled)
-                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + mMaxFreqSetting + " > " + SNAKE_CHARMER_MAX_FREQ);
-                }
+                                    if (snakeCharmerEnabled)
+                                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + mMaxFreqSetting + " > " + SNAKE_CHARMER_MAX_FREQ);
+                                }
+                                actionMode.finish();
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+
+                    @Override
+                    public void onDestroyActionMode(ActionMode actionMode) {
+
+                    }
+                });
             }
         });
 
@@ -323,12 +357,41 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if (mMinFreqSetting != null && !mMinFreqSetting.isEmpty()) {
-                    bootPrefs.edit().putString("CPU_MIN_FREQ", mMinFreqSetting).commit();
-                    for (int i = 0; i < mNumOfCpus; i++)
-                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + mMinFreqSetting + " > "
-                                + MIN_FREQ.replace("cpu0", "cpu" + i));
-                }
+                startSupportActionMode(new ActionMode.Callback() {
+                    @Override
+                    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+                        MenuInflater inflater = actionMode.getMenuInflater();
+                        inflater.inflate(R.menu.contextual_menu, menu);
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.apply:
+                                if (mMinFreqSetting != null && !mMinFreqSetting.isEmpty()) {
+                                    bootPrefs.edit().putString("CPU_MIN_FREQ", mMinFreqSetting).commit();
+                                    for (int i = 0; i < mNumOfCpus; i++)
+                                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + mMinFreqSetting + " > "
+                                                + MIN_FREQ.replace("cpu0", "cpu" + i));
+                                }
+                                actionMode.finish();
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+
+                    @Override
+                    public void onDestroyActionMode(ActionMode actionMode) {
+
+                    }
+                });
             }
         });
 
