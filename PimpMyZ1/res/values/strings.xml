@@ -59,6 +59,7 @@
     <string name="help_center">Help Center</string>
     <string name="help_center_introduction">Learn everything about every single feature of Pimp My Z1, and become a lvl.99 Android nerd along the way ;)</string>
     <string name="menu_link_seekbars">Link Left &amp; Right</string>
+    <string name="menu_apply">Apply</string>
     <string name="kernel_cpu_control">CPU Control</string>
     <string name="kernel_cpu_control_desc">This tool allows you to set your CPU min/max frequencies, governors, I/O schedulers and a lot more</string>
     <string name="kernel_color">#1abc9c</string>
@@ -157,4 +158,6 @@
     <string name="msm_thermal_text">This option allows you to enable or disable your kernel\'s thermal control module (msm_thermal). Be careful if you disable this option, as nothing will prevent your device from overheating and potentially frying.</string>
     <string name="msm_thermal">Thermal Throttling</string>
     <string name="cores_online">Cores Online: </string>
+    <string name="dt2wake">Double Tap 2 Wake</string>
+    <string name="dt2wake_text">When enabled, a double tap on the screen will wake-up the device</string>
 </resources>
