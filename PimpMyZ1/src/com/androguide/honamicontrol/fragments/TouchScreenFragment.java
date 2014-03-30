@@ -125,6 +125,35 @@ public class TouchScreenFragment extends Fragment implements TouchScreenInterfac
             );
         }
 
+        if (Helpers.doesFileExist(DT2WAKE)) {
+            mCardUI.addCard(new CardSwitchPlugin(
+                    fa.getString(R.string.dt2wake),
+                    fa.getString(R.string.dt2wake_text),
+                    sectionColor,
+                    DT2WAKE,
+                    fa,
+                    new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
+                            bootPrefs.edit().putBoolean("DT2WAKE", isOn).commit();
+                            if (isOn)
+                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + DT2WAKE);
+                            else
+                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + DT2WAKE);
+                        }
+                    }
+            ));
+        } else {
+            mCardUI.addCard(new CardSwitchDisabled(
+                            fa.getString(R.string.dt2wake),
+                            "Sorry, your kernel does not seem to support Double Tap 2 Wake",
+                            "#c74b46",
+                            "",
+                            fa,
+                            null)
+            );
+        }
+
         // bash command to grab the nth line (where NUM is the line number):
         // sed 'NUMq;d' path/to/file
 //        mCardUI.addCard(new CardSeekBar("Touch Pressure Scale",

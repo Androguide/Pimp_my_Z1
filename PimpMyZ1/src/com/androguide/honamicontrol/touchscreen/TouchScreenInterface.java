@@ -26,4 +26,5 @@ public interface TouchScreenInterface {
     public static final String GLOVE_MODE = "/sys/devices/virtual/input/clearpad/glove";
     public static final String CLEARPAD = "/system/usr/idc/clearpad.idc";
     public static final String CLEARPAD_PEN = "/system/usr/idc/clearpad_pen.idc";
+    public static final String DT2WAKE = "/sys/devices/virtual/input/clearpad/wakeup_gesture";
 }
