@@ -24,19 +24,21 @@ package com.androguide.honamicontrol.kernel.misc;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.CompoundButton;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.androguide.honamicontrol.R;
-import com.androguide.honamicontrol.cards.CardSeekBarGeneric;
 import com.androguide.honamicontrol.cards.CardSeekBarVibrator;
-import com.androguide.honamicontrol.cards.CardSwitchDisabled;
-import com.androguide.honamicontrol.cards.CardSwitchPlugin;
+import com.androguide.honamicontrol.cards.CardSpinner;
 import com.androguide.honamicontrol.helpers.CPUHelper;
 import com.androguide.honamicontrol.helpers.Helpers;
 import com.fima.cardsui.objects.CardStack;
+import com.fima.cardsui.views.CardTextStripe;
 import com.fima.cardsui.views.CardUI;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class MiscActivity extends ActionBarActivity implements MiscInterface {
 
@@ -53,7 +55,95 @@ public class MiscActivity extends ActionBarActivity implements MiscInterface {
         cardsUI.addStack(new CardStack(""));
         cardsUI.addStack(new CardStack(""));
 
-        cardsUI.addCard(new CardSeekBarVibrator(getString(R.string.vibrator_intensity), getString(R.string.vibrator_intensity_text), "#1abc9c", this));
+        if (Helpers.doesFileExist(VIBRATOR_SYSFS))
+            cardsUI.addCard(new CardSeekBarVibrator(getString(R.string.vibrator_intensity), getString(R.string.vibrator_intensity_text), "#1abc9c", this));
+
+        if (Helpers.doesFileExist(FAST_CHARGE_VERSION)) {
+
+            // Fast Charge Warning
+            cardsUI.addStack(new CardStack(getString(R.string.fast_charge_stack)));
+            cardsUI.addCard(new CardTextStripe(
+                            getString(R.string.fastcharge_warning),
+                            getString(R.string.fastcharge_warning_text) + "\n\nFast Charge " + CPUHelper.readOneLineNotRoot(FAST_CHARGE_VERSION),
+                            "#F4842D", "#F4842D", false)
+            );
+
+            final Boolean[] isManual = {false};
+            int currMode = Integer.parseInt(CPUHelper.readOneLineNotRoot(FORCE_FAST_CHARGE));
+            if (currMode == 2)
+                isManual[0] = true;
+
+            final View[] spinnerView = {null};
+
+            // Fast Charge Mode
+            ArrayList<String> modes = new ArrayList<String>();
+            modes.add(getString(R.string.disabled));
+            modes.add(getString(R.string.fast_charge_force_ac));
+            modes.add(getString(R.string.manual));
+            cardsUI.addCard(new CardSpinner(
+                    getString(R.string.fast_charge_mode),
+                    getString(R.string.fast_charge_mode_text),
+                    "#1abc9c",
+                    FORCE_FAST_CHARGE, Integer.parseInt(CPUHelper.readOneLineNotRoot(FORCE_FAST_CHARGE)),
+                    modes,
+                    this,
+                    new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            isManual[0] = i == 2;
+
+                            if (spinnerView[0] != null) {
+                                if (isManual[0])
+                                    spinnerView[0].setEnabled(true);
+                                else if (!isManual[0])
+                                    spinnerView[0].setEnabled(false);
+                            }
+
+                            Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + i + " > " + FORCE_FAST_CHARGE);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    }
+            ));
+
+            // Fast Charge Level
+            final String[] amps = CPUHelper.readOneLineNotRoot(AVAILABLE_FAST_CHARGE_LEVELS).split(" ");
+            ArrayList<String> amperages = new ArrayList<String>();
+            Collections.addAll(amperages, amps);
+            int currLevel = amperages.indexOf(CPUHelper.readOneLineNotRoot(FAST_CHARGE_LEVEL));
+
+            cardsUI.addCard(new CardSpinner(
+                    getString(R.string.fast_charge_level),
+                    getString(R.string.fast_charge_level_text), "#1abc9c", FAST_CHARGE_LEVEL, currLevel, amperages, this, new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    spinnerView[0] = adapterView;
+
+                    if (isManual[0]) {
+                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + amps[i] + " > " + FAST_CHARGE_LEVEL);
+                        adapterView.setEnabled(true);
+                    } else {
+                        adapterView.setEnabled(false);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            }
+            ));
+
+            if (spinnerView[0] != null) {
+                if (isManual[0])
+                    spinnerView[0].setEnabled(true);
+                else if (!isManual[0])
+                    spinnerView[0].setEnabled(false);
+            }
+        }
 
         cardsUI.refresh();
     }

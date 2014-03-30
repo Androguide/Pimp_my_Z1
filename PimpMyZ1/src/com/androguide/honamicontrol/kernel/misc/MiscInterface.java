@@ -23,4 +23,8 @@ package com.androguide.honamicontrol.kernel.misc;
 
 public interface MiscInterface {
     public static final String VIBRATOR_SYSFS = "/sys/devices/virtual/timed_output/vibrator/vtg_level";
+    public static final String FORCE_FAST_CHARGE = "/sys/kernel/fast_charge/force_fast_charge";
+    public static final String FAST_CHARGE_LEVEL = "/sys/kernel/fast_charge/fast_charge_level";
+    public static final String AVAILABLE_FAST_CHARGE_LEVELS = "/sys/kernel/fast_charge/available_charge_levels";
+    public static final String FAST_CHARGE_VERSION = "/sys/kernel/fast_charge/version";
 }
