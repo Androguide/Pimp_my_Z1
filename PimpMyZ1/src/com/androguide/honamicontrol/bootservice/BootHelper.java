@@ -23,6 +23,7 @@ package com.androguide.honamicontrol.bootservice;
 
 import android.content.SharedPreferences;
 
+import com.androguide.honamicontrol.helpers.CMDProcessor.CMDProcessor;
 import com.androguide.honamicontrol.helpers.Helpers;
 import com.androguide.honamicontrol.kernel.cpucontrol.CPUInterface;
 import com.androguide.honamicontrol.kernel.gpucontrol.GPUInterface;
@@ -42,12 +43,14 @@ public class BootHelper {
         int SCHED_MC_LEVEL = prefs.getInt("SCHED_MC_LEVEL", 0);
         int KSM_PAGES_TO_SCAN = prefs.getInt(MemoryManagementInterface.KSM_PAGES_TO_SCAN.replaceAll("/", "_"), 100);
         int KSM_SLEEP_TIMER = prefs.getInt(MemoryManagementInterface.KSM_SLEEP_TIMER.replaceAll("/", "_"), 500);
+        int FASTCHARGE_MODE = prefs.getInt("FASTCHARGE_MODE", 0);
         Boolean DYNAMIC_FSYNC = prefs.getBoolean("DYNAMIC_FSYNC", false);
         Boolean INTELLI_PLUG = prefs.getBoolean("INTELLI_PLUG", false);
         Boolean INTELLI_PLUG_ECO = prefs.getBoolean("INTELLI_PLUG_ECO", false);
         Boolean POWER_SUSPEND = prefs.getBoolean("POWER_SUSPEND", false);
         Boolean PEN_MODE = prefs.getBoolean("PEN_MODE", false);
         Boolean GLOVE_MODE = prefs.getBoolean("GLOVE_MODE", false);
+        Boolean DT2WAKE = prefs.getBoolean("DT2WAKE", false);
         Boolean KSM_ENABLED = prefs.getBoolean("KSM_ENABLED", false);
         Boolean SNAKE_CHARMER = prefs.getBoolean("SNAKE_CHARMER", true);
         Boolean EMMC_ENTROPY = prefs.getBoolean("EMMC_ENTROPY_CONTRIB", true);
@@ -68,14 +71,7 @@ public class BootHelper {
         String SC_HEADPHONE_PA = prefs.getString("HEADPHONE_PA", "38 38 179");
         String SC_HEADPHONE = prefs.getString("HEADPHONE", "0 0 255");
         String SC_SPEAKER = prefs.getString("SPEAKER", "0 0 255");
-
-        String applyIntelliPlug;
-        if (INTELLI_PLUG)
-            applyIntelliPlug = "stop mpdecision\nbusybox echo 0 > " + PowerManagementInterface.MSM_MPDECISION_TOGGLE
-                    + "\nbusybox echo 1 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE;
-        else
-            applyIntelliPlug = "start mpdecision\nbusybox echo 1 > " + PowerManagementInterface.MSM_MPDECISION_TOGGLE
-                    + "\nbusybox echo 0 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE;
+        String FASTCHARGE_LEVEL = prefs.getString("FASTCHARGE_LEVEL", "500");
 
         String applyMaxCpuFreq = "busybox echo " + CPU_MAX_FREQ + " > " + CPUInterface.MAX_FREQ;
         String applyMsmThermal = "";
@@ -102,6 +98,7 @@ public class BootHelper {
         String applyPowerSuspend = "busybox echo " + getIntFromBoolean(POWER_SUSPEND) + " > " + PowerManagementInterface.POWER_SUSPEND_TOGGLE;
         String applyPenMode = "chown system:system " + TouchScreenInterface.PEN_MODE + "\nbusybox echo " + getIntFromBoolean(PEN_MODE) + " > " + TouchScreenInterface.PEN_MODE;
         String applyGloveMode = "chown system:system " + TouchScreenInterface.PEN_MODE + "\nbusybox echo " + getIntFromBoolean(GLOVE_MODE) + " > " + TouchScreenInterface.GLOVE_MODE;
+        String applyDt2Wake = "busybox echo " + getIntFromBoolean(DT2WAKE) + " > " + TouchScreenInterface.DT2WAKE;
         String applyScHeadphone = "busybox echo " + SC_HEADPHONE + " > " + SoundControlInterface.FAUX_SC_HEADPHONE;
         String applyScHeadphonePa = "busybox echo " + SC_HEADPHONE_PA + " > " + SoundControlInterface.FAUX_SC_HEADPHONE_POWERAMP;
         String applyScSpeaker = "busybox echo " + SC_SPEAKER + " > " + SoundControlInterface.FAUX_SC_SPEAKER;
@@ -114,6 +111,8 @@ public class BootHelper {
         String applySDReadahead = "busybox echo " + SD_READAHEAD + " > " + IOTweaksInterface.SD_READAHEAD;
         String applyEmmcEntropy = "busybox echo " + EMMC_ENTROPY + " > " + IOTweaksInterface.EMMC_ENTROPY_CONTRIB;
         String applySDEntropy = "busybox echo " + SD_ENTROPY + " > " + IOTweaksInterface.SD_ENTROPY_CONTRIB;
+        String applyFastChargeMode = "busybox echo " + FASTCHARGE_MODE + " > " + MiscInterface.FORCE_FAST_CHARGE;
+        String applyFastChargeLevel = "busybox echo " + FASTCHARGE_LEVEL + " > " + MiscInterface.FAST_CHARGE_LEVEL;
 
         Helpers.CMDProcessorWrapper.runSuCommand(
                 applyMaxCpuFreq + "\n" +
@@ -141,16 +140,29 @@ public class BootHelper {
                         "echo 1 > " + SoundControlInterface.FAUX_SC_LOCKED + "\n" +
                         applySchedMcLevel + "\n" +
                         applyDynamicFsync + "\n" +
-                        applyIntelliPlug + "\n" +
-                        applyIntelliPlugEco + "\n" +
                         applyPowerSuspend + "\n" +
                         applyMsmThermal + "\n" +
                         applyKSM + "\n" +
                         applyKSMPages + "\n" +
                         applyKSMTimer + "\n" +
+                        applyFastChargeMode + "\n" +
+                        applyFastChargeLevel + "\n" +
                         applyPenMode + "\n" +
-                        applyGloveMode
+                        applyGloveMode + "\n" +
+                        applyDt2Wake
         );
+
+        if (INTELLI_PLUG) {
+            CMDProcessor.runSuCommand("busybox echo 0 > " + PowerManagementInterface.MSM_MPDECISION_TOGGLE);
+            CMDProcessor.runSuCommand("stop mpdecision");
+            CMDProcessor.runSuCommand("busybox echo 1 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE);
+        } else {
+            CMDProcessor.runSuCommand("busybox echo 0 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE);
+            CMDProcessor.runSuCommand("busybox echo 1 > " + PowerManagementInterface.MSM_MPDECISION_TOGGLE);
+            CMDProcessor.runSuCommand("start mpdecision");
+        }
+
+        CMDProcessor.runSuCommand(applyIntelliPlugEco);
     }
 
     private static int getIntFromBoolean(Boolean bool) {

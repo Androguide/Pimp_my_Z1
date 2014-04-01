@@ -90,6 +90,7 @@ public class MiscActivity extends ActionBarActivity implements MiscInterface {
                     new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            bootPrefs.edit().putInt("FASTCHARGE_MODE", i).commit();
                             isManual[0] = i == 2;
 
                             if (spinnerView[0] != null) {
@@ -124,6 +125,7 @@ public class MiscActivity extends ActionBarActivity implements MiscInterface {
 
                     if (isManual[0]) {
                         Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + amps[i] + " > " + FAST_CHARGE_LEVEL);
+                        bootPrefs.edit().putString("FASTCHARGE_LEVEL", amps[i]).commit();
                         adapterView.setEnabled(true);
                     } else {
                         adapterView.setEnabled(false);
