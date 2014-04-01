@@ -135,4 +135,42 @@
     <string name="ksm_pages_to_scan_desc">実行ごとにKSMがスキャンするページ数を指定してください。</string>
     <string name="ksm_timer">KSMタイマー</string>
     <string name="ksm_timer_desc">KSMがメモリページをスキャンする間隔をミリ秒で指定してください。</string>
+    <string name="snake_charmer">Snake Charmer</string>
+    <string name="snake_charmer_desc">Snake Charmer by faux123 allows to limit the maximum CPU frequency for all cores</string>
+    <string name="dyn_fsync_unsupported">Sorry, your kernel does not seem to support Dynamic Fsync.</string>
+    <string name="io_sched_emmc">I/O Scheduler (eMMC)</string>
+    <string name="io_sched_emmc_desc">Defines the I/O Scheduler to use for the internal storage</string>
+    <string name="io_sched_sd">I/O Scheduler (SD-Card)</string>
+    <string name="io_sched_sd_desc">Defines the I/O Scheduler to use for the external storage/SD-Card</string>
+    <string name="emmc_readahead">Readahead (eMMC)</string>
+    <string name="emmc_readahead_desc">Specifies the amount of data in kilobytes that are read and cached ahead of time by the I/O Scheduler for the internal storage</string>
+    <string name="sdcard_readahead">Readahead (SD-Card)</string>
+    <string name="sdcard_readahead_desc">Specifies the amount of data in kilobytes that are read and cached ahead of time by the I/O Scheduler for the external SD-Card</string>
+    <string name="emmc_entropy_contrib">Entropy Contribution (eMMC)</string>
+    <string name="entropy_contrib_desc">Flash devices have few randomness and as such they are a very poor source of entropy, disable for better performance.</string>
+    <string name="sdcard_entropy_contrib">Entropy Contribution (SD-Card)</string>
+    <string name="profiles">Profiles</string>
+    <string name="per_core_governors">Per-Core Governor Control</string>
+    <string name="per_core_governors_text">Enable to control each core\'s governor independently, disable to use the same governor for all cores.</string>
+    <string name="general_governor">Governor (All Cores)</string>
+    <string name="memory_management_text">Control the memory management features of your kernel, such as Kernel Same-page Merging, zRam, Swap, VM parameters and more&#8230;</string>
+    <string name="memory_management">Memory Management</string>
+    <string name="warning_vibrator">Values higher than %1$d are not recommended</string>
+    <string name="vibrator_intensity">Vibrator Intensity</string>
+    <string name="vibrator_intensity_text">Allows to set the device\'s vibrator intensity at kernel level by modifying its voltage</string>
+    <string name="msm_thermal_text">This option allows you to enable or disable your kernel\'s thermal control module (msm_thermal). Be careful if you disable this option, as nothing will prevent your device from overheating and potentially frying.</string>
+    <string name="msm_thermal">Thermal Throttling</string>
+    <string name="cores_online">Cores Online: </string>
+    <string name="dt2wake">Double Tap 2 Wake</string>
+    <string name="dt2wake_text">When enabled, a double tap on the screen will wake-up the device</string><string name="fastcharge_warning_text">Be very careful with fastcharge settings, a wrong value on the wrong input can damage both the device and the USB port or charger.
+When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, you can use up to 900mA. For wall chargers, use between 900mA and the charger\'s maximum amperage (usually written on the charger).</string>
+    <string name="fastcharge_warning">WARNING</string>
+    <string name="fast_charge_force_ac">Force A/C</string>
+    <string name="manual">Manual</string>
+    <string name="fast_charge_mode">Fast Charge Mode</string>
+    <string name="fast_charge_mode_text">Toggle Fast Charge on and off and choose between A/C mode and manual mode.</string>
+    <string name="fast_charge_level">Fast Charge Level</string>
+    <string name="fast_charge_level_text">Select the amperage to use depending on the type of charger or USB port you are using (Manual mode only).</string>
+    <string name="fast_charge_stack">FAST CHARGE</string>
+    <string name="menu_apply">Apply</string>
 </resources>

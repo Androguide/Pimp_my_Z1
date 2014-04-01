@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="profiles_array">
+        <item>Battery Max</item>
+        <item>Battery</item>
+        <item>Balanced</item>
+        <item>Performance</item>
+        <item>Benchmark</item>
+        <item>Custom</item>
+    </string-array>
+</resources>
