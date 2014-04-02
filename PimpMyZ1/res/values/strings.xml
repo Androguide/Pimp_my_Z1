@@ -169,4 +169,6 @@ When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, 
     <string name="fast_charge_level">Fast Charge Level</string>
     <string name="fast_charge_level_text">Select the amperage to use depending on the type of charger or USB port you are using (Manual mode only).</string>
     <string name="fast_charge_stack">FAST CHARGE</string>
+    <string name="intelliplug_eco_cores">Intelliplug Eco Cores Enabled</string>
+    <string name="intelliplug_eco_cores_text">Defines the maximum amount of CPU cores to enable when Intelli Plug\'s eco mode is active.</string>
 </resources>

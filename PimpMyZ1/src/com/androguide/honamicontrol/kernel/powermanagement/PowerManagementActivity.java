@@ -32,6 +32,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.androguide.honamicontrol.R;
+import com.androguide.honamicontrol.cards.CardSpinner;
 import com.androguide.honamicontrol.cards.CardSpinnerSchedMC;
 import com.androguide.honamicontrol.cards.CardSpinnerSchedMCDisabled;
 import com.androguide.honamicontrol.cards.CardSwitchDisabled;
@@ -42,6 +43,7 @@ import com.fima.cardsui.objects.CardStack;
 import com.fima.cardsui.views.CardUI;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class PowerManagementActivity extends ActionBarActivity implements PowerManagementInterface {
 
@@ -61,7 +63,9 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
         CardUI cardsUI = (CardUI) findViewById(R.id.cardsui);
         cardsUI.addStack(new CardStack(""));
         cardsUI.addStack(new CardStack(""));
+        final View[] ecoCoresSpinner = {null};
 
+        // Sched MC Power Savings
         if (Helpers.doesFileExist(SCHED_MC_POWER_SAVINGS)) {
             ArrayList<String> schedMCEntries = new ArrayList<String>();
             schedMCEntries.add(getString(R.string.disabled));
@@ -95,17 +99,18 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
             ArrayList<String> spinnerEntries = new ArrayList<String>();
             spinnerEntries.add("No Kernel Support");
             cardsUI.addCard(new CardSpinnerSchedMCDisabled(
-                    getString(R.string.sched_mc),
-                    "Sorry, your kernel does not seem to support Sched_MC power savings",
-                    "#c74b46",
-                    "",
-                    0,
-                    spinnerEntries,
-                    this,
-                    null)
+                            getString(R.string.sched_mc),
+                            "Sorry, your kernel does not seem to support Sched_MC power savings",
+                            "#c74b46",
+                            "",
+                            0,
+                            spinnerEntries,
+                            this,
+                            null)
             );
         }
 
+        // Intelli_Plug Toggle
         if (Helpers.doesFileExist(INTELLI_PLUG_TOGGLE)) {
             isIntelliPlugOn = getIsIntelliPlugOn();
             cardsUI.addCard(new CardSwitchPlugin(
@@ -134,17 +139,18 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
 
         } else {
             cardsUI.addCard(new CardSwitchDisabled(
-                    getString(R.string.intelli_plug),
-                    "Sorry, your kernel does not seem to support the Intelli Plug hotplug driver",
-                    "#c74b46",
-                    "",
-                    this,
-                    null)
+                            getString(R.string.intelli_plug),
+                            "Sorry, your kernel does not seem to support the Intelli Plug hotplug driver",
+                            "#c74b46",
+                            "",
+                            this,
+                            null)
             );
         }
 
+        // Intelli_Plug Eco Mode
         if (Helpers.doesFileExist(INTELLI_PLUG_ECO_MODE)) {
-            CardSwitchPlugin cardEcoMode = new CardSwitchPlugin(
+            cardsUI.addCard(new CardSwitchPlugin(
                     getString(R.string.intelli_plug_eco),
                     getString(R.string.intelli_plug_eco_desc),
                     "#1abc9c",
@@ -155,27 +161,67 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
                         public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
                             bootPrefs.edit().putBoolean("INTELLI_PLUG_ECO", isOn).commit();
                             ecoModeSwitch = (Switch) compoundButton;
-                            if (isOn && isIntelliPlugOn)
+                            if (isOn && isIntelliPlugOn) {
                                 Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + INTELLI_PLUG_ECO_MODE);
-                            else if (isOn && !isIntelliPlugOn) {
+                                if (ecoCoresSpinner[0] != null)
+                                    ecoCoresSpinner[0].setEnabled(true);
+
+                            } else if (isOn) {
                                 Toast.makeText(PowerManagementActivity.this, "Intelli_plug is not enabled", Toast.LENGTH_LONG).show();
                                 compoundButton.setChecked(false);
-                            } else
+                            } else {
                                 Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + INTELLI_PLUG_ECO_MODE);
+                                if (ecoCoresSpinner[0] != null)
+                                    ecoCoresSpinner[0].setEnabled(false);
+                            }
                         }
                     }
-            );
-            cardsUI.addCard(cardEcoMode);
+            ));
+
         } else {
             cardsUI.addCard(new CardSwitchDisabled(
-                    getString(R.string.intelli_plug_eco),
-                    "Sorry, your kernel does not seem to support the Intelli Plug eco mode",
-                    "#c74b46",
-                    "",
-                    this,
-                    null)
+                            getString(R.string.intelli_plug_eco),
+                            "Sorry, your kernel does not seem to support the Intelli Plug eco mode",
+                            "#c74b46",
+                            "",
+                            this,
+                            null)
             );
         }
+
+        // Intelli_Plug Cores Enabled
+        if (Helpers.doesFileExist(INTELLI_PLUG_ECO_CORES)) {
+            int currEcoCores = Integer.parseInt(CPUHelper.readOneLineNotRoot(INTELLI_PLUG_ECO_CORES));
+            String[] cores = new String[4];
+            cores[0] = 1 + "";
+            cores[1] = 2 + "";
+            cores[2] = 3 + "";
+            ArrayList<String> possibleEcoCores = new ArrayList<String>();
+            Collections.addAll(possibleEcoCores, cores);
+            cardsUI.addCard(new CardSpinner(
+                    getString(R.string.intelliplug_eco_cores),
+                    getString(R.string.intelliplug_eco_cores_text),
+                    "#1abc9c",
+                    INTELLI_PLUG_ECO_CORES,
+                    currEcoCores - 1,
+                    possibleEcoCores,
+                    PowerManagementActivity.this,
+                    new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            ecoCoresSpinner[0] = parent;
+                            Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + position + " > " + INTELLI_PLUG_ECO_CORES);
+                            bootPrefs.edit().putString("INTELLI_PLUG_ECO_CORES", position + "").commit();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    }
+            ));
+        }
+
 
         if (Helpers.doesFileExist(POWER_SUSPEND_TOGGLE)) {
             cardsUI.addCard(new CardSwitchPlugin(
@@ -198,12 +244,12 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
             ));
         } else {
             cardsUI.addCard(new CardSwitchDisabled(
-                    getString(R.string.power_suspend),
-                    "Sorry, your kernel does not seem to support the power_suspend Power Management driver",
-                    "#c74b46",
-                    "",
-                    this,
-                    null)
+                            getString(R.string.power_suspend),
+                            "Sorry, your kernel does not seem to support the power_suspend Power Management driver",
+                            "#c74b46",
+                            "",
+                            this,
+                            null)
             );
         }
 
