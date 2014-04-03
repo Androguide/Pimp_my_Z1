@@ -173,5 +173,6 @@ USB 2.0ポートを使用する場合は500mAまでにしてください。USB 3
     <string name="fast_charge_level_text">お使いの充電器やUSBポートに応じたアンペア数を指定してください。 (手動調整モードのみ)</string>
     <string name="fast_charge_stack">高速充電</string>
     <string name="menu_apply">Apply</string>
-    <string name="intelliplug_eco_cores">Eco Mode Cores Enabled</string>
+    <string name="intelliplug_eco_cores">Intelliplug Eco Cores Enabled</string>
+    <string name="intelliplug_eco_cores_text">Defines the maximum amount of CPU cores to enable when Intelli Plug\'s eco mode is active.</string>
 </resources>
