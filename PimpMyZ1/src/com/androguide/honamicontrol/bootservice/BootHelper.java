@@ -44,8 +44,10 @@ public class BootHelper {
         int KSM_PAGES_TO_SCAN = prefs.getInt(MemoryManagementInterface.KSM_PAGES_TO_SCAN.replaceAll("/", "_"), 100);
         int KSM_SLEEP_TIMER = prefs.getInt(MemoryManagementInterface.KSM_SLEEP_TIMER.replaceAll("/", "_"), 500);
         int FASTCHARGE_MODE = prefs.getInt("FASTCHARGE_MODE", 0);
+        int HOTPLUG_DRIVER = prefs.getInt("HOTPLUG_DRIVER", 0);
+        int ALUCARD_CORES = prefs.getInt("ALUCARD_CORES", 4);
+        int INTELLI_CORES = prefs.getInt("INTELLI_PLUG_ECO_CORES", 2);
         Boolean DYNAMIC_FSYNC = prefs.getBoolean("DYNAMIC_FSYNC", false);
-        Boolean INTELLI_PLUG = prefs.getBoolean("INTELLI_PLUG", false);
         Boolean INTELLI_PLUG_ECO = prefs.getBoolean("INTELLI_PLUG_ECO", false);
         Boolean POWER_SUSPEND = prefs.getBoolean("POWER_SUSPEND", false);
         Boolean PEN_MODE = prefs.getBoolean("PEN_MODE", false);
@@ -152,14 +154,26 @@ public class BootHelper {
                         applyDt2Wake
         );
 
-        if (INTELLI_PLUG) {
-            CMDProcessor.runSuCommand("busybox echo 0 > " + PowerManagementInterface.MSM_MPDECISION_TOGGLE);
-            CMDProcessor.runSuCommand("stop mpdecision");
-            CMDProcessor.runSuCommand("busybox echo 1 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE);
-        } else {
-            CMDProcessor.runSuCommand("busybox echo 0 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE);
-            CMDProcessor.runSuCommand("busybox echo 1 > " + PowerManagementInterface.MSM_MPDECISION_TOGGLE);
-            CMDProcessor.runSuCommand("start mpdecision");
+        switch (HOTPLUG_DRIVER) {
+            case 0:
+                CMDProcessor.runSuCommand("echo 0 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE);
+                CMDProcessor.runSuCommand("echo 0 > " + PowerManagementInterface.ALUCARD_HOTPLUG_TOGGLE);
+                CMDProcessor.runSuCommand("start mpdecision");
+                break;
+            case 1:
+                CMDProcessor.runSuCommand("echo 0 > " + PowerManagementInterface.ALUCARD_HOTPLUG_TOGGLE);
+                CMDProcessor.runSuCommand("stop mpdecision");
+                CMDProcessor.runSuCommand("echo 1 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE);
+                CMDProcessor.runSuCommand("echo " + INTELLI_CORES + " > " + PowerManagementInterface.INTELLI_PLUG_ECO_CORES);
+                break;
+            case 2:
+                CMDProcessor.runSuCommand("echo 0 > " + PowerManagementInterface.INTELLI_PLUG_TOGGLE);
+                CMDProcessor.runSuCommand("stop mpdecision");
+                CMDProcessor.runSuCommand("echo 1 > " + PowerManagementInterface.ALUCARD_HOTPLUG_TOGGLE);
+                CMDProcessor.runSuCommand("echo " + ALUCARD_CORES + " > " + PowerManagementInterface.ALUCARD_HOTPLUG_CORES);
+                break;
+            default:
+                break;
         }
 
         CMDProcessor.runSuCommand(applyIntelliPlugEco);

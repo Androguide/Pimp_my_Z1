@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="16dp"
+        android:animateLayoutChanges="true">
+
+        <LinearLayout
+            android:id="@+id/card_sched_mc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:padding="8dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sched_mc_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/sched_mc"
+                android:textColor="@color/kernel_color_2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/sched_mc_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="all"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/sched_mc_desc"
+                android:textSize="15sp" />
+
+            <Spinner
+                android:id="@+id/sched_mc_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card_hotplug_driver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:padding="8dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/hotplug_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/hotplug_driver"
+                android:textColor="@color/kernel_color_2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/hotplug_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="all"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/hotplug_driver_text"
+                android:textSize="15sp" />
+
+            <Spinner
+                android:id="@+id/hotplug_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card_intelliplug_eco_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:padding="8dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+
+                <TextView
+                    android:id="@+id/intelliplug_eco_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dip"
+                    android:layout_weight="99"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/intelli_plug_eco"
+                    android:textColor="@color/kernel_color_2"
+                    android:textSize="20sp" />
+
+                <Switch
+                    android:id="@+id/intelliplug_eco_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/intelliplug_eco_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_3quarter_margin"
+                android:layout_marginTop="@dimen/activity_quarter_margin"
+                android:autoLink="all"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/intelli_plug_eco_desc"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card_intelliplug_eco_cores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:padding="8dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/intelliplug_eco_cores_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/intelliplug_eco_cores"
+                android:textColor="@color/kernel_color_2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/intelliplug_eco_cores_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="all"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/intelliplug_eco_cores_text"
+                android:textSize="15sp" />
+
+            <Spinner
+                android:id="@+id/intelliplug_eco_cores_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card_alucard_cores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:padding="8dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/alucard_cores_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/alucard_cores"
+                android:textColor="@color/kernel_color_2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/alucard_cores_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="all"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/alucard_cores_text"
+                android:textSize="15sp" />
+
+            <Spinner
+                android:id="@+id/alucard_cores_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card_power_suspend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:padding="8dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+
+                <TextView
+                    android:id="@+id/power_suspend_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dip"
+                    android:layout_weight="99"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/power_suspend"
+                    android:textColor="@color/kernel_color_2"
+                    android:textSize="20sp" />
+
+                <Switch
+                    android:id="@+id/power_suspend_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/power_suspend_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_3quarter_margin"
+                android:layout_marginTop="@dimen/activity_quarter_margin"
+                android:autoLink="all"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/power_suspend_desc"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

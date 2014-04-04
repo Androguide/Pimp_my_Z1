@@ -24,32 +24,30 @@ package com.androguide.honamicontrol.kernel.powermanagement;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.androguide.honamicontrol.R;
-import com.androguide.honamicontrol.cards.CardSpinner;
-import com.androguide.honamicontrol.cards.CardSpinnerSchedMC;
-import com.androguide.honamicontrol.cards.CardSpinnerSchedMCDisabled;
-import com.androguide.honamicontrol.cards.CardSwitchDisabled;
-import com.androguide.honamicontrol.cards.CardSwitchPlugin;
+import com.androguide.honamicontrol.helpers.CMDProcessor.CMDProcessor;
 import com.androguide.honamicontrol.helpers.CPUHelper;
 import com.androguide.honamicontrol.helpers.Helpers;
-import com.fima.cardsui.objects.CardStack;
-import com.fima.cardsui.views.CardUI;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class PowerManagementActivity extends ActionBarActivity implements PowerManagementInterface {
 
-    private int spinnerCounter = 0;
+    private int spinnerCounter = 0, ecoCoresCounter = 0, alucardCoresCounter = 0, hotplugCounter = 0;
     private Boolean isIntelliPlugOn;
-    private Switch ecoModeSwitch;
+    private LinearLayout mCardIntelliEco, mCardIntelliCores, mCardAlucardCores;
+    private Spinner mEcoCoresSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,203 +55,236 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.ic_tools_power_management));
-        setContentView(R.layout.cardsui);
+        setContentView(R.layout.card_power_management);
         final SharedPreferences bootPrefs = getSharedPreferences("BOOT_PREFS", 0);
 
-        CardUI cardsUI = (CardUI) findViewById(R.id.cardsui);
-        cardsUI.addStack(new CardStack(""));
-        cardsUI.addStack(new CardStack(""));
-        final View[] ecoCoresSpinner = {null};
-
-        // Sched MC Power Savings
+        // Sched MC
         if (Helpers.doesFileExist(SCHED_MC_POWER_SAVINGS)) {
+            Spinner schedMcSpinner = (Spinner) findViewById(R.id.sched_mc_spinner);
             ArrayList<String> schedMCEntries = new ArrayList<String>();
             schedMCEntries.add(getString(R.string.disabled));
             schedMCEntries.add(getString(R.string.moderate));
             schedMCEntries.add(getString(R.string.aggressive));
-            cardsUI.addCard(new CardSpinnerSchedMC(
-                    getString(R.string.sched_mc),
-                    getString(R.string.sched_mc_desc),
-                    "#1abc9c",
-                    SCHED_MC_POWER_SAVINGS,
-                    Integer.valueOf(CPUHelper.readOneLineNotRoot(SCHED_MC_POWER_SAVINGS)),
-                    schedMCEntries,
-                    this,
-                    new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            bootPrefs.edit().putInt("SCHED_MC_LEVEL", i).commit();
-                            if (spinnerCounter > 0)
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + i + " > " + SCHED_MC_POWER_SAVINGS);
-                            else
-                                spinnerCounter++;
-                        }
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_row, schedMCEntries);
+            schedMcSpinner.setAdapter(adapter);
+            schedMcSpinner.setSelection(Integer.valueOf(CPUHelper.readOneLineNotRoot(SCHED_MC_POWER_SAVINGS)));
+            schedMcSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    bootPrefs.edit().putInt("SCHED_MC_LEVEL", i).commit();
+                    if (spinnerCounter > 0)
+                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + i + " > " + SCHED_MC_POWER_SAVINGS);
+                    else
+                        spinnerCounter++;
+                }
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
 
-                        }
-                    }
-            ));
-        } else {
-            ArrayList<String> spinnerEntries = new ArrayList<String>();
-            spinnerEntries.add("No Kernel Support");
-            cardsUI.addCard(new CardSpinnerSchedMCDisabled(
-                            getString(R.string.sched_mc),
-                            "Sorry, your kernel does not seem to support Sched_MC power savings",
-                            "#c74b46",
-                            "",
-                            0,
-                            spinnerEntries,
-                            this,
-                            null)
-            );
+                }
+            });
         }
 
-        // Intelli_Plug Toggle
-        if (Helpers.doesFileExist(INTELLI_PLUG_TOGGLE)) {
-            isIntelliPlugOn = getIsIntelliPlugOn();
-            cardsUI.addCard(new CardSwitchPlugin(
-                    getString(R.string.intelli_plug),
-                    getString(R.string.intelli_plug_desc),
-                    "#1abc9c",
-                    PowerManagementInterface.INTELLI_PLUG_TOGGLE,
-                    this,
-                    new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
-                            isIntelliPlugOn = isOn;
-                            bootPrefs.edit().putBoolean("INTELLI_PLUG", isOn).commit();
-                            if (isOn) {
-                                Helpers.CMDProcessorWrapper.runSuCommand("stop mpdecision\nbusybox echo 0 > " + MSM_MPDECISION_TOGGLE
-                                        + "\nbusybox echo 1 > " + INTELLI_PLUG_TOGGLE);
-                            } else {
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + INTELLI_PLUG_TOGGLE
-                                        + "\nbusybox echo 1 > " + MSM_MPDECISION_TOGGLE + "\nstart mpdecision");
-                                if (ecoModeSwitch != null)
-                                    ecoModeSwitch.setChecked(false);
-                            }
-                        }
-                    }
-            ));
+        // Hotplug Driver
+        Spinner hotplugDriverSpinner = (Spinner) findViewById(R.id.hotplug_spinner);
+        ArrayList<String> availableDrivers = new ArrayList<String>();
+        availableDrivers.add("MPDecision");
+        if (Helpers.doesFileExist(INTELLI_PLUG_TOGGLE))
+            availableDrivers.add("Intelliplug");
+        if (Helpers.doesFileExist(ALUCARD_HOTPLUG_TOGGLE))
+            availableDrivers.add("Alucard Hotplug");
+        ArrayAdapter<String> hotplugAdapter = new ArrayAdapter<String>(this, R.layout.spinner_row, availableDrivers);
+        hotplugDriverSpinner.setAdapter(hotplugAdapter);
+        int intelliState = Integer.parseInt(CPUHelper.readOneLineNotRoot(INTELLI_PLUG_TOGGLE));
+        int alucardState = Integer.parseInt(CPUHelper.readOneLineNotRoot(ALUCARD_HOTPLUG_TOGGLE));
 
-        } else {
-            cardsUI.addCard(new CardSwitchDisabled(
-                            getString(R.string.intelli_plug),
-                            "Sorry, your kernel does not seem to support the Intelli Plug hotplug driver",
-                            "#c74b46",
-                            "",
-                            this,
-                            null)
-            );
+        try {
+            if (intelliState == 0 && alucardState == 0) {
+                hotplugDriverSpinner.setSelection(0);
+            } else if (intelliState == 1 && alucardState == 0) {
+                hotplugDriverSpinner.setSelection(1);
+            } else if (intelliState == 0 && alucardState == 1) {
+                hotplugDriverSpinner.setSelection(2);
+            } else {
+                Toast.makeText(this, "It appears you have several hotplug drivers enabled! Switching back to MPDecision...", Toast.LENGTH_LONG).show();
+                CMDProcessor.runSuCommand("echo 0 > " + INTELLI_PLUG_TOGGLE);
+                CMDProcessor.runSuCommand("echo 0 > " + ALUCARD_HOTPLUG_TOGGLE);
+                CMDProcessor.runSuCommand("start mpdecision");
+                hotplugDriverSpinner.setSelection(0);
+            }
+
+        } catch (Exception e) {
+            Log.e("PowerManagement", e.getMessage());
         }
 
-        // Intelli_Plug Eco Mode
+        hotplugDriverSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+
+                bootPrefs.edit().putInt("HOTPLUG_DRIVER", pos).commit();
+                switch (pos) {
+                    case 0:
+                        mCardIntelliEco.setVisibility(View.GONE);
+                        mCardIntelliCores.setVisibility(View.GONE);
+                        mCardAlucardCores.setVisibility(View.GONE);
+                        isIntelliPlugOn = false;
+                        if (hotplugCounter > 0) {
+                            CMDProcessor.runSuCommand("echo 0 > " + INTELLI_PLUG_TOGGLE);
+                            CMDProcessor.runSuCommand("echo 0 > " + ALUCARD_HOTPLUG_TOGGLE);
+                            CMDProcessor.runSuCommand("start mpdecision");
+                        } else hotplugCounter++;
+                        break;
+                    case 1:
+                        mCardAlucardCores.setVisibility(View.GONE);
+                        mCardIntelliEco.setVisibility(View.VISIBLE);
+                        mCardIntelliCores.setVisibility(View.VISIBLE);
+                        isIntelliPlugOn = true;
+                        if (hotplugCounter > 0) {
+                            CMDProcessor.runSuCommand("echo 0 > " + ALUCARD_HOTPLUG_TOGGLE);
+                            CMDProcessor.runSuCommand("stop mpdecision");
+                            CMDProcessor.runSuCommand("echo 1 > " + INTELLI_PLUG_TOGGLE);
+                        } else hotplugCounter++;
+                        break;
+                    case 2:
+                        mCardIntelliEco.setVisibility(View.GONE);
+                        mCardIntelliCores.setVisibility(View.GONE);
+                        mCardAlucardCores.setVisibility(View.VISIBLE);
+                        isIntelliPlugOn = false;
+                        if (hotplugCounter > 0) {
+                            CMDProcessor.runSuCommand("echo 0 > " + INTELLI_PLUG_TOGGLE);
+                            CMDProcessor.runSuCommand("stop mpdecision");
+                            CMDProcessor.runSuCommand("echo 1 > " + ALUCARD_HOTPLUG_TOGGLE);
+                        } else hotplugCounter++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        // Intelliplug Eco Mode
         if (Helpers.doesFileExist(INTELLI_PLUG_ECO_MODE)) {
-            cardsUI.addCard(new CardSwitchPlugin(
-                    getString(R.string.intelli_plug_eco),
-                    getString(R.string.intelli_plug_eco_desc),
-                    "#1abc9c",
-                    PowerManagementInterface.INTELLI_PLUG_ECO_MODE,
-                    this,
-                    new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
-                            bootPrefs.edit().putBoolean("INTELLI_PLUG_ECO", isOn).commit();
-                            ecoModeSwitch = (Switch) compoundButton;
-                            if (isOn && isIntelliPlugOn) {
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + INTELLI_PLUG_ECO_MODE);
-                                if (ecoCoresSpinner[0] != null)
-                                    ecoCoresSpinner[0].setEnabled(true);
+            mCardIntelliEco = (LinearLayout) findViewById(R.id.card_intelliplug_eco_mode);
+            final Switch intelliEcoSwitch = (Switch) findViewById(R.id.intelliplug_eco_switch);
+            int currEcoState = Integer.parseInt(CPUHelper.readOneLineNotRoot(INTELLI_PLUG_TOGGLE));
 
-                            } else if (isOn) {
-                                Toast.makeText(PowerManagementActivity.this, "Intelli_plug is not enabled", Toast.LENGTH_LONG).show();
-                                compoundButton.setChecked(false);
-                            } else {
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + INTELLI_PLUG_ECO_MODE);
-                                if (ecoCoresSpinner[0] != null)
-                                    ecoCoresSpinner[0].setEnabled(false);
-                            }
-                        }
+            if (currEcoState == 0)
+                intelliEcoSwitch.setChecked(false);
+            else
+                intelliEcoSwitch.setChecked(true);
+
+            intelliEcoSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isOn) {
+                    bootPrefs.edit().putBoolean("INTELLI_PLUG_ECO", isOn).commit();
+
+                    if (isOn && isIntelliPlugOn) {
+                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + INTELLI_PLUG_ECO_MODE);
+                        mEcoCoresSpinner.setEnabled(true);
+
+                    } else if (isOn) {
+                        Toast.makeText(PowerManagementActivity.this, "Intelli_plug is not enabled", Toast.LENGTH_LONG).show();
+                        intelliEcoSwitch.setChecked(false);
+
+                    } else {
+                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + INTELLI_PLUG_ECO_MODE);
+                        mEcoCoresSpinner.setEnabled(false);
                     }
-            ));
-
-        } else {
-            cardsUI.addCard(new CardSwitchDisabled(
-                            getString(R.string.intelli_plug_eco),
-                            "Sorry, your kernel does not seem to support the Intelli Plug eco mode",
-                            "#c74b46",
-                            "",
-                            this,
-                            null)
-            );
+                }
+            });
         }
 
-        // Intelli_Plug Cores Enabled
+        // Intelliplug eco cores
         if (Helpers.doesFileExist(INTELLI_PLUG_ECO_CORES)) {
-            int currEcoCores = Integer.parseInt(CPUHelper.readOneLineNotRoot(INTELLI_PLUG_ECO_CORES));
-            String[] cores = new String[4];
-            cores[0] = 1 + "";
-            cores[1] = 2 + "";
-            cores[2] = 3 + "";
+            mCardIntelliCores = (LinearLayout) findViewById(R.id.card_intelliplug_eco_cores);
+            Spinner intelliEcoCoresSpinner = (Spinner) findViewById(R.id.intelliplug_eco_cores_spinner);
+            mEcoCoresSpinner = intelliEcoCoresSpinner;
             ArrayList<String> possibleEcoCores = new ArrayList<String>();
-            Collections.addAll(possibleEcoCores, cores);
-            cardsUI.addCard(new CardSpinner(
-                    getString(R.string.intelliplug_eco_cores),
-                    getString(R.string.intelliplug_eco_cores_text),
-                    "#1abc9c",
-                    INTELLI_PLUG_ECO_CORES,
-                    currEcoCores - 1,
-                    possibleEcoCores,
-                    PowerManagementActivity.this,
-                    new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            ecoCoresSpinner[0] = parent;
-                            Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + position + " > " + INTELLI_PLUG_ECO_CORES);
-                            bootPrefs.edit().putString("INTELLI_PLUG_ECO_CORES", position + "").commit();
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-
-                        }
+            possibleEcoCores.add("1");
+            possibleEcoCores.add("2");
+            possibleEcoCores.add("3");
+            ArrayAdapter<String> ecoCoresAdapter = new ArrayAdapter<String>(this, R.layout.spinner_row, possibleEcoCores);
+            intelliEcoCoresSpinner.setAdapter(ecoCoresAdapter);
+            intelliEcoCoresSpinner.setSelection(Integer.parseInt(CPUHelper.readOneLineNotRoot(INTELLI_PLUG_ECO_CORES)) - 1);
+            if (!bootPrefs.getBoolean("INTELLI_PLUG_ECO", false))
+                intelliEcoCoresSpinner.setEnabled(false);
+            intelliEcoCoresSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    int toApply = position + 1;
+                    if (ecoCoresCounter > 0) {
+                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + toApply + " > " + INTELLI_PLUG_ECO_CORES);
+                        bootPrefs.edit().putInt("INTELLI_PLUG_ECO_CORES", toApply).commit();
+                    } else {
+                        ecoCoresCounter++;
                     }
-            ));
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
         }
 
+        // Alucard eco cores
+        if (Helpers.doesFileExist(ALUCARD_HOTPLUG_CORES)) {
+            mCardAlucardCores = (LinearLayout) findViewById(R.id.card_alucard_cores);
+            final Spinner alucardCoresSpinner = (Spinner) findViewById(R.id.alucard_cores_spinner);
+            mEcoCoresSpinner = alucardCoresSpinner;
+            ArrayList<String> possibleEcoCores = new ArrayList<String>();
+            possibleEcoCores.add("1");
+            possibleEcoCores.add("2");
+            possibleEcoCores.add("3");
+            possibleEcoCores.add("4");
+            ArrayAdapter<String> ecoCoresAdapter = new ArrayAdapter<String>(this, R.layout.spinner_row, possibleEcoCores);
+            alucardCoresSpinner.setAdapter(ecoCoresAdapter);
+            alucardCoresSpinner.setSelection(Integer.parseInt(CPUHelper.readOneLineNotRoot(ALUCARD_HOTPLUG_CORES)) - 1);
+            alucardCoresSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    int toApply = position + 1;
+                    if (alucardCoresCounter > 0) {
+                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + toApply + " > " + ALUCARD_HOTPLUG_CORES);
+                        bootPrefs.edit().putInt("ALUCARD_CORES", toApply).commit();
+                    } else {
+                        alucardCoresCounter++;
+                    }
+                }
 
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+        }
+
+        // Power Suspend
         if (Helpers.doesFileExist(POWER_SUSPEND_TOGGLE)) {
-            cardsUI.addCard(new CardSwitchPlugin(
-                    getString(R.string.power_suspend),
-                    getString(R.string.power_suspend_desc),
-                    "#1abc9c",
-                    PowerManagementInterface.POWER_SUSPEND_TOGGLE,
-                    this,
-                    new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
-                            bootPrefs.edit().putBoolean("POWER_SUSPEND", isOn).commit();
-                            if (isOn)
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + POWER_SUSPEND_TOGGLE);
-                            else {
-                                Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + POWER_SUSPEND_TOGGLE);
-                            }
-                        }
-                    }
-            ));
-        } else {
-            cardsUI.addCard(new CardSwitchDisabled(
-                            getString(R.string.power_suspend),
-                            "Sorry, your kernel does not seem to support the power_suspend Power Management driver",
-                            "#c74b46",
-                            "",
-                            this,
-                            null)
-            );
-        }
+            Switch powerSuspendSwitch = (Switch) findViewById(R.id.power_suspend_switch);
+            int isPowerSuspendOn = Integer.parseInt(CPUHelper.readOneLineNotRoot(POWER_SUSPEND_TOGGLE));
+            if (isPowerSuspendOn == 0)
+                powerSuspendSwitch.setChecked(false);
+            else if (isPowerSuspendOn == 1)
+                powerSuspendSwitch.setChecked(true);
 
-        cardsUI.refresh();
+            powerSuspendSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    bootPrefs.edit().putBoolean("POWER_SUSPEND", isChecked).commit();
+                    if (isChecked)
+                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + POWER_SUSPEND_TOGGLE);
+                    else {
+                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + POWER_SUSPEND_TOGGLE);
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -264,9 +295,5 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private Boolean getIsIntelliPlugOn() {
-        return !CPUHelper.readOneLineNotRoot(INTELLI_PLUG_TOGGLE).equals("0");
     }
 }

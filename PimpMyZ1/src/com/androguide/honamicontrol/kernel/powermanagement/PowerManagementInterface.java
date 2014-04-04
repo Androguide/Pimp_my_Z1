@@ -26,6 +26,8 @@ public interface PowerManagementInterface {
     public static final String INTELLI_PLUG_TOGGLE = "/sys/module/intelli_plug/parameters/intelli_plug_active";
     public static final String INTELLI_PLUG_ECO_MODE = "/sys/module/intelli_plug/parameters/eco_mode_active";
     public static final String INTELLI_PLUG_ECO_CORES = "/sys/module/intelli_plug/parameters/eco_cores_enabled";
+    public static final String ALUCARD_HOTPLUG_TOGGLE = "/sys/kernel/alucard_hotplug/hotplug_enable";
+    public static final String ALUCARD_HOTPLUG_CORES = "/sys/kernel/alucard_hotplug/maxcoreslimit";
     public static final String MSM_MPDECISION_TOGGLE = "/sys/kernel/msm_mpdecision/conf/enabled";
     public static final String POWER_SUSPEND_TOGGLE = "/sys/kernel/power_suspend/power_suspend_mode";
 }
