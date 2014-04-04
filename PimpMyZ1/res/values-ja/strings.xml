@@ -92,10 +92,10 @@
     <string name="sound_control">音量調整</string>
     <string name="sound_control_desc">カーネルにFaux123 Sound Controlが搭載されている場合、ヘッドホン出力やスピーカー、カメラマイクや録音用マイクの音量を調整できます。</string>
     <string name="touch_screen">タッチスクリーン</string>
-    <string name="touch_screen_desc">Xperia Z1のタッチスクリーンをプラスチック製以外のペンに対応させたり、タッチ圧力、ターゲットサイズやドラッグ範囲などの細かな値などを調整したりします。</string>
+    <string name="touch_screen_desc">Xperia Z1のペンモードやタップして起動の有効/無効を切り替えたり、タッチ圧力、ターゲットサイズやドラッグ範囲などの細かな値などを調整したりします。</string>
     <string name="help_center_color">#34495e</string>
     <string name="dynamic_fsync">Dynamic File Sync</string>
-    <string name="dynamic_fsync_desc">When Dynamic Fsyncが有効になっている場合、画面が消灯するまでファイル同期を遅延させ、使用中のパフォーマンスを改善します。</string>
+    <string name="dynamic_fsync_desc">Dynamic Fsyncが有効になっている場合、画面が消灯するまでファイル同期を遅延させ、使用中のパフォーマンスを改善します。\n</string>
     <string name="dynamic_fsync_version">カーネルのDynamic Fsyncバージョン: \'</string>
     <string name="sched_mc">マルチコアプロセッサ制御</string>
     <string name="sched_mc_desc">マルチコアプロセッサ制御を有効にすると、CPUは使用率が最大になるまで一つのコアを使い、コア数を最小限にしようとするようになります。この機能でバッテリー消費が改善されます。\n二段階で調整できます。</string>
@@ -126,7 +126,7 @@
     <string name="right">右:\u0020</string>
     <string name="gpu_governor">GPUガバナ</string>
     <string name="kernel_misc">その他</string>
-    <string name="kernel_misc_desc">VMパラメータやKernel Same-page Mergingなどのその他のカーネルの機能を設定します。</string>
+    <string name="kernel_misc_desc">VMパラメータや高速充電などのその他のカーネルの機能を設定します。</string>
     <string name="ksm_header">KERNEL SAME-PAGE MERGING</string>
     <string name="ksm">KSM</string>
     <string name="ksm_desc">Kernel Same-page Mergingを有効にすると、システムが重複したメモリページをスキャンして統合することによりメモリ使用率が減りパフォーマンスが向上します。</string>
@@ -172,7 +172,7 @@ USB 2.0ポートを使用する場合は500mAまでにしてください。USB 3
     <string name="fast_charge_level">高速充電レベル</string>
     <string name="fast_charge_level_text">お使いの充電器やUSBポートに応じたアンペア数を指定してください。 (手動調整モードのみ)</string>
     <string name="fast_charge_stack">高速充電</string>
-    <string name="menu_apply">Apply</string>
-    <string name="intelliplug_eco_cores">Intelliplug Eco Cores Enabled</string>
-    <string name="intelliplug_eco_cores_text">Defines the maximum amount of CPU cores to enable when Intelli Plug\'s eco mode is active.</string>
+    <string name="menu_apply">適用</string>
+    <string name="intelliplug_eco_cores">Intelliplugエココア数</string>
+    <string name="intelliplug_eco_cores_text">Intelli Plugエコモードを有効にしたときに使う最大コア数を指定してください。</string>
 </resources>
