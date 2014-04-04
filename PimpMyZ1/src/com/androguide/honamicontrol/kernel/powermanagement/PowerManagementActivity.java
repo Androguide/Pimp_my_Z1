@@ -171,29 +171,27 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
         if (Helpers.doesFileExist(INTELLI_PLUG_ECO_MODE)) {
             mCardIntelliEco = (LinearLayout) findViewById(R.id.card_intelliplug_eco_mode);
             final Switch intelliEcoSwitch = (Switch) findViewById(R.id.intelliplug_eco_switch);
-            int currEcoState = Integer.parseInt(CPUHelper.readOneLineNotRoot(INTELLI_PLUG_TOGGLE));
+            int currEcoState = Integer.parseInt(CPUHelper.readOneLineNotRoot(INTELLI_PLUG_ECO_MODE));
 
-            if (currEcoState == 0)
+            if (currEcoState == 0) {
                 intelliEcoSwitch.setChecked(false);
-            else
+                findViewById(R.id.intelliplug_eco_cores_spinner).setEnabled(false);
+            } else if (currEcoState == 1) {
                 intelliEcoSwitch.setChecked(true);
+                findViewById(R.id.intelliplug_eco_cores_spinner).setEnabled(true);
+            }
 
             intelliEcoSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isOn) {
                     bootPrefs.edit().putBoolean("INTELLI_PLUG_ECO", isOn).commit();
 
-                    if (isOn && isIntelliPlugOn) {
+                    if (isOn) {
                         Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 1 > " + INTELLI_PLUG_ECO_MODE);
-                        mEcoCoresSpinner.setEnabled(true);
-
-                    } else if (isOn) {
-                        Toast.makeText(PowerManagementActivity.this, "Intelli_plug is not enabled", Toast.LENGTH_LONG).show();
-                        intelliEcoSwitch.setChecked(false);
-
+                        findViewById(R.id.intelliplug_eco_cores_spinner).setEnabled(true);
                     } else {
                         Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + INTELLI_PLUG_ECO_MODE);
-                        mEcoCoresSpinner.setEnabled(false);
+                        findViewById(R.id.intelliplug_eco_cores_spinner).setEnabled(false);
                     }
                 }
             });
