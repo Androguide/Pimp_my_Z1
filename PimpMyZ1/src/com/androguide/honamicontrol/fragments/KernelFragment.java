@@ -39,7 +39,10 @@ import android.widget.Spinner;
 
 import com.androguide.honamicontrol.R;
 import com.androguide.honamicontrol.cards.CardImageLocal;
+import com.androguide.honamicontrol.helpers.Helpers;
 import com.androguide.honamicontrol.kernel.cpucontrol.CPUActivity;
+import com.androguide.honamicontrol.kernel.gammacontrol.GammaControlActivity;
+import com.androguide.honamicontrol.kernel.gammacontrol.GammaControlInterface;
 import com.androguide.honamicontrol.kernel.gpucontrol.GPUActivity;
 import com.androguide.honamicontrol.kernel.iotweaks.IOTweaksActivity;
 import com.androguide.honamicontrol.kernel.memory.MemoryManagementActivity;
@@ -107,6 +110,23 @@ public class KernelFragment extends Fragment {
             }
         });
 
+
+        CardImageLocal gammaControl = new CardImageLocal(
+                fa.getString(R.string.color_calibration),
+                fa.getString(R.string.gamma_control_desc),
+                sectionColor,
+                R.drawable.ic_tools_color_calibration,
+                fa
+        );
+
+        gammaControl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fa.startActivity(new Intent(fa, GammaControlActivity.class));
+            }
+        });
+
+
         CardImageLocal powerManagement = new CardImageLocal(
                 fa.getString(R.string.kernel_power_management),
                 fa.getString(R.string.kernel_power_management_desc),
@@ -169,6 +189,10 @@ public class KernelFragment extends Fragment {
 
         mCardUI.addCard(cpuControl);
         mCardUI.addCard(gpuControl);
+
+        if (Helpers.doesFileExist(GammaControlInterface.GAMMA_KCAL))
+            mCardUI.addCard(gammaControl);
+
         mCardUI.addCard(powerManagement);
         mCardUI.addCard(ioTweaks);
         mCardUI.addCard(mm);

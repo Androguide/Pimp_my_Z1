@@ -129,10 +129,6 @@ public class MainActivity extends ActionBarActivity implements
                 R.layout.drawer_list_item, mDrawerHeaders);
         mDrawerList.setAdapter(pimpAdapter);
 
-        // TODO: Delete in RC/Stable builds
-        Log.e("FIRST POS", mDrawerList.getFirstVisiblePosition() + "");
-        Log.e("LAST POS", mDrawerList.getLastVisiblePosition() + "");
-
         View child = mDrawerList.getChildAt(mDrawerList
                 .getFirstVisiblePosition());
 
