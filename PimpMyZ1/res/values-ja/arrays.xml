@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="profiles_array">
-        <item>Battery Max</item>
-        <item>Battery</item>
-        <item>Balanced</item>
-        <item>Performance</item>
-        <item>Benchmark</item>
-        <item>Custom</item>
+        <item>省電力(強)</item>
+        <item>省電力(弱)</item>
+        <item>普通</item>
+        <item>パフォーマンス</item>
+        <item>ベンチマーク</item>
+        <item>カスタム</item>
     </string-array>
 </resources>
