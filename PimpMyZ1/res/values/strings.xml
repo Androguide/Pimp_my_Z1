@@ -175,10 +175,11 @@ When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, 
     <string name="alucard_cores_text">Defines the max amount of online CPU cores when using Alucard Hotplug</string>
     <string name="hotplug_driver">Hotplug Driver</string>
     <string name="hotplug_driver_text">Select which hotplug driver to use. Hotplug drivers define the strategy to use for toggling CPU cores on/off depending on the CPU load.</string>
-    <string name="gamma_control">Color Calibration (Gamma)</string>
+    <string name="gamma_control">Color Calibration</string>
     <string name="gamma_control_desc">This tool gives you full control over your display\'s color channels, allowing you to calibrate your display to your liking, or to lower its minimum brightness.</string>
     <string name="color_calibration">Color Calibration</string>
     <string name="red_val">Red: </string>
     <string name="green_val">Green: </string>
     <string name="blue_val">Blue: </string>
+    <string name="multiple_hotplug_drivers_warning">It appears you have several hotplug drivers enabled at the same time! Reverting back to mpdecision...</string>
 </resources>

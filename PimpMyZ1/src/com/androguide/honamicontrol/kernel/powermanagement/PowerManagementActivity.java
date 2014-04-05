@@ -89,28 +89,61 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
         Spinner hotplugDriverSpinner = (Spinner) findViewById(R.id.hotplug_spinner);
         ArrayList<String> availableDrivers = new ArrayList<String>();
         availableDrivers.add("MPDecision");
-        if (Helpers.doesFileExist(INTELLI_PLUG_TOGGLE))
-            availableDrivers.add("Intelliplug");
-        if (Helpers.doesFileExist(ALUCARD_HOTPLUG_TOGGLE))
-            availableDrivers.add("Alucard Hotplug");
-        ArrayAdapter<String> hotplugAdapter = new ArrayAdapter<String>(this, R.layout.spinner_row, availableDrivers);
-        hotplugDriverSpinner.setAdapter(hotplugAdapter);
-        int intelliState = Integer.parseInt(CPUHelper.readOneLineNotRoot(INTELLI_PLUG_TOGGLE));
-        int alucardState = Integer.parseInt(CPUHelper.readOneLineNotRoot(ALUCARD_HOTPLUG_TOGGLE));
+        Boolean hasIntelliPlug = false;
+        Boolean hasAlucardPlug = false;
+        int intelliState = 0;
+        int alucardState = 0;
 
         try {
-            if (intelliState == 0 && alucardState == 0) {
+            if (Helpers.doesFileExist(INTELLI_PLUG_TOGGLE)) {
+                hasIntelliPlug = true;
+                intelliState = Integer.parseInt(CPUHelper.readOneLineNotRoot(INTELLI_PLUG_TOGGLE));
+                availableDrivers.add("Intelliplug");
+            }
+
+            if (Helpers.doesFileExist(ALUCARD_HOTPLUG_TOGGLE)) {
+                hasAlucardPlug = true;
+                alucardState = Integer.parseInt(CPUHelper.readOneLineNotRoot(ALUCARD_HOTPLUG_TOGGLE));
+                availableDrivers.add("Alucard Hotplug");
+            }
+
+            ArrayAdapter<String> hotplugAdapter = new ArrayAdapter<String>(this, R.layout.spinner_row, availableDrivers);
+            hotplugDriverSpinner.setAdapter(hotplugAdapter);
+
+            /** If the kernel doesn't have intelliplug nor alucard hotplug */
+            if (!hasAlucardPlug && !hasIntelliPlug) {
+                // then default to mpdecision
                 hotplugDriverSpinner.setSelection(0);
-            } else if (intelliState == 1 && alucardState == 0) {
-                hotplugDriverSpinner.setSelection(1);
-            } else if (intelliState == 0 && alucardState == 1) {
-                hotplugDriverSpinner.setSelection(2);
+
+            /** If the kernel has intelliplug but not alucard hotplug */
+            } else if (hasIntelliPlug && !hasAlucardPlug) {
+
+                if (intelliState == 1) // If intelliplug is on, intelliplug is the current hotplug driver
+                    hotplugDriverSpinner.setSelection(1);
+                else
+                    hotplugDriverSpinner.setSelection(0); // else it's mpdecision
+
+            /** If the kernel has alucard hotplug but not intelliplug */
+            } else if (!hasIntelliPlug) {
+
+                if (alucardState == 1)
+                    hotplugDriverSpinner.setSelection(2); // if alucard hotplug is on, then it's the current hotplug driver
+                else
+                    hotplugDriverSpinner.setSelection(0); // else it's mpdecision
+
+            /** If the kernel has both intelliplug & alucard hotplug */
             } else {
-                Toast.makeText(this, "It appears you have several hotplug drivers enabled! Switching back to MPDecision...", Toast.LENGTH_LONG).show();
-                CMDProcessor.runSuCommand("echo 0 > " + INTELLI_PLUG_TOGGLE);
-                CMDProcessor.runSuCommand("echo 0 > " + ALUCARD_HOTPLUG_TOGGLE);
-                CMDProcessor.runSuCommand("start mpdecision");
-                hotplugDriverSpinner.setSelection(0);
+                if (intelliState == 1 && alucardState == 0) // if intelliplug is on & alucard is off, intelliplug is the current driver
+                    hotplugDriverSpinner.setSelection(1);
+                else if (intelliState == 0 && alucardState == 1) // if alucard is on & intelliplug is off, alucard is the current driver
+                    hotplugDriverSpinner.setSelection(2);
+                else if (intelliState == 0 && alucardState == 0) // if neither alucard or intelliplug is on, mpdecision is the current driver
+                    hotplugDriverSpinner.setSelection(0);
+                else if (intelliState == 1 && alucardState == 1) { // if both alucard & intelliplug are on, notifiy the user and default back to mpdecision
+                    Toast.makeText(this, getString(R.string.multiple_hotplug_drivers_warning), Toast.LENGTH_LONG).show();
+                    hotplugDriverSpinner.setSelection(0);
+                    Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + INTELLI_PLUG_TOGGLE + "\nbusybox echo 0 > " + ALUCARD_HOTPLUG_TOGGLE + "\nstart mpdecision");
+                }
             }
 
         } catch (Exception e) {

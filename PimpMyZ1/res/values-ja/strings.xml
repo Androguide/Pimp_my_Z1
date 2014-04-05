@@ -178,4 +178,5 @@ USB 2.0ポートを使用する場合は500mAまでにしてください。USB 3
     <string name="alucard_cores">Max Online Cores</string>
     <string name="alucard_cores_text">Defines the max amount of online CPU cores when using Alucard Hotplug</string>
     <string name="hotplug_driver">Hotplug Driver</string>
+    <string name="multiple_hotplug_drivers_warning">It appears you have several hotplug drivers enabled at the same time! Reverting back to mpdecision...</string>
 </resources>
