@@ -175,8 +175,15 @@ USB 2.0ポートを使用する場合は500mAまでにしてください。USB 3
     <string name="menu_apply">適用</string>
     <string name="intelliplug_eco_cores">Intelliplugエココア数</string>
     <string name="intelliplug_eco_cores_text">Intelli Plugエコモードを有効にしたときに使う最大コア数を指定してください。</string>
-    <string name="alucard_cores">Max Online Cores</string>
-    <string name="alucard_cores_text">Defines the max amount of online CPU cores when using Alucard Hotplug</string>
-    <string name="hotplug_driver">Hotplug Driver</string>
-    <string name="multiple_hotplug_drivers_warning">It appears you have several hotplug drivers enabled at the same time! Reverting back to mpdecision...</string>
+    <string name="alucard_cores">Alucardオンラインコア</string>
+    <string name="alucard_cores_text">Alucard Hotplugを使うときの最大オンラインCPUコア数を指定してください。</string>
+    <string name="hotplug_driver">Hotplugドライバ</string>
+    <string name="hotplug_driver_text">どのHotplugドライバを使うか選んでください。Hotplugドライバは、CPUの負荷に応じてCPUコアのオン/オフを切り替える動作を制御します。</string>
+    <string name="gamma_control">色の調整(ガンマ)</string>
+    <string name="gamma_control_desc">このツールでディスプレイの色を変更できます。好きな色に調整したり、明るさを下げたりできます。</string>
+    <string name="color_calibration">色の調整</string>
+    <string name="red_val">赤: </string>
+    <string name="green_val">緑: </string>
+    <string name="blue_val">青: </string>
+    <string name="multiple_hotplug_drivers_warning">It appears you have several hotplug drivers enabled at the same time! Reverting back to mpdecision…</string>
 </resources>
