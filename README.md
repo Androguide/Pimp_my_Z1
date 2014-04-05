@@ -10,8 +10,10 @@ Most features require either [Pimped Kernel](http://forum.xda-developers.com/sho
 - __CPU Control__: 
   - Set your minimum & maximum CPU frequencies (and overclock if your kernel allows it)
   - Set a different Governor for each CPU core
-  - Select your I/O Scheduler
   - View your current CPU frequency in real-time and with a graph
+  - Select your TCP Congestion Algorithm
+  - Toggle thermal throttling (msm_thermal) on/off
+  - Toggle Snake Charmer on/off
 
 
 - __GPU Control__: 
@@ -21,11 +23,17 @@ Most features require either [Pimped Kernel](http://forum.xda-developers.com/sho
   - View your current GPU frequency in real-time and with a graph
 
 
+- __Color Calibration__:
+  - Support for LCD_KCAL interface, allowing to control the RGB channels of the display. 
+
+
 - __Power Management__: 
 
   - Select your level of multi-core power savings, a.k.a sched_mc power savings (disabled/moderate/aggressive)
-  - Toggle the IntelliPlug hotplug driver on and off
+  - Select your hotplug driver (MPDecision/Intelliplug/Alucard Hotplug)
   - Toggle IntelliPlug's eco mode on and off
+  - Set IntelliPlug's eco mode max amount of online cores
+  - Set Alucard Hotplug's max amount of online cores
   - Toggle between the default early_suspend PM driver and the newer power_suspend PM driver
 
 
@@ -36,11 +44,17 @@ Most features require either [Pimped Kernel](http://forum.xda-developers.com/sho
   - Toggle eMMC & SD-Card entropy contribution independently
 
 
-- __Miscellaneous__:
+- __Memory Management__:
 
   - Toggle Kernel Same-page Merging (KSM) on and off
   - Set KSM's amount of pages to scan
   - Set KSM's timer in milliseconds
+
+
+- __Miscellaneous__:
+  - Set the vibrator intensity at kernel level
+  - Set Fast Charge mode (off|force A/C|manual)
+  - Set FastCharge amperage in manual mode
 
 
 - __Sound Control__:
@@ -56,7 +70,7 @@ Most features require either [Pimped Kernel](http://forum.xda-developers.com/sho
 
   - Enable/Disable Pen Mode to allow/disallow the use of any non-plastic pen or object as a stylus for the touchscreen
   - Enable/Disable Glove Mode to allow/disallow using the touchscreen while wearing gloves
-
+  - Enable/Disable Double-Tap 2 Wake
 
 
 
