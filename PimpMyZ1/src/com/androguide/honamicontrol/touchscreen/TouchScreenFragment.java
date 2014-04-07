@@ -19,7 +19,7 @@
  *      51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  **/
 
-package com.androguide.honamicontrol.fragments;
+package com.androguide.honamicontrol.touchscreen;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;

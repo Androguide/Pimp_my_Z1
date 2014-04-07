@@ -58,10 +58,9 @@ import android.widget.ListView;
 
 import com.androguide.honamicontrol.fragments.CardsFragment;
 import com.androguide.honamicontrol.fragments.HelpFragment;
-import com.androguide.honamicontrol.fragments.KernelFragment;
-import com.androguide.honamicontrol.fragments.SoundControlFragment;
-import com.androguide.honamicontrol.fragments.SoundFragment;
-import com.androguide.honamicontrol.fragments.TouchScreenFragment;
+import com.androguide.honamicontrol.kernel.KernelFragment;
+import com.androguide.honamicontrol.soundcontrol.SoundControlFragment;
+import com.androguide.honamicontrol.touchscreen.TouchScreenFragment;
 import com.androguide.honamicontrol.fragments.WelcomeFragment;
 import com.astuetz.viewpager.extensions.PagerSlidingTabStrip;
 

@@ -19,7 +19,7 @@
  *      51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  **/
 
-package com.androguide.honamicontrol.fragments;
+package com.androguide.honamicontrol.kernel;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,9 +40,9 @@ import android.widget.Spinner;
 import com.androguide.honamicontrol.R;
 import com.androguide.honamicontrol.cards.CardImageLocal;
 import com.androguide.honamicontrol.helpers.Helpers;
+import com.androguide.honamicontrol.kernel.colorcontrol.ColorControlActivity;
+import com.androguide.honamicontrol.kernel.colorcontrol.ColorControlInterface;
 import com.androguide.honamicontrol.kernel.cpucontrol.CPUActivity;
-import com.androguide.honamicontrol.kernel.gammacontrol.GammaControlActivity;
-import com.androguide.honamicontrol.kernel.gammacontrol.GammaControlInterface;
 import com.androguide.honamicontrol.kernel.gpucontrol.GPUActivity;
 import com.androguide.honamicontrol.kernel.iotweaks.IOTweaksActivity;
 import com.androguide.honamicontrol.kernel.memory.MemoryManagementActivity;
@@ -122,7 +122,7 @@ public class KernelFragment extends Fragment {
         gammaControl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fa.startActivity(new Intent(fa, GammaControlActivity.class));
+                fa.startActivity(new Intent(fa, ColorControlActivity.class));
             }
         });
 
@@ -190,7 +190,7 @@ public class KernelFragment extends Fragment {
         mCardUI.addCard(cpuControl);
         mCardUI.addCard(gpuControl);
 
-        if (Helpers.doesFileExist(GammaControlInterface.GAMMA_KCAL))
+        if (Helpers.doesFileExist(ColorControlInterface.GAMMA_KCAL))
             mCardUI.addCard(gammaControl);
 
         mCardUI.addCard(powerManagement);

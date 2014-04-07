@@ -26,7 +26,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,7 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androguide.honamicontrol.R;
-import com.androguide.honamicontrol.fragments.SoundFragment;
+import com.androguide.honamicontrol.soundcontrol.SoundFragment;
 import com.androguide.honamicontrol.helpers.Helpers;
 import com.androguide.honamicontrol.soundcontrol.SoundControlInterface;
 import com.fima.cardsui.objects.Card;

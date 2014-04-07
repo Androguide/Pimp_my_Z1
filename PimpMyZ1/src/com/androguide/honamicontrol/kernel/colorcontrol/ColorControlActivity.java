@@ -19,7 +19,7 @@
  *      51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  **/
 
-package com.androguide.honamicontrol.kernel.gammacontrol;
+package com.androguide.honamicontrol.kernel.colorcontrol;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,13 +28,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.androguide.honamicontrol.R;
 import com.androguide.honamicontrol.helpers.CMDProcessor.CMDProcessor;
 import com.androguide.honamicontrol.helpers.CPUHelper;
 
-public class GammaControlActivity extends ActionBarActivity implements GammaControlInterface {
+public class ColorControlActivity extends ActionBarActivity implements ColorControlInterface {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

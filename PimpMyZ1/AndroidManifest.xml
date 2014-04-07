@@ -62,7 +62,7 @@
             android:configChanges="orientation|screenSize">
         </activity>
         <activity
-            android:name="com.androguide.honamicontrol.kernel.gammacontrol.GammaControlActivity"
+            android:name=".kernel.colorcontrol.ColorControlActivity"
             android:label="@string/gamma_control"
             android:configChanges="orientation|screenSize">
         </activity>

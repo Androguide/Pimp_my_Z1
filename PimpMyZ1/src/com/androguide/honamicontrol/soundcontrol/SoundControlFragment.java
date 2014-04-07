@@ -19,33 +19,25 @@
  *      51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  **/
 
-package com.androguide.honamicontrol.fragments;
+package com.androguide.honamicontrol.soundcontrol;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.androguide.honamicontrol.R;
 import com.androguide.honamicontrol.helpers.CPUHelper;
 import com.androguide.honamicontrol.helpers.Helpers;
-import com.androguide.honamicontrol.soundcontrol.SoundControlInterface;
-import com.echo.holographlibrary.Line;
-import com.fima.cardsui.objects.Card;
-
-import java.util.ArrayList;
 
 public class SoundControlFragment extends Fragment implements SoundControlInterface {
 
