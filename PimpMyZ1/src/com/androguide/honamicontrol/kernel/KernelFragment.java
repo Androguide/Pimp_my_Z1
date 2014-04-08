@@ -63,7 +63,6 @@ import java.util.ArrayList;
 public class KernelFragment extends Fragment {
 
     private static ArrayList<Card> mCards;
-    private static CardUI mCardUI;
     private static int profileCounter = 0;
 
     @Override
@@ -75,7 +74,7 @@ public class KernelFragment extends Fragment {
         fa.getSupportActionBar().setHomeButtonEnabled(true);
 
         assert ll != null;
-        mCardUI = (CardUI) (ll.findViewById(R.id.cardsui));
+        CardUI mCardUI = (CardUI) (ll.findViewById(R.id.cardsui));
         mCardUI.addStack(new CardStack(""), true);
 
         String sectionColor = fa.getString(R.string.kernel_color);

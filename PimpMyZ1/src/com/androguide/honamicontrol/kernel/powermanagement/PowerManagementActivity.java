@@ -58,6 +58,10 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
         setContentView(R.layout.card_power_management);
         final SharedPreferences bootPrefs = getSharedPreferences("BOOT_PREFS", 0);
 
+        mCardIntelliEco = (LinearLayout) findViewById(R.id.card_intelliplug_eco_mode);
+        mCardIntelliCores = (LinearLayout) findViewById(R.id.card_intelliplug_eco_cores);
+        mCardAlucardCores = (LinearLayout) findViewById(R.id.card_alucard_cores);
+
         // Sched MC
         if (Helpers.doesFileExist(SCHED_MC_POWER_SAVINGS)) {
             Spinner schedMcSpinner = (Spinner) findViewById(R.id.sched_mc_spinner);
@@ -115,7 +119,7 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
                 // then default to mpdecision
                 hotplugDriverSpinner.setSelection(0);
 
-            /** If the kernel has intelliplug but not alucard hotplug */
+                /** If the kernel has intelliplug but not alucard hotplug */
             } else if (hasIntelliPlug && !hasAlucardPlug) {
 
                 if (intelliState == 1) // If intelliplug is on, intelliplug is the current hotplug driver
@@ -123,7 +127,7 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
                 else
                     hotplugDriverSpinner.setSelection(0); // else it's mpdecision
 
-            /** If the kernel has alucard hotplug but not intelliplug */
+                /** If the kernel has alucard hotplug but not intelliplug */
             } else if (!hasIntelliPlug) {
 
                 if (alucardState == 1)
@@ -131,7 +135,7 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
                 else
                     hotplugDriverSpinner.setSelection(0); // else it's mpdecision
 
-            /** If the kernel has both intelliplug & alucard hotplug */
+                /** If the kernel has both intelliplug & alucard hotplug */
             } else {
                 if (intelliState == 1 && alucardState == 0) // if intelliplug is on & alucard is off, intelliplug is the current driver
                     hotplugDriverSpinner.setSelection(1);
@@ -167,6 +171,7 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
                             CMDProcessor.runSuCommand("start mpdecision");
                         } else hotplugCounter++;
                         break;
+
                     case 1:
                         mCardAlucardCores.setVisibility(View.GONE);
                         mCardIntelliEco.setVisibility(View.VISIBLE);
@@ -178,6 +183,7 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
                             CMDProcessor.runSuCommand("echo 1 > " + INTELLI_PLUG_TOGGLE);
                         } else hotplugCounter++;
                         break;
+
                     case 2:
                         mCardIntelliEco.setVisibility(View.GONE);
                         mCardIntelliCores.setVisibility(View.GONE);
@@ -202,7 +208,6 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
 
         // Intelliplug Eco Mode
         if (Helpers.doesFileExist(INTELLI_PLUG_ECO_MODE)) {
-            mCardIntelliEco = (LinearLayout) findViewById(R.id.card_intelliplug_eco_mode);
             final Switch intelliEcoSwitch = (Switch) findViewById(R.id.intelliplug_eco_switch);
             int currEcoState = Integer.parseInt(CPUHelper.readOneLineNotRoot(INTELLI_PLUG_ECO_MODE));
 
@@ -232,7 +237,6 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
 
         // Intelliplug eco cores
         if (Helpers.doesFileExist(INTELLI_PLUG_ECO_CORES)) {
-            mCardIntelliCores = (LinearLayout) findViewById(R.id.card_intelliplug_eco_cores);
             Spinner intelliEcoCoresSpinner = (Spinner) findViewById(R.id.intelliplug_eco_cores_spinner);
             mEcoCoresSpinner = intelliEcoCoresSpinner;
             ArrayList<String> possibleEcoCores = new ArrayList<String>();
@@ -265,7 +269,6 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
 
         // Alucard eco cores
         if (Helpers.doesFileExist(ALUCARD_HOTPLUG_CORES)) {
-            mCardAlucardCores = (LinearLayout) findViewById(R.id.card_alucard_cores);
             final Spinner alucardCoresSpinner = (Spinner) findViewById(R.id.alucard_cores_spinner);
             mEcoCoresSpinner = alucardCoresSpinner;
             ArrayList<String> possibleEcoCores = new ArrayList<String>();
