@@ -547,5 +547,13 @@ public class Helpers {
     public static Boolean doesFileExist(String path) {
         return new File(path).exists();
     }
+
+    public static void applySysctlValue(String key, String value) {
+        Helpers.CMDProcessorWrapper.runSuCommand("mount -o remount,rw /system\n" +
+                        "sysctl -w " + key + "=" + value + "\n" +
+                        "echo \'" + key + " = " + value + "\' > /system/etc/sysctl.conf\n" +
+                        "mount -o remount,ro /system"
+        );
+    }
 }
 

@@ -30,8 +30,10 @@ import android.widget.CompoundButton;
 
 import com.androguide.honamicontrol.R;
 import com.androguide.honamicontrol.cards.CardSeekBarGeneric;
+import com.androguide.honamicontrol.cards.CardSeekBarSysctl;
 import com.androguide.honamicontrol.cards.CardSwitchDisabled;
 import com.androguide.honamicontrol.cards.CardSwitchPlugin;
+import com.androguide.honamicontrol.helpers.CMDProcessor.CMDProcessor;
 import com.androguide.honamicontrol.helpers.CPUHelper;
 import com.androguide.honamicontrol.helpers.Helpers;
 import com.fima.cardsui.objects.CardStack;
@@ -122,6 +124,21 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
                     null
             ));
         }
+
+        String currVfs = CMDProcessor.runShellCommand("sysctl " + VFS_CACHE_PRESSURE).getStdout();
+        currVfs = currVfs.replaceAll("[\\D]", "");
+
+        cardsUI.addCard(new CardSeekBarSysctl(
+                "VFS Cache Pressure",
+                "The lower this value is set, the more RAM the kernel will be able to use for file-system caching, resulting in better perceived performance.",
+                "#1abc9c",
+                "",
+                VFS_CACHE_PRESSURE,
+                100,
+                Integer.parseInt(currVfs),
+                this,
+                null
+        ));
 
         cardsUI.refresh();
     }

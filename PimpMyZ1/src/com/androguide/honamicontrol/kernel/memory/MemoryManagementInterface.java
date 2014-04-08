@@ -25,4 +25,5 @@ public interface MemoryManagementInterface {
     public static final String KSM_TOGGLE = "/sys/kernel/mm/ksm/run";
     public static final String KSM_PAGES_TO_SCAN = "/sys/kernel/mm/ksm/pages_to_scan";
     public static final String KSM_SLEEP_TIMER = "/sys/kernel/mm/ksm/sleep_millisecs";
+    public static final String VFS_CACHE_PRESSURE = "vm.vfs_cache_pressure";
 }
