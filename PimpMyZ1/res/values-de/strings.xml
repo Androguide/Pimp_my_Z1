@@ -176,4 +176,12 @@ When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, 
     <string name="alucard_cores_text">Defines the max amount of online CPU cores when using Alucard Hotplug</string>
     <string name="hotplug_driver">Hotplug Driver</string>
     <string name="multiple_hotplug_drivers_warning">It appears you have several hotplug drivers enabled at the same time! Reverting back to mpdecision...</string>
+    <string name="vfs_cache_pressure">VFS Cache Pressure</string>
+    <string name="vfs_cache_pressure_text">The lower this value is set, the more RAM the kernel will be able to use for file-system caching, resulting in better perceived performance.</string>
+    <string name="swappiness">Swappiness</string>
+    <string name="swappiness_text">Controls the relative weight given to swapping-out runtime memory, as opposed to dropping pages from the system page cache.</string>
+    <string name="dirty_ratio">Dirty Ratio</string>
+    <string name="dirty_ratio_text">Defines the percentage of the total memory that can consume dirty pages before the I/O is blocked and the dirty memory flushed to disk.</string>
+    <string name="dirty_bg_ratio">Dirty Background Ratio</string>
+    <string name="dirty_bg_ratio_text">Defines the percentage of the memory that can be dirty before the I/O is blocked and dirty memory is flushed to disk.</string>
 </resources>

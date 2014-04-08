@@ -26,4 +26,7 @@ public interface MemoryManagementInterface {
     public static final String KSM_PAGES_TO_SCAN = "/sys/kernel/mm/ksm/pages_to_scan";
     public static final String KSM_SLEEP_TIMER = "/sys/kernel/mm/ksm/sleep_millisecs";
     public static final String VFS_CACHE_PRESSURE = "vm.vfs_cache_pressure";
+    public static final String SWAPPINESS = "vm.swappiness";
+    public static final String DIRTY_RATIO = "vm.dirty_ratio";
+    public static final String DIRTY_BG_RATIO = "vm.dirty_background_ratio";
 }

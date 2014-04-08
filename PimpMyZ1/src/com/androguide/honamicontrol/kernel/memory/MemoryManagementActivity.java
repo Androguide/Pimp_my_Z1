@@ -125,17 +125,60 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
             ));
         }
 
+        cardsUI.addStack(new CardStack("VM PARAMETERS"));
+
         String currVfs = CMDProcessor.runShellCommand("sysctl " + VFS_CACHE_PRESSURE).getStdout();
         currVfs = currVfs.replaceAll("[\\D]", "");
-
         cardsUI.addCard(new CardSeekBarSysctl(
-                "VFS Cache Pressure",
-                "The lower this value is set, the more RAM the kernel will be able to use for file-system caching, resulting in better perceived performance.",
+                getString(R.string.vfs_cache_pressure),
+                getString(R.string.vfs_cache_pressure_text),
                 "#1abc9c",
-                "",
+                "%",
                 VFS_CACHE_PRESSURE,
                 100,
                 Integer.parseInt(currVfs),
+                this,
+                null
+        ));
+
+        String currSwappiness = CMDProcessor.runShellCommand("sysctl " + SWAPPINESS).getStdout();
+        currSwappiness = currSwappiness.replaceAll("[\\D]", "");
+        cardsUI.addCard(new CardSeekBarSysctl(
+                getString(R.string.swappiness),
+                getString(R.string.swappiness_text),
+                "#1abc9c",
+                "%",
+                SWAPPINESS,
+                100,
+                Integer.parseInt(currSwappiness),
+                this,
+                null
+        ));
+
+        String currDirtyRatio = CMDProcessor.runShellCommand("sysctl " + DIRTY_RATIO).getStdout();
+        currDirtyRatio = currDirtyRatio.replaceAll("[\\D]", "");
+        cardsUI.addCard(new CardSeekBarSysctl(
+                getString(R.string.dirty_ratio),
+                getString(R.string.dirty_ratio_text),
+                "#1abc9c",
+                "%",
+                DIRTY_RATIO,
+                100,
+                Integer.parseInt(currDirtyRatio),
+                this,
+                null
+        ));
+
+        String currDirtyBgRatio = CMDProcessor.runShellCommand("sysctl " + DIRTY_BG_RATIO).getStdout();
+        currDirtyBgRatio = currDirtyBgRatio.replaceAll("[\\D]", "");
+        cardsUI.addCard(new CardSeekBarSysctl(
+                getString(R.string.dirty_bg_ratio),
+                getString(R.string.dirty_bg_ratio_text),
+                "#1abc9c",
+                "%",
+                DIRTY_BG_RATIO,
+                100,
+                Integer.parseInt(currDirtyBgRatio),
                 this,
                 null
         ));
