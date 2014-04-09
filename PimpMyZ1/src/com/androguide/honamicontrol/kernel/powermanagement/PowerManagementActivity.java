@@ -318,6 +318,8 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
                     }
                 }
             });
+        } else {
+            findViewById(R.id.card_power_suspend).setVisibility(View.GONE);
         }
     }
 

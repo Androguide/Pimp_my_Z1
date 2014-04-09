@@ -195,6 +195,7 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
         } catch (Exception e) {
             Log.e("DIRTY_BACKGROUND_RATIO", e.getMessage());
         }
+
         cardsUI.addCard(new CardSeekBarSysctl(
                 getString(R.string.dirty_bg_ratio),
                 getString(R.string.dirty_bg_ratio_text),
