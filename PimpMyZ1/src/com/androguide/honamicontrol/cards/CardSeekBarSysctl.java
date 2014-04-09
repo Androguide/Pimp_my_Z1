@@ -57,7 +57,7 @@ public class CardSeekBarSysctl extends Card  {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                mValue.setText(progress + "");
+                mValue.setText(progress + unit);
             }
 
             @Override
