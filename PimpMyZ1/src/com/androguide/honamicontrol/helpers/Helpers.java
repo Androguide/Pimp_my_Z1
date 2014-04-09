@@ -549,10 +549,10 @@ public class Helpers {
     }
 
     public static void applySysctlValue(String key, String value) {
-        Helpers.CMDProcessorWrapper.runSuCommand("mount -o remount,rw /system\n" +
-                        "sysctl -w " + key + "=" + value + "\n" +
-                        "echo \'" + key + " = " + value + "\' > /system/etc/sysctl.conf\n" +
-                        "mount -o remount,ro /system"
+        Helpers.CMDProcessorWrapper.runSuCommand("busybox mount -o remount,rw /system\n" +
+                        "busybox sysctl -w " + key + "=" + value + "\n" +
+                        "busybox echo \'" + key + " = " + value + "\' > /system/etc/sysctl.conf\n" +
+                        "busybox mount -o remount,ro /system"
         );
     }
 }

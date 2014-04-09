@@ -127,7 +127,7 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
 
         cardsUI.addStack(new CardStack("VM PARAMETERS"));
 
-        String currVfs = CMDProcessor.runShellCommand("sysctl " + VFS_CACHE_PRESSURE).getStdout();
+        String currVfs = CMDProcessor.runShellCommand("busybox sysctl " + VFS_CACHE_PRESSURE).getStdout();
         currVfs = currVfs.replaceAll("[\\D]", "");
         int vfs = 50;
         try {
@@ -147,7 +147,7 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
                     null
             ));
 
-        String currSwappiness = CMDProcessor.runShellCommand("sysctl " + SWAPPINESS).getStdout();
+        String currSwappiness = CMDProcessor.runShellCommand("busybox sysctl " + SWAPPINESS).getStdout();
         currSwappiness = currSwappiness.replaceAll("[\\D]", "");
         int swappiness = 60;
         try {
@@ -167,7 +167,7 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
                 null
         ));
 
-        String currDirtyRatio = CMDProcessor.runShellCommand("sysctl " + DIRTY_RATIO).getStdout();
+        String currDirtyRatio = CMDProcessor.runShellCommand("busybox sysctl " + DIRTY_RATIO).getStdout();
         currDirtyRatio = currDirtyRatio.replaceAll("[\\D]", "");
         int dirtyRatio = 30;
         try {
@@ -187,7 +187,7 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
                 null
         ));
 
-        String currDirtyBgRatio = CMDProcessor.runShellCommand("sysctl " + DIRTY_BG_RATIO).getStdout();
+        String currDirtyBgRatio = CMDProcessor.runShellCommand("busybox sysctl " + DIRTY_BG_RATIO).getStdout();
         currDirtyBgRatio = currDirtyBgRatio.replaceAll("[\\D]", "");
         int dirtyBgRatio = 15;
         try {
