@@ -47,6 +47,12 @@ public class BootHelper {
         int HOTPLUG_DRIVER = prefs.getInt("HOTPLUG_DRIVER", 0);
         int ALUCARD_CORES = prefs.getInt("ALUCARD_CORES", 4);
         int INTELLI_CORES = prefs.getInt("INTELLI_PLUG_ECO_CORES", 2);
+        int VFS_CACHE_PRESSURE = prefs.getInt(MemoryManagementInterface.VFS_CACHE_PRESSURE, 100);
+        int SWAPPINESS = prefs.getInt(MemoryManagementInterface.SWAPPINESS, 60);
+        int DIRTY_RATIO = prefs.getInt(MemoryManagementInterface.DIRTY_RATIO, 20);
+        int DIRTY_BG_RATIO = prefs.getInt(MemoryManagementInterface.DIRTY_BG_RATIO, 5);
+        int DIRTY_WRITEBACK = prefs.getInt(MemoryManagementInterface.DIRTY_WRITEBACK_CENTISECS, 500);
+        int DIRTY_EXPIRE = prefs.getInt(MemoryManagementInterface.DIRTY_EXPIRE_CENTISECS, 200);
         Boolean DYNAMIC_FSYNC = prefs.getBoolean("DYNAMIC_FSYNC", false);
         Boolean INTELLI_PLUG_ECO = prefs.getBoolean("INTELLI_PLUG_ECO", false);
         Boolean POWER_SUSPEND = prefs.getBoolean("POWER_SUSPEND", false);
@@ -177,6 +183,13 @@ public class BootHelper {
         }
 
         CMDProcessor.runSuCommand(applyIntelliPlugEco);
+
+        Helpers.applySysctlValue(MemoryManagementInterface.VFS_CACHE_PRESSURE, VFS_CACHE_PRESSURE + "");
+        Helpers.applySysctlValue(MemoryManagementInterface.SWAPPINESS, SWAPPINESS + "");
+        Helpers.applySysctlValue(MemoryManagementInterface.DIRTY_RATIO, DIRTY_RATIO + "");
+        Helpers.applySysctlValue(MemoryManagementInterface.DIRTY_BG_RATIO, DIRTY_BG_RATIO + "");
+        Helpers.applySysctlValue(MemoryManagementInterface.DIRTY_WRITEBACK_CENTISECS, DIRTY_WRITEBACK + "");
+        Helpers.applySysctlValue(MemoryManagementInterface.DIRTY_EXPIRE_CENTISECS, DIRTY_EXPIRE + "");
     }
 
     private static int getIntFromBoolean(Boolean bool) {

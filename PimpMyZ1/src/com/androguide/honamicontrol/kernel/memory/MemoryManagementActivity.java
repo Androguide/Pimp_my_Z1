@@ -54,6 +54,7 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
         cardsUI.addStack(new CardStack(""));
         cardsUI.addStack(new CardStack(getString(R.string.ksm_header)));
 
+        // KERNEL SAME-PAGE MERGING
         if (Helpers.doesFileExist(KSM_TOGGLE)) {
             cardsUI.addCard(new CardSwitchPlugin(
                     getString(R.string.ksm),
@@ -84,6 +85,7 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
             );
         }
 
+        // KSM PAGES-TO-SCAN
         if (Helpers.doesFileExist(KSM_PAGES_TO_SCAN)) {
             int currPagesToScan = 100;
             try {
@@ -105,6 +107,7 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
             cardsUI.addCard(cardKSMPages);
         }
 
+        // KSM SLEEP TIMER
         if (Helpers.doesFileExist(KSM_SLEEP_TIMER)) {
             int currTimer = 500;
             try {
@@ -127,6 +130,7 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
 
         cardsUI.addStack(new CardStack("VM PARAMETERS"));
 
+        // VFS CACHE PRESSURE
         String currVfs = CMDProcessor.runShellCommand("busybox sysctl " + VFS_CACHE_PRESSURE).getStdout();
         currVfs = currVfs.replaceAll("[\\D]", "");
         int vfs = 50;
@@ -135,18 +139,19 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
         } catch (Exception e) {
             Log.e("VFS_CACHE_PRESSURE", e.getMessage());
         }
-            cardsUI.addCard(new CardSeekBarSysctl(
-                    getString(R.string.vfs_cache_pressure),
-                    getString(R.string.vfs_cache_pressure_text),
-                    "#1abc9c",
-                    "%",
-                    VFS_CACHE_PRESSURE,
-                    100,
-                    vfs,
-                    this,
-                    null
-            ));
+        cardsUI.addCard(new CardSeekBarSysctl(
+                getString(R.string.vfs_cache_pressure),
+                getString(R.string.vfs_cache_pressure_text),
+                "#1abc9c",
+                "%",
+                VFS_CACHE_PRESSURE,
+                100,
+                vfs,
+                this,
+                null
+        ));
 
+        // VM SWAPPINESS
         String currSwappiness = CMDProcessor.runShellCommand("busybox sysctl " + SWAPPINESS).getStdout();
         currSwappiness = currSwappiness.replaceAll("[\\D]", "");
         int swappiness = 60;
@@ -167,6 +172,7 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
                 null
         ));
 
+        // VM DIRTY RATIO
         String currDirtyRatio = CMDProcessor.runShellCommand("busybox sysctl " + DIRTY_RATIO).getStdout();
         currDirtyRatio = currDirtyRatio.replaceAll("[\\D]", "");
         int dirtyRatio = 30;
@@ -187,6 +193,7 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
                 null
         ));
 
+        // VM DIRTY BACKGROUND RATIO
         String currDirtyBgRatio = CMDProcessor.runShellCommand("busybox sysctl " + DIRTY_BG_RATIO).getStdout();
         currDirtyBgRatio = currDirtyBgRatio.replaceAll("[\\D]", "");
         int dirtyBgRatio = 15;
@@ -204,6 +211,50 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
                 DIRTY_BG_RATIO,
                 100,
                 dirtyBgRatio,
+                this,
+                null
+        ));
+
+        // VM DIRTY WRITEBACK
+        String currDirtyWriteback = CMDProcessor.runShellCommand("busybox sysctl " + DIRTY_WRITEBACK_CENTISECS).getStdout();
+        currDirtyWriteback = currDirtyWriteback.replaceAll("[\\D]", "");
+        int dirtyWriteback = 500;
+        try {
+            dirtyWriteback = Integer.valueOf(currDirtyWriteback);
+        } catch (Exception e) {
+            Log.e("DIRTY_WRITEBACK_CENTISECS", e.getMessage());
+        }
+
+        cardsUI.addCard(new CardSeekBarSysctl(
+                getString(R.string.dirty_writeback),
+                getString(R.string.dirty_writeback_text),
+                "#1abc9c",
+                "cs",
+                DIRTY_WRITEBACK_CENTISECS,
+                2000,
+                dirtyWriteback,
+                this,
+                null
+        ));
+
+        // VM DIRTY EXPIRE
+        String currDirtyExpire = CMDProcessor.runShellCommand("busybox sysctl " + DIRTY_EXPIRE_CENTISECS).getStdout();
+        currDirtyExpire = currDirtyExpire.replaceAll("[\\D]", "");
+        int dirtyExpire = 200;
+        try {
+            dirtyExpire = Integer.valueOf(currDirtyExpire);
+        } catch (Exception e) {
+            Log.e("DIRTY_EXPIRE_CENTISECS", e.getMessage());
+        }
+
+        cardsUI.addCard(new CardSeekBarSysctl(
+                getString(R.string.dirty_expire),
+                getString(R.string.dirty_expire_text),
+                "#1abc9c",
+                "cs",
+                DIRTY_EXPIRE_CENTISECS,
+                2000,
+                dirtyExpire,
                 this,
                 null
         ));

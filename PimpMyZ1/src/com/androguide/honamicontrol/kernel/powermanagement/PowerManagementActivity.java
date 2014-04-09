@@ -146,7 +146,7 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
                 else if (intelliState == 1 && alucardState == 1) { // if both alucard & intelliplug are on, notifiy the user and default back to mpdecision
                     Toast.makeText(this, getString(R.string.multiple_hotplug_drivers_warning), Toast.LENGTH_LONG).show();
                     hotplugDriverSpinner.setSelection(0);
-                    Helpers.CMDProcessorWrapper.runSuCommand("busybox echo 0 > " + INTELLI_PLUG_TOGGLE + "\nbusybox echo 0 > " + ALUCARD_HOTPLUG_TOGGLE + "\nstart mpdecision");
+                    CMDProcessor.runSuCommand("busybox echo 0 > " + INTELLI_PLUG_TOGGLE + "\nbusybox echo 0 > " + ALUCARD_HOTPLUG_TOGGLE + "\nstart mpdecision");
                 }
             }
 
@@ -202,7 +202,6 @@ public class PowerManagementActivity extends ActionBarActivity implements PowerM
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 

@@ -190,4 +190,8 @@ When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, 
     <string name="dirty_ratio_text">Defines the percentage of the total memory that can consume dirty pages before the I/O is blocked and the dirty memory flushed to disk.</string>
     <string name="dirty_bg_ratio">Dirty Background Ratio</string>
     <string name="dirty_bg_ratio_text">Defines the percentage of the memory that can be dirty before the I/O is blocked and dirty memory is flushed to disk.</string>
+    <string name="dirty_writeback">Dirty Writeback</string>
+    <string name="dirty_writeback_text">Defines the interval of time at which \'old\' data is flushed from memory to disk, in centiseconds.</string>
+    <string name="dirty_expire">Dirty Expire</string>
+    <string name="dirty_expire_text">This defines the minimum amount of time at which data is old enough to be flushed to disk.</string>
 </resources>

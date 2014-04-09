@@ -29,4 +29,6 @@ public interface MemoryManagementInterface {
     public static final String SWAPPINESS = "vm.swappiness";
     public static final String DIRTY_RATIO = "vm.dirty_ratio";
     public static final String DIRTY_BG_RATIO = "vm.dirty_background_ratio";
+    public static final String DIRTY_WRITEBACK_CENTISECS = "vm.dirty_writeback_centisecs";
+    public static final String DIRTY_EXPIRE_CENTISECS = "vm.dirty_expire_centisecs";
 }
