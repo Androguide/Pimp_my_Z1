@@ -129,20 +129,32 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
 
         String currVfs = CMDProcessor.runShellCommand("sysctl " + VFS_CACHE_PRESSURE).getStdout();
         currVfs = currVfs.replaceAll("[\\D]", "");
-        cardsUI.addCard(new CardSeekBarSysctl(
-                getString(R.string.vfs_cache_pressure),
-                getString(R.string.vfs_cache_pressure_text),
-                "#1abc9c",
-                "%",
-                VFS_CACHE_PRESSURE,
-                100,
-                Integer.parseInt(currVfs),
-                this,
-                null
-        ));
+        int vfs = 50;
+        try {
+            vfs = Integer.valueOf(currVfs);
+        } catch (Exception e) {
+            Log.e("VFS_CACHE_PRESSURE", e.getMessage());
+        }
+            cardsUI.addCard(new CardSeekBarSysctl(
+                    getString(R.string.vfs_cache_pressure),
+                    getString(R.string.vfs_cache_pressure_text),
+                    "#1abc9c",
+                    "%",
+                    VFS_CACHE_PRESSURE,
+                    100,
+                    vfs,
+                    this,
+                    null
+            ));
 
         String currSwappiness = CMDProcessor.runShellCommand("sysctl " + SWAPPINESS).getStdout();
         currSwappiness = currSwappiness.replaceAll("[\\D]", "");
+        int swappiness = 60;
+        try {
+            swappiness = Integer.valueOf(currSwappiness);
+        } catch (Exception e) {
+            Log.e("SWAPPINESS", e.getMessage());
+        }
         cardsUI.addCard(new CardSeekBarSysctl(
                 getString(R.string.swappiness),
                 getString(R.string.swappiness_text),
@@ -150,13 +162,19 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
                 "%",
                 SWAPPINESS,
                 100,
-                Integer.parseInt(currSwappiness),
+                swappiness,
                 this,
                 null
         ));
 
         String currDirtyRatio = CMDProcessor.runShellCommand("sysctl " + DIRTY_RATIO).getStdout();
         currDirtyRatio = currDirtyRatio.replaceAll("[\\D]", "");
+        int dirtyRatio = 30;
+        try {
+            dirtyRatio = Integer.valueOf(currDirtyRatio);
+        } catch (Exception e) {
+            Log.e("DIRTY_RATIO", e.getMessage());
+        }
         cardsUI.addCard(new CardSeekBarSysctl(
                 getString(R.string.dirty_ratio),
                 getString(R.string.dirty_ratio_text),
@@ -164,13 +182,19 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
                 "%",
                 DIRTY_RATIO,
                 100,
-                Integer.parseInt(currDirtyRatio),
+                dirtyRatio,
                 this,
                 null
         ));
 
         String currDirtyBgRatio = CMDProcessor.runShellCommand("sysctl " + DIRTY_BG_RATIO).getStdout();
         currDirtyBgRatio = currDirtyBgRatio.replaceAll("[\\D]", "");
+        int dirtyBgRatio = 15;
+        try {
+            dirtyBgRatio = Integer.valueOf(currDirtyBgRatio);
+        } catch (Exception e) {
+            Log.e("DIRTY_BACKGROUND_RATIO", e.getMessage());
+        }
         cardsUI.addCard(new CardSeekBarSysctl(
                 getString(R.string.dirty_bg_ratio),
                 getString(R.string.dirty_bg_ratio_text),
@@ -178,7 +202,7 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
                 "%",
                 DIRTY_BG_RATIO,
                 100,
-                Integer.parseInt(currDirtyBgRatio),
+                dirtyBgRatio,
                 this,
                 null
         ));
@@ -195,5 +219,4 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
