@@ -233,16 +233,20 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         if (Helpers.doesFileExist(CURR_TCP_ALGORITHM))
             currentTcp = Helpers.getCurrentTcpAlgorithm();
 
-        String curMaxSpeed = "0";
-        if (Helpers.doesFileExist(MAX_FREQ))
+        String curMaxSpeed = "NaN";
+        if (Helpers.doesFileExist(MAX_FREQ_ALL_CORES))
+            curMaxSpeed = CPUHelper.readOneLineNotRoot(MAX_FREQ_ALL_CORES);
+        else if (Helpers.doesFileExist(MAX_FREQ))
             curMaxSpeed = CPUHelper.readOneLineNotRoot(MAX_FREQ);
 
-        String curMinSpeed = "0";
-        if (Helpers.doesFileExist(MIN_FREQ))
+        String curMinSpeed = "NaN";
+        if (Helpers.doesFileExist(MIN_FREQ_ALL_CORES))
+            curMinSpeed = CPUHelper.readOneLineNotRoot(MIN_FREQ_ALL_CORES);
+        else if (Helpers.doesFileExist(MIN_FREQ))
             curMinSpeed = CPUHelper.readOneLineNotRoot(MIN_FREQ);
 
         if (mIsTegra3) {
-            String curTegraMaxSpeed = "0";
+            String curTegraMaxSpeed = "NaN";
             if (Helpers.doesFileExist(TEGRA_MAX_FREQ)) {
                 curTegraMaxSpeed = CPUHelper.readOneLineNotRoot(TEGRA_MAX_FREQ);
                 int curTegraMax = 0;
@@ -500,6 +504,29 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         mGovernor4.setOnItemSelectedListener(new GovListener4());
 
 
+        /** CPU Boost */
+        if (Helpers.doesFileExist(KRAIT_BOOST)) {
+            Switch cpuBoostSwitch = (Switch) findViewById(R.id.krait_boost_switch);
+            String cpuBoostState = CPUHelper.readOneLineNotRoot(KRAIT_BOOST);
+            if (cpuBoostState.equals("Y"))
+                cpuBoostSwitch.setChecked(true);
+            else
+                cpuBoostSwitch.setChecked(false);
+
+            cpuBoostSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                   if (isChecked)
+                       Helpers.CMDProcessorWrapper.runSuCommand("busybox echo Y > " + KRAIT_BOOST);
+                    else
+                       Helpers.CMDProcessorWrapper.runSuCommand("busybox echo N > " + KRAIT_BOOST);
+                }
+            });
+
+        } else {
+            findViewById(R.id.card_krait_boost).setVisibility(View.GONE);
+        }
+
         /** CPU Informations */
         String pvs = "NaN";
         TextView pvsBinning = (TextView) findViewById(R.id.pvs_bin);
@@ -524,11 +551,16 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                 // each cpu
                 // and it doesn't hurt other devices to do it
 
-                for (int i = 0; i < mNumOfCpus; i++) {
-                    Helpers.CMDProcessorWrapper.runSuCommand(
-                            "busybox echo " + selected + " > " + FIRST_PART_CPU + i + SECOND_PART_GOV
-                    );
-                    bootPrefs.edit().putString("CORE" + i + "_GOVERNOR", selected).commit();
+                if (Helpers.doesFileExist(GOVERNOR_ALL_CORES)) {
+                    Helpers.CMDProcessorWrapper.runSuCommand("busybox echo " + selected + " > " + GOVERNOR_ALL_CORES);
+
+                } else {
+                    for (int i = 0; i < mNumOfCpus; i++) {
+                        Helpers.CMDProcessorWrapper.runSuCommand(
+                                "busybox echo " + selected + " > " + FIRST_PART_CPU + i + SECOND_PART_GOV
+                        );
+                        bootPrefs.edit().putString("CORE" + i + "_GOVERNOR", selected).commit();
+                    }
                 }
 
             } else {
@@ -745,7 +777,10 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
             try {
                 while (!mInterrupt) {
                     sleep(750);
-                    final String curFreq = CPUHelper.readOneLineNotRoot(CURRENT_CPU);
+                    String curFreq = "";
+                    if (Helpers.doesFileExist(CURRENT_CPU))
+                        curFreq = CPUHelper.readOneLineNotRoot(CURRENT_CPU);
+
                     mCurCPUHandler.sendMessage(mCurCPUHandler.obtainMessage(0,
                             curFreq));
                 }

@@ -23,11 +23,14 @@ package com.androguide.honamicontrol.kernel.cpucontrol;
 
 public interface CPUInterface {
     public static final String CURRENT_CPU = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq";
+    public static final String CURRENT_CPU_CPUINFO = "/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq";
     public static final String MAX_FREQ = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq";
+    public static final String MAX_FREQ_ALL_CORES = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq_all_cpus";
     public static final String SNAKE_CHARMER_MAX_FREQ = "/sys/kernel/msm_cpufreq_limit/cpufreq_limit";
     public static final String SNAKE_CHARMER_VERSION = "/sys/kernel/msm_cpufreq_limit/msm_cpufreq_limit_version";
     public static final String TEGRA_MAX_FREQ = "/sys/module/cpu_tegra/parameters/cpu_user_cap";
     public static final String MIN_FREQ = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq";
+    public static final String MIN_FREQ_ALL_CORES = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq_all_cpus";
     public static final String STEPS = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies";
     public static final String ONLINE_CPUS = "/sys/devices/system/cpu/online";
     public static final String OFFLINE_CPUS = "/sys/devices/system/cpu/offline";
@@ -46,11 +49,13 @@ public interface CPUInterface {
     public static final String GOVERNOR2 = "/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor";
     public static final String GOVERNOR3 = "/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor";
     public static final String GOVERNOR4 = "/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor";
+    public static final String GOVERNOR_ALL_CORES = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor_all_cpus";
     public static final String IO_SCHEDULER = "/sys/block/mmcblk0/queue/scheduler";
     public static final String NUM_OF_CPUS = "/sys/devices/system/cpu/present";
     public static final String AVAILABLE_TCP_ALGORITHMS = "/proc/sys/net/ipv4/tcp_available_congestion_control";
     public static final String CURR_TCP_ALGORITHM = "/proc/sys/net/ipv4/tcp_congestion_control";
     public static final String SYSCTL_TCP_ALGORITHM = "sysctl -w net.ipv4.tcp_congestion_control=";
     public static final String MSM_THERMAL = "/sys/module/msm_thermal/parameters/enabled";
+    public static final String KRAIT_BOOST = "/sys/module/clock_krait_8974/parameters/boost";
     public static final String PVS_BINNING = "/sys/module/clock_krait_8974/parameters/table_name";
 }
