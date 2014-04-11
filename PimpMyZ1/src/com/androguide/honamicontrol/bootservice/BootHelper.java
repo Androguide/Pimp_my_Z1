@@ -25,6 +25,7 @@ import android.content.SharedPreferences;
 
 import com.androguide.honamicontrol.helpers.CMDProcessor.CMDProcessor;
 import com.androguide.honamicontrol.helpers.Helpers;
+import com.androguide.honamicontrol.kernel.colorcontrol.ColorControlInterface;
 import com.androguide.honamicontrol.kernel.cpucontrol.CPUInterface;
 import com.androguide.honamicontrol.kernel.gpucontrol.GPUInterface;
 import com.androguide.honamicontrol.kernel.iotweaks.IOTweaksInterface;
@@ -80,6 +81,7 @@ public class BootHelper {
         String SC_HEADPHONE = prefs.getString("HEADPHONE", "0 0 255");
         String SC_SPEAKER = prefs.getString("SPEAKER", "0 0 255");
         String FASTCHARGE_LEVEL = prefs.getString("FASTCHARGE_LEVEL", "500");
+        String KCAL_CONFIG = prefs.getString("KCAL_CONFIG", "255 255 255");
 
         String applyMaxCpuFreq = "busybox echo " + CPU_MAX_FREQ + " > " + CPUInterface.MAX_FREQ;
         String applyMsmThermal = "";
@@ -121,6 +123,7 @@ public class BootHelper {
         String applySDEntropy = "busybox echo " + SD_ENTROPY + " > " + IOTweaksInterface.SD_ENTROPY_CONTRIB;
         String applyFastChargeMode = "busybox echo " + FASTCHARGE_MODE + " > " + MiscInterface.FORCE_FAST_CHARGE;
         String applyFastChargeLevel = "busybox echo " + FASTCHARGE_LEVEL + " > " + MiscInterface.FAST_CHARGE_LEVEL;
+        String applyColorControl = "busybox echo \"" + KCAL_CONFIG + "\" > " + ColorControlInterface.GAMMA_KCAL + "\nbusybox echo 1 > " + ColorControlInterface.GAMMA_OK;
 
         Helpers.CMDProcessorWrapper.runSuCommand(
                 applyMaxCpuFreq + "\n" +
@@ -153,6 +156,7 @@ public class BootHelper {
                         applyKSM + "\n" +
                         applyKSMPages + "\n" +
                         applyKSMTimer + "\n" +
+                        applyColorControl + "\n" +
                         applyFastChargeMode + "\n" +
                         applyFastChargeLevel + "\n" +
                         applyPenMode + "\n" +
