@@ -26,9 +26,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.internal.view.SupportMenuInflater;
 import android.support.v7.view.ActionMode;
 import android.util.Log;
 import android.view.Menu;
@@ -46,7 +44,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.androguide.honamicontrol.R;
-import com.androguide.honamicontrol.helpers.CMDProcessor.CMDProcessor;
 import com.androguide.honamicontrol.helpers.CPUHelper;
 import com.androguide.honamicontrol.helpers.Helpers;
 import com.echo.holographlibrary.Line;
@@ -144,7 +141,6 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                 });
             }
         }
-
 
         snakeCharmer = (Switch) findViewById(R.id.snake_charmer_switch);
         if (!Helpers.doesFileExist(SNAKE_CHARMER_MAX_FREQ)) {
@@ -503,6 +499,19 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                 currentGovernor4));
         mGovernor4.setOnItemSelectedListener(new GovListener4());
 
+
+        /** CPU Informations */
+        String pvs = "NaN";
+        TextView pvsBinning = (TextView) findViewById(R.id.pvs_bin);
+        if (Helpers.doesFileExist(PVS_BINNING)) {
+            String rawTableName = CPUHelper.readOneLineNotRoot(PVS_BINNING);
+            rawTableName = rawTableName.replaceAll("[\\D]", "");
+            String[] params = rawTableName.split("");
+            if (rawTableName.length() == 3)
+                pvs = params[2];
+        }
+
+        pvsBinning.setText(getString(R.string.pvs_binning) + " " + pvs);
     }
 
     public class GeneralGovListener implements OnItemSelectedListener {

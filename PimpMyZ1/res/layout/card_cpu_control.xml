@@ -497,5 +497,39 @@
                 android:text="@string/snake_charmer_desc"
                 android:textSize="16sp" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
+
+            <TextView
+                android:id="@+id/cpu_infos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="center_horizontal"
+                android:paddingTop="8dp"
+                android:text="@string/cpu_infos"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/pvs_bin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="sans-serif-light"
+                android:paddingTop="8dp"
+                android:text="@string/pvs_binning"
+                android:textSize="14sp" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

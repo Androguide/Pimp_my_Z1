@@ -52,4 +52,5 @@ public interface CPUInterface {
     public static final String CURR_TCP_ALGORITHM = "/proc/sys/net/ipv4/tcp_congestion_control";
     public static final String SYSCTL_TCP_ALGORITHM = "sysctl -w net.ipv4.tcp_congestion_control=";
     public static final String MSM_THERMAL = "/sys/module/msm_thermal/parameters/enabled";
+    public static final String PVS_BINNING = "/sys/module/clock_krait_8974/parameters/table_name";
 }
