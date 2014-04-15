@@ -46,7 +46,7 @@ public class MemoryManagementActivity extends ActionBarActivity implements Memor
         super.onCreate(savedInstanceState);
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.ic_tools_io_tweaks));
+        getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.ic_tools_mm));
         setContentView(R.layout.cardsui);
 
         final SharedPreferences bootPrefs = getSharedPreferences("BOOT_PREFS", 0);

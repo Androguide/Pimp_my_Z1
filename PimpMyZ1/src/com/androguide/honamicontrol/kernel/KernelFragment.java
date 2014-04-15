@@ -48,6 +48,8 @@ import com.androguide.honamicontrol.kernel.iotweaks.IOTweaksActivity;
 import com.androguide.honamicontrol.kernel.memory.MemoryManagementActivity;
 import com.androguide.honamicontrol.kernel.misc.MiscActivity;
 import com.androguide.honamicontrol.kernel.powermanagement.PowerManagementActivity;
+import com.androguide.honamicontrol.kernel.voltagecontrol.VoltageActivity;
+import com.androguide.honamicontrol.kernel.voltagecontrol.VoltageInterface;
 import com.androguide.honamicontrol.profiles.BalancedProfile;
 import com.androguide.honamicontrol.profiles.BatteryMaxProfile;
 import com.androguide.honamicontrol.profiles.BatteryProfile;
@@ -91,6 +93,21 @@ public class KernelFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 fa.startActivity(new Intent(fa, CPUActivity.class));
+            }
+        });
+
+        CardImageLocal voltageControl = new CardImageLocal(
+                fa.getString(R.string.voltage_control),
+                fa.getString(R.string.voltage_control_text),
+                sectionColor,
+                R.drawable.ic_tools_voltage_control,
+                fa
+        );
+
+        voltageControl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fa.startActivity(new Intent(fa, VoltageActivity.class));
             }
         });
 
@@ -187,6 +204,10 @@ public class KernelFragment extends Fragment {
         });
 
         mCardUI.addCard(cpuControl);
+
+        if (Helpers.doesFileExist(VoltageInterface.UV_MV_TABLE))
+            mCardUI.addCard(voltageControl);
+
         mCardUI.addCard(gpuControl);
 
         if (Helpers.doesFileExist(ColorControlInterface.GAMMA_KCAL))
@@ -197,7 +218,6 @@ public class KernelFragment extends Fragment {
         mCardUI.addCard(mm);
         mCardUI.addCard(misc);
         mCardUI.refresh();
-
         return ll;
     }
 

@@ -66,7 +66,6 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
     private static int currX = 0;
     private static int counter = 0;
     private static TextView mCurFreq;
-
     private SeekBar mMaxSlider;
     private SeekBar mMinSlider;
     private Spinner mGeneralGovernor;
@@ -74,8 +73,7 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
     private static Spinner mGovernor2;
     private static Spinner mGovernor3;
     private static Spinner mGovernor4;
-    private Spinner mIo, mTcp;
-    private Switch snakeCharmer, perCoreGovernor, thermalControl;
+    private Switch perCoreGovernor;
     private TextView mMaxSpeedText;
     private TextView mMinSpeedText;
     private TextView mCoresOnline;
@@ -85,7 +83,7 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
     private CurCPUThread mCurCPUThread;
     private Boolean mIsTegra3 = false, snakeCharmerEnabled = true;
     private int mNumOfCpus = 0;
-    private int govCounterGeneral = 0, govCounter = 0, govCounter2 = 0, govCounter3 = 0, govCounter4 = 0, schedCounter = 0, tcpCounter = 0;
+    private int govCounterGeneral = 0, govCounter = 0, govCounter2 = 0, govCounter3 = 0, govCounter4 = 0, tcpCounter = 0;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -142,7 +140,7 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
             }
         }
 
-        snakeCharmer = (Switch) findViewById(R.id.snake_charmer_switch);
+        Switch snakeCharmer = (Switch) findViewById(R.id.snake_charmer_switch);
         if (!Helpers.doesFileExist(SNAKE_CHARMER_MAX_FREQ)) {
             LinearLayout cardSnakeCharmer = (LinearLayout) findViewById(R.id.card_snake_charmer);
             cardSnakeCharmer.setVisibility(View.GONE);
@@ -174,7 +172,7 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
 
         int frequenciesNum = availableFrequencies.length - 1;
 
-        thermalControl = (Switch) findViewById(R.id.msm_thermal_switch);
+        Switch thermalControl = (Switch) findViewById(R.id.msm_thermal_switch);
         if (Helpers.doesFileExist(MSM_THERMAL)) {
             String thermal = CPUHelper.readOneLineNotRoot(MSM_THERMAL);
             if (thermal.equals("Y"))
@@ -398,7 +396,7 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         handleGovernors();
 
         /** TCP Congestion Spinner */
-        mTcp = (Spinner) findViewById(R.id.tcp);
+        Spinner mTcp = (Spinner) findViewById(R.id.tcp);
         ArrayAdapter<CharSequence> tcpAdapter = new ArrayAdapter<CharSequence>(
                 this, R.layout.spinner_row);
         tcpAdapter
@@ -591,6 +589,7 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
+
         }
     }
 

@@ -61,7 +61,7 @@
     <string name="menu_link_seekbars">Link Left &amp; Right</string>
     <string name="menu_apply">Apply</string>
     <string name="kernel_cpu_control">CPU Control</string>
-    <string name="kernel_cpu_control_desc">This tool allows you to set your CPU min/max frequencies, governors, I/O schedulers and a lot more</string>
+    <string name="kernel_cpu_control_desc">This tool allows you to set your CPU min/max frequencies, governors, I/O schedulers, TCP congestion algorithms and a lot more.</string>
     <string name="kernel_color">#1abc9c</string>
     <string name="coming_soon">Coming Soon</string>
     <string name="kernel_gpu_control">GPU Control</string>
@@ -196,4 +196,11 @@ When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, 
     <string name="dirty_expire_text">This defines the minimum amount of time at which data is old enough to be flushed to disk.</string>
     <string name="cpu_infos">CPU Informations</string>
     <string name="pvs_binning">PVS Binning: </string>
+    <string name="voltage_control">Voltage Control</string>
+    <string name="voltage_control_text">Control the voltage level of your CPU for each individual frequency scaling steps.</string>
+    <string name="warning">Warning</string><string name="voltage_warning_text">Setting too low voltages will cause instability.
+Setting too high voltages can unrecoverably damage your device.</string>
+    <string name="reset_to_default">Reset to default</string>
+    <string name="voltage_boost">Voltage Boost</string>
+    <string name="voltage_boost_text">Disabling voltage boost will save a bit of power. Re-enable it if your device is unstable.</string>
 </resources>

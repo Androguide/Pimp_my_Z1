@@ -476,7 +476,7 @@
                 android:fontFamily="sans-serif-thin"
                 android:gravity="center_horizontal"
                 android:paddingTop="8dp"
-                android:text="CPU Boost"
+                android:text="@string/voltage_boost"
                 android:textSize="18sp" />
 
             <Switch
@@ -494,7 +494,7 @@
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
                 android:paddingTop="8dp"
-                android:text="Enable or disable CPU input boost"
+                android:text="@string/voltage_boost_text"
                 android:textSize="16sp" />
         </LinearLayout>
 

@@ -32,8 +32,11 @@ import com.androguide.honamicontrol.kernel.iotweaks.IOTweaksInterface;
 import com.androguide.honamicontrol.kernel.memory.MemoryManagementInterface;
 import com.androguide.honamicontrol.kernel.misc.MiscInterface;
 import com.androguide.honamicontrol.kernel.powermanagement.PowerManagementInterface;
+import com.androguide.honamicontrol.kernel.voltagecontrol.VoltageInterface;
 import com.androguide.honamicontrol.soundcontrol.SoundControlInterface;
 import com.androguide.honamicontrol.touchscreen.TouchScreenInterface;
+
+import java.util.Currency;
 
 public class BootHelper {
     public static void generateScriptFromPrefs(SharedPreferences prefs) {
@@ -82,6 +85,7 @@ public class BootHelper {
         String SC_SPEAKER = prefs.getString("SPEAKER", "0 0 255");
         String FASTCHARGE_LEVEL = prefs.getString("FASTCHARGE_LEVEL", "500");
         String KCAL_CONFIG = prefs.getString("KCAL_CONFIG", "255 255 255");
+        String VOLTAGE_TABLE = prefs.getString("CURRENT_VOLTAGE_TABLE", prefs.getString("DEFAULT_VOLTAGE_TABLE", ""));
 
         String applyMaxCpuFreq = "busybox echo " + CPU_MAX_FREQ + " > " + CPUInterface.MAX_FREQ;
         String applyMsmThermal = "";
@@ -124,6 +128,7 @@ public class BootHelper {
         String applyFastChargeMode = "busybox echo " + FASTCHARGE_MODE + " > " + MiscInterface.FORCE_FAST_CHARGE;
         String applyFastChargeLevel = "busybox echo " + FASTCHARGE_LEVEL + " > " + MiscInterface.FAST_CHARGE_LEVEL;
         String applyColorControl = "busybox echo \"" + KCAL_CONFIG + "\" > " + ColorControlInterface.GAMMA_KCAL + "\nbusybox echo 1 > " + ColorControlInterface.GAMMA_OK;
+        String applyVoltages = "busybox echo \"" + VOLTAGE_TABLE + "\" > " + VoltageInterface.UV_MV_TABLE;
 
         Helpers.CMDProcessorWrapper.runSuCommand(
                 applyMaxCpuFreq + "\n" +
@@ -161,7 +166,8 @@ public class BootHelper {
                         applyFastChargeLevel + "\n" +
                         applyPenMode + "\n" +
                         applyGloveMode + "\n" +
-                        applyDt2Wake
+                        applyDt2Wake + "\n" +
+                        applyVoltages
         );
 
         switch (HOTPLUG_DRIVER) {
