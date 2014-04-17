@@ -201,4 +201,6 @@ Setting too high voltages can unrecoverably damage your device.</string>
     <string name="color_brightness">Brightness (All Channels)</string>
     <string name="custom">Custom</string><string name="color_brightness_warning">Your value was not applied, it is too low.
 If you really want to apply such a low brightness value, please use the color sliders instead.</string>
+    <string name="governor_customization">Governor Customization</string>
+    <string name="governor_customization_text">Customize each and every parameter of your current CPU Governor</string>
 </resources>

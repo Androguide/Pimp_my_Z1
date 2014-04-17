@@ -32,6 +32,6 @@ public class BootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         SharedPreferences prefs = context.getSharedPreferences("BOOT_PREFS", 0);
         if (prefs.getBoolean("SET_ON_BOOT", false))
-            BootHelper.generateScriptFromPrefs(prefs);
+            BootHelper.generateScriptFromPrefs(prefs, context);
     }
 }

@@ -26,6 +26,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.util.Log;
@@ -36,6 +37,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -124,6 +126,17 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         mGovernor2 = (Spinner) findViewById(R.id.governor2);
         mGovernor3 = (Spinner) findViewById(R.id.governor3);
         mGovernor4 = (Spinner) findViewById(R.id.governor4);
+
+
+        Button customizeGov = (Button) findViewById(R.id.governor_customize_btn);
+        customizeGov.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getSupportFragmentManager();
+                GovernorDialog editNameDialog = new GovernorDialog();
+                editNameDialog.show(fm, "governor_fragment");
+            }
+        });
 
         if (Helpers.doesFileExist(STEPS)) {
             availableFrequenciesLine = CPUHelper.readOneLineNotRoot(STEPS);

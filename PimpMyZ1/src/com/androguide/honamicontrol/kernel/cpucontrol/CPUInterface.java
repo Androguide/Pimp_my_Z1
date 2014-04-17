@@ -58,4 +58,5 @@ public interface CPUInterface {
     public static final String MSM_THERMAL = "/sys/module/msm_thermal/parameters/enabled";
     public static final String KRAIT_BOOST = "/sys/module/clock_krait_8974/parameters/boost";
     public static final String PVS_BINNING = "/sys/module/clock_krait_8974/parameters/table_name";
+    public static final String GOV_CUSTOMIZATION = "/sys/devices/system/cpu/cpufreq";
 }

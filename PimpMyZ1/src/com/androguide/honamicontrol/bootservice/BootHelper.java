@@ -21,9 +21,11 @@
 
 package com.androguide.honamicontrol.bootservice;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.androguide.honamicontrol.helpers.CMDProcessor.CMDProcessor;
+import com.androguide.honamicontrol.helpers.CPUHelper;
 import com.androguide.honamicontrol.helpers.Helpers;
 import com.androguide.honamicontrol.kernel.colorcontrol.ColorControlInterface;
 import com.androguide.honamicontrol.kernel.cpucontrol.CPUInterface;
@@ -36,10 +38,8 @@ import com.androguide.honamicontrol.kernel.voltagecontrol.VoltageInterface;
 import com.androguide.honamicontrol.soundcontrol.SoundControlInterface;
 import com.androguide.honamicontrol.touchscreen.TouchScreenInterface;
 
-import java.util.Currency;
-
 public class BootHelper {
-    public static void generateScriptFromPrefs(SharedPreferences prefs) {
+    public static void generateScriptFromPrefs(SharedPreferences prefs, Context context) {
         int CPU_MAX_FREQ = Integer.valueOf(prefs.getString("CPU_MAX_FREQ", "2150400"));
         int CPU_MIN_FREQ = Integer.valueOf(prefs.getString("CPU_MIN_FREQ", "300000"));
         int GPU_MAX_FREQ = Integer.valueOf(prefs.getString("GPU_MAX_FREQ", "450000000"));
@@ -86,6 +86,24 @@ public class BootHelper {
         String FASTCHARGE_LEVEL = prefs.getString("FASTCHARGE_LEVEL", "500");
         String KCAL_CONFIG = prefs.getString("KCAL_CONFIG", "255 255 255");
         String VOLTAGE_TABLE = prefs.getString("CURRENT_VOLTAGE_TABLE", prefs.getString("DEFAULT_VOLTAGE_TABLE", ""));
+
+        // Governor Customization
+        SharedPreferences govPrefs = context.getSharedPreferences("GOVERNOR_CUSTOMIZATION", 0);
+        String TARGET_GOV = govPrefs.getString("TARGET_GOV", CPUHelper.readOneLineNotRoot(CPUInterface.GOVERNOR_ALL_CORES));
+        if (Helpers.doesFileExist(CPUInterface.GOV_CUSTOMIZATION + "/" + TARGET_GOV)) {
+            String[] paramsList = CMDProcessor.runShellCommand("ls " + CPUInterface.GOV_CUSTOMIZATION + "/" + TARGET_GOV)
+                    .getStdout().split("\n");
+
+            String commands = "";
+
+            for (final String param : paramsList) {
+                String key = govPrefs.getString(param, "null");
+                if (!key.equals("null"))
+                    commands += key + "\n";
+            }
+
+            CMDProcessor.runSuCommand(commands);
+        }
 
         String applyMaxCpuFreq = "busybox echo " + CPU_MAX_FREQ + " > " + CPUInterface.MAX_FREQ;
         String applyMsmThermal = "";

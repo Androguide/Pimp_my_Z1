@@ -8,9 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
         android:orientation="vertical"
-        android:paddingBottom="16dp"
-        android:animateLayoutChanges="true">
+        android:paddingBottom="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
                 android:paddingBottom="8dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:text="0 MhZ"
+                android:text="NaN MhZ"
                 android:textSize="60sp" />
 
             <com.echo.holographlibrary.LineGraph
@@ -59,8 +59,8 @@
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_horizontal"
-                android:paddingTop="4dp"
                 android:paddingBottom="4dp"
+                android:paddingTop="4dp"
                 android:text="@string/cores_online"
                 android:textColor="@color/play_gray"
                 android:textSize="14sp" />
@@ -382,6 +382,54 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:paddingTop="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card_governor_customize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
+
+            <TextView
+                android:id="@+id/governor_customize_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="center_horizontal"
+                android:paddingTop="8dp"
+                android:text="@string/governor_customization"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/governor_customize_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center_horizontal"
+                android:paddingTop="8dp"
+                android:text="@string/governor_customization_text"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/governor_customize_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_blue_selector"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:text="@string/governor_customization"
+                android:textColor="#fff"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout

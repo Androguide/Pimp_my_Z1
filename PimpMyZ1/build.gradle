@@ -22,12 +22,12 @@
 apply plugin: 'android'
 
 dependencies {
+    compile 'com.android.support:support-v4:19.0.+'
+    compile 'com.android.support:appcompat-v7:19.0.+'
     compile fileTree(dir: 'libs', include: '*.jar')
     compile project(':libs:CardsUILib')
     compile project(':libs:PagerSlidingStrip')
     compile project(':libs:HoloGraphLibrary')
-    compile 'com.android.support:support-v4:19.0.+'
-    compile 'com.android.support:appcompat-v7:19.0.+'
 }
 
 android {

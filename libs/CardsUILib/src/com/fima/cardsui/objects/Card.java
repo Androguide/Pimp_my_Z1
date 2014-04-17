@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,6 +48,14 @@ public abstract class Card extends AbstractCard {
         this.title = title;
         this.desc = desc;
         this.fa = fa;
+    }
+
+    public Card(String title, String desc, String titleColor, TextWatcher textWatcher, View.OnFocusChangeListener focusListener) {
+        this.title = title;
+        this.desc = desc;
+        this.titleColor = titleColor;
+        this.textWatcher = textWatcher;
+        this.focusListener = focusListener;
     }
 
     public Card(String title, String desc, String url, ActionBarActivity fa) {

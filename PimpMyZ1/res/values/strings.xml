@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-
+<?xml version="1.0" encoding="utf-8"?>
+<!--
    Copyright (C) 2013  Louis Teboul (a.k.a Androguide)
 
    admin@pimpmyrom.org  || louisteboul@gmail.com
@@ -19,9 +19,7 @@
    You should have received a copy of the GNU General Public License along
    with this program; if not, write to the Free Software Foundation, Inc.,
    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-
 -->
-
 <resources>
 
     <!-- ================= General Stuff ================= -->
@@ -69,13 +67,14 @@
     <string name="kernel_power_management">Power Management</string>
     <string name="kernel_power_management_desc">This section allows you to control various power management features of your kernel (if implemented)</string>
     <string name="kernel_io_tweaks">I/O Tweaks</string>
-    <string name="kernel_io_tweaks_desc">This section contains various kernel-level I/O tweaks, such as your I/O Schedulers settings, dynamic file sync, I/O readahead, etc&#8230;</string>
+    <string name="kernel_io_tweaks_desc">This section contains various kernel-level I/O tweaks, such as your I/O Schedulers settings, dynamic file sync, I/O readahead, etc…</string>
     <string name="unsupported">Unsupported</string>
     <string name="sound_control_unsupported">Your kernel does not seem to implement Faux123\'s Sound Control driver, or the version it implements is not supported, sorry :(</string>
     <string name="sound_control_color">#e67e22</string>
     <string name="sc_headphone_digital_gain">Headphones Digital Gain</string>
     <string name="sc_headphone_digital_gain_desc">Controls the audio volume gain for the headphone digital output</string>
-    <string name="sc_headphone_analog_gain">Headphone Analog Gain</string><string name="sc_headphone_analog_gain_desc">Controls the audio volume gain for the headphone analog output\n(PowerAmp gain)</string>
+    <string name="sc_headphone_analog_gain">Headphone Analog Gain</string>
+    <string name="sc_headphone_analog_gain_desc">Controls the audio volume gain for the headphone analog output\n(PowerAmp gain)</string>
     <string name="sc_speaker_gain">Speaker Gain</string>
     <string name="sc_speaker_gain_desc">Controls the audio volume gain for the speaker analog output</string>
     <string name="sc_mic_gain">Mic Gain</string>
@@ -89,19 +88,23 @@
     <string name="glove_mode">Glove Mode</string>
     <string name="glove_mode_desc">With Glove Mode enabled, you will be able to use the touchscreen on your Xperia Z1 even while wearing gloves.</string>
     <string name="kernel_control">Kernel Control</string>
-    <string name="kernel_control_desc">This section allows you to tweak your kernel features to your liking, from CPU &amp; GPU overclocking to governors, I/O schedulers, TCP congestion algorithms and much more&#8230;</string>
-    <string name="sound_control">Sound Control</string><string name="sound_control_desc">Tweak the volume of your headphones output, speaker, camera mic &amp; sound recording mic if you are using a kernel which implements Faux123\'s Sound Control.</string>
+    <string name="kernel_control_desc">This section allows you to tweak your kernel features to your liking, from CPU &amp; GPU overclocking to governors, I/O schedulers, TCP congestion algorithms and much more…</string>
+    <string name="sound_control">Sound Control</string>
+    <string name="sound_control_desc">Tweak the volume of your headphones output, speaker, camera mic &amp; sound recording mic if you are using a kernel which implements Faux123\'s Sound Control.</string>
     <string name="touch_screen">Touch Screen</string>
     <string name="touch_screen_desc">Control your Xperia Z1 touch-screen, from adding support for any pen or non-plastic object to tweaking the smallest parameters like touch pressure, target size, max speed, drag range, etc…</string>
     <string name="help_center_color">#34495e</string>
-    <string name="dynamic_fsync">Dynamic File Sync</string><string name="dynamic_fsync_desc">When Dynamic Fsync is enabled, file sync will be delayed until the screen is turned off, at which point all pending write operations are synced, allowing for better performance while using the device.</string>
+    <string name="dynamic_fsync">Dynamic File Sync</string>
+    <string name="dynamic_fsync_desc">When Dynamic Fsync is enabled, file sync will be delayed until the screen is turned off, at which point all pending write operations are synced, allowing for better performance while using the device.</string>
     <string name="dynamic_fsync_version">Your kernel\'s Dynamic Fsync version is: \'</string>
-    <string name="sched_mc">Multi-Core Power Savings</string><string name="sched_mc_desc">With Multi-Core Power Savings enabled, the CPU will try to use as few cores as possible by using one core until it is maxed-out. This allows to save quite a lot of battery.\nTwo levels of aggressiveness are available.</string>
+    <string name="sched_mc">Multi-Core Power Savings</string>
+    <string name="sched_mc_desc">With Multi-Core Power Savings enabled, the CPU will try to use as few cores as possible by using one core until it is maxed-out. This allows to save quite a lot of battery.\nTwo levels of aggressiveness are available.</string>
     <string name="intelli_plug">Intelli Plug</string>
     <string name="intelli_plug_desc">Intelli_plug is a hotplug driver created by Faux123 as an open-source replacement for Qualcomm\'s closed-source msm_mpdecision driver. As such, it is more customizable and has a different and possibly more optimized strategy.</string>
     <string name="intelli_plug_eco">Intelli Plug Eco Mode</string>
     <string name="intelli_plug_eco_desc">Intelli_plug\'s eco mode is a hotplug strategy optimized to keep 2 cores offline as often as possible, thus saving a great deal of battery.</string>
-    <string name="power_suspend">Power Suspend</string><string name="power_suspend_desc">Power Suspend is an open-source kernel power management driver created by Faux123, it replaces the now aging early_suspend driver.\nPower Suspend allows for better battery savings while the screen is off.</string>
+    <string name="power_suspend">Power Suspend</string>
+    <string name="power_suspend_desc">Power Suspend is an open-source kernel power management driver created by Faux123, it replaces the now aging early_suspend driver.\nPower Suspend allows for better battery savings while the screen is off.</string>
     <string name="disabled">Disabled</string>
     <string name="moderate">Moderate</string>
     <string name="aggressive">Aggressive</string>
@@ -150,7 +153,7 @@
     <string name="per_core_governors">Per-Core Governor Control</string>
     <string name="per_core_governors_text">Enable to control each core\'s governor independently, disable to use the same governor for all cores.</string>
     <string name="general_governor">Governor (All Cores)</string>
-    <string name="memory_management_text">Control the memory management features of your kernel, such as Kernel Same-page Merging, zRam, Swap, VM parameters and more&#8230;</string>
+    <string name="memory_management_text">Control the memory management features of your kernel, such as Kernel Same-page Merging, zRam, Swap, VM parameters and more…</string>
     <string name="memory_management">Memory Management</string>
     <string name="warning_vibrator">Values higher than %1$d are not recommended</string>
     <string name="vibrator_intensity">Vibrator Intensity</string>
@@ -159,7 +162,8 @@
     <string name="msm_thermal">Thermal Throttling</string>
     <string name="cores_online">Cores Online: </string>
     <string name="dt2wake">Double Tap 2 Wake</string>
-    <string name="dt2wake_text">When enabled, a double tap on the screen will wake-up the device</string><string name="fastcharge_warning_text">Be very careful with fastcharge settings, a wrong value on the wrong input can damage both the device and the USB port or charger.
+    <string name="dt2wake_text">When enabled, a double tap on the screen will wake-up the device</string>
+    <string name="fastcharge_warning_text">Be very careful with fastcharge settings, a wrong value on the wrong input can damage both the device and the USB port or charger.
 When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, you can use up to 900mA. For wall chargers, use between 900mA and the charger\'s maximum amperage (usually written on the charger).</string>
     <string name="fastcharge_warning">WARNING</string>
     <string name="fast_charge_force_ac">Force A/C</string>
@@ -199,12 +203,18 @@ When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, 
     <string name="snake_charmer_built_in">Your version (v1.2) is used as a built-in kernel feature and cannot be disabled</string>
     <string name="voltage_control">Voltage Control</string>
     <string name="voltage_control_text">Control the voltage level of your CPU for each individual frequency scaling steps.</string>
-    <string name="warning">Warning</string><string name="voltage_warning_text">Setting too low voltages will cause instability.
+    <string name="warning">Warning</string>
+    <string name="voltage_warning_text">Setting too low voltages will cause instability.
 Setting too high voltages can unrecoverably damage your device.</string>
     <string name="reset_to_default">Reset to default</string>
     <string name="voltage_boost">Voltage Boost</string>
     <string name="voltage_boost_text">Disabling voltage boost will save a bit of power. Re-enable it if your device is unstable.</string>
     <string name="color_brightness">Brightness: </string>
-    <string name="custom">Custom</string><string name="color_brightness_warning">Your value was not applied, it is too low.
+    <string name="custom">Custom</string>
+    <string name="color_brightness_warning">Your value was not applied, it is too low.
 If you really want to apply such a low brightness value, please use the color sliders instead.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="governor_customization">Governor Customization</string>
+    <string name="governor_customization_text">Customize each and every parameter of your current CPU Governor</string>
+
 </resources>

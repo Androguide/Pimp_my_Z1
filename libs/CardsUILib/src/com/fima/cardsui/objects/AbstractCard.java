@@ -2,6 +2,7 @@ package com.fima.cardsui.objects;
 
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
@@ -38,6 +39,8 @@ public abstract class AbstractCard {
     protected android.support.v7.view.ActionMode.Callback callback;
     protected SeekBar.OnSeekBarChangeListener listener;
     protected View.OnClickListener clickListener;
+    protected TextWatcher textWatcher;
+    protected View.OnFocusChangeListener focusListener;
 
     public abstract View getView(Context context);
 
@@ -151,7 +154,7 @@ public abstract class AbstractCard {
         return seekBarMax;
     }
 
-    public String getProp(){
+    public String getProp() {
         return prop;
     }
 
@@ -193,5 +196,21 @@ public abstract class AbstractCard {
 
     public void setClickListener(View.OnClickListener clickListener) {
         this.clickListener = clickListener;
+    }
+
+    public TextWatcher getTextWatcher() {
+        return textWatcher;
+    }
+
+    public void setTextWatcher(TextWatcher textWatcher) {
+        this.textWatcher = textWatcher;
+    }
+
+    public View.OnFocusChangeListener getFocusListener() {
+        return focusListener;
+    }
+
+    public void setFocusListener(View.OnFocusChangeListener focusListener) {
+        this.focusListener = focusListener;
     }
 }
