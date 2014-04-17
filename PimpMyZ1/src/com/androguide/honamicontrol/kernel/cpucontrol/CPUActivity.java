@@ -432,30 +432,30 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
         if (Helpers.doesFileExist(GOVERNOR2))
             currentGovernor2 = CPUHelper.readOneLineNotRoot(GOVERNOR2);
         else
-            currentGovernor2 = bootPrefs.getString("CORE1_GOVERNOR", "intelliactive");
+            currentGovernor2 = bootPrefs.getString("CORE1_GOVERNOR", "NaN");
 
         String currentGovernor3 = "";
         if (Helpers.doesFileExist(GOVERNOR3))
             currentGovernor3 = CPUHelper.readOneLineNotRoot(GOVERNOR3);
         else
-            currentGovernor3 = bootPrefs.getString("CORE2_GOVERNOR", "intelliactive");
+            currentGovernor3 = bootPrefs.getString("CORE2_GOVERNOR", "NaN");
 
         String currentGovernor4 = "";
         if (Helpers.doesFileExist(GOVERNOR4))
             currentGovernor4 = CPUHelper.readOneLineNotRoot(GOVERNOR4);
         else
-            currentGovernor4 = bootPrefs.getString("CORE3_GOVERNOR", "intelliactive");
-
+            currentGovernor4 = bootPrefs.getString("CORE3_GOVERNOR", "NaN");
 
         /** CPU Governor for all cores */
         String[] availableGovernorsGeneral = CPUHelper.readOneLineNotRoot(GOVERNORS_LIST).split(" ");
         ArrayAdapter<CharSequence> governorAdapterGeneral = new ArrayAdapter<CharSequence>(
                 this, R.layout.spinner_row);
-        governorAdapterGeneral
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        governorAdapterGeneral.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         for (String availableGovernor : availableGovernorsGeneral) {
             governorAdapterGeneral.add(availableGovernor);
         }
+
         mGeneralGovernor.setAdapter(governorAdapterGeneral);
         mGeneralGovernor.setSelection(Arrays.asList(availableGovernorsGeneral).indexOf(
                 currentGovernor));
@@ -527,10 +527,10 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
             cpuBoostSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                   if (isChecked)
-                       Helpers.CMDProcessorWrapper.runSuCommand("busybox echo Y > " + KRAIT_BOOST);
+                    if (isChecked)
+                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo Y > " + KRAIT_BOOST);
                     else
-                       Helpers.CMDProcessorWrapper.runSuCommand("busybox echo N > " + KRAIT_BOOST);
+                        Helpers.CMDProcessorWrapper.runSuCommand("busybox echo N > " + KRAIT_BOOST);
                 }
             });
 
@@ -540,16 +540,21 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
 
         /** CPU Informations */
         String pvs = "NaN";
+        String table = "NaN";
         TextView pvsBinning = (TextView) findViewById(R.id.pvs_bin);
+        TextView pvsSpeed = (TextView) findViewById(R.id.pvs_speed);
+
         if (Helpers.doesFileExist(PVS_BINNING)) {
             String rawTableName = CPUHelper.readOneLineNotRoot(PVS_BINNING);
             rawTableName = rawTableName.replaceAll("[\\D]", "");
+            table = rawTableName;
             String[] params = rawTableName.split("");
             if (rawTableName.length() == 3)
                 pvs = params[2];
         }
 
         pvsBinning.setText(getString(R.string.pvs_binning) + " " + pvs);
+        pvsSpeed.setText(getString(R.string.freq_table) + " " + table);
     }
 
     public class GeneralGovListener implements OnItemSelectedListener {

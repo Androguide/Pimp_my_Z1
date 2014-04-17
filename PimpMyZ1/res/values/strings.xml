@@ -217,5 +217,8 @@ If you really want to apply such a low brightness value, please use the color sl
     <string name="governor_customization">Governor Customization</string>
     <string name="governor_customization_text">Customize each and every parameter of your current CPU Governor</string>
     <string name="governor_customization_error">Governor parameters not found!</string>
+    <string name="frequency_table">Frequency table</string>
+    <string name="pvs_speed">PVS Table:</string>
+    <string name="freq_table">Frequency Table:</string>
 
 </resources>

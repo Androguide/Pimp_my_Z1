@@ -597,7 +597,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/card_background"
             android:orientation="vertical"
-            android:paddingBottom="16dp"
+            android:paddingBottom="12dp"
             android:paddingLeft="12dp"
             android:paddingRight="12dp">
 
@@ -620,6 +620,16 @@
                 android:fontFamily="sans-serif-light"
                 android:paddingTop="8dp"
                 android:text="@string/pvs_binning"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/pvs_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="sans-serif-light"
+                android:paddingTop="8dp"
+                android:text="@string/frequency_table"
                 android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
