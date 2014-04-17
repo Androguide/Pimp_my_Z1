@@ -157,7 +157,6 @@ public class VoltageActivity extends ActionBarActivity implements VoltageInterfa
                                     toApply += "\" > " + UV_MV_TABLE;
                                     CMDProcessor.runSuCommand(toApply);
                                     bootPrefs.edit().putString("CURRENT_VOLTAGE_TABLE", defaultTable).commit();
-                                    Toast.makeText(VoltageActivity.this, toApply, Toast.LENGTH_LONG).show();
                                     Log.e("toApply", toApply);
                                 } else spinnerCounters[currStep]++;
                             }
@@ -209,4 +208,8 @@ public class VoltageActivity extends ActionBarActivity implements VoltageInterfa
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public android.support.v4.app.FragmentManager getSupportFragmentManager() {
+        return null;
+    }
 }
