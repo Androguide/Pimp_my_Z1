@@ -216,5 +216,6 @@ If you really want to apply such a low brightness value, please use the color sl
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="governor_customization">Governor Customization</string>
     <string name="governor_customization_text">Customize each and every parameter of your current CPU Governor</string>
+    <string name="governor_customization_error">Governor parameters not found!</string>
 
 </resources>

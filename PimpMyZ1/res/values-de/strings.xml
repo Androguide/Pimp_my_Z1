@@ -203,4 +203,5 @@ Setting too high voltages can unrecoverably damage your device.</string>
 If you really want to apply such a low brightness value, please use the color sliders instead.</string>
     <string name="governor_customization">Governor Customization</string>
     <string name="governor_customization_text">Customize each and every parameter of your current CPU Governor</string>
+    <string name="governor_customization_error">Governor parameters not found!</string>
 </resources>

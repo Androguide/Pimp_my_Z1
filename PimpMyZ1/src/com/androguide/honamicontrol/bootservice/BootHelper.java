@@ -106,12 +106,14 @@ public class BootHelper {
         }
 
         String applyMaxCpuFreq = "busybox echo " + CPU_MAX_FREQ + " > " + CPUInterface.MAX_FREQ;
-        String applyMsmThermal = "";
-        if (SNAKE_CHARMER) applyMaxCpuFreq += "\nbusybox echo " + CPU_MAX_FREQ + " > " + CPUInterface.SNAKE_CHARMER_MAX_FREQ;
+        String applyMsmThermal;
+
+        if (SNAKE_CHARMER)
+            applyMaxCpuFreq += "\nbusybox echo " + CPU_MAX_FREQ + " > " + CPUInterface.SNAKE_CHARMER_MAX_FREQ;
         if (MSM_THERMAL)
             applyMsmThermal = "busybox echo Y > " + CPUInterface.MSM_THERMAL;
         else
-           applyMsmThermal = "busybox echo N > " + CPUInterface.MSM_THERMAL;
+            applyMsmThermal = "busybox echo N > " + CPUInterface.MSM_THERMAL;
 
         String applyMinCpuFreq = "busybox echo " + CPU_MIN_FREQ + " > " + CPUInterface.MIN_FREQ;
         String applyMaxGpuFreq = "busybox echo " + GPU_MAX_FREQ + " > " + GPUInterface.maxFreq;

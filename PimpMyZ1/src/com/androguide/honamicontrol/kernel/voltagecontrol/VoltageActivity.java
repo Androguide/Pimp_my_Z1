@@ -141,17 +141,22 @@ public class VoltageActivity extends ActionBarActivity implements VoltageInterfa
                             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
                                 if (spinnerCounters[currStep] > 0) {
                                     String toApply = "busybox echo \"";
+                                    String defaultTable = "";
                                     currentApplicableTable.set(currStep, applicableVoltages.get(pos));
 
                                     for (int j = 0; j < currentApplicableTable.size(); j++) {
-                                        if (j == 0)
+                                        if (j == 0) {
                                             toApply += currentApplicableTable.get(j);
-                                        else
+                                            defaultTable += currentApplicableTable.get(j);
+                                        } else {
                                             toApply += " " + currentApplicableTable.get(j);
+                                            defaultTable += " " + currentApplicableTable.get(j);
+                                        }
                                     }
 
                                     toApply += "\" > " + UV_MV_TABLE;
                                     CMDProcessor.runSuCommand(toApply);
+                                    bootPrefs.edit().putString("CURRENT_VOLTAGE_TABLE", defaultTable).commit();
                                     Toast.makeText(VoltageActivity.this, toApply, Toast.LENGTH_LONG).show();
                                     Log.e("toApply", toApply);
                                 } else spinnerCounters[currStep]++;

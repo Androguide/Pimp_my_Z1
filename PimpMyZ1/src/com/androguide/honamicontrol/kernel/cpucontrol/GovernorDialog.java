@@ -35,7 +35,7 @@ public class GovernorDialog extends DialogFragment implements CPUInterface {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        getDialog().setTitle("Governor Customization");
+        getDialog().setTitle(getString(R.string.governor_customization));
 
         LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.cardsui, container, false);
         fa = (ActionBarActivity) super.getActivity();
@@ -90,9 +90,8 @@ public class GovernorDialog extends DialogFragment implements CPUInterface {
             }
             cardsUI.refresh();
 
-        } else {
-            Toast.makeText(super.getActivity(), "Error!", Toast.LENGTH_LONG).show();
-        }
+        } else
+            Toast.makeText(super.getActivity(), fa.getString(R.string.governor_customization_error), Toast.LENGTH_LONG).show();
 
         return ll;
     }
