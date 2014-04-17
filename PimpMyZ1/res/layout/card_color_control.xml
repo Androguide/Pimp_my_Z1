@@ -74,6 +74,22 @@
                 android:src="@drawable/ic_calibration_test" />
 
             <SeekBar
+                android:id="@+id/brightness_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_3quarter_margin" />
+
+            <TextView
+                android:id="@+id/brightness_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/activity_half_margin"
+                android:fontFamily="sans-serif-light"
+                android:text="Brightness (All channels): 255"
+                android:textSize="18sp" />
+
+            <SeekBar
                 android:id="@+id/red_seekbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
