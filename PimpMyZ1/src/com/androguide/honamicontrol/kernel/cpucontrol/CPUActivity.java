@@ -152,7 +152,7 @@ public class CPUActivity extends ActionBarActivity implements CPUInterface {
                 snakeTitle.setText(snakeTitle.getText() + " " + snakeVersion);
                 if (snakeVersion.equals("v1.2")) {
                     TextView snakeDesc = (TextView) findViewById(R.id.snake_charmer_text);
-                    snakeDesc.setText(snakeDesc.getText() + "\n" + "Your version (v1.2) is used as a built-in kernel feature and cannot be disabled");
+                    snakeDesc.setText(snakeDesc.getText() + "\n" + getString(R.string.snake_charmer_built_in));
                     snakeCharmer.setEnabled(false);
                 }
             }

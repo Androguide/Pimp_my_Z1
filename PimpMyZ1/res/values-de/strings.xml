@@ -175,7 +175,7 @@ When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, 
     <string name="alucard_cores">Max Online Cores</string>
     <string name="alucard_cores_text">Defines the max amount of online CPU cores when using Alucard Hotplug</string>
     <string name="hotplug_driver">Hotplug Driver</string>
-    <string name="multiple_hotplug_drivers_warning">It appears you have several hotplug drivers enabled at the same time! Reverting back to mpdecision...</string>
+    <string name="multiple_hotplug_drivers_warning">It appears you have several hotplug drivers enabled at the same time! Reverting back to mpdecision…</string>
     <string name="vfs_cache_pressure">VFS Cache Pressure</string>
     <string name="vfs_cache_pressure_text">The lower this value is set, the more RAM the kernel will be able to use for file-system caching, resulting in better perceived performance.</string>
     <string name="swappiness">Swappiness</string>
@@ -189,6 +189,8 @@ When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, 
     <string name="dirty_expire">Dirty Expire</string>
     <string name="dirty_expire_text">This defines the minimum amount of time at which data is old enough to be flushed to disk.</string>
     <string name="cpu_infos">CPU Informations</string>
+    <string name="pvs_binning">PVS Binning: </string>
+    <string name="snake_charmer_built_in">Your version (v1.2) is used as a built-in kernel feature and cannot be disabled</string>
     <string name="voltage_control">Voltage Control</string>
     <string name="voltage_control_text">Control the voltage of your CPU for each individual frequency scaling step</string>
     <string name="warning">Warning</string><string name="voltage_warning_text">Setting too low voltages will cause instability.
@@ -196,4 +198,7 @@ Setting too high voltages can unrecoverably damage your device.</string>
     <string name="reset_to_default">Reset to default</string>
     <string name="voltage_boost">Voltage Boost</string>
     <string name="voltage_boost_text">Disabling voltage boost will save a bit of power. Re-enable it if your device is unstable.</string>
+    <string name="color_brightness">Brightness (All Channels)</string>
+    <string name="custom">Custom</string><string name="color_brightness_warning">Your value was not applied, it is too low.
+If you really want to apply such a low brightness value, please use the color sliders instead.</string>
 </resources>

@@ -126,8 +126,6 @@ public class VoltageActivity extends ActionBarActivity implements VoltageInterfa
                 if (currIndex == -1)
                     currIndex = possibleVoltages.indexOf(currStepVoltage + " mV");
 
-                Log.e("CURR_INDEX", "currIndex: " + currIndex);
-
                 final int currStep = i;
 
                 cardsUI.addCard(new CardSpinnerVoltage(
@@ -196,8 +194,8 @@ public class VoltageActivity extends ActionBarActivity implements VoltageInterfa
                 onBackPressed();
                 break;
             case R.id.reset_default:
-                String defaultTable = VoltageActivity.this.getSharedPreferences("BOOT_PREFS", 0).getString("DEFAULT_VOLTAGE_TABLE", "null");
-                if (!defaultTable.equals("null"))
+                String defaultTable = getSharedPreferences("BOOT_PREFS", 0).getString("DEFAULT_VOLTAGE_TABLE", "null");
+                if (defaultTable.equals("null"))
                     CMDProcessor.runSuCommand("busybox echo \"" + defaultTable + "\" > " + VoltageInterface.UV_MV_TABLE);
                 else
                     Toast.makeText(this, "Default not found!", Toast.LENGTH_LONG).show();
