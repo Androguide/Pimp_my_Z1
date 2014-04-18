@@ -76,6 +76,7 @@ public class ColorControlActivity extends ActionBarActivity implements ColorCont
 
         if (currRed[0] == currGreen[0] && currRed[0] == currBlue[0]) {
             currBrightness[0] = currRed[0];
+            brightnessSeek.setEnabled(true);
             brightnessSeek.setProgress(currBrightness[0]);
             brightnessVal.setText(getString(R.string.color_brightness) + " " + currBrightness[0]);
         } else {
