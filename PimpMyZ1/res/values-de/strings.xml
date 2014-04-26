@@ -159,8 +159,7 @@
     <string name="msm_thermal">Thermal Throttling</string>
     <string name="cores_online">Kerne Online: </string>
     <string name="dt2wake">Double Tap 2 Wake</string>
-    <string name="dt2wake_text">When enabled, a double tap on the screen will wake-up the device</string><string name="fastcharge_warning_text">Be very careful with fastcharge settings, a wrong value on the wrong input can damage both the device and the USB port or charger.
-When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, you can use up to 900mA. For wall chargers, use between 900mA and the charger\'s maximum amperage (usually written on the charger).</string>
+    <string name="dt2wake_text">When enabled, a double tap on the screen will wake-up the device</string><string name="fastcharge_warning_text">Be very careful with fastcharge settings, a wrong value on the wrong input can damage both the device and the USB port or charger. When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, you can use up to 900mA. For wall chargers, use between 900mA and the charger\'s maximum amperage (usually written on the charger).</string>
     <string name="fastcharge_warning">WARNING</string>
     <string name="fast_charge_force_ac">Force A/C</string>
     <string name="manual">Manual</string>
