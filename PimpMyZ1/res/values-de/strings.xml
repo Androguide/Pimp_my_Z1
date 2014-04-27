@@ -123,22 +123,22 @@
     <string name="right">Re:\u0020</string>
     <string name="gpu_governor">GPU Governor</string>
     <string name="kernel_misc">Miscellaneous</string>
-    <string name="kernel_misc_desc">Control some miscellaneous kernel features, such as VM parameters, Kernel Same-page Merging and more</string>
+    <string name="kernel_misc_desc">Steuern Sie einige verschiedene Kernel-Funktionen, wie VM-Parameter, Kernel Samepage Zusammenführung und mehr</string>
     <string name="ksm_header">KERNEL SAME-PAGE MERGING</string>
     <string name="ksm">KSM</string>
-    <string name="ksm_desc">Enabling Kernel Same-page Merging reduces memory usage and increases performance by allowing the system to scan for duplicate memory pages, merge them and allow those pages to be shared amongst different processes</string>
-    <string name="ksm_unsupported">Sorry, your kernel does not seem to support KSM.</string>
-    <string name="ksm_pages_to_scan">Pages To Scan</string>
+    <string name="ksm_desc">Aktivieren der Kernel Samepage Zusammenführung verringert den Speicherbedarf und erhöht die Leistung.</string>
+    <string name="ksm_unsupported">Sorry, ihr Kernel scheint KSM nicht zu unterstützen.</string>
+    <string name="ksm_pages_to_scan">Seiten scannen</string>
     <string name="ksm_pages_to_scan_desc">Amount of pages KSM should scan at each run</string>
     <string name="ksm_timer">KSM Timer</string>
     <string name="ksm_timer_desc">Defines the interval of time (in milliseconds) at which KSM will scan for mergeable memory pages</string>
     <string name="snake_charmer">Snake Charmer</string>
-    <string name="snake_charmer_desc">Snake Charmer by faux123 allows to limit the maximum CPU frequency for all cores</string>
-    <string name="dyn_fsync_unsupported">Sorry, your kernel does not seem to support Dynamic Fsync.</string>
+    <string name="snake_charmer_desc">Snake Charmer von faux123 ermöglicht, die maximale CPU-Frequenz für alle Kerne zu begrenzen.</string>
+    <string name="dyn_fsync_unsupported">Sorry, ihr Kernel scheint Dynamische Fsync nicht zu unterstützen.</string>
     <string name="io_sched_emmc">I/O Scheduler (eMMC)</string>
-    <string name="io_sched_emmc_desc">Defines the I/O Scheduler to use for the internal storage</string>
+    <string name="io_sched_emmc_desc">Definiert den I/O-Scheduler für den internen Speicher verwenden.</string>
     <string name="io_sched_sd">I/O Scheduler (SD-Card)</string>
-    <string name="io_sched_sd_desc">Defines the I/O Scheduler to use for the external storage/SD-Card</string>
+    <string name="io_sched_sd_desc">Definiert den I/O-Scheduler für den externen Speicher/SD-Karte verwenden.</string>
     <string name="emmc_readahead">Readahead (eMMC)</string>
     <string name="emmc_readahead_desc">Specifies the amount of data in kilobytes that are read and cached ahead of time by the I/O Scheduler for the internal storage</string>
     <string name="sdcard_readahead">Readahead (SD-Card)</string>
@@ -150,17 +150,16 @@
     <string name="per_core_governors">Per-Core Governor Control</string>
     <string name="per_core_governors_text">Enable to control each core\'s governor independently, disable to use the same governor for all cores.</string>
     <string name="general_governor">Governor (All Cores)</string>
-    <string name="memory_management_text">Control the memory management features of your kernel, such as Kernel Same-page Merging, zRam, Swap, VM parameters and more&#8230;</string>
+    <string name="memory_management_text">Steuern Sie die Speicher-Management-Funktionen des Kernels, wie Kernel Same-page  Merging, ZRAM, Swap, VM-Parameter und mehr.</string>
     <string name="memory_management">Memory Management</string>
-    <string name="warning_vibrator">Values higher than %1$d are not recommended</string>
-    <string name="vibrator_intensity">Vibrator Intensity</string>
+    <string name="warning_vibrator">Höhere Werte als %1$d sind nicht zu empfehlen.</string>
+    <string name="vibrator_intensity">Vibrationsintensität</string>
     <string name="vibrator_intensity_text">Allows to set the device\'s vibrator intensity at kernel level by modifying its voltage</string>
     <string name="msm_thermal_text">This option allows you to enable or disable your kernel\'s thermal control module (msm_thermal). Be careful if you disable this option, as nothing will prevent your device from overheating and potentially frying.</string>
     <string name="msm_thermal">Thermal Throttling</string>
-    <string name="cores_online">Cores Online: </string>
+    <string name="cores_online">Kerne Online: </string>
     <string name="dt2wake">Double Tap 2 Wake</string>
-    <string name="dt2wake_text">When enabled, a double tap on the screen will wake-up the device</string><string name="fastcharge_warning_text">Be very careful with fastcharge settings, a wrong value on the wrong input can damage both the device and the USB port or charger.
-When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, you can use up to 900mA. For wall chargers, use between 900mA and the charger\'s maximum amperage (usually written on the charger).</string>
+    <string name="dt2wake_text">When enabled, a double tap on the screen will wake-up the device</string><string name="fastcharge_warning_text">Be very careful with fastcharge settings, a wrong value on the wrong input can damage both the device and the USB port or charger. When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, you can use up to 900mA. For wall chargers, use between 900mA and the charger\'s maximum amperage (usually written on the charger).</string>
     <string name="fastcharge_warning">WARNING</string>
     <string name="fast_charge_force_ac">Force A/C</string>
     <string name="manual">Manual</string>
@@ -185,26 +184,24 @@ When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, 
     <string name="dirty_bg_ratio">Dirty Background Ratio</string>
     <string name="dirty_bg_ratio_text">Defines the percentage of the memory that can be dirty before the I/O is blocked and dirty memory is flushed to disk.</string>
     <string name="dirty_writeback">Dirty Writeback</string>
-    <string name="dirty_writeback_text">Defines the interval of time at which \'old\' data is flushed from memory to disk, in centiseconds.</string>
+    <string name="dirty_writeback_text">Definiert das Zeitintervall, mit dem die Daten aus dem Speicher auf die Festplatte geschrieben werden, in Hundertstelsekunden.</string>
     <string name="dirty_expire">Dirty Expire</string>
-    <string name="dirty_expire_text">This defines the minimum amount of time at which data is old enough to be flushed to disk.</string>
-    <string name="cpu_infos">CPU Informations</string>
+    <string name="dirty_expire_text">Dies definiert die minimale Zeit mit der die Daten auf die Festplatte geschrieben werden.</string>
+    <string name="cpu_infos">CPU Information</string>
     <string name="pvs_binning">PVS Binning: </string>
-    <string name="snake_charmer_built_in">Your version (v1.2) is used as a built-in kernel feature and cannot be disabled</string>
-    <string name="voltage_control">Voltage Control</string>
-    <string name="voltage_control_text">Control the voltage of your CPU for each individual frequency scaling step</string>
-    <string name="warning">Warning</string><string name="voltage_warning_text">Setting too low voltages will cause instability.
-Setting too high voltages can unrecoverably damage your device.</string>
-    <string name="reset_to_default">Reset to default</string>
+    <string name="snake_charmer_built_in">Ihre Version (v1.2) wird als eine eingebaute Kerneigenschaft verwendet und kann nicht deaktiviert werden.</string>
+    <string name="voltage_control">Stromspannungskontrolle</string>
+    <string name="voltage_control_text">Kontrollieren Sie die Stromspannung Ihrer CPU für jeden individuellen(einzelnen) Frequenzschritt(Stufe).</string>
+    <string name="warning">Warning</string><string name="voltage_warning_text">Einstellung zu niedriger Spannungen - Instabilität. Einstellung zu hoher Spannungen können das Gerät beschädigen, nicht wiederherstellbar.</string>
+    <string name="reset_to_default">Zurücksetzen</string>
     <string name="voltage_boost">Voltage Boost</string>
-    <string name="voltage_boost_text">Disabling voltage boost will save a bit of power. Re-enable it if your device is unstable.</string>
-    <string name="color_brightness">Brightness (All Channels)</string>
-    <string name="custom">Custom</string><string name="color_brightness_warning">Your value was not applied, it is too low.
-If you really want to apply such a low brightness value, please use the color sliders instead.</string>
-    <string name="governor_customization">Governor Customization</string>
-    <string name="governor_customization_text">Customize each and every parameter of your current CPU Governor</string>
-    <string name="governor_customization_error">Governor parameters not found!</string>
-    <string name="frequency_table">Frequency table</string>
+    <string name="voltage_boost_text">Deaktivieren der Spannungsanhebung wird ein bisschen Strom sparen). Wieder aktivieren, wenn Ihr Gerät ist instabil wird.</string>
+    <string name="color_brightness">Helligkeit (alle Kanäle)</string>
+    <string name="custom">Custom</string><string name="color_brightness_warning">Ihr Wert wurde nicht angewandt, da er zu niedrig ist. Wenn Sie wirklich einen so geringen Helligkeitswert anwenden möchten, nutzen Sie bitte die Farbregler.</string>
+    <string name="governor_customization">Governor Anpassung</string>
+    <string name="governor_customization_text">Passen Sie jeden Parameter des aktuellen CPU Governor an.</string>
+    <string name="governor_customization_error">Governor Parameter nicht gefunden!</string>
+    <string name="frequency_table">Frequenztabelle</string>
     <string name="pvs_speed">PVS Table:</string>
-    <string name="freq_table">Frequency Table:</string>
+    <string name="freq_table">Frequenztabelle:</string>
 </resources>
