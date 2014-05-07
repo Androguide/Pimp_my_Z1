@@ -156,23 +156,23 @@
     <string name="vibrator_intensity">Vibrationsintensität</string>
     <string name="vibrator_intensity_text">Allows to set the device\'s vibrator intensity at kernel level by modifying its voltage</string>
     <string name="msm_thermal_text">This option allows you to enable or disable your kernel\'s thermal control module (msm_thermal). Be careful if you disable this option, as nothing will prevent your device from overheating and potentially frying.</string>
-    <string name="msm_thermal">Thermal Throttling</string>
+    <string name="msm_thermal">Wärme Drosselung</string>
     <string name="cores_online">Kerne Online: </string>
     <string name="dt2wake">Double Tap 2 Wake</string>
     <string name="dt2wake_text">When enabled, a double tap on the screen will wake-up the device</string><string name="fastcharge_warning_text">Be very careful with fastcharge settings, a wrong value on the wrong input can damage both the device and the USB port or charger. When using an USB 2.0 port, use a maximum of 500mA. When using an USB 3.0 port, you can use up to 900mA. For wall chargers, use between 900mA and the charger\'s maximum amperage (usually written on the charger).</string>
-    <string name="fastcharge_warning">WARNING</string>
+    <string name="fastcharge_warning">WARNUNG</string>
     <string name="fast_charge_force_ac">Force A/C</string>
-    <string name="manual">Manual</string>
-    <string name="fast_charge_mode">Fast Charge Mode</string>
+    <string name="manual">Manuell</string>
+    <string name="fast_charge_mode">Schnell lade Modus</string>
     <string name="fast_charge_mode_text">Toggle Fast Charge on and off and choose between A/C mode and manual mode.</string>
-    <string name="fast_charge_level">Fast Charge Level</string>
+    <string name="fast_charge_level">Schnell lade Level</string>
     <string name="fast_charge_level_text">Select the amperage to use depending on the type of charger or USB port you are using (Manual mode only).</string>
-    <string name="fast_charge_stack">FAST CHARGE</string>
-    <string name="menu_apply">Apply</string>
-    <string name="intelliplug_eco_cores">Intelliplug Eco Cores Enabled</string>
+    <string name="fast_charge_stack">Schnelles Laden</string>
+    <string name="menu_apply">anwenden</string>
+    <string name="intelliplug_eco_cores">intelliplug Eco Farben aktiviert</string>
     <string name="intelliplug_eco_cores_text">Defines the maximum amount of CPU cores to enable when Intelli Plug\'s eco mode is active.</string>
-    <string name="alucard_cores">Max Online Cores</string>
-    <string name="alucard_cores_text">Defines the max amount of online CPU cores when using Alucard Hotplug</string>
+    <string name="alucard_cores">Max Online-Kerne</string>
+    <string name="alucard_cores_text">Definiert die maximale Anzahl von Online-CPU-Kernen bei der Verwendung von Alucard Hotplug</string>
     <string name="hotplug_driver">Hotplug Driver</string>
     <string name="multiple_hotplug_drivers_warning">It appears you have several hotplug drivers enabled at the same time! Reverting back to mpdecision…</string>
     <string name="vfs_cache_pressure">VFS Cache Pressure</string>
@@ -202,6 +202,6 @@
     <string name="governor_customization_text">Passen Sie jeden Parameter des aktuellen CPU Governor an.</string>
     <string name="governor_customization_error">Governor Parameter nicht gefunden!</string>
     <string name="frequency_table">Frequenztabelle</string>
-    <string name="pvs_speed">PVS Table:</string>
+    <string name="pvs_speed">PVS Tabelle:</string>
     <string name="freq_table">Frequenztabelle:</string>
 </resources>
